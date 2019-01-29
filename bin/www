@@ -5,9 +5,9 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('nwm:server');
 var http = require('http');
-
+Nimiq = require('@nimiq/core');
+log = Nimiq.Log;
 /**
  * Get port from environment and store in Express.
  */
@@ -86,5 +86,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  log.i('Nimiq Wallet Manger', 'Listening on ' + bind);
 }
