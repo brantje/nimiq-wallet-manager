@@ -1,31 +1,83 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+require('dotenv').config();
+const path = require('path');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const csp = require('express-csp-header');
+const cors = require('cors');
+const http = require('http');
+const SocketSingleton = require('./lib/SocketSingletion');
+const app = express();
+const server = http.createServer(app);
+const NH = require('./lib/NimiqHelper');
+const Nimiq = require('@nimiq/core');
+Log = Nimiq.Log;
+let NimiqHelper = new NH();
+SocketSingleton.configure(server);
+const isProduction = process.env.NODE_ENV === 'production';
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+if(!isProduction){
+    Log.instance.level = 'debug';
+    /*for (const tag in config.log.tags) {
+        Nimiq.Log.instance.setLoggable(tag, config.log.tags[tag]);
 
-var app = express();
+    }*/
+    Log.instance.setLoggable('ConnectionPool', Log.Level.ASSERT);
+    Log.instance.setLoggable('Network', Log.Level.ASSERT);
+
+    app.use(function(req, res, next) {
+        if (res.headersSent) {
+                Log.d('Express', req.method, req.url, res.statusCode);
+        } else {
+            res.on('finish', function() {
+                Log.d('Express', req.method, req.url, res.statusCode);
+            })
+        }
+        next();
+    });
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'twig');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+//Configure our app
+app.use(cors({
+    origin: process.env.DOMAIN_NAME
+}));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(session({
+    secret: process.env.SESSION_KEY || 'passport-tutorial',
+    cookie: {maxAge: 60000},
+    resave: false,
+    saveUninitialized: false
+}));
+
+
+let stylePolicy = [
+    csp.SELF,
+    "'unsafe-inline'"
+
+];
+//Configure SCP
+app.use(csp({
+    policies: {
+        'default-src': [csp.SELF, process.env.DOMAIN_NAME],
+        'connect-src': [csp.SELF, 'wss://' + process.env.DOMAIN_NAME],
+        'script-src': [csp.SELF, csp.NONCE, csp.EVAL],
+        'style-src': stylePolicy,
+        'font-src': [csp.SELF],
+        'img-src': ['data:', csp.SELF],
+        'worker-src': [csp.SELF, 'blob:'],
+        'block-all-mixed-content': true
+    }
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -38,4 +90,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+ (async () => {
+    let {PORT = 3000} = process.env;
+    NimiqHelper = await NimiqHelper.connect();
+
+    app.use(require('./routes')(NimiqHelper));
+    server.listen(PORT, '0.0.0.0', () => Log.i(`Server running on http://localhost:${PORT}/`));
+})();

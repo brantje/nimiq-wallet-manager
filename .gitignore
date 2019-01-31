@@ -62,3 +62,6 @@ typings/
 .idea
 .env
 .sass-cache
+main-full-consensus/
+peer-key/
+test-full-consensus/
