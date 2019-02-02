@@ -7,6 +7,7 @@ const session = require('express-session');
 const csp = require('express-csp-header');
 const cors = require('cors');
 const http = require('http');
+const mongoose = require('mongoose');
 const SocketSingleton = require('./lib/SocketSingletion');
 const app = express();
 const server = http.createServer(app);
@@ -16,8 +17,22 @@ Log = Nimiq.Log;
 let NimiqHelper = new NH();
 SocketSingleton.configure(server);
 const isProduction = process.env.NODE_ENV === 'production';
+mongoose.promise = global.Promise;
 
-if(!isProduction){
+//Configure Mongoose
+mongoose.connect(process.env.MONGODB_CONNECTION_URI);
+if (!isProduction) {
+    mongoose.set('debug', true);
+}
+mongoose.set('useCreateIndex', true);
+require('./models/Block');
+require('./models/Transaction');
+require('./models/User');
+require('./models/Wallet');
+
+const NimiqService = require('./service/NimiqService');
+
+if (!isProduction) {
     Log.instance.level = 'debug';
     /*for (const tag in config.log.tags) {
         Nimiq.Log.instance.setLoggable(tag, config.log.tags[tag]);
@@ -26,12 +41,13 @@ if(!isProduction){
     Log.instance.setLoggable('ConnectionPool', Log.Level.ASSERT);
     Log.instance.setLoggable('Network', Log.Level.ASSERT);
 
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
+        let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         if (res.headersSent) {
-                Log.d('Express', req.method, req.url, res.statusCode);
+            Log.d('Express', ip, req.method, req.url, res.statusCode);
         } else {
-            res.on('finish', function() {
-                Log.d('Express', req.method, req.url, res.statusCode);
+            res.on('finish', function () {
+                Log.d('Express', ip, req.method, req.url, res.statusCode);
             })
         }
         next();
@@ -78,21 +94,27 @@ app.use(csp({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
+;
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
- (async () => {
+(async () => {
     let {PORT = 3000} = process.env;
     NimiqHelper = await NimiqHelper.connect();
+
+    (async () => {
+
+        new NimiqService(NimiqHelper);
+    })();
 
     app.use(require('./routes')(NimiqHelper));
     server.listen(PORT, '0.0.0.0', () => Log.i(`Server running on http://localhost:${PORT}/`));
