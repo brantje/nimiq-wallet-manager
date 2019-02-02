@@ -20,7 +20,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 mongoose.promise = global.Promise;
 
 //Configure Mongoose
-mongoose.connect(process.env.MONGODB_CONNECTION_URI);
+mongoose.connect(process.env.MONGODB_CONNECTION_URI, { useNewUrlParser: true });
 if (!isProduction) {
     mongoose.set('debug', true);
 }
@@ -29,6 +29,7 @@ require('./models/Block');
 require('./models/Transaction');
 require('./models/User');
 require('./models/Wallet');
+require('./config/passport');
 
 const NimiqService = require('./service/NimiqService');
 
@@ -65,9 +66,9 @@ app.use(cors({
 }));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.SESSION_KEY || 'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997'));
 app.use(session({
-    secret: process.env.SESSION_KEY || 'passport-tutorial',
+    secret: process.env.SESSION_KEY || 'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997',
     cookie: {maxAge: 60000},
     resave: false,
     saveUninitialized: false
