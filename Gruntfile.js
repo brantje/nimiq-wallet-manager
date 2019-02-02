@@ -1,10 +1,6 @@
 var jsFiles = [
 	// 'js/lib/jquery-3.1.0.min.js',
-
-
 	'public/javascripts/',
-
-
 ];
 
 module.exports = function (grunt) {
