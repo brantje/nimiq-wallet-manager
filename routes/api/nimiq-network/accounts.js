@@ -3,15 +3,15 @@ const router = express.Router();
 const Nimiq = require('@nimiq/core');
 
 module.exports = function (NimiqHelper) {
-    router.get('/', async (req, res, next) => {
-        let account;
+    router.get('/:address', async (req, res, next) => {
         try {
-            account = await NimiqHelper.getAccount(req.query.address);
-        } catch (e){
+            const account = await NimiqHelper.getAccount(req.params.address);
+            return res.json(account);
+        } catch (e) {
             res.status(422);
             return res.json({'error': e.message});
+
         }
-        return res.json(account);
     });
     return router
 }
