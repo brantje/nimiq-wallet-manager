@@ -29,7 +29,7 @@ UserSchema.methods.validatePassword = function (password) {
 UserSchema.methods.generateJWT = function () {
     const today = new Date();
     const expirationDate = new Date(today);
-    expirationDate.setDate(today.getDate() + 1);
+    expirationDate.setDate(today.getDate() + 1g);
 
     return jwt.sign({
         "username": this.username,
@@ -48,9 +48,6 @@ UserSchema.methods.toAuthJSON = function () {
     };
 };
 
-UserSchema.methods.findUserByEmail = function (email) {
-    return UserSchema.findOne({email: email})
-};
 
 UserSchema.methods.toJSON = function () {
     const user = {
