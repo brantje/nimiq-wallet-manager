@@ -8,7 +8,7 @@ module.exports = function (NimiqHelper) {
         if (req.cookies && !req.cookies.accessToken) {
             return res.redirect('/login');
         }
-        res.render('index', {title: 'Dashboard - Nimiq Wallet Manager', user:  req.payload});
+        res.render('dashboard', {title: 'Dashboard - Nimiq Wallet Manager', user:  req.payload});
     });
 
     /* GET example page. */
