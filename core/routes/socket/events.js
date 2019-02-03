@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-var SocketSingleton = require('../../lib/SocketSingletion');
+var SocketSingleton = require('../../../lib/SocketSingletion');
 
 module.exports = function (NimiqHelper) {
     const $ = NimiqHelper.getConsensus();

@@ -29,9 +29,9 @@ require('./models/Block');
 require('./models/Transaction');
 require('./models/User');
 require('./models/Wallet');
-require('./config/passport');
+require('./core/config/passport');
 
-const NimiqService = require('./service/NimiqService');
+const NimiqService = require('./services/NimiqService');
 
 if (!isProduction) {
     Log.instance.level = 'debug';
@@ -56,7 +56,7 @@ if (!isProduction) {
 }
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'core/views'));
 app.set('view engine', 'twig');
 
 
@@ -94,7 +94,7 @@ app.use(csp({
     }
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'core/public')));
 ;
 
 // error handler
@@ -117,6 +117,6 @@ app.use(function (err, req, res, next) {
         new NimiqService(NimiqHelper);
     })();
 
-    app.use(require('./routes')(NimiqHelper));
+    app.use(require('./core/routes')(NimiqHelper));
     server.listen(PORT, '0.0.0.0', () => Log.i(`Server running on http://localhost:${PORT}/`));
 })();
