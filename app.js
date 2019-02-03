@@ -109,7 +109,7 @@ app.use(function (err, req, res, next) {
 });
 
 (async () => {
-    let {PORT = 3000} = process.env;
+    let {APP_PORT = 3000} = process.env;
     NimiqHelper = await NimiqHelper.connect();
 
     (async () => {
@@ -118,5 +118,5 @@ app.use(function (err, req, res, next) {
     })();
 
     app.use(require('./core/routes')(NimiqHelper));
-    server.listen(PORT, '0.0.0.0', () => Log.i(`Server running on http://localhost:${PORT}/`));
+    server.listen(APP_PORT, '0.0.0.0', () => Log.i(`Server running on http://localhost:${APP_PORT}/`));
 })();
