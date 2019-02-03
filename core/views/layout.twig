@@ -19,6 +19,7 @@
 {% block body %}
 {% endblock %}
 </body>
-<script src="/build/bundle.js"></script>
-
+{% if user %}
+    <script src="/build/bundle.js"></script>
+{% endif %}
 </html>
