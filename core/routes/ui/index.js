@@ -5,9 +5,10 @@ const auth = require('../auth');
 module.exports = function (NimiqHelper) {
 
     router.get('/', auth.required, function (req, res, next) {
-        if (req.cookies && !req.cookies.accessToken) {
+        if (req.cookies && !req.cookies.accessToken || !req.payload) {
             return res.redirect('/login');
         }
+        console.log(req.payload);
         res.render('dashboard', {title: 'Dashboard - Nimiq Wallet Manager', user:  req.payload});
     });
 

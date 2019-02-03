@@ -30,11 +30,19 @@ const validateToken = function(request, response, next) {
     }
     getBearerToken(token, function(error, token) {
         if(error) {
-            return response.status(401).send({ "success": false, "message": error });
+            if( request.hasOwnProperty('xhr')) {
+                return response.status(401).send({"success": false, "message": error});
+            } else {
+                return response.redirect('/login');
+            }
         }
         JsonWebToken.verify(token, process.env.JWT_SECRET, function(error, decodedToken) {
             if(error) {
-                return response.status(401).send({ "success": false, "error": "Invalid authorization token" });
+                if( request.hasOwnProperty('xhr')) {
+                    return response.status(401).send({ "success": false, "error": "Invalid authorization token" });
+                } else {
+                    return response.redirect('/login');
+                }
             }
 
             if(decodedToken.authorized) {
