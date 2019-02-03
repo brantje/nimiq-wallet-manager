@@ -25,10 +25,10 @@ if (!isProduction) {
     mongoose.set('debug', true);
 }
 mongoose.set('useCreateIndex', true);
-require('./models/Block');
-require('./models/Transaction');
-require('./models/User');
-require('./models/Wallet');
+require('./core/models/Block');
+require('./core/models/Transaction');
+require('./core/models/User');
+require('./core/models/Wallet');
 require('./core/config/passport');
 
 const NimiqService = require('./services/NimiqService');
