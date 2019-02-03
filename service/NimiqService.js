@@ -25,7 +25,7 @@ class NimiqService {
     }
 
     async blockReverted(head) {
-        let block = await Block.find({hash: head.hash().toHex()});
+        let block = await Block.findOne({hash: head.hash().toHex()});
         block.mainChain = false;
         await block.save();
     }
