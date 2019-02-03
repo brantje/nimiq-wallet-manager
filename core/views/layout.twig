@@ -2,10 +2,9 @@
 <html>
 <head>
     <title>{{ title }}</title>
-    <link rel='stylesheet' href='/css/style.css'/>
+    {#<link rel='stylesheet' href='/css/style.css'/>#}
 
     {% block head %}{% endblock %}
-
 </head>
 <body>
 <header id="top" class="nq-blue-bg">
@@ -84,6 +83,7 @@
         </div>
     {% endif %}
     <div class="content-container nq-style scrollbar-themed">
+        <app></app>
         {% block body %}
         {% endblock %}
     </div>
@@ -91,4 +91,6 @@
 
 
 </body>
+<script src="/build/bundle.js"></script>
+
 </html>

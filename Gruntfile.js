@@ -33,14 +33,14 @@ module.exports = function (grunt) {
 			}
 		},
 		watch: {
-			css: {
+			/*css: {
 				files: ['src/scss/*.scss'],
 				tasks: ['sass']
 			},
 			js: {
 				files: jsFiles,
 				tasks: ['concat','uglify']
-			}
+			}*/
 		}
 	});
 
