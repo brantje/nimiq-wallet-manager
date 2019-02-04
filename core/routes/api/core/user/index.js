@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 module.exports = function (NimiqHelper) {
-    router.use('/nimiq', require('./nimiq-network')(NimiqHelper));
-    router.use('/core', require('./core')(NimiqHelper));
+    router.use('/login', require('./login')(NimiqHelper));
+    router.use('/register', require('./register')(NimiqHelper));
     return router;
 };
