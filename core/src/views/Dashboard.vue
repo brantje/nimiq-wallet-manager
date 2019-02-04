@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import NetworkWidget from "@/components/dashboard/NetworkWidget.vue";
-import WalletWidget from "@/components/dashboard/WalletWidget.vue";
-import SeedWidget from "@/components/dashboard/SeedWidget.vue";
-import TransactionList from "@/components/transaction/TransactionList.vue";
+import NetworkWidget from "components/dashboard/NetworkWidget.vue";
+import WalletWidget from "components/dashboard/WalletWidget.vue";
+import SeedWidget from "components/dashboard/SeedWidget.vue";
+import TransactionList from "components/transaction/TransactionList.vue";
 
 export default {
   name: "Dashboard",
