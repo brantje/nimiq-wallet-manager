@@ -101,7 +101,8 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, "dist/")));
+
+app.use(express.static(path.join(__dirname, 'core/public')));
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
