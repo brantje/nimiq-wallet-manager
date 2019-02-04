@@ -75,7 +75,7 @@
 
             fetchTodo() {
 
-                let uri = 'http://localhost:4000/api/all';
+                let uri = 'http://localhost:3000/api/all';
 
                 axios.get(uri).then((response) => {
 
@@ -89,7 +89,7 @@
 
                 let id = todo._id;
 
-                let uri = 'http://localhost:4000/api/update/' + id;
+                let uri = 'http://localhost:3000/api/update/' + id;
 
                 todo.editing = false;
 
@@ -108,7 +108,7 @@
 
             deleteTodo(id) {
 
-                let uri = 'http://localhost:4000/api/delete/' + id;
+                let uri = 'http://localhost:3000/api/delete/' + id;
 
                 axios.get(uri);
 

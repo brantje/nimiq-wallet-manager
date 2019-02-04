@@ -20,4 +20,5 @@ new Vue({
     },
     components: {App},
     methods: {}
-})
+});
+// *---*

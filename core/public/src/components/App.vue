@@ -123,7 +123,6 @@
                     <h1 class="nq-h1"> Recent transactions</h1>
                 </div>
                 <div class="nq-card-body">
-                    {% raw %}
                     <div class="x-transactions-list">
 
                         <div class="x-transaction">
@@ -287,7 +286,6 @@
                             </div>
                         </div>
                     </div>
-                    {% endraw %}
                 </div>
             </div>
             <create-todo></create-todo>
@@ -328,22 +326,3 @@
 
     }
 </script>
-
-
-<style>
-    .fade-enter-active,
-
-    .fade-leave-active {
-
-        transition: opacity .5s
-
-    }
-
-    .fade-enter,
-
-    .fade-leave-active {
-
-        opacity: 0
-
-    }
-</style>
