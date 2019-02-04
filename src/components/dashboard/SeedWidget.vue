@@ -24,7 +24,9 @@
     export default {
         name: 'SeedWidget',
         data() {
-
+            return{
+                // Data never empy, at least with a return ;D
+            }
         },
 
         methods: {
