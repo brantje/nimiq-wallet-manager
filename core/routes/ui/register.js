@@ -28,7 +28,6 @@ module.exports = function (NimiqHelper) {
             });
         }),
         body('password').isLength({ min: 5 }).custom((value, {req}) => {
-            console.log(req.body.password, value)
             if (value !== req.param('password_repeat')) {
                 throw new Error('Password confirmation is incorrect');
             }
