@@ -1,11 +1,11 @@
 {
-  "name": "nwm",
-  "version": "0.0.0",
+  "name": "nimiq-wallet-manager-remake",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "build": "webpack",
-    "watch": "webpack --watch & nodemon app.js"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@nimiq/core": "^1.4.1",
@@ -30,28 +30,23 @@
     "twig": "~0.10.3",
     "vue": "^2.5.22",
     "vue-axios": "^2.0.2",
-    "vue-router": "^3.0.2"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-3": "^6.24.1",
-    "cross-env": "^5.0.5",
-    "css-loader": "^0.28.11",
-    "file-loader": "^1.1.4",
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
     "grunt": "^1.0.3",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "node-sass": "^4.11.0",
-    "prettier": "^1.9.2",
+    "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "vue-loader": "^13.0.5",
-    "vue-template-compiler": "^2.4.4",
-    "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.9.1"
+    "vue-template-compiler": "^2.5.21"
   }
 }
