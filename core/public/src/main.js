@@ -12,9 +12,11 @@ import "./scss/dashboard.scss";
 import "./scss/scrollbar.scss";
 import "./scss/transaction.scss";
 import App from './components/App.vue'
+import router from './router'
 
 new Vue({
     el: 'app',
+    router,
     created: function () {
         console.log('created')
     },
