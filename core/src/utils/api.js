@@ -5,6 +5,9 @@ const userApi = {
     },
     register: (newUser) => {
         return axios({url: '/api/v1/core/user/register', data: newUser, method: 'POST' });
+    },
+    current: () => {
+        return axios({url: '/api/v1/core/user/current', method: 'GET',  headers: { 'Content-Type': 'application/json' }});
     }
 }
 

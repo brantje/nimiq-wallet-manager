@@ -15,11 +15,18 @@ import "assets/scss/transaction.scss";
 import store from './store';
 import App from "./App.vue";
 import router from "./router";
+import axios from "axios";
+import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT, AUTH_REGISTER, AUTH_REGISTER_ERROR, AUTH_REGISTER_SUCCESS } from 'store/actions/auth'
 
+const token = localStorage.getItem('user-token')
+if (token) {
+    axios.defaults.headers.common['Authorization'] = token
+    store.commit(AUTH_SUCCESS, {token: token})
+}
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");

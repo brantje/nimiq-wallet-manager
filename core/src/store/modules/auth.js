@@ -1,11 +1,14 @@
-import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT, AUTH_REGISTER, AUTH_REGISTER_ERROR, AUTH_REGISTER_SUCCESS } from '../actions/auth'
-// import { USER_REQUEST } from '../actions/user'
+import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT, AUTH_REGISTER, AUTH_REGISTER_ERROR, AUTH_REGISTER_SUCCESS } from 'store/actions/auth'
+import { USER_REQUEST } from 'store/actions/user'
 import {userApi} from 'utils/api'
 import axios from 'axios'
 const state = { token: localStorage.getItem('user-token') || '', status: '', hasLoadedOnce: false }
 
 const getters = {
-    isAuthenticated: state => !!state.token,
+    isAuthenticated: (state) => {
+        return state.token !== 'undefined' && state.token !== '';
+
+    },
     authStatus: state => state.status,
 }
 
@@ -16,12 +19,14 @@ const actions = {
 
             userApi.login(user)
                 .then(resp => {
-                    localStorage.setItem('user-token', resp.token)
+                    console.log(resp)
+                    localStorage.removeItem('user-token');
+                    localStorage.setItem('user-token', resp.data.token)
                     // Here set the header of your ajax library to the token value.
                     // example with axios
-                    axios.defaults.headers.common['Authorization'] = resp.token
-                    commit(AUTH_SUCCESS, resp)
-                    // dispatch(USER_REQUEST)
+                    axios.defaults.headers.common['Authorization'] = 'Token ' + resp.data.token
+                    commit(AUTH_SUCCESS, resp.data)
+                    dispatch(USER_REQUEST)
                     resolve(resp)
                 })
                 .catch(err => {

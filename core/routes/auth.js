@@ -12,7 +12,7 @@ const getTokenFromHeaders = (req) => {
 
 const getBearerToken = function(header, callback) {
     if(header) {
-        let token = header.split(" ");
+        token = header.split(" ");
         if(token.length == 2) {
             return callback(null, token[1]);
         } else {
@@ -24,27 +24,15 @@ const getBearerToken = function(header, callback) {
 };
 
 const validateToken = function(request, response, next) {
-    let token = request.headers["authorization"];
-    if(!token){
-        token = 'Token '+ request.cookies.accessToken;
-    }
-    getBearerToken(token, function(error, token) {
+    getBearerToken(request.headers["authorization"], function(error, token) {
         if(error) {
-            if( request.hasOwnProperty('xhr')) {
-                return response.status(401).send({"success": false, "message": error});
-            } else {
-                return response.redirect('/login');
-            }
+            return response.status(401).send({ "success": false, "message": error });
         }
         JsonWebToken.verify(token, process.env.JWT_SECRET, function(error, decodedToken) {
             if(error) {
-                if( request.hasOwnProperty('xhr')) {
-                    return response.status(401).send({ "success": false, "error": "Invalid authorization token" });
-                } else {
-                    return response.redirect('/login');
-                }
+                return response.status(401).send({ "success": false, "error": "Invalid authorization token" });
             }
-
+            // console.log(decodedToken)
             if(decodedToken.authorized) {
                 request.payload = decodedToken;
                 next();
