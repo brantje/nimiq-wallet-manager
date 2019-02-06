@@ -27,7 +27,7 @@ module.exports = function (NimiqHelper) {
                     return res.status(200).json(user.toAuthJSON());
                 }
 
-                res.status(200).json( {errors: 'Invalid username or password'});
+                res.status(401).json( {errors: 'Invalid username or password'});
             })(req, res, next);
         });
     return router;

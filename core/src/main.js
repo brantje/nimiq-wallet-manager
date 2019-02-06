@@ -12,6 +12,7 @@ import "assets/scss/inputs.scss";
 import "assets/scss/dashboard.scss";
 import "assets/scss/scrollbar.scss";
 import "assets/scss/transaction.scss";
+import store from './store';
 import App from "./App.vue";
 import router from "./router";
 
@@ -19,5 +20,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");
