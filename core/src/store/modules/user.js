@@ -10,7 +10,7 @@ const state = { status: '', profile: {} }
 
 const getters = {
     getProfile: state => state.profile,
-    isProfileLoaded: state => !!state.profile.name,
+    isProfileLoaded: state => !!state.profile.username,
 }
 
 const actions = {
@@ -34,7 +34,7 @@ const mutations = {
     },
     [USER_SUCCESS]: (state, resp) => {
         state.status = 'success'
-        Vue.set(state, 'profile', resp)
+        Vue.set(state, 'profile', resp.data)
     },
     [USER_ERROR]: (state) => {
         state.status = 'error'

@@ -1,5 +1,8 @@
 const express = require('express');
 const auth = require('../../../auth');
+const mongoose = require('mongoose');
+const Users = mongoose.model('Users');
+
 const router = express.Router();
 
 
@@ -15,9 +18,9 @@ module.exports = function (NimiqHelper) {
                 if (!user) {
                     return res.sendStatus(400);
                 }
-                let settings = await Config.getAll(id);
+                // let settings = await Config.getAll(id);
                 let userJson = user.toJSON();
-                return res.json({user: userJson, settings: settings});
+                return res.json(userJson);
             });
     })
     return router;

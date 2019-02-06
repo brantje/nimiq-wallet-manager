@@ -20,7 +20,7 @@ import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT, AUTH_REGISTER, AUT
 
 const token = localStorage.getItem('user-token')
 if (token) {
-    axios.defaults.headers.common['Authorization'] = token
+    axios.defaults.headers.common['Authorization'] = 'Token '+ token;
     store.commit(AUTH_SUCCESS, {token: token})
 }
 Vue.config.productionTip = false;

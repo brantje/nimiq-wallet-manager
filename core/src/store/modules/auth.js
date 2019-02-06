@@ -19,18 +19,13 @@ const actions = {
 
             userApi.login(user)
                 .then(resp => {
-                    console.log(resp)
-                    localStorage.removeItem('user-token');
                     localStorage.setItem('user-token', resp.data.token)
-                    // Here set the header of your ajax library to the token value.
-                    // example with axios
                     axios.defaults.headers.common['Authorization'] = 'Token ' + resp.data.token
                     commit(AUTH_SUCCESS, resp.data)
                     dispatch(USER_REQUEST)
                     resolve(resp)
                 })
                 .catch(err => {
-                    console.log(err)
                     commit(AUTH_ERROR, err);
                     localStorage.removeItem('user-token');
                     reject(AUTH_ERROR);

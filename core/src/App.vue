@@ -1,8 +1,8 @@
 <template>
     <div>
-        <Header v-if="isAuthenticated"/>
+        <Header v-if="isProfileLoaded"/>
         <div class="flex-container">
-            <Sidebar v-if="isAuthenticated"/>
+            <Sidebar v-if="isProfileLoaded"/>
             <div class="content-container nq-style scrollbar-themed"> <!-- Scrollbar not working on firefox -->
                 <router-view :key="$route.fullPath"></router-view>
             </div>
@@ -15,7 +15,9 @@
     import Header from "layout/Header.vue"
     import Sidebar from "layout/Sidebar.vue"
     import { USER_REQUEST } from 'store/actions/user'
+    import store from 'store'
     import { mapState, mapGetters } from 'vuex'
+    import router from 'router'
 
     export default {
         name: "app",
@@ -25,7 +27,19 @@
                 user: false
             };
         },
-        computed: mapGetters(['isAuthenticated']),
+        computed: mapGetters(['isProfileLoaded', 'isAuthenticated']),
+        created(){
+            if(this.isAuthenticated){
+                store.dispatch(USER_REQUEST)
+            }
+        },
+        watch: {
+            isAuthenticated: (newValue, oldValue) => {
+                if(newValue === false && oldValue === true){
+                    router.push({name: 'Login'});
+                }
+            }
+        },
         components: {
             Header,
             Sidebar
