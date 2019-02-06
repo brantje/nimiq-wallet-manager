@@ -28,7 +28,8 @@ module.exports = function (NimiqHelper) {
                     }
                 });
             }),
-            body('password').isLength({min: 5}).custom((value, {req}) => {
+            body('password').isLength({min: 5}).withMessage('Password is too weak'),
+            body('password').custom((value, {req}) => {
                 console.log(req.body.password, value)
                 if (value !== req.param('password_repeat')) {
                     throw new Error('Password confirmation is incorrect');
@@ -38,7 +39,8 @@ module.exports = function (NimiqHelper) {
         ],
         async (req, res, next) => {
             let errors = validationResult(req).array();
-            let success = false;
+            let status = 422;
+
             if (errors.length === 0) {
                 const finalUser = new Users({
                     username: req.param('username'),
@@ -46,10 +48,10 @@ module.exports = function (NimiqHelper) {
                 });
                 finalUser.setPassword(req.param('password'));
                 await finalUser.save();
-                success = true;
+                status = 200;
             }
 
-            return res.json({success: success, errors: errors});
+            return res.status(status).json({success: (status === 200), errors: errors});
         });
 
     return router;

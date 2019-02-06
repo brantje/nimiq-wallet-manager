@@ -20,7 +20,7 @@
                             <input v-model="password" type="password" class="password" name="password" required>
                             <button class="nq-button-s" type="submit">Login</button>
                         </form>
-                        <a href="/register">No account? Register here</a>
+                        <router-link  to="/register"><a>No account? Register here</a></router-link>
 
                     </div>
                 </div>
@@ -47,6 +47,7 @@
                 this.error = false;
                 const {username, password} = this;
                 this.$store.dispatch(AUTH_REQUEST, {username, password}).then(() => {
+                    console.log('Logged in!');
                     this.$router.push('/')
                 }).catch(e => {
                     console.log(e);
@@ -60,7 +61,12 @@
     };
 </script>
 <style scoped>
-    .nq-card{
-        width: 310px;
+    .nq-card {
+        width: 380px;
+    }
+
+    .centered-container {
+        margin-top: 50px;
+        height: auto;
     }
 </style>

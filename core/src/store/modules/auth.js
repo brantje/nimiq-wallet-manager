@@ -1,7 +1,7 @@
-import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/auth'
+import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT, AUTH_REGISTER, AUTH_REGISTER_ERROR, AUTH_REGISTER_SUCCESS } from '../actions/auth'
 // import { USER_REQUEST } from '../actions/user'
 import {userApi} from 'utils/api'
-
+import axios from 'axios'
 const state = { token: localStorage.getItem('user-token') || '', status: '', hasLoadedOnce: false }
 
 const getters = {
@@ -25,9 +25,28 @@ const actions = {
                     resolve(resp)
                 })
                 .catch(err => {
+                    console.log(err)
                     commit(AUTH_ERROR, err);
                     localStorage.removeItem('user-token');
                     reject(AUTH_ERROR);
+                })
+        })
+    },
+    [AUTH_REGISTER]: ({commit, dispatch}, user) => {
+        return new Promise((resolve, reject) => {
+            commit(AUTH_REGISTER)
+
+            userApi.register(user)
+                .then(resp => {
+                    // Here set the header of your ajax library to the token value.
+                    // example with axios
+                    commit(AUTH_REGISTER_SUCCESS, resp)
+                    // dispatch(USER_REQUEST)
+                    resolve(resp)
+                })
+                .catch(err => {
+                    commit(AUTH_REGISTER_ERROR, err);
+                    reject(err);
                 })
         })
     },
@@ -54,6 +73,15 @@ const mutations = {
         state.hasLoadedOnce = true
     },
     [AUTH_LOGOUT]: (state) => {
+        state.token = ''
+    },
+    [AUTH_REGISTER]: (state) => {
+        state.token = ''
+    },
+    [AUTH_REGISTER_ERROR]: (state) => {
+        state.token = ''
+    },
+    [AUTH_REGISTER_SUCCESS]: (state) => {
         state.token = ''
     }
 }
