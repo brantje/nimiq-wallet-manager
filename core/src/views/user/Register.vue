@@ -46,6 +46,9 @@
 
     export default {
         name: "Login",
+        metaInfo: {
+            title: 'Register'
+        },
         data() {
             return {
                 success: false,

@@ -34,6 +34,9 @@
 
     export default {
         name: "Login",
+        metaInfo: {
+            title: 'Login'
+        },
         data() {
             return {
                 username: '',

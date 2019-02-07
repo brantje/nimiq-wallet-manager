@@ -21,7 +21,12 @@
 
     export default {
         name: "app",
-
+        metaInfo: {
+            // if no subcomponents specify a metaInfo.title, this title will be used
+            title: 'Index',
+            // all titles will be injected into this template
+            titleTemplate: '%s | Nimiq Wallet Manager'
+        },
         data() {
             return {
                 user: false

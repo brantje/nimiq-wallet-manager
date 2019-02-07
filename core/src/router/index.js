@@ -4,6 +4,7 @@ import Dashboard from "views/Dashboard.vue";
 import Login from "views/user/Login.vue";
 import Register from "views/user/Register.vue";
 import store from "store";
+import Meta from 'vue-meta'
 
 const ifNotAuthenticated = (to, from, next) => {
     if (!store.getters.isAuthenticated) {
@@ -22,7 +23,7 @@ const ifAuthenticated = (to, from, next) => {
 }
 
 Vue.use(Router);
-
+Vue.use(Meta);
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
