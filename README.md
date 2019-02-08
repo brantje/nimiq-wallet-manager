@@ -7,7 +7,7 @@ Setup a fresh MongoDB database.
 
 `$ npm install`
 
-`$ mv .ens.sample .env`
+`$ cp .env.sample .env`
 
 `$ nano .env`
 
