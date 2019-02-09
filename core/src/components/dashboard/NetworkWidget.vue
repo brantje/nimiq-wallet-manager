@@ -7,7 +7,7 @@
             <div class="body-row">
                 <span class="nq-label">Consensus</span>
                 <span class="nq-text-s pull-right" v-if="getNetworkStats.consensus">Established</span>
-                <span class="nq-text-s pull-right" v-else="getNetworkStats.consensus">Lost</span>
+                <span class="nq-text-s pull-right" v-else>Lost</span>
             </div>
             <div class="body-row">
                 <span class="nq-label">Blockchain height</span>

@@ -6,7 +6,7 @@ const WalletsSchema = new Schema({
     label: String,
     address: String,
     encryptedPrivateKey: String,
-    users: [{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
     order: Number
 });
 
