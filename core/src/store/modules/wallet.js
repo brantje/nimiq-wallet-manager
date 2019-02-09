@@ -1,6 +1,7 @@
 import {
     WALLET_LIST_ERROR, WALLET_LIST_REQUEST, WALLET_LIST_SUCCESS,
-    WALLET_LIST_TRANSACTIONS_ERROR, WALLET_LIST_TRANSACTIONS_REQUEST, WALLET_LIST_TRANSACTIONS_SUCCESS
+    WALLET_LIST_TRANSACTIONS_ERROR, WALLET_LIST_TRANSACTIONS_REQUEST, WALLET_LIST_TRANSACTIONS_SUCCESS,
+    GET_WALLET_SUCCESS, GET_WALLET_REQUEST, GET_WALLET_ERROR
 } from '../actions/wallet'
 import {walletApi} from 'utils/api/wallet'
 
@@ -9,12 +10,14 @@ import {AUTH_LOGOUT} from 'store/actions/auth'
 
 const state = {
     wallets: [],
-    transactions: []
+    transactions: [],
+    activeWallet: {}
 }
 
 const getters = {
     getWallets: state => state.wallets,
-    getWalletTransactions: state => state.transactions
+    getWalletTransactions: state => state.transactions,
+    getActiveWallet: state => state.activeWallet
 }
 
 const inflight = {
@@ -60,6 +63,26 @@ const actions = {
                 console.log(resp)
                 // dispatch(AUTH_LOGOUT)
             })
+    },
+
+    [GET_WALLET_REQUEST]: ({commit, dispatch}, address) => {
+        if (inflight[GET_WALLET_REQUEST]) {
+            return;
+        }
+        inflight[GET_WALLET_REQUEST] = true;
+        commit(GET_WALLET_REQUEST)
+        walletApi.get(address)
+            .then(resp => {
+                inflight[GET_WALLET_REQUEST] = false;
+                commit(GET_WALLET_SUCCESS, resp)
+            })
+            .catch(resp => {
+                inflight[GET_WALLET_REQUEST] = false;
+                commit(GET_WALLET_ERROR)
+                // if resp is unauthorized, logout, to
+                console.log(resp)
+                // dispatch(AUTH_LOGOUT)
+            })
     }
 }
 
@@ -80,6 +103,15 @@ const mutations = {
         state.transactions = resp.data
     },
     [WALLET_LIST_TRANSACTIONS_ERROR]: () => {
+
+    },
+    [GET_WALLET_REQUEST]: (state) => {
+
+    },
+    [GET_WALLET_SUCCESS]: (state, resp) => {
+        state.activeWallet = resp.data
+    },
+    [GET_WALLET_ERROR]: () => {
 
     },
 }

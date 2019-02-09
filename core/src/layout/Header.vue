@@ -1,6 +1,6 @@
 <template>
   <header id="top" class="nq-blue-bg">
-    <h1 class="nq-h1 pull-left">Nimiq Wallet Manager</h1>
+    <router-link to="/login"><h1 class="nq-h1 pull-left">Nimiq Wallet Manager</h1></router-link>
     <!-- {% if user %} -->
     <ul v-if="user" class="nav pull-right">
       <li>
@@ -23,4 +23,7 @@ export default {
 </script>
 
 <style>
+  header .nq-h1{
+    color: #fff;
+  }
 </style>

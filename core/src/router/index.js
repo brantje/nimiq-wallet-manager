@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Dashboard from "views/Dashboard.vue";
 import Login from "views/user/Login.vue";
 import Register from "views/user/Register.vue";
+import WalletDetail from "views/wallet/Detail.vue";
 import store from "store";
 import Meta from 'vue-meta'
 
@@ -32,6 +33,12 @@ export default new Router({
             path: "/",
             name: "Dashboard",
             component: Dashboard,
+            beforeEnter: ifAuthenticated,
+        },
+        {
+            path: "/wallet/:address",
+            name: "WalletDetail",
+            component: WalletDetail,
             beforeEnter: ifAuthenticated,
         },
         {

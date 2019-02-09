@@ -1,7 +1,7 @@
 <template>
     <div class="sidenav scrollbar-themed">
         <div class="nq-card" v-for="wallet in getWallets">
-            <div class="nq-card-body">
+            <div class="nq-card-body" @click="loadWallet(wallet.address)">
                 <span class="nq-label">{{ wallet.label }} </span>
                 <div class="nq-text-s">
                     {{ wallet.address }}
@@ -19,20 +19,23 @@
     import store from 'store'
     import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
     import {lunaToCoins} from 'filters/lunaToCoins'
+
     export default {
         computed: mapGetters(['getWallets']),
         created() {
             store.dispatch(WALLET_LIST_REQUEST)
         },
         data() {
-            return {
-
-            };
+            return {};
         },
         filters: {
-          lunaToCoins
+            lunaToCoins
         },
-        methods: {}
+        methods: {
+            loadWallet: function (address) {
+//                this.$router.push('/wallet/' + address)
+            }
+        }
     };
 </script>
 
