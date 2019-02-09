@@ -36,7 +36,7 @@
     export default {
         name: "Dashboard",
         metaInfo: {
-            title: 'Dashboard'
+            title: 'Wallet detail'
         },
         computed: mapGetters(['getActiveWallet']),
         created() {

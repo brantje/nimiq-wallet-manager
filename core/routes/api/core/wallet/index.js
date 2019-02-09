@@ -87,7 +87,7 @@ module.exports = function (NimiqHelper) {
         if (wallet) {
             let result = wallet.toJSON();
             let info = await NimiqHelper.getAccount(addr.toUserFriendlyAddress());
-            let txs = await NimiqHelper.getAccountTransactions(addr, 250);
+            let txs = await NimiqHelper.getAccountTransactions(addr, 100);
             result.balance = 0;
             if (info && info.balance) {
                 result.balance = info.balance;
