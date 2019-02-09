@@ -1,40 +1,55 @@
 <template>
-  <div class="nq-card">
-    <div class="nq-card-header">
-      <h1 class="nq-h1">Wallet information</h1>
+    <div class="nq-card">
+        <div class="nq-card-header">
+            <h1 class="nq-h1">Wallet information</h1>
+        </div>
+        <div class="nq-card-body">
+            <div class="body-row">
+                <span class="nq-label">Total balance</span>
+                <span class="nq-text-s pull-right">{{ totalBalance | lunaToCoins}} NIM</span>
+            </div>
+            <div class="body-row">
+                <span class="nq-label">Number of wallets</span>
+                <span class="nq-text-s pull-right">{{ getWallets.length }}</span>
+            </div>
+            <div class="body-row">
+                <span class="nq-label">Average wallet balance</span>
+                <span class="nq-text-s pull-right">{{ avgBalance | lunaToCoins }} NIM</span>
+            </div>
+
+        </div>
     </div>
-    <div class="nq-card-body">
-      <div class="body-row">
-        <span class="nq-label">Consensus</span>
-        <span class="nq-text-s pull-right">12</span>
-      </div>
-      <div class="body-row">
-        <span class="nq-label">Blockchain height</span>
-        <span class="nq-text-s pull-right">12</span>
-      </div>
-      <div class="body-row">
-        <span class="nq-label">Global hashrate</span>
-        <span class="nq-text-s pull-right">12</span>
-      </div>
-      <div class="body-row">
-        <span class="nq-label">Difficulty</span>
-        <span class="nq-text-s pull-right">12</span>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-export default {
-  name: "WalletWidget",
-  data() {
-    return {
-      // Data never empy, at least with a return ;D
-    };
-  },
+    import {mapState, mapGetters} from 'vuex'
+    import store from 'store'
+    import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
+    import {lunaToCoins} from 'filters/lunaToCoins'
+    export default {
+        name: "WalletWidget",
+        computed: mapGetters(['getWallets']),
+        created() {
+            store.dispatch(WALLET_LIST_REQUEST)
+        },
+        data() {
+            return {
+                totalBalance: 0,
+                avgBalance: 0
+            };
+        },
+        filters: {
+            lunaToCoins
+        },
+        watch: {
+            getWallets: function (wallets) {
+                this.totalBalance = wallets.reduce((e) => { return e.balance });
+                this.avgBalance = (this.totalBalance / wallets.length);
 
-  methods: {}
-};
+            }
+        },
+        methods: {}
+    };
 </script>
 
 <style scoped>

@@ -1,79 +1,39 @@
 <template>
-  <div class="sidenav scrollbar-themed">
-    <div class="nq-card">
-      <div class="nq-card-body">
-        <span class="nq-label">My Wallet test 123 </span>
-        <div class="nq-text-s">
-          NQ42 DF7T CB2Q N2E2 JKDS HYDP QDD3 4EHQ R2N6
+    <div class="sidenav scrollbar-themed">
+        <div class="nq-card" v-for="wallet in getWallets">
+            <div class="nq-card-body">
+                <span class="nq-label">{{ wallet.label }} </span>
+                <div class="nq-text-s">
+                    {{ wallet.address }}
+                </div>
+                <div class="nq-h3 pull-right">{{ wallet.balance | lunaToCoins }} NIM</div>
+                <div class="clearfix"></div>
+            </div>
         </div>
-        <div class="nq-h3 pull-right">33.33 NIM</div>
-        <div class="clearfix"></div>
-      </div>
+
     </div>
-    <div class="nq-card">
-      <div class="nq-card-body">
-        <span class="nq-label">My Wallet test 123 </span>
-        <div class="nq-text-s">
-          NQ42 DF7T CB2Q N2E2 JKDS HYDP QDD3 4EHQ R2N6
-        </div>
-        <div class="nq-h3 pull-right">33.33 NIM</div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <div class="nq-card">
-      <div class="nq-card-body">
-        <span class="nq-label">My Wallet test 123 </span>
-        <div class="nq-text-s">
-          NQ42 DF7T CB2Q N2E2 JKDS HYDP QDD3 4EHQ R2N6
-        </div>
-        <div class="nq-h3 pull-right">33.33 NIM</div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <div class="nq-card">
-      <div class="nq-card-body">
-        <span class="nq-label">My Wallet test 123 </span>
-        <div class="nq-text-s">
-          NQ42 DF7T CB2Q N2E2 JKDS HYDP QDD3 4EHQ R2N6
-        </div>
-        <div class="nq-h3 pull-right">33.33 NIM</div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <div class="nq-card">
-      <div class="nq-card-body">
-        <span class="nq-label">My Wallet test 123 </span>
-        <div class="nq-text-s">
-          NQ42 DF7T CB2Q N2E2 JKDS HYDP QDD3 4EHQ R2N6
-        </div>
-        <div class="nq-h3 pull-right">33.33 NIM</div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <div class="nq-card">
-      <div class="nq-card-body">
-        <span class="nq-label">My Wallet test 123 </span>
-        <div class="nq-text-s">
-          NQ42 DF7T CB2Q N2E2 JKDS HYDP QDD3 4EHQ R2N6
-        </div>
-        <div class="nq-h3 pull-right">33.33 NIM</div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      todo: "",
-      typing: false
-    };
-  },
+    import {mapState, mapGetters} from 'vuex'
+    import store from 'store'
+    import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
+    import {lunaToCoins} from 'filters/lunaToCoins'
+    export default {
+        computed: mapGetters(['getWallets']),
+        created() {
+            store.dispatch(WALLET_LIST_REQUEST)
+        },
+        data() {
+            return {
 
-  methods: {}
-};
+            };
+        },
+        filters: {
+          lunaToCoins
+        },
+        methods: {}
+    };
 </script>
 
 <style scoped></style>
