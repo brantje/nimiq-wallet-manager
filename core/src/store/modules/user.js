@@ -1,6 +1,6 @@
 
 import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from '../actions/user'
-import {userApi} from 'utils/api'
+import {userApi} from 'utils/api/user'
 import axios from 'axios'
 
 import Vue from 'vue'

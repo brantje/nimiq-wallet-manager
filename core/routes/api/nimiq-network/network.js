@@ -15,11 +15,17 @@ module.exports = function (NimiqHelper) {
         let now = Date.now()/ 1000;
         let diff = now - $.blockchain.head.timestamp;
         res.json({
+            consensus: $.established,
             hashrate: Math.round($.blockchain.head.difficulty * Math.pow(2, 16) / 60),
             lastFound: diff,
             height: $.blockchain.height,
             difficulty: $.blockchain.head.difficulty,
-            lastReward: Nimiq.Policy.blockRewardAt($.blockchain.head.height) + $.blockchain.head.transactions.reduce((sum, tx) => sum + tx.fee, 0)
+            lastReward: Nimiq.Policy.blockRewardAt($.blockchain.head.height) + $.blockchain.head.transactions.reduce((sum, tx) => sum + tx.fee, 0),
+            network: {
+                bytesSent: $.network.bytesSent,
+                bytesReceived: $.network.bytesReceived,
+                peerCount: $.network.peerCount
+            }
         });
     });
 

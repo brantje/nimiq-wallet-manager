@@ -1,4 +1,4 @@
-'use strict' // eslint-disable-line
+'use strict'; // eslint-disable-line
 
 import Vue from "vue"
 import "@nimiq/style/nimiq-style.min.css"
@@ -18,7 +18,7 @@ import router from "./router"
 import axios from "axios"
 import { AUTH_SUCCESS } from 'store/actions/auth'
 
-const token = localStorage.getItem('user-token')
+const token = localStorage.getItem('user-token');
 if (token) {
     axios.defaults.headers.common['Authorization'] = 'Token '+ token;
     store.commit(AUTH_SUCCESS, {token: token})

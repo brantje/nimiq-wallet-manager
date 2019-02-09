@@ -1,7 +1,7 @@
 <template>
   <div class="nq-card">
     <div class="nq-card-header">
-      <h1 class="nq-h1">Network information</h1>
+      <h1 class="nq-h1">Wallet information</h1>
     </div>
     <div class="nq-card-body">
       <div class="body-row">

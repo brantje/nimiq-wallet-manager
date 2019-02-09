@@ -1,6 +1,6 @@
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT, AUTH_REGISTER, AUTH_REGISTER_ERROR, AUTH_REGISTER_SUCCESS } from 'store/actions/auth'
 import { USER_REQUEST } from 'store/actions/user'
-import {userApi} from 'utils/api'
+import {userApi} from 'utils/api/user'
 import axios from 'axios'
 const state = { token: localStorage.getItem('user-token') || '', status: '', hasLoadedOnce: false }
 

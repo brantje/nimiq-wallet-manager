@@ -11,7 +11,6 @@
 </template>
 
 <script>
-    // @ is an alias to /src
     import Header from "layout/Header.vue"
     import Sidebar from "layout/Sidebar.vue"
     import { USER_REQUEST } from 'store/actions/user'
