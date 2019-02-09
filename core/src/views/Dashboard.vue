@@ -11,7 +11,7 @@
                 <h1 class="nq-h1">Recent transactions</h1>
             </div>
             <div class="nq-card-body">
-                <TransactionList></TransactionList>
+                <TransactionList :transactions="getWalletTransactions"></TransactionList>
             </div>
         </div>
     </div>
@@ -22,15 +22,22 @@
     import WalletWidget from "components/dashboard/WalletWidget.vue";
     import SeedWidget from "components/dashboard/SeedWidget.vue";
     import TransactionList from "components/transaction/TransactionList.vue";
+    import {mapState, mapGetters} from 'vuex'
+    import store from 'store'
+    import {WALLET_LIST_TRANSACTIONS_REQUEST} from 'store/actions/wallet'
 
     export default {
         name: "Dashboard",
         metaInfo: {
             title: 'Dashboard'
         },
+        computed: mapGetters(['getWalletTransactions']),
+        created() {
+            store.dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
+        },
         data() {
             return {
-                msg: "Welcome to Crypto Info"
+
             };
         },
         components: {

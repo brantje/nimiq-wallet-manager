@@ -12,6 +12,9 @@ const walletApi = {
     },
     delete: (wallet) => {
         return axios({url: `/api/v1/core/wallets/${wallet.address}`, method: 'DELETE'});
+    },
+    recentTransactions: () => {
+        return axios({url: '/api/v1/core/transactions/recent'});
     }
 }
 

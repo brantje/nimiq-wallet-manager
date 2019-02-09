@@ -5,7 +5,7 @@ const auth = require('../../../auth');
 const Wallets = mongoose.model('Wallets');
 const Nimiq = require('@nimiq/core');
 
-module.exports = function (NimiqHelper, Cache) {
+module.exports = function (NimiqHelper) {
 
     router.post('/', auth.required, async (req, res, next) => {
         const {body, payload: {id}} = req;
