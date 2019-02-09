@@ -1,26 +1,26 @@
 <template>
     <div class="x-transactions-list">
-        <div class="x-transaction" v-for="transaction in transactions">
+        <div class="x-transaction" v-for="transaction in transactions" v-if="transactions.length > 0">
             <div class="timestamp">
                 {{ transaction.timestamp | formatDate}}
             </div>
             <div class="x-identicon">
-                <div class="identicon" address="tx.fromAddress" size="64" ng-if="tx.fromAddress"></div>
+                <Identicon :address="transaction.fromAddress" size="64"></Identicon>
             </div>
             <div class="x-label" sender="">
                 {{ transaction.fromAddress }}
             </div>
             <div class="x-arrow">
-                <i class="mdi mdi-arrow-forward mdi-2x"></i>
+                <i class="nq-icon arrow-right"></i>
             </div>
             <div class="x-identicon">
-                <div class="identicon" address="tx.toAddress" size="64" ng-if="tx.toAddress"></div>
+                <Identicon :address="transaction.toAddress" size="64"></Identicon>
             </div>
             <div class="x-label" recipient="">
                 {{ transaction.toAddress }}
             </div>
             <div class="x-amount"
-                 v-bind:class="{'incoming': (isOurs(transaction.toAddress)  && !isOurs(transaction.fromAddress)),
+                 :class="{'incoming': (isOurs(transaction.toAddress)  && !isOurs(transaction.fromAddress)),
                                 'outgoing': (!isOurs(transaction.toAddress) && isOurs(transaction.fromAddress))
                 }">
                 <div class="x-currency-nim " style="display: inline;">
@@ -174,6 +174,7 @@
     import store from 'store'
     import {lunaToCoins} from 'filters/lunaToCoins'
     import {formatDate} from 'filters/formatDate'
+    import Identicon from "components/Identicon.vue"
 
     export default {
         name: 'TransactionList',
@@ -196,10 +197,16 @@
             lunaToCoins,
             formatDate
         },
+        components: {
+            Identicon
+        }
 
     }
 </script>
 
 <style scoped>
-
+    .nq-icon.arrow-right{
+        display: block !important;
+        margin: 0 auto;
+    }
 </style>
