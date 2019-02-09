@@ -33,7 +33,7 @@
         },
         methods: {
             loadWallet: function (address) {
-//                this.$router.push('/wallet/' + address)
+                this.$router.push('/wallet/' + address)
             }
         }
     };
