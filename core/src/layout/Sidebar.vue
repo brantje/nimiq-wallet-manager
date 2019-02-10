@@ -2,12 +2,17 @@
     <div class="sidenav scrollbar-themed">
         <div class="nq-card" v-for="wallet in getWallets">
             <div class="nq-card-body" @click="loadWallet(wallet.address)">
-                <span class="nq-label">{{ wallet.label }} </span>
-                <div class="nq-text-s">
-                    {{ wallet.address }}
+                <div class="identicon">
+                    <Identicon :address="wallet.address" size="64" class="img-responsive"></Identicon>
                 </div>
-                <div class="nq-h3 pull-right">{{ wallet.balance | lunaToCoins }} NIM</div>
-                <div class="clearfix"></div>
+                <div class="account-data">
+                    <span class="nq-label">{{ wallet.label }} </span>
+                    <div class="nq-text-s">
+                        {{ wallet.address }}
+                    </div>
+                    <div class="nq-h3 pull-right">{{ wallet.balance | lunaToCoins }} NIM</div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
 
@@ -19,6 +24,7 @@
     import store from 'store'
     import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
     import {lunaToCoins} from 'filters/lunaToCoins'
+    import Identicon from "components/Identicon.vue"
 
     export default {
         computed: mapGetters(['getWallets']),
@@ -35,8 +41,27 @@
             loadWallet: function (address) {
                 this.$router.push('/wallet/' + address)
             }
+        },
+        components: {
+            Identicon
         }
     };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .identicon {
+        margin-right: 15px;
+    }
+
+    .account-data {
+        width: calc(100% - 65px);
+    }
+
+    .nq-card {
+        cursor: pointer;
+    }
+
+    .nq-card-body {
+        display: flex;
+    }
+</style>
