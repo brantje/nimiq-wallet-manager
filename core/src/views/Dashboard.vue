@@ -6,6 +6,18 @@
             <SeedWidget></SeedWidget>
         </div>
 
+        <div class="action-card nq-card">
+            <div>
+                Send
+            </div>
+            <div>
+                Receive
+            </div>
+            <div>
+                <router-link to="/contacts">Contacts</router-link>
+            </div>
+        </div>
+
         <div class="recent-tx nq-card">
             <div class="nq-card-header">
                 <h1 class="nq-h1">Recent transactions</h1>
@@ -36,8 +48,7 @@
             store.dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
         },
         data() {
-            return {
-            };
+            return {};
         },
         components: {
             NetworkWidget,
@@ -48,5 +59,12 @@
     };
 </script>
 <style scoped>
+    .action-card {
+        display: flex;
+        max-width: none;
+    }
 
+    .action-card div {
+        padding: 5px 15px;
+    }
 </style>

@@ -58,9 +58,11 @@ header {
 .content-container {
   //background-color: lightblue;
   max-height: calc(100vh - 68px);
+  max-width: 1200px;
   overflow-y: auto;
   -webkit-flex: 5;
   flex: 5;
+  margin: 0 auto;
 
 }
 

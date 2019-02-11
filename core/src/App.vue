@@ -2,17 +2,19 @@
     <div>
         <Header v-if="isProfileLoaded"/>
         <div class="flex-container">
-            <Sidebar v-if="isProfileLoaded"/>
+            <LeftSidebar v-if="isProfileLoaded"/>
             <div class="content-container nq-style scrollbar-themed"> <!-- Scrollbar not working on firefox -->
                 <router-view :key="$route.fullPath"></router-view>
             </div>
+            <RightSidebar v-if="isProfileLoaded"/>
         </div>
     </div>
 </template>
 
 <script>
     import Header from "layout/Header.vue"
-    import Sidebar from "layout/Sidebar.vue"
+    import LeftSidebar from "layout/LeftSidebar.vue"
+    import RightSidebar from "layout/RightSidebar.vue"
     import { USER_REQUEST } from 'store/actions/user'
     import store from 'store'
     import { mapState, mapGetters } from 'vuex'
@@ -46,7 +48,8 @@
         },
         components: {
             Header,
-            Sidebar
+            LeftSidebar,
+            RightSidebar
         }
     };
 </script>

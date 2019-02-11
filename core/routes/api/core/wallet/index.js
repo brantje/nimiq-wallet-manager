@@ -74,7 +74,6 @@ module.exports = function (NimiqHelper) {
         } catch (e) {
 
         }
-
         if (!addr) {
             return res.status(422).json({
                 errors: {
@@ -82,12 +81,11 @@ module.exports = function (NimiqHelper) {
                 },
             });
         }
-
-        let wallet = await Wallets.findOne({user: id, address: req.param('address')});
+        let wallet = await Wallets.findOne({user: id, address: addr.toUserFriendlyAddress()});
         if (wallet) {
             let result = wallet.toJSON();
             let info = await NimiqHelper.getAccount(addr.toUserFriendlyAddress());
-            let txs = await NimiqHelper.getAccountTransactions(addr, 50);
+            let txs = await NimiqHelper.getAccountTransactions(addr, 200);
             result.balance = 0;
             if (info && info.balance) {
                 result.balance = info.balance;
@@ -95,7 +93,7 @@ module.exports = function (NimiqHelper) {
             result.transactions = txs;
             return res.json(result);
         }
-        return res.status(404);
+        return res.status(404).json({error: "Not found"});
     });
 
     router.get('/:address/seed', auth.required, async (req, res, next) => {

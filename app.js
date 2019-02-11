@@ -29,6 +29,7 @@ require("./core/models/Block");
 require("./core/models/Transaction");
 require("./core/models/User");
 require("./core/models/Wallet");
+require("./core/models/Contact");
 require("./core/config/passport");
 
 const NimiqService = require("./services/NimiqService");

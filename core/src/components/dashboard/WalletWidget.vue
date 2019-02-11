@@ -13,7 +13,7 @@
                 <span class="nq-text-s pull-right">{{ getWallets.length }}</span>
             </div>
             <div class="body-row">
-                <span class="nq-label">Average wallet balance</span>
+                <span class="nq-label">Avg balance</span>
                 <span class="nq-text-s pull-right">{{ avgBalance | lunaToCoins }} NIM</span>
             </div>
 
