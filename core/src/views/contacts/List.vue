@@ -1,31 +1,28 @@
 <template>
     <div class="nq-card walletDetail">
         <h3 class="nq-label">Contact list</h3>
+
+        {{ getContacts }}
     </div>
 </template>
 
 <script>
-    import NetworkWidget from "components/dashboard/NetworkWidget.vue";
-    import WalletWidget from "components/dashboard/WalletWidget.vue";
-    import SeedWidget from "components/dashboard/SeedWidget.vue";
-    import TransactionList from "components/transaction/TransactionList.vue";
-    import {mapState, mapGetters} from 'vuex'
+    import {mapGetters} from 'vuex'
     import store from 'store'
-    import {WALLET_LIST_TRANSACTIONS_REQUEST} from 'store/actions/wallet'
+    import {CONTACT_LIST_REQUEST} from 'store/actions/contact'
 
     export default {
         name: "Contacts",
         metaInfo: {
             title: 'Contacts'
         },
-//        computed: mapGetters(['getWalletTransactions']),
+        computed: mapGetters(['getContacts']),
         created() {
-
+            store.dispatch(CONTACT_LIST_REQUEST)
         },
         data() {
             return {};
         },
-        components: {}
     };
 </script>
 <style scoped>
