@@ -3,7 +3,7 @@
 ## Installation
 Setup a fresh MongoDB database.
 
-`$ sudo apt-get install -y build-essential`
+`$ sudo apt-get install -y build-essential mongodb`
 
 `$ npm install`
 
