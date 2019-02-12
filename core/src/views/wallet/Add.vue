@@ -54,7 +54,7 @@
                             <div>
                                 <h1>Account Recovery</h1>
                                 <p>Please enter your 24 Account Recovery Words.</p>
-                                <input type="text" v-model="wallet.privateKey"/>
+                                <input type="text" v-model="wallet.privateKey" placeholder="Enter your recovery words"/>
                             </div>
                         </div>
                     </tab-content>
@@ -80,7 +80,6 @@
     import store from 'store'
     import {ADD_WALLET_REQUEST, ADD_WALLET_ERROR} from 'store/actions/wallet'
     import Identicon from "components/Identicon.vue"
-    import Nimiq from '@nimiq/core-web';
     import {FormWizard, TabContent} from 'vue-form-wizard'
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
@@ -105,15 +104,15 @@
             };
         },
         created() {
-          /*for(let i = 0; i < 6; i++){
-              let entropy = Nimiq.Entropy.generate();
+          for(let i = 0; i < 7; i++){
+              let entropy = window.Nimiq.Entropy.generate();
               let master = entropy.toExtendedPrivateKey('');
               let wallet = master.derivePath("m/44'/242'/0'/0'");
-              this.wallets.push({
+              this.newWallets.push({
                   address: wallet.toAddress().toUserFriendlyAddress(),
                   privateKey: master.privateKey.serialize()
               })
-          }*/
+          }
         },
         methods: {
             async onComplete() {

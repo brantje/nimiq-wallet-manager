@@ -91,8 +91,8 @@ app.use(
   csp({
     policies: {
       "default-src": [csp.SELF, process.env.DOMAIN_NAME],
-      "connect-src": [csp.SELF, "wss://" + process.env.DOMAIN_NAME],
-      "script-src": [csp.SELF, csp.NONCE, csp.EVAL],
+      "connect-src": [csp.SELF, "wss://" + process.env.DOMAIN_NAME, 'https://cdn.nimiq.com'],
+      "script-src": [csp.SELF, csp.NONCE, csp.EVAL, 'https://cdn.nimiq.com'],
       "style-src": stylePolicy,
       "font-src": [csp.SELF],
       "img-src": ["data:", csp.SELF],
