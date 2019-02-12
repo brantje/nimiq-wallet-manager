@@ -19,7 +19,8 @@
                         <p>
                             <small>The wallet private key will be encrypted before it's send to the server.<br/>More info can be found <a
                                     href="https://github.com/brantje/nimiq-wallet-manager/wiki/How-is-the-private-key-of-the-wallet-stored%3F"
-                                    rel="nofollow noreferrer noopener">here</a> <!--nofollow noreferrer noopener: Prevents tab napping and information leakage. -->
+                                    rel="nofollow noreferrer noopener">here</a>
+                                <!--nofollow noreferrer noopener: Prevents tab napping and information leakage. -->
                             </small>
                         </p>
                     </tab-content>
@@ -44,7 +45,7 @@
                             <div>
                                 <div class="identicon-container">
                                     <div class="x-identicon" v-for="wallet in newWallets" click="setWallet(wallet)">
-                                        <Identicon :address="wallet.address" size="64"></Identicon>
+                                        <Identicon :address="wallet.address" size="128"></Identicon>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +54,7 @@
                             <div>
                                 <h1>Account Recovery</h1>
                                 <p>Please enter your 24 Account Recovery Words.</p>
-                                <input type="text" v-model="wallet.privateKey" />
+                                <input type="text" v-model="wallet.privateKey"/>
                             </div>
                         </div>
                     </tab-content>
@@ -79,6 +80,7 @@
     import store from 'store'
     import {ADD_WALLET_REQUEST, ADD_WALLET_ERROR} from 'store/actions/wallet'
     import Identicon from "components/Identicon.vue"
+    import Nimiq from '@nimiq/core-web';
 
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
@@ -93,7 +95,8 @@
         },
         data() {
             return {
-                newWallets: [],
+                newWallets: [
+                ],
                 addType: '',
                 wallet: {
                     label: '',
@@ -102,9 +105,19 @@
                 },
             };
         },
+        created() {
+          for(let i = 0; i < 6; i++){
+              let entropy = Nimiq.Entropy.generate();
+              let master = entropy.toExtendedPrivateKey('');
+              let wallet = master.derivePath("m/44'/242'/0'/0'");
+              this.wallets.push({
+                  address: wallet.toAddress().toUserFriendlyAddress(),
+                  privateKey: master.privateKey.serialize()
+              })
+          }
+        },
         methods: {
             async onComplete() {
-                console.log('Call')
                 let wallet = await this.wallet
                 this.$store.dispatch(ADD_WALLET_REQUEST, wallet).then(() => {
                     this.$router.push('/')
@@ -127,9 +140,14 @@
         width: calc(100% - 30px);
         max-width: none;
     }
+
 </style>
 <style>
     .wizard-nav.wizard-nav-pills, .wizard-progress-with-circle, .vue-form-wizard .category {
         display: none;
+    }
+
+    .vue-form-wizard .wizard-tab-content {
+        padding: 0;
     }
 </style>
