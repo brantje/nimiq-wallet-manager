@@ -81,7 +81,7 @@
     import {ADD_WALLET_REQUEST, ADD_WALLET_ERROR} from 'store/actions/wallet'
     import Identicon from "components/Identicon.vue"
     import Nimiq from '@nimiq/core-web';
-
+    import {FormWizard, TabContent} from 'vue-form-wizard'
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
     export default {
@@ -95,8 +95,7 @@
         },
         data() {
             return {
-                newWallets: [
-                ],
+                newWallets: [],
                 addType: '',
                 wallet: {
                     label: '',
@@ -106,7 +105,7 @@
             };
         },
         created() {
-          for(let i = 0; i < 6; i++){
+          /*for(let i = 0; i < 6; i++){
               let entropy = Nimiq.Entropy.generate();
               let master = entropy.toExtendedPrivateKey('');
               let wallet = master.derivePath("m/44'/242'/0'/0'");
@@ -114,7 +113,7 @@
                   address: wallet.toAddress().toUserFriendlyAddress(),
                   privateKey: master.privateKey.serialize()
               })
-          }
+          }*/
         },
         methods: {
             async onComplete() {
@@ -130,7 +129,9 @@
             },
         },
         components: {
-            Identicon
+            Identicon,
+            FormWizard,
+            TabContent
         }
     };
 </script>

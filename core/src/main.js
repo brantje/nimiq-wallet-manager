@@ -17,7 +17,7 @@ import store from './store'
 import App from "./App.vue"
 import router from "./router"
 import axios from "axios"
-import VueFormWizard from 'vue-form-wizard'
+// import VueFormWizard from 'vue-form-wizard'
 import { AUTH_SUCCESS } from 'store/actions/auth'
 
 const token = localStorage.getItem('user-token');
@@ -25,7 +25,6 @@ if (token) {
     axios.defaults.headers.common['Authorization'] = 'Token '+ token;
     store.commit(AUTH_SUCCESS, {token: token})
 }
-Vue.use(VueFormWizard)
 
 Vue.config.productionTip = false;
 

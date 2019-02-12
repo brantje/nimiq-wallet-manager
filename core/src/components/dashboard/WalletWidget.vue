@@ -44,10 +44,11 @@
         watch: {
             getWallets: function (wallets) {
                 if(wallets) {
-                    this.totalBalance = wallets.reduce((e) => {
-                        if(e && e.hasOwnProperty('balance')) {
-                            return e.balance
+                    this.totalBalance = wallets.reduce((e, p) => {
+                        if(e.hasOwnProperty('balance')){
+                            return e.balance;
                         }
+                        return e + p.balance;
                     });
                     this.avgBalance = (this.totalBalance / wallets.length);
                 }
