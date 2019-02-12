@@ -7,7 +7,7 @@
             <div class="identicon" v-if="!loading">
                 <Identicon :address="getActiveWallet.address" size="128" class="img-responsive"></Identicon>
             </div>
-            <div class="col-xs-8" v-if="!loading">
+            <div v-if="!loading">
                 <h3 class="nq-label">{{ getActiveWallet.label }}</h3>
                 <h4>{{ getActiveWallet.address}}</h4>
                 <div class="nq-label">

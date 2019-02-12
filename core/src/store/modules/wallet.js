@@ -1,7 +1,8 @@
 import {
     WALLET_LIST_ERROR, WALLET_LIST_REQUEST, WALLET_LIST_SUCCESS,
     WALLET_LIST_TRANSACTIONS_ERROR, WALLET_LIST_TRANSACTIONS_REQUEST, WALLET_LIST_TRANSACTIONS_SUCCESS,
-    GET_WALLET_SUCCESS, GET_WALLET_REQUEST, GET_WALLET_ERROR
+    GET_WALLET_SUCCESS, GET_WALLET_REQUEST, GET_WALLET_ERROR,
+    ADD_WALLET_ERROR, ADD_WALLET_REQUEST, ADD_WALLET_SUCCESS
 } from '../actions/wallet'
 import {walletApi} from 'utils/api/wallet'
 
@@ -83,7 +84,21 @@ const actions = {
                 console.log(resp)
                 // dispatch(AUTH_LOGOUT)
             })
-    }
+    },
+    [ADD_WALLET_REQUEST]: ({commit, dispatch}, wallet) => {
+        return new Promise((resolve, reject) => {
+            commit(ADD_WALLET_REQUEST)
+            walletApi.create(wallet)
+                .then(resp => {
+                    commit(ADD_WALLET_SUCCESS, resp.data)
+                    resolve(resp)
+                })
+                .catch(err => {
+                    commit(ADD_WALLET_ERROR, err)
+                    reject(ADD_WALLET_ERROR, err)
+                })
+        })
+    },
 }
 
 const mutations = {
@@ -112,6 +127,15 @@ const mutations = {
         state.activeWallet = resp.data
     },
     [GET_WALLET_ERROR]: () => {
+
+    },
+    [ADD_WALLET_REQUEST]: (state) => {
+
+    },
+    [ADD_WALLET_SUCCESS]: (state, resp) => {
+
+    },
+    [ADD_WALLET_ERROR]: () => {
 
     },
 }

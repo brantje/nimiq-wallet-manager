@@ -43,8 +43,14 @@
         },
         watch: {
             getWallets: function (wallets) {
-                this.totalBalance = wallets.reduce((e) => { return e.balance });
-                this.avgBalance = (this.totalBalance / wallets.length);
+                if(wallets) {
+                    this.totalBalance = wallets.reduce((e) => {
+                        if(e && e.hasOwnProperty('balance')) {
+                            return e.balance
+                        }
+                    });
+                    this.avgBalance = (this.totalBalance / wallets.length);
+                }
 
             }
         },

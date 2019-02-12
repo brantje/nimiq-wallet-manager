@@ -16,6 +16,9 @@
             <div>
                 <router-link to="/contacts">Contacts</router-link>
             </div>
+            <div>
+                <router-link to="/wallet/add">Add wallet</router-link>
+            </div>
         </div>
 
         <div class="recent-tx nq-card">
