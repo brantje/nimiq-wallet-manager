@@ -3,7 +3,6 @@
 import Vue from "vue"
 import "@nimiq/style/nimiq-style.min.css"
 import "@nimiq/style/nimiq-style-icons.min.css"
-import * as Nimiq from '@nimiq/core-web'
 import "assets/scss/main.scss"
 import "assets/scss/icon-addon.scss"
 import "assets/scss/fonts.scss"

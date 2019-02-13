@@ -85,6 +85,7 @@
     import Identicon from "components/Identicon.vue"
     import {FormWizard, TabContent} from 'vue-form-wizard'
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+    import Nimiq from '@nimiq/core-web';
 
     export default {
         name: "AddWallet",
