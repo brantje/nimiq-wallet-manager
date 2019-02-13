@@ -14,6 +14,9 @@
                             <label><input type="radio" name="addType" v-model="addType" value="recoveryWords">Import wallet by Recovery Words</label>
                         </div>
                         <div>
+                            <label><input type="radio" name="addType" v-model="addType" value="imageWallet">Import wallet by ImageWallet</label>
+                        </div>
+                        <div>
                             <label><input type="radio" name="addType" v-model="addType" value="generateNew">Generate new wallet</label>
                         </div>
                         <p>
