@@ -2,33 +2,40 @@
     <div>
         <div class="nq-card">
             <div class="nq-card-body">
-                <form-wizard title="Add wallet" subtitle="" color="#1f2348" stepSize="xs" @on-complete="onComplete">
+                <form-wizard title="Add wallet" subtitle="" color="#1f2348" stepSize="xs" @on-complete="onComplete"
+                             ref="wizard"
+                             @on-error="handleError">
                     <tab-content title="Choose wallet type">
                         <div>
                             <p><b>Choose wallet type to add</b></p>
                         </div>
                         <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="address">Add wallet by address (sending tx not possible)</label>
+                            <label><input type="radio" name="addType" v-model="addType" value="address">Add wallet by
+                                address (sending tx not possible)</label>
                         </div>
                         <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="recoveryWords">Import wallet by Recovery Words</label>
+                            <label><input type="radio" name="addType" v-model="addType" value="recoveryWords">Import
+                                wallet by Recovery Words</label>
                         </div>
                         <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="imageWallet">Import wallet by ImageWallet</label>
+                            <label><input type="radio" name="addType" v-model="addType" value="imageWallet">Import
+                                wallet by ImageWallet</label>
                         </div>
                         <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="generateNew">Generate new wallet</label>
+                            <label><input type="radio" name="addType" v-model="addType" value="generateNew">Generate new
+                                wallet</label>
                         </div>
                         <p>
-                            <small>The wallet private key will be encrypted before it's send to the server.<br/>More info can be found <a
-                                    href="https://github.com/brantje/nimiq-wallet-manager/wiki/How-is-the-private-key-of-the-wallet-stored%3F"
-                                    rel="nofollow noreferrer noopener">here</a>
+                            <small>The wallet private key will be encrypted before it's send to the server.<br/>More
+                                info can be found <a
+                                        href="https://github.com/brantje/nimiq-wallet-manager/wiki/How-is-the-private-key-of-the-wallet-stored%3F"
+                                        rel="nofollow noreferrer noopener">here</a>
                                 <!--nofollow noreferrer noopener: Prevents tab napping and information leakage. -->
                             </small>
                         </p>
                     </tab-content>
 
-                    <tab-content title="Additional Info">
+                    <tab-content title="Additional Info" :before-change="validateStep2">
                         <div v-if="addType === 'address'">
                             <div>
                                 <p>
@@ -36,7 +43,7 @@
                                 </p>
                             </div>
                             <div>
-                                <input type="text" v-model="wallet.address"
+                                <input type="text" v-model="walletAddressInput"
                                        placeholder="NQ.. .... .... .... .... ...."/>
                             </div>
                         </div>
@@ -47,7 +54,7 @@
                             </div>
                             <div>
                                 <div class="identicon-container">
-                                    <div class="x-identicon" v-for="wallet in newWallets" click="setWallet(wallet)">
+                                    <div class="x-identicon" v-for="wallet in newWallets" @click="setWallet(wallet)">
                                         <Identicon :address="wallet.address" size="128"></Identicon>
                                     </div>
                                 </div>
@@ -57,7 +64,7 @@
                             <div>
                                 <h1>Account Recovery</h1>
                                 <p>Please enter your 24 Account Recovery Words.</p>
-                                <input type="text" v-model="wallet.privateKey" placeholder="Enter your recovery words"/>
+                                <input type="text" v-model="recoveryWords" placeholder="Enter your recovery words"/>
                             </div>
                         </div>
                     </tab-content>
@@ -70,6 +77,19 @@
                         </div>
                         <div>
                             <input type="text" v-model="wallet.label"/>
+                        </div>
+                    </tab-content>
+                    <tab-content title="Last step">
+                        <div>
+                            <h1>Set a Pass Phrase</h1>
+                            <p>Please enter a Pass Phrase to secure your wallet.<br/><br/>
+
+                                The Pass Phrase is not an alternative for your 24 Recovery Words and it cannot be
+                                changed or reset!
+                            </p>
+                        </div>
+                        <div>
+                            <input type="text" v-model="passPhrase"/>
                         </div>
                     </tab-content>
                 </form-wizard>
@@ -85,7 +105,6 @@
     import Identicon from "components/Identicon.vue"
     import {FormWizard, TabContent} from 'vue-form-wizard'
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
-    import Nimiq from '@nimiq/core-web';
 
     export default {
         name: "AddWallet",
@@ -93,13 +112,13 @@
             title: 'Add wallet'
         },
 //        computed: mapGetters(['getWalletTransactions']),
-        created() {
-
-        },
         data() {
             return {
                 newWallets: [],
                 addType: '',
+                recoveryWords: '',
+                passPhrase: '',
+                walletAddressInput: '',
                 wallet: {
                     label: '',
                     address: '',
@@ -108,28 +127,108 @@
             };
         },
         created() {
-          for(let i = 0; i < 7; i++){
-              let entropy = window.Nimiq.Entropy.generate();
-              let master = entropy.toExtendedPrivateKey('');
-              let wallet = master.derivePath("m/44'/242'/0'/0'");
-              this.newWallets.push({
-                  address: wallet.toAddress().toUserFriendlyAddress(),
-                  privateKey: master.privateKey.serialize()
-              })
-          }
+            for (let i = 0; i < 7; i++) {
+                let entropy = window.Nimiq.Entropy.generate();
+                let master = entropy.toExtendedPrivateKey('');
+                let wallet = master.derivePath("m/44'/242'/0'/0'");
+                this.newWallets.push({
+                    address: wallet.toAddress().toUserFriendlyAddress(),
+                    privateKey: master.privateKey.toHex()
+                })
+            }
         },
         methods: {
             async onComplete() {
                 let wallet = await this.wallet
+                console.log(wallet)
+                //@TODO encrypt the private key
+                return;
                 this.$store.dispatch(ADD_WALLET_REQUEST, wallet).then(() => {
                     this.$router.push('/')
                 }).catch(e => {
                     if (e === ADD_WALLET_ERROR) {
-                        // Something went wrong
+                        this.$notify({
+                            type: 'error',
+                            title: 'Something went wrong while saving the wallet',
+                        });
                     }
                 })
 
             },
+            handleError: function (errorMsg) {
+                if (errorMsg) {
+                    this.$notify({
+                        type: 'error',
+                        title: errorMsg,
+                    });
+                }
+            },
+            setWallet: function (wallet) {
+                this.wallet.address = wallet.address
+                this.wallet.privateKey = wallet.privateKey
+                this.$refs.wizard.changeTab(1, 2)
+            },
+            validateStep2: function () {
+                return new Promise((resolve, reject) => {
+                    let result;
+                    switch (this.addType) {
+                        case 'address':
+                            result = this.validateAddress()
+                            break;
+                        case 'recoveryWords':
+                            result = this.validateRecoveryWords()
+                            break;
+
+                        case 'imageWallet':
+
+                            break;
+                    }
+                    if (result && result.hasOwnProperty('address') && result.hasOwnProperty('privateKey')) {
+                        this.wallet.address = result.address;
+                        this.wallet.privateKey = result.privateKey;
+                        resolve(true)
+                        return;
+                    }
+                    reject('An error occurred while validating the wallet.')
+                })
+            },
+            validateAddress: function () {
+                let address = Nimiq.Address.fromUserFriendlyAddress(this.walletAddressInput)
+                return {address: address.toUserFriendlyAddress(), privateKey: ''}
+            },
+            validateRecoveryWords: function () {
+                if (!this.recoveryWords || this.recoveryWords.trim() === '') {
+                    throw Error('Please enter your recovery words')
+                }
+                let string = this.recoveryWords.split(',').join(' ');
+                let mnemonicType = window.Nimiq.MnemonicUtils.getMnemonicType(string)
+                let entropy, wallet;
+                if (mnemonicType === window.Nimiq.MnemonicUtils.MnemonicType.BIP39) {
+                    console.log('BIP39 key')
+                    entropy = window.Nimiq.MnemonicUtils.mnemonicToEntropy(string)
+                    let master = entropy.toExtendedPrivateKey('');
+                    let mastrW0 = master.derivePath("m/44'/242'/0'/0'")
+                    wallet = {
+                        address: mastrW0.toAddress().toUserFriendlyAddress(),
+                        privateKey: master.toHex(),
+                        legacy: 0
+                    }
+                }
+                if (mnemonicType === window.Nimiq.MnemonicUtils.MnemonicType.LEGACY) {
+                    console.log('Legacy key')
+                    const entropy = Nimiq.MnemonicUtils.legacyMnemonicToEntropy(string);
+                    const buffer = entropy.serialize();
+                    const privateKey = new Nimiq.PrivateKey(buffer);
+                    const keyPair = Nimiq.KeyPair.derive(privateKey);
+                    const _wallet = new Nimiq.Wallet(keyPair);
+                    wallet = {
+                        address: _wallet.address.toUserFriendlyAddress(),
+                        privateKey: _wallet.keyPair.privateKey.toHex(),
+                        legacy: 1,
+                    }
+                }
+                return wallet;
+            }
         },
         components: {
             Identicon,

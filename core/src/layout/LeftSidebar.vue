@@ -13,6 +13,7 @@
                     <div class="nq-h3 pull-right">{{ wallet.balance | lunaToCoins }} NIM</div>
                     <div class="clearfix"></div>
                 </div>
+                <div class="clearfix"></div>
             </div>
         </div>
 
@@ -54,14 +55,14 @@
     }
 
     .account-data {
-        width: calc(100% - 65px);
+        width: calc(100% - 80px);
     }
 
     .nq-card {
         cursor: pointer;
     }
 
-    .nq-card-body {
-        display: flex;
+    .identicon, .account-data{
+        float: left;
     }
 </style>

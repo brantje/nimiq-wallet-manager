@@ -4,6 +4,7 @@
         <div class="flex-container">
             <LeftSidebar v-if="isProfileLoaded"/>
             <div class="content-container nq-style scrollbar-themed"> <!-- Scrollbar not working on firefox -->
+                <notifications  position="top center" classes="notification" />
                 <router-view :key="$route.fullPath"></router-view>
             </div>
             <RightSidebar v-if="isProfileLoaded"/>
@@ -53,3 +54,9 @@
         }
     };
 </script>
+
+<style>
+    .nq-card-body{
+        padding: 2rem;
+    }
+</style>

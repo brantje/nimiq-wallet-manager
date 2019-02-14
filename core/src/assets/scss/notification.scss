@@ -1,0 +1,28 @@
+html {
+  --success-color: #64FFDA;
+  --error-color: #FF1744;
+  --warning-color: #FFC400;
+  --box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+.notification {
+  padding: 14px 24px 14px 16px;
+
+  box-shadow: var(--box-shadow);
+  border-radius: 3px;
+  font-size: 12px;
+  margin: 24px;
+  color: #ffffff;
+  background: #44A4FC;
+
+  &.warn {
+    background: var(--warning-color);
+  }
+
+  &.error {
+    background: var(--error-color);
+  }
+
+  &.success {
+    background: var(--success-color);
+  }
+}
