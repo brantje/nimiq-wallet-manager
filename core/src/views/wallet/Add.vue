@@ -3,8 +3,7 @@
         <div class="nq-card">
             <div class="nq-card-body">
                 <form-wizard title="Add wallet" subtitle="" color="#1f2348" stepSize="xs" @on-complete="onComplete"
-                             ref="wizard"
-                             @on-error="handleError">
+                             ref="wizard" @on-error="handleError">
                     <tab-content title="Choose wallet type">
                         <div>
                             <p><b>Choose wallet type to add</b></p>
@@ -123,17 +122,19 @@
                     label: '',
                     address: '',
                     privateKey: '',
+                    legacy: false
                 },
             };
         },
         created() {
             for (let i = 0; i < 7; i++) {
-                let entropy = window.Nimiq.Entropy.generate();
+                let entropy = Nimiq.Entropy.generate();
                 let master = entropy.toExtendedPrivateKey('');
                 let wallet = master.derivePath("m/44'/242'/0'/0'");
                 this.newWallets.push({
                     address: wallet.toAddress().toUserFriendlyAddress(),
-                    privateKey: master.privateKey.toHex()
+                    privateKey: master.privateKey.toHex(),
+                    legacy: Nimiq.MnemonicUtils.MnemonicType.BIP39
                 })
             }
         },
@@ -166,6 +167,7 @@
             setWallet: function (wallet) {
                 this.wallet.address = wallet.address
                 this.wallet.privateKey = wallet.privateKey
+                this.wallet.legacy = wallet.legacy || 0
                 this.$refs.wizard.changeTab(1, 2)
             },
             validateStep2: function () {
@@ -183,9 +185,9 @@
 
                             break;
                     }
+                    console.log(result)
                     if (result && result.hasOwnProperty('address') && result.hasOwnProperty('privateKey')) {
-                        this.wallet.address = result.address;
-                        this.wallet.privateKey = result.privateKey;
+                        this.setWallet(result)
                         resolve(true)
                         return;
                     }
@@ -201,20 +203,20 @@
                     throw Error('Please enter your recovery words')
                 }
                 let string = this.recoveryWords.split(',').join(' ');
-                let mnemonicType = window.Nimiq.MnemonicUtils.getMnemonicType(string)
+                let mnemonicType = Nimiq.MnemonicUtils.getMnemonicType(string)
                 let entropy, wallet;
-                if (mnemonicType === window.Nimiq.MnemonicUtils.MnemonicType.BIP39) {
+                if (mnemonicType === Nimiq.MnemonicUtils.MnemonicType.BIP39) {
                     console.log('BIP39 key')
-                    entropy = window.Nimiq.MnemonicUtils.mnemonicToEntropy(string)
+                    entropy = Nimiq.MnemonicUtils.mnemonicToEntropy(string)
                     let master = entropy.toExtendedPrivateKey('');
                     let mastrW0 = master.derivePath("m/44'/242'/0'/0'")
                     wallet = {
                         address: mastrW0.toAddress().toUserFriendlyAddress(),
                         privateKey: master.toHex(),
-                        legacy: 0
+                        legacy: Nimiq.MnemonicUtils.MnemonicType.BIP39
                     }
                 }
-                if (mnemonicType === window.Nimiq.MnemonicUtils.MnemonicType.LEGACY) {
+                if (mnemonicType === Nimiq.MnemonicUtils.MnemonicType.LEGACY) {
                     console.log('Legacy key')
                     const entropy = Nimiq.MnemonicUtils.legacyMnemonicToEntropy(string);
                     const buffer = entropy.serialize();
@@ -224,7 +226,7 @@
                     wallet = {
                         address: _wallet.address.toUserFriendlyAddress(),
                         privateKey: _wallet.keyPair.privateKey.toHex(),
-                        legacy: 1,
+                        legacy: Nimiq.MnemonicUtils.MnemonicType.LEGACY,
                     }
                 }
                 return wallet;
