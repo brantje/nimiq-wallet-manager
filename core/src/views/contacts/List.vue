@@ -9,7 +9,7 @@
                 <div class="nq-label">{{ contact.label }}</div>
                 <div class="nq-text-s">{{ contact.address }}</div>
                 <div class="actions">
-                    <button class="nq-button-s red">Delete</button>
+                    <button class="nq-button-s red" @click="deleteContact(contact)">Delete</button>
                     <button class="nq-button-s">Edit</button>
                 </div>
             </div>
@@ -35,29 +35,46 @@
         data() {
             return {};
         },
+        methods: {
+            deleteContact: function () {
+                this.$dialog
+                    .confirm('Please confirm to continue', {type: 'prompt'})
+                    .then(function(dialog) {
+                        console.log('Clicked on proceed');
+                    })
+                    .catch(function() {
+                        console.log('Clicked on cancel');
+                    });
+            }
+        },
         components: {
             Identicon
         }
     };
 </script>
 <style scoped>
-    .contact-list .contact{
+    .contact-list .contact {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    .contact-list .contact .actions{
+
+    .contact-list .contact .actions {
         margin-top: 12px;
     }
-    .contact-list .contact div:first-child{
+
+    .contact-list .contact div:first-child {
         width: 10%
     }
-    .contact-list .contact div:nth-child(2){
+
+    .contact-list .contact div:nth-child(2) {
         width: 20%
     }
-    .contact-list .contact div:nth-child(3){
+
+    .contact-list .contact div:nth-child(3) {
         width: 40%
     }
+
     .nq-card {
         position: relative;
         width: calc(100% - 30px);

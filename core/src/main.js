@@ -2,7 +2,10 @@
 
 import Vue from "vue"
 import Notifications from 'vue-notification'
+import VuejsDialog from 'vuejs-dialog';
+// import VuejsDialogMixin from 'vuejs-dialog/vuejs-dialog-mixin.min.js';
 
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 import "@nimiq/style/nimiq-style.min.css"
 import "@nimiq/style/nimiq-style-icons.min.css"
 import "assets/scss/main.scss"
@@ -18,6 +21,7 @@ import "assets/scss/transaction.scss"
 
 import store from './store'
 import App from "./App.vue"
+import DefaultDialog from 'components/dialog/DefaultDialog.vue'
 import router from "./router"
 import axios from "axios"
 // import VueFormWizard from 'vue-form-wizard'
@@ -34,6 +38,10 @@ if (token) {
     document.querySelectorAll(".loading-container-overlay").forEach( el => el.remove() )
     Vue.config.productionTip = false;
     Vue.use(Notifications)
+    Vue.use(VuejsDialog, {
+        view: 'DefaultDialog',
+    });
+    Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
 
     new Vue({
         router,
