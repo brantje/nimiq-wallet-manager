@@ -106,3 +106,16 @@ header {
   border-radius: 1rem;
   margin-bottom: 15px;
 }
+
+.identicon {
+  margin-right: 15px;
+}
+
+.account-data {
+  width: calc(100% - 80px);
+}
+
+
+.identicon, .account-data{
+  float: left;
+}

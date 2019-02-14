@@ -50,19 +50,8 @@
 </script>
 
 <style scoped>
-    .identicon {
-        margin-right: 15px;
-    }
-
-    .account-data {
-        width: calc(100% - 80px);
-    }
-
-    .nq-card {
+    .nq-card{
+        animation: slideInDown 0.5s;
         cursor: pointer;
-    }
-
-    .identicon, .account-data{
-        float: left;
     }
 </style>

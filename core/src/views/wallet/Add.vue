@@ -10,13 +10,13 @@
                         </div>
                         <div>
                             <label>
-                                <input type="radio" name="addType" v-model="addType" value="address">
+                                <input type="radio" name="addType" v-model="addType" value="address" @click="nextStep">
                                 Add wallet by address (sending tx not possible)
                             </label>
                         </div>
                         <div>
                             <label>
-                                <input type="radio" name="addType" v-model="addType" value="recoveryWords">
+                                <input type="radio" name="addType" v-model="addType" value="recoveryWords" @click="nextStep">
                                 Import wallet by Recovery Words
                             </label>
                         </div>
@@ -28,7 +28,7 @@
                         <!--</div>-->
                         <div>
                             <label>
-                                <input type="radio" name="addType" v-model="addType" value="generateNew">
+                                <input type="radio" name="addType" v-model="addType" value="generateNew" @click="nextStep">
                                 Generate new wallet
                             </label>
                         </div>
@@ -61,7 +61,7 @@
                             </div>
                             <div>
                                 <div class="identicon-container">
-                                    <div class="x-identicon" v-for="wallet in newWallets" @click="setWallet(wallet)">
+                                    <div class="x-identicon" v-for="wallet in newWallets" @click="setWallet(wallet, true)">
                                         <Identicon :address="wallet.address" size="128"></Identicon>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                             <input type="text" v-model="wallet.label"/>
                         </div>
                     </tab-content>
-                    <tab-content title="Last step">
+                    <tab-content title="Last step" v-if="addType !== 'address'">
                         <div>
                             <h1>Set a Pass Phrase</h1>
                             <p>Please enter a Pass Phrase to secure your wallet.<br/><br/>
@@ -103,10 +103,20 @@
                         <div>
                             <h1>Your wallet is almost ready</h1>
                             <p>
-                                Below you can find the details, if everything look fine click finish<br/>
-                                <br/>
-
+                                Below you can find the details, if everything look fine click finish
                             </p>
+                            <div>
+                                <div class="identicon">
+                                    <Identicon :address="wallet.address" size="64" class="img-responsive"></Identicon>
+                                </div>
+                                <div class="account-data">
+                                    <span class="nq-label">{{ wallet.label }} </span>
+                                    <div class="nq-text-s">
+                                        {{ wallet.address }}
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
                     </tab-content>
                 </form-wizard>
@@ -168,6 +178,9 @@
                     delete wallet.privateKey;
                 }
                 this.$store.dispatch(ADD_WALLET_REQUEST, wallet).then(() => {
+                    this.$notify({
+                        title: 'Wallet added',
+                    });
                     this.$router.push('/')
                 }).catch(e => {
                     if (e === ADD_WALLET_ERROR) {
@@ -179,6 +192,9 @@
                 })
 
             },
+            nextStep: function () {
+                this.$refs.wizard.nextTab()
+            },
             handleError: function (errorMsg) {
                 if (errorMsg) {
                     this.$notify({
@@ -187,12 +203,12 @@
                     });
                 }
             },
-            setWallet: function (wallet) {
+            setWallet: function (wallet, goNext = false) {
                 this.wallet.address = wallet.address
                 this.wallet.privateKey = wallet.privateKey
                 this.wallet.legacy = wallet.legacy || 0
-                if(this.addType !== 'address'){
-                    this.$refs.wizard.changeTab(1, 2)
+                if(goNext){
+                    this.$refs.wizard.changeTab(1,2)
                 }
             },
             validateStep2: function () {
@@ -210,7 +226,9 @@
 
                             break;
                     }
-                    if (result && result.hasOwnProperty('address') && result.hasOwnProperty('privateKey')) {
+                    if (result &&
+                        result.hasOwnProperty('address') &&
+                        result.hasOwnProperty('privateKey')) {
                         this.setWallet(result)
                         resolve(true)
                         return;
@@ -222,9 +240,6 @@
                 return new Promise((resolve, reject) => {
                     if(!this.wallet.label){
                         return reject('Please give your wallet a name');
-                    }
-                    if(this.addType === 'address'){
-                        this.$refs.wizard.changeTab(3, 4)
                     }
                     resolve(true)
                 })
@@ -283,10 +298,20 @@
 
 </style>
 <style>
-    .wizard-nav.wizard-nav-pills, .wizard-progress-with-circle, .vue-form-wizard .category {
+    .wizard-nav.wizard-nav-pills, .wizard-progress-with-circle, .vue-form-wizard .category, .vue-form-wizard .wizard-header {
         display: none;
+    }
+    .vue-form-wizard .wizard-tab-content .wizard-tab-container {
+        display: block;
+        animation: fadeIn 0.5s;
+        width: 100%;
+    }
+    .vue-form-wizard .wizard-card-footer{
+        padding: 0;
+        margin-top: 2rem;
     }
     .vue-form-wizard .wizard-tab-content {
         padding: 0;
+        display: flex;
     }
 </style>
