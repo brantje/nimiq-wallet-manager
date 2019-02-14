@@ -61,7 +61,7 @@
                             </div>
                             <div>
                                 <div class="identicon-container">
-                                    <div class="x-identicon" v-for="wallet in newWallets" @click="setWallet(wallet, true)">
+                                    <div class="x-identicon"  :class="{'initial-position': !firstStepPassed}" v-for="wallet in newWallets" @click="setWallet(wallet, true)">
                                         <Identicon :address="wallet.address" size="128"></Identicon>
                                     </div>
                                 </div>
@@ -144,6 +144,7 @@
             return {
                 newWallets: [],
                 addType: '',
+                firstStepPassed: false,
                 recoveryWords: '',
                 passPhrase: '',
                 walletAddressInput: '',
@@ -194,6 +195,8 @@
             },
             nextStep: function () {
                 this.$refs.wizard.nextTab()
+                this.firstStepPassed = false
+                setTimeout(() => this.firstStepPassed = true, 50)
             },
             handleError: function (errorMsg) {
                 if (errorMsg) {
@@ -296,6 +299,9 @@
         max-width: none;
     }
 
+    .initial-position{
+        transform: translate(0, 0) !important;
+    }
 </style>
 <style>
     .wizard-nav.wizard-nav-pills, .wizard-progress-with-circle, .vue-form-wizard .category, .vue-form-wizard .wizard-header {
