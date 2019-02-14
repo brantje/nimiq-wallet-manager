@@ -4,7 +4,7 @@
         <div class="flex-container">
             <LeftSidebar v-if="isProfileLoaded"/>
             <div class="content-container nq-style scrollbar-themed"> <!-- Scrollbar not working on firefox -->
-                <notifications  position="top center" classes="notification" />
+                <notifications  position="top center" classes="notification" width="350" />
                 <router-view :key="$route.fullPath"></router-view>
             </div>
             <RightSidebar v-if="isProfileLoaded"/>

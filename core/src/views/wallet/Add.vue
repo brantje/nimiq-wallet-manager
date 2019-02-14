@@ -9,20 +9,28 @@
                             <p><b>Choose wallet type to add</b></p>
                         </div>
                         <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="address">Add wallet by
-                                address (sending tx not possible)</label>
+                            <label>
+                                <input type="radio" name="addType" v-model="addType" value="address">
+                                Add wallet by address (sending tx not possible)
+                            </label>
                         </div>
                         <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="recoveryWords">Import
-                                wallet by Recovery Words</label>
+                            <label>
+                                <input type="radio" name="addType" v-model="addType" value="recoveryWords">
+                                Import wallet by Recovery Words
+                            </label>
                         </div>
+                        <!--<div>-->
+                            <!--<label>-->
+                                <!--<input type="radio" name="addType" v-model="addType" value="imageWallet">-->
+                                <!--Import wallet by ImageWallet-->
+                            <!--</label>-->
+                        <!--</div>-->
                         <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="imageWallet">Import
-                                wallet by ImageWallet</label>
-                        </div>
-                        <div>
-                            <label><input type="radio" name="addType" v-model="addType" value="generateNew">Generate new
-                                wallet</label>
+                            <label>
+                                <input type="radio" name="addType" v-model="addType" value="generateNew">
+                                Generate new wallet
+                            </label>
                         </div>
                         <p>
                             <small>The wallet private key will be encrypted before it's send to the server.<br/>More
@@ -68,7 +76,7 @@
                         </div>
                     </tab-content>
 
-                    <tab-content title="Last step">
+                    <tab-content title="Name it" :before-change="validateStep3">
                         <div>
                             <p>
                                 <b>Make your wallet personal by giving it a name</b>
@@ -91,6 +99,16 @@
                             <input type="text" v-model="passPhrase"/>
                         </div>
                     </tab-content>
+                    <tab-content title="Confirmation">
+                        <div>
+                            <h1>Your wallet is almost ready</h1>
+                            <p>
+                                Below you can find the details, if everything look fine click finish<br/>
+                                <br/>
+
+                            </p>
+                        </div>
+                    </tab-content>
                 </form-wizard>
             </div>
         </div>
@@ -104,6 +122,7 @@
     import Identicon from "components/Identicon.vue"
     import {FormWizard, TabContent} from 'vue-form-wizard'
     import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+    import {encrypt} from "../../utils/encryption";
 
     export default {
         name: "AddWallet",
@@ -143,7 +162,11 @@
                 let wallet = await this.wallet
                 console.log(wallet)
                 //@TODO encrypt the private key
-                return;
+                if (wallet.privateKey) {
+                    let encrypted = await encrypt(wallet.privateKey, this.passPhrase);
+                    wallet.encryptedPrivateKey = encrypted;
+                    delete wallet.privateKey;
+                }
                 this.$store.dispatch(ADD_WALLET_REQUEST, wallet).then(() => {
                     this.$router.push('/')
                 }).catch(e => {
@@ -168,7 +191,9 @@
                 this.wallet.address = wallet.address
                 this.wallet.privateKey = wallet.privateKey
                 this.wallet.legacy = wallet.legacy || 0
-                this.$refs.wizard.changeTab(1, 2)
+                if(this.addType !== 'address'){
+                    this.$refs.wizard.changeTab(1, 2)
+                }
             },
             validateStep2: function () {
                 return new Promise((resolve, reject) => {
@@ -185,13 +210,23 @@
 
                             break;
                     }
-                    console.log(result)
                     if (result && result.hasOwnProperty('address') && result.hasOwnProperty('privateKey')) {
                         this.setWallet(result)
                         resolve(true)
                         return;
                     }
                     reject('An error occurred while validating the wallet.')
+                })
+            },
+            validateStep3: function () {
+                return new Promise((resolve, reject) => {
+                    if(!this.wallet.label){
+                        return reject('Please give your wallet a name');
+                    }
+                    if(this.addType === 'address'){
+                        this.$refs.wizard.changeTab(3, 4)
+                    }
+                    resolve(true)
                 })
             },
             validateAddress: function () {
@@ -251,7 +286,6 @@
     .wizard-nav.wizard-nav-pills, .wizard-progress-with-circle, .vue-form-wizard .category {
         display: none;
     }
-
     .vue-form-wizard .wizard-tab-content {
         padding: 0;
     }

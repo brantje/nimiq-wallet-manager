@@ -6,7 +6,7 @@
         <div class="nq-card-body">
             <div class="body-row">
                 <span class="nq-label">Total balance</span>
-                <span class="nq-text-s pull-right">{{ totalBalance | lunaToCoins}} NIM</span>
+                <span class="nq-text-s pull-right">{{ totalBalance | lunaToCoins }} NIM</span>
             </div>
             <div class="body-row">
                 <span class="nq-label">Number of wallets</span>
@@ -44,11 +44,10 @@
         watch: {
             getWallets: function (wallets) {
                 if(wallets) {
-                    this.totalBalance = wallets.reduce((e, p) => {
+                    wallets.forEach((e) => {
                         if(e.hasOwnProperty('balance')){
-                            return e.balance;
+                            this.totalBalance += e.balance;
                         }
-                        return e + p.balance;
                     });
                     this.avgBalance = (this.totalBalance / wallets.length);
                 }
