@@ -40,6 +40,7 @@ if (token) {
     Vue.use(Notifications)
     Vue.use(VuejsDialog, {
         view: 'DefaultDialog',
+        backdropClose: true
     });
     Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
 

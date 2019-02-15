@@ -64,7 +64,8 @@
     }
 
     .contact-list .contact div:first-child {
-        width: 10%
+        width: 10%;
+        min-width: 55px;
     }
 
     .contact-list .contact div:nth-child(2) {

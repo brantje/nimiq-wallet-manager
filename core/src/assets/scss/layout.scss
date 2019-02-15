@@ -13,14 +13,58 @@ header {
     margin: 0;
     padding: 20px;
   }
-  ul{
+  > ul.nav {
     margin: 0;
-    li{
-      padding: 20px;
+    > li {
+      padding: 22px;
+      cursor: pointer;
+      &:hover {
+        .settings {
+          svg path {
+            fill: #1f2348;
+          }
+        }
+        background-color: #fff;
+        .submenu {
+          display: block;
+        }
+      }
+    }
+    ul li:hover {
+      background-color: hsla(0, 0%, 50.2%, .1);
+    }
+    li {
       list-style: none;
-      .settings{
+
+      .settings {
         width: 1.2em;
         height: 1.2em;
+      }
+
+      .submenu {
+        min-width: 200px;
+        text-align: center;
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        right: 0;
+        color: var(--nimiq-blue);
+        padding: 0;
+        top: 53px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+
+        & > li {
+          &.spacer{
+
+          }
+          a {
+            padding: 22px;
+            display: block;
+            cursor: pointer;
+            text-decoration: none;
+          }
+        }
       }
     }
   }
@@ -41,7 +85,7 @@ header {
   overflow-y: auto;
   .nq-card {
     .nq-card-body {
-      .nq-text-s{
+      .nq-text-s {
         white-space: nowrap;
         overflow: hidden;
         max-width: 300px;
@@ -73,35 +117,40 @@ header {
 .pull-left {
   float: left;
 }
-.clearfix{
-    clear: both;
+
+.clearfix {
+  clear: both;
 }
-.text-center{
+
+.text-center {
   text-align: center;
 }
-.centered-container{
+
+.centered-container {
   height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .logo{
+  .logo {
     height: 64px;
     width: 64px;
     margin: 0 auto;
   }
-  .form{
-    h2{
+  .form {
+    h2 {
       margin-top: 0;
     }
     padding: 20px;
   }
 }
-.logo{
+
+.logo {
   background: url('data:image/svg+xml;utf8,<svg width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.6991 10.875L21.0741 1.125C20.6691 0.4275 19.9266 0 19.1241 0H7.87414C7.07164 0 6.32914 0.4275 5.92789 1.125L0.302891 10.875C-0.0983594 11.5725 -0.0983594 12.4275 0.302891 13.125L5.92789 22.875C6.32914 23.5725 7.07164 24 7.87414 24H19.1241C19.9266 24 20.6691 23.5725 21.0704 22.875L26.6954 13.125C27.1004 12.4275 27.1004 11.5725 26.6991 10.875Z" fill="url(#paint0_radial)"/><defs><radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(26.9996 24) rotate(-180) scale(26.9977 24)"><stop stop-color="#EC991C"/><stop offset="1" stop-color="#E9B213"/></radialGradient></defs></svg>') no-repeat;
   background-size: contain;
 }
-.errors{
+
+.errors {
   padding: 5px;
   border-radius: 1rem;
   margin-bottom: 15px;
@@ -115,7 +164,7 @@ header {
   width: calc(100% - 80px);
 }
 
-
-.identicon, .account-data{
+.identicon, .account-data {
   float: left;
 }
+

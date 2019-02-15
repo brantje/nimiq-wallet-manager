@@ -1,6 +1,6 @@
 <template>
     <div class="sidenav scrollbar-themed">
-        <div class="nq-card" v-for="wallet in getWallets">
+        <div class="nq-card" v-for="wallet in sortWallets(getWallets)">
             <div class="nq-card-body" @click="loadWallet(wallet.address)">
                 <div class="identicon">
                     <Identicon :address="wallet.address" size="64" class="img-responsive"></Identicon>
@@ -10,9 +10,9 @@
                     <div class="nq-text-s">
                         {{ wallet.address }}
                     </div>
-                    <div class="nq-h3 pull-right">{{ wallet.balance | lunaToCoins }} NIM</div>
                     <div class="clearfix"></div>
                 </div>
+                <div class="nq-h3 pull-right">{{ wallet.balance | lunaToCoins }} NIM</div>
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -41,6 +41,13 @@
         methods: {
             loadWallet: function (address) {
                 this.$router.push('/wallet/' + address)
+            },
+            sortWallets: function (wallets) {
+                return wallets.sort((a, b) => {
+                    let orderA = a.order;
+                    let orderB = b.order;
+                    return orderA - orderB
+                })
             }
         },
         components: {
