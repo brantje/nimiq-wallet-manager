@@ -1,6 +1,7 @@
 <template>
     <div class="nq-card walletDetail">
         <h3 class="nq-label">Contact list</h3>
+        <button class="nq-button-s" @click="addContact">Add contact</button>
         <div class="contact-list" v-for="contact in getContacts">
             <div class="contact">
                 <div>
@@ -10,7 +11,7 @@
                 <div class="nq-text-s">{{ contact.address }}</div>
                 <div class="actions">
                     <button class="nq-button-s red" @click="deleteContact(contact)">Delete</button>
-                    <button class="nq-button-s">Edit</button>
+                    <button class="nq-button-s" @click="editContact(contact)">Edit</button>
                 </div>
             </div>
         </div>
@@ -22,6 +23,7 @@
     import store from 'store'
     import {CONTACT_LIST_REQUEST} from 'store/actions/contact'
     import Identicon from "components/Identicon.vue"
+    import {contactApi} from 'utils/api/contact'
 
     export default {
         name: "Contacts",
@@ -36,15 +38,48 @@
             return {};
         },
         methods: {
-            deleteContact: function () {
+            deleteContact: function (contact) {
                 this.$dialog
                     .confirm('Please confirm to continue', {type: 'prompt'})
-                    .then(function(dialog) {
-                        console.log('Clicked on proceed');
+                    .then(function (dialog) {
+                        contactApi.delete(contact).then(() => {
+                            store.dispatch(CONTACT_LIST_REQUEST)
+                            this.$notify({
+                                title: 'Contact deleted',
+                            });
+                        }).catch((e) => {
+                            this.$notify({
+                                type: 'error',
+                                title: 'Error during deleting contact',
+                            });
+                        })
                     })
-                    .catch(function() {
-                        console.log('Clicked on cancel');
+                    .catch(function () {
+
                     });
+            },
+            addContact: function () {
+                this.$dialog.alert('', {
+                    view: 'AddContactDialog', // can be set globally too
+                    html: true,
+                    animation: 'fade',
+                    backdropClose: true,
+                    message: {
+                        title: 'Add contact'
+                    }
+                }).then(() => store.dispatch(CONTACT_LIST_REQUEST)).catch(() => {})
+            },
+            editContact: function (contact) {
+                this.$dialog.alert('', {
+                    view: 'AddContactDialog', // can be set globally too
+                    html: true,
+                    animation: 'fade',
+                    backdropClose: true,
+                    contact: contact,
+                    message: {
+                        title: 'Edit contact'
+                    }
+                }).then(() => store.dispatch(CONTACT_LIST_REQUEST)).catch(() => {})
             }
         },
         components: {

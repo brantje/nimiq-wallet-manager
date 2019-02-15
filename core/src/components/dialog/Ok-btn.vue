@@ -1,5 +1,5 @@
 <template>
-    <button v-if="enabled" :class="['nq-button-s', 'red', {'dg-btn--loading': loading}, {'dg-pull-right': !options.reverse}]"
+    <button v-if="enabled" :class="['nq-button-s', {'dg-btn--loading': loading}, {'dg-pull-right': !options.reverse}, btnColor]"
             @click.prevent="proceed()" ref="btn" :disabled="is_disabled">
         <span class="dg-btn-content">
             <slot></slot>
@@ -38,6 +38,11 @@
                 required: false,
                 type: Boolean,
                 'default': false
+            },
+            btnColor: {
+                required: false,
+                type: String,
+                'default': 'red'
             }
         },
         mounted(){

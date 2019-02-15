@@ -22,8 +22,10 @@ import "assets/scss/transaction.scss"
 import store from './store'
 import App from "./App.vue"
 import DefaultDialog from 'components/dialog/DefaultDialog.vue'
+import AddContactDialog from 'views/contacts/Add.vue'
 import router from "./router"
 import axios from "axios"
+// import Nimiq from '@nimiq/core-web'
 // import VueFormWizard from 'vue-form-wizard'
 import { AUTH_SUCCESS } from 'store/actions/auth'
 
@@ -35,7 +37,6 @@ if (token) {
 
 (async () => {
     await Nimiq.load()
-    document.querySelectorAll(".loading-container-overlay").forEach( el => el.remove() )
     Vue.config.productionTip = false;
     Vue.use(Notifications)
     Vue.use(VuejsDialog, {
@@ -43,12 +44,15 @@ if (token) {
         backdropClose: true
     });
     Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
-
+    Vue.dialog.registerComponent('AddContactDialog', AddContactDialog);
     new Vue({
         router,
         store,
         render: h => h(App)
     }).$mount("#app");
+    setTimeout(() => {
+        document.querySelectorAll(".loading-container-overlay").forEach( el => el.remove() )
+    }, 250);
 })()
 
 

@@ -43,7 +43,7 @@
                 this.$router.push('/wallet/' + address)
             },
             sortWallets: function (wallets) {
-                return wallets.sort((a, b) => {
+                return wallets.slice().sort((a, b) => {
                     let orderA = a.order;
                     let orderB = b.order;
                     return orderA - orderB

@@ -2,7 +2,9 @@
 @import "notification";
 @import "animate";
 @import "dialog";
-
+@import "icon-addon";
+$material-icons-font-path: '~material-icons/iconfont/';
+@import '~material-icons/iconfont/material-icons.scss';
 //@import "@nimiq/style"
 
 /**/

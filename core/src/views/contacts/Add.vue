@@ -1,0 +1,91 @@
+<template>
+    <div class="nq-card">
+        <div class="nq-card-header">
+            <h1 class="nq-h1">{{ messageTitle }}</h1>
+        </div>
+        <div class="nq-card-body">
+            <div class="identicon">
+                <Identicon :address="contact.address" size="64" class="img-responsive"></Identicon>
+            </div>
+            <div class="account-data">
+                <span class="nq-label"><input type="text" v-model="contact.label" placeholder="Enter a name "> </span>
+                <div class="nq-text-s">
+                    <input type="text" v-model="inputAddress" placeholder="Enter address"/>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="nq-card-footer">
+            <ok-btn @click="saveContact" :options="options" btnColor="green" v-if="contact.address">Save</ok-btn>
+            <cancel-btn @click="handleDismiss()" :options="options">Dismiss</cancel-btn>
+        </div>
+    </div>
+</template>
+
+<script>
+    import DialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js'; // Include mixin
+    import OkBtn from 'components/dialog/Ok-btn.vue';
+    import CancelBtn from 'components/dialog/Cancel-btn.vue';
+    import Identicon from 'components/Identicon.vue'
+    import {contactApi} from 'utils/api/contact'
+
+    export default {
+        mixins: [DialogMixin],
+        data: function () {
+            return {
+                inputAddress: '',
+                inputLabel: ''
+            }
+        },
+        computed: {
+            contact: function () {
+                if (this.options.contact) {
+                    this.inputAddress = this.options.contact.address
+                    return Object.assign({}, this.options.contact)
+                }
+                return {
+                    _id: null,
+                    label: '',
+                    address: ''
+                }
+            }
+        },
+        watch: {
+            inputAddress: function (inputAddress) {
+                let address;
+                try {
+                    address = Nimiq.Address.fromString(inputAddress)
+                } catch (e) {
+                    this.contact.address = ''
+                }
+                if (address) {
+                    this.contact.address = address.toUserFriendlyAddress();
+                }
+            }
+        },
+        methods: {
+            saveContact() {
+                let method = (this.contact._id) ? 'update' : 'create'
+                contactApi[method](this.contact).then(() => {
+                    this.$notify({
+                        title: 'Contact saved',
+                    });
+                    this.proceed(); // included in DialogMixin
+                }).catch(() => {
+                    this.$notify({
+                        type: 'error',
+                        title: 'Please fill in all fields',
+                    });
+                });
+            },
+            handleDismiss() {
+                this.cancel(); // included in DialogMixin
+            }
+        },
+        components: {
+            CancelBtn,
+            OkBtn,
+            Identicon
+        }
+    };
+</script>

@@ -13,6 +13,10 @@ header {
     margin: 0;
     padding: 20px;
   }
+  .nimiq-logo{
+    margin-top: 15px;
+    margin-left: 15px;
+  }
   > ul.nav {
     margin: 0;
     > li {
@@ -59,10 +63,11 @@ header {
 
           }
           a {
-            padding: 22px;
+            padding: 2rem;
             display: block;
             cursor: pointer;
             text-decoration: none;
+            color: var(--nimiq-blue);
           }
         }
       }
@@ -74,14 +79,14 @@ header {
   display: -webkit-flex;
   display: flex;
   //background-color: red;
-  min-height: calc(100% - 68px);
+  min-height: calc(100% - 70px);
 }
 
 .sidenav {
   //background-color: lightgray;
   -webkit-flex: 1;
   flex: 1.5;
-  max-height: calc(100vh - 68px);
+  max-height: calc(100vh - 70px);
   overflow-y: auto;
   .nq-card {
     .nq-card-body {
@@ -101,7 +106,7 @@ header {
 
 .content-container {
   //background-color: lightblue;
-  max-height: calc(100vh - 68px);
+  max-height: calc(100vh - 70px);
   max-width: 1200px;
   overflow-y: auto;
   -webkit-flex: 5;

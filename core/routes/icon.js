@@ -23,11 +23,8 @@ router.get('/:address', auth.optional, async (req, res, next) => {
     }
 
     if (!validAddress) {
-        return res.status(422).json({
-            errors: {
-                address: 'is not valid',
-            },
-        });
+        res.type('svg')
+        return res.status(200).send('<svg viewBox="0 0 160 160" width="256" height="256" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/2000/xlink" ><defs><clipPath id="hexagon-clip-3803192263" transform="scale(0.5) translate(0, 16)"></clipPath></defs><path fill="white" stroke="#3b3b3b" transform="translate(0, 8) scale(0.5)" d="M251.6 17.34l63.53 110.03c5.72 9.9 5.72 22.1 0 32L251.6 269.4c-5.7 9.9-16.27 16-27.7 16H96.83c-11.43 0-22-6.1-27.7-16L5.6 159.37c-5.7-9.9-5.7-22.1 0-32L69.14 17.34c5.72-9.9 16.28-16 27.7-16H223.9c11.43 0 22 6.1 27.7 16z"/></svg>');
     }
 
     const filenameSvg = validAddress.toHex() + '.svg';
