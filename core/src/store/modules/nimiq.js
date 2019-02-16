@@ -101,7 +101,6 @@ const mutations = {
 
     },
     [NETWORK_MEMPOOL_SUCCESS]: (state, resp) => {
-        console.log(resp)
         state.mempool = resp.data
     },
     [MEMPOOL_ADD_TRANSACTION]: (state, tx) => {
