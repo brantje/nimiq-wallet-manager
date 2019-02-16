@@ -9,6 +9,7 @@
                 </div>
                 <div class="nq-label">{{ wallet.label }}</div>
                 <div class="nq-text-s">{{ wallet.address }}</div>
+                <div class="nq-text-s">{{ wallet.balance | lunaToCoins}} NIM</div>
                 <div class="actions">
                     <button class="nq-button-s red" @click="deleteWallet(wallet)">Delete</button>
                     <button class="nq-button-s" @click="editWallet(wallet)">Edit</button>
@@ -24,6 +25,7 @@
     import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
     import Identicon from "components/Identicon.vue"
     import {walletApi} from 'utils/api/wallet'
+    import {lunaToCoins} from 'filters/lunaToCoins'
 
     export default {
         name: "Wallets",
@@ -39,16 +41,21 @@
         },
         methods: {
             deleteWallet: function (wallet) {
+                let that = this;
                 this.$dialog
-                    .confirm('Please confirm to continue', {type: 'prompt'})
+                    .confirm('Please confirm to continue', {
+                        type: 'hard',
+                        verification: wallet.label,
+                        verificationHelp: 'Type the wallets name  "[+:verification]" to confirm deletion',
+                    })
                     .then(function (dialog) {
                         walletApi.delete(wallet).then(() => {
                             store.dispatch(WALLET_LIST_REQUEST)
-                            this.$notify({
+                            that.$notify({
                                 title: 'Wallet deleted',
                             });
                         }).catch((e) => {
-                            this.$notify({
+                            that.$notify({
                                 type: 'error',
                                 title: 'Error during deleting wallet',
                             });
@@ -58,8 +65,7 @@
 
                     });
             },
-
-            editContact: function (contact) {
+            editWallet: function (contact) {
                 this.$dialog.alert('', {
                     view: 'AddContactDialog', // can be set globally too
                     html: true,
@@ -71,6 +77,9 @@
                     }
                 }).then(() => store.dispatch(WALLET_LIST_REQUEST)).catch(() => {})
             }
+        },
+        filters: {
+            lunaToCoins,
         },
         components: {
             Identicon
@@ -99,6 +108,10 @@
 
     .wallet-list .wallet div:nth-child(3) {
         width: 40%
+    }
+
+    .wallet-list .wallet div:nth-child(4) {
+        width: 15%
     }
 
     .nq-card {

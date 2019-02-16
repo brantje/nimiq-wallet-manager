@@ -1,3 +1,23 @@
 .dg-main-content{
   background-color: transparent;
 }
+
+body .dg-container--has-input .dg-form{
+  border: none;
+}
+
+body .dg-form{
+  border-radius: 0;
+  padding: 0;
+  background-color: transparent;
+  input{
+    outline: none;
+    background: transparent;
+    width: 100%;
+    border: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3) !important;
+    border-radius: 0;
+    padding: 1px !important;
+
+  }
+}
