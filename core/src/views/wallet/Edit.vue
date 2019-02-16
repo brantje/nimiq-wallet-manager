@@ -10,13 +10,13 @@
             <div class="account-data">
                 <span class="nq-label"><input type="text" v-model="wallet.label" placeholder="Enter a name "> </span>
                 <div class="nq-text-s">
-                    <input type="text" v-model="inputAddress" disabled />
+                    <input type="text" v-model="wallet.address" disabled />
                 </div>
                 <div class="clearfix"></div>
             </div>
         </div>
         <div class="nq-card-footer">
-            <ok-btn @click="saveWallet" :options="options" btnColor="green" v-if="wallet.address">Save</ok-btn>
+            <ok-btn @click="saveWallet" :options="options" btnColor="green" v-if="wallet.label">Save</ok-btn>
             <cancel-btn @click="handleDismiss()" :options="options">Dismiss</cancel-btn>
         </div>
     </div>
@@ -33,8 +33,7 @@
         mixins: [DialogMixin],
         data: function () {
             return {
-                inputAddress: '',
-                inputLabel: ''
+
             }
         },
         computed: {
@@ -50,19 +49,7 @@
                 }
             }
         },
-        watch: {
-            inputAddress: function (inputAddress) {
-                let address;
-                try {
-                    address = Nimiq.Address.fromString(inputAddress)
-                } catch (e) {
-                    this.wallet.address = ''
-                }
-                if (address) {
-                    this.wallet.address = address.toUserFriendlyAddress();
-                }
-            }
-        },
+
         methods: {
             saveWallet() {
                 walletApi.update(this.wallet).then(() => {
