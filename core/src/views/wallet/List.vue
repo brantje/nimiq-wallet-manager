@@ -65,13 +65,13 @@
 
                     });
             },
-            editWallet: function (contact) {
+            editWallet: function (wallet) {
                 this.$dialog.alert('', {
-                    view: 'AddContactDialog', // can be set globally too
+                    view: 'EditWalletDialog',
                     html: true,
                     animation: 'fade',
                     backdropClose: true,
-                    contact: contact,
+                    wallet: wallet,
                     message: {
                         title: 'Edit wallet'
                     }

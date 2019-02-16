@@ -26,6 +26,8 @@ import store from './store'
 import App from "./App.vue"
 import DefaultDialog from 'components/dialog/DefaultDialog.vue'
 import AddContactDialog from 'views/contacts/Add.vue'
+import EditWalletDialog from 'views/wallet/Edit.vue'
+
 import router from "./router"
 import axios from "axios"
 // import Nimiq from '@nimiq/core-web'
@@ -72,6 +74,7 @@ new Vue({
     await Nimiq.load()
     Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
     Vue.dialog.registerComponent('AddContactDialog', AddContactDialog);
+    Vue.dialog.registerComponent('EditWalletDialog', EditWalletDialog);
 
     setTimeout(() => {
         document.querySelectorAll(".loading-container-overlay").forEach( el => el.remove() )
