@@ -18,7 +18,7 @@
                 </a>
                 <ul class="submenu nq-card">
                     <li>
-                        <a>Manage wallets</a>
+                        <router-link to="/wallets">Manage wallets</router-link>
                     </li>
                     <li>
                         <router-link to="/contacts">Manage contacts</router-link>

@@ -5,6 +5,7 @@ import Login from "views/user/Login.vue";
 import Register from "views/user/Register.vue";
 import WalletDetail from "views/wallet/Detail.vue";
 import AddWallet from "views/wallet/Add.vue";
+import WalletList from "views/wallet/List.vue";
 import ContactList from "views/contacts/List.vue";
 import store from "store";
 import Meta from 'vue-meta'
@@ -47,6 +48,12 @@ export default new Router({
             path: "/wallet/:address",
             name: "WalletDetail",
             component: WalletDetail,
+            beforeEnter: ifAuthenticated,
+        },
+        {
+            path: "/wallets",
+            name: "WalletDetail",
+            component: WalletList,
             beforeEnter: ifAuthenticated,
         },
         {
