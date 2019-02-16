@@ -1,38 +1,62 @@
 <template>
     <div class="nq-card walletDetail">
         <h3 class="nq-label">Wallets</h3>
-        <router-link to="/wallet/add"><button class="nq-button-s">Add wallet</button></router-link>
-        <div class="wallet-list" v-for="wallet in getWallets">
-            <div class="wallet">
-                <div>
-                    <Identicon :address="wallet.address" size="50" class="img-responsive"></Identicon>
-                </div>
-                <div class="nq-label">{{ wallet.label }}</div>
-                <div class="nq-text-s">{{ wallet.address }}</div>
-                <div class="nq-text-s">{{ wallet.balance | lunaToCoins}} NIM</div>
-                <div class="actions">
-                    <button class="nq-button-s red" @click="deleteWallet(wallet)">Delete</button>
-                    <button class="nq-button-s" @click="editWallet(wallet)">Edit</button>
+        <router-link to="/wallet/add">
+            <button class="nq-button-s">Add wallet</button>
+        </router-link>
+        <draggable v-model="wallets" :options="{group:'people'}" @start="drag=true" @end="drag=false">
+            <div class="wallet-list" v-for="wallet in wallets" :key="wallet.address">
+                <div class="wallet">
+                    <div>
+                        <Identicon :address="wallet.address" size="50" class="img-responsive"></Identicon>
+                    </div>
+                    <div class="nq-label">{{ wallet.label }}</div>
+                    <div class="nq-text-s">{{ wallet.address }}</div>
+                    <div class="nq-text-s">{{ wallet.balance | lunaToCoins}} NIM</div>
+                    <div class="actions">
+                        <button class="nq-button-s red" @click="deleteWallet(wallet)">Delete</button>
+                        <button class="nq-button-s" @click="editWallet(wallet)">Edit</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </draggable>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
     import store from 'store'
-    import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
+    import {WALLET_LIST_REQUEST, UPDATE_WALLET_LIST} from 'store/actions/wallet'
     import Identicon from "components/Identicon.vue"
     import {walletApi} from 'utils/api/wallet'
     import {lunaToCoins} from 'filters/lunaToCoins'
+    import draggable from 'vuedraggable'
 
     export default {
         name: "Wallets",
         metaInfo: {
             title: 'My wallets'
         },
-        computed: mapGetters(['getWallets']),
+        computed: {
+            wallets: {
+                get: function () {
+                    return store.state.wallet.wallets.slice()
+                },
+                set: function (value) {
+                    let wallets = JSON.parse(JSON.stringify(value))
+                    let i = 1;
+                    for(let wallet of wallets){
+                        wallet.order = i;
+                        walletApi.update(wallet).catch(() => { console.log('Error updating wallet order') })
+                        i++;
+                    }
+                    store.dispatch(UPDATE_WALLET_LIST, value)
+                    this.$notify({
+                        title: 'Wallet order saved',
+                    });
+                }
+            }
+        },
         created() {
             store.dispatch(WALLET_LIST_REQUEST)
         },
@@ -75,19 +99,21 @@
                     message: {
                         title: 'Edit wallet'
                     }
-                }).then(() => store.dispatch(WALLET_LIST_REQUEST)).catch(() => {})
+                }).then(() => store.dispatch(WALLET_LIST_REQUEST)).catch(() => {
+                })
             }
         },
         filters: {
             lunaToCoins,
         },
         components: {
-            Identicon
+            Identicon,
+            draggable
         }
     };
 </script>
 <style scoped>
-    .wallet-list .wallet{
+    .wallet-list .wallet {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -100,6 +126,7 @@
     .wallet-list .wallet div:first-child {
         width: 10%;
         min-width: 55px;
+        cursor: move;
     }
 
     .wallet-list .wallet div:nth-child(2) {

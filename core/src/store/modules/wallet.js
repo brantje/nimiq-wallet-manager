@@ -1,5 +1,5 @@
 import {
-    WALLET_LIST_ERROR, WALLET_LIST_REQUEST, WALLET_LIST_SUCCESS,
+    WALLET_LIST_ERROR, WALLET_LIST_REQUEST, WALLET_LIST_SUCCESS, UPDATE_WALLET_LIST, UPDATE_WALLET_LIST_SUCCESS,
     WALLET_LIST_TRANSACTIONS_ERROR, WALLET_LIST_TRANSACTIONS_REQUEST, WALLET_LIST_TRANSACTIONS_SUCCESS,
     GET_WALLET_SUCCESS, GET_WALLET_REQUEST, GET_WALLET_ERROR,
     ADD_WALLET_ERROR, ADD_WALLET_REQUEST, ADD_WALLET_SUCCESS
@@ -99,6 +99,9 @@ const actions = {
                 })
         })
     },
+    [UPDATE_WALLET_LIST]: ({commit}, walletList) => {
+        commit(UPDATE_WALLET_LIST_SUCCESS, walletList)
+    },
 }
 
 const mutations = {
@@ -137,6 +140,12 @@ const mutations = {
     },
     [ADD_WALLET_ERROR]: () => {
 
+    },
+    [UPDATE_WALLET_LIST]: () => {
+
+    },
+    [UPDATE_WALLET_LIST_SUCCESS]: (state, walletList) => {
+        state.wallets = walletList
     },
 }
 
