@@ -26,6 +26,7 @@
                 <h1 class="nq-h1">Recent transactions</h1>
             </div>
             <div class="nq-card-body">
+                <TransactionList :transactions="getMempool"></TransactionList>
                 <TransactionList :transactions="getWalletTransactions"></TransactionList>
             </div>
         </div>
@@ -40,15 +41,17 @@
     import {mapState, mapGetters} from 'vuex'
     import store from 'store'
     import {WALLET_LIST_TRANSACTIONS_REQUEST} from 'store/actions/wallet'
+    import {NETWORK_MEMPOOL_REQUEST} from 'store/actions/nimiq'
 
     export default {
         name: "Dashboard",
         metaInfo: {
             title: 'Dashboard'
         },
-        computed: mapGetters(['getWalletTransactions']),
+        computed: mapGetters(['getWalletTransactions', 'getMempool']),
         created() {
             store.dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
+            store.dispatch(NETWORK_MEMPOOL_REQUEST)
         },
         data() {
             return {};

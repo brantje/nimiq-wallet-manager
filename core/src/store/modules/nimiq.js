@@ -1,5 +1,5 @@
 import {
-    NETWORK_MEMPOOL_ERROR, NETWORK_MEMPOOL_REQUEST, NETWORK_MEMPOOL_SUCCESS,
+    NETWORK_MEMPOOL_ERROR, NETWORK_MEMPOOL_REQUEST, NETWORK_MEMPOOL_SUCCESS, MEMPOOL_ADD_TRANSACTION, MEMPOOL_CLEAR,
     NETWORK_STATS_ERROR, NETWORK_STATS_REQUEST, NETWORK_STATS_SUCCESS,
     PEER_LIST_ERROR, PEER_LIST_REQUEST, PEER_LIST_SUCCESS
 } from '../actions/nimiq'
@@ -50,6 +50,12 @@ const actions = {
                 // dispatch(AUTH_LOGOUT)
             })
     },
+    [MEMPOOL_ADD_TRANSACTION]: ({commit}, tx) => {
+        commit(MEMPOOL_ADD_TRANSACTION, tx)
+    },
+    [MEMPOOL_CLEAR]: ({commit}) => {
+        commit(MEMPOOL_CLEAR)
+    },
     [NETWORK_STATS_REQUEST]: ({commit, dispatch}) => {
         if (inflight[NETWORK_STATS_REQUEST]) {
             return;
@@ -95,7 +101,14 @@ const mutations = {
 
     },
     [NETWORK_MEMPOOL_SUCCESS]: (state, resp) => {
+        console.log(resp)
         state.mempool = resp.data
+    },
+    [MEMPOOL_ADD_TRANSACTION]: (state, tx) => {
+        state.mempool.push(tx)
+    },
+    [MEMPOOL_CLEAR]: () => {
+        state.mempool = []
     },
     [NETWORK_MEMPOOL_ERROR]: () => {
 
