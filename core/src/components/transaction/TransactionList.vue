@@ -57,17 +57,19 @@
                 }
             },
             sortTransactions: function (wallets) {
-                return wallets.slice().sort((a, b) => {
-                    if(! a.hasOwnProperty('timestamp')){
-                        return -1
-                    }
-                    if(! b.hasOwnProperty('timestamp')){
-                        return 1
-                    }
-                    let orderA = a.timestamp;
-                    let orderB = b.timestamp;
-                    return orderB - orderA
-                })
+                if(wallets) {
+                    return wallets.slice().sort((a, b) => {
+                        if (!a.hasOwnProperty('timestamp')) {
+                            return -1
+                        }
+                        if (!b.hasOwnProperty('timestamp')) {
+                            return 1
+                        }
+                        let orderA = a.timestamp;
+                        let orderB = b.timestamp;
+                        return orderB - orderA
+                    })
+                }
             }
         },
         computed: mapGetters(['getWallets']),

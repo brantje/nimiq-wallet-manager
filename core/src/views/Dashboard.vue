@@ -26,7 +26,7 @@
                 <h1 class="nq-h1">Recent transactions</h1>
             </div>
             <div class="nq-card-body">
-                <TransactionList :transactions="getMempool"></TransactionList>
+                <TransactionList :transactions="getOurTransactions(getMempool)"></TransactionList>
                 <TransactionList :transactions="getWalletTransactions"></TransactionList>
             </div>
         </div>
@@ -49,6 +49,20 @@
             title: 'Dashboard'
         },
         computed: mapGetters(['getWalletTransactions', 'getMempool']),
+        methods: {
+            getOurTransactions: function (transactions) {
+                if (store.state.wallet.wallets && store.state.wallet.wallets.length > 0) {
+                    let ourWallets = store.state.wallet.wallets.slice().map(function (w) {
+                        return w.address;
+                    });
+                    if(ourWallets.length > 0 && transactions.length > 0) {
+                        return transactions.slice().filter(function (item) {
+                            return ( ourWallets.indexOf(item.fromAddress) > -1 || ourWallets.indexOf(item.toAddress)) ? item : false
+                        })
+                    }
+                }
+            },
+        },
         created() {
             store.dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
             store.dispatch(NETWORK_MEMPOOL_REQUEST)
