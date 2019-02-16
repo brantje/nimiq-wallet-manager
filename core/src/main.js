@@ -3,6 +3,9 @@
 import Vue from "vue"
 import Notifications from 'vue-notification'
 import VuejsDialog from 'vuejs-dialog';
+import socketio from 'socket.io-client';
+import VueSocketIO from 'vue-socket.io';
+
 // import VuejsDialogMixin from 'vuejs-dialog/vuejs-dialog-mixin.min.js';
 
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
@@ -26,7 +29,6 @@ import AddContactDialog from 'views/contacts/Add.vue'
 import router from "./router"
 import axios from "axios"
 // import Nimiq from '@nimiq/core-web'
-// import VueFormWizard from 'vue-form-wizard'
 import { AUTH_SUCCESS } from 'store/actions/auth'
 
 const token = localStorage.getItem('user-token');
@@ -35,24 +37,46 @@ if (token) {
     store.commit(AUTH_SUCCESS, {token: token})
 }
 
+let socketPort = (window.location.port) ? ':'+ window.location.port : '';
+let socketHost = window.location.protocol + '//' + window.location.host + socketPort
+export const SocketInstance = socketio(socketHost, {
+    upgrade: true,
+    transports: ['websocket']
+});
+
+
+Vue.use(new VueSocketIO({
+    debug: true,
+    connection: SocketInstance,
+    vuex: {
+        store,
+        actionPrefix: 'SOCKET_',
+        mutationPrefix: 'SOCKET_'
+    }
+}))
+Vue.config.productionTip = false;
+
+Vue.use(Notifications)
+Vue.use(VuejsDialog, {
+    view: 'DefaultDialog',
+    backdropClose: true
+});
+new Vue({
+    router,
+    store,
+    render: h => h(App)
+}).$mount("#app");
+
+
 (async () => {
     await Nimiq.load()
-    Vue.config.productionTip = false;
-    Vue.use(Notifications)
-    Vue.use(VuejsDialog, {
-        view: 'DefaultDialog',
-        backdropClose: true
-    });
     Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
     Vue.dialog.registerComponent('AddContactDialog', AddContactDialog);
-    new Vue({
-        router,
-        store,
-        render: h => h(App)
-    }).$mount("#app");
+
     setTimeout(() => {
         document.querySelectorAll(".loading-container-overlay").forEach( el => el.remove() )
-    }, 250);
+    }, 1000);
+
 })()
 
 
