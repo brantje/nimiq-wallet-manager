@@ -19,12 +19,9 @@ const actions = {
         dispatch(MEMPOOL_CLEAR)
         dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
     },
-    SOCKET_PEER_JOINED({dispatch}) {
+    SOCKET_NETWORK_PEERS_CHANGED({dispatch}) {
         dispatch(PEER_LIST_REQUEST)
-    },
-    SOCKET_PEER_LEFT({dispatch}) {
-        dispatch(PEER_LIST_REQUEST)
-    },
+    }
 };
 
 const mutations = {}

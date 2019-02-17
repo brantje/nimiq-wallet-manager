@@ -7,8 +7,9 @@ import WalletDetail from "views/wallet/Detail.vue";
 import AddWallet from "views/wallet/Add.vue";
 import WalletList from "views/wallet/List.vue";
 import ContactList from "views/contacts/List.vue";
+import SendTransaction from 'views/transaction/Send.vue';
 import store from "store";
-import Meta from 'vue-meta'
+import Meta from 'vue-meta';
 
 const ifNotAuthenticated = (to, from, next) => {
     if (!store.getters.isAuthenticated) {
@@ -52,10 +53,17 @@ export default new Router({
         },
         {
             path: "/wallets",
-            name: "WalletDetail",
+            name: "WalletList",
             component: WalletList,
             beforeEnter: ifAuthenticated,
         },
+        {
+            path: "/new-transaction",
+            name: "SendTransaction",
+            component: SendTransaction,
+            beforeEnter: ifAuthenticated,
+        },
+
         {
             path: "/contacts",
             name: "ContactList",

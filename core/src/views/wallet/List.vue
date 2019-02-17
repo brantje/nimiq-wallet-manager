@@ -1,6 +1,6 @@
 <template>
     <div class="nq-card walletDetail">
-        <h3 class="nq-label">Wallets</h3>
+        <h1 class="nq-h1">Wallets</h1>
         <router-link to="/wallet/add">
             <button class="nq-button-s">Add wallet</button>
         </router-link>
@@ -65,21 +65,20 @@
         },
         methods: {
             deleteWallet: function (wallet) {
-                let that = this;
                 this.$dialog
                     .confirm('Please confirm to continue', {
                         type: 'hard',
                         verification: wallet.label,
                         verificationHelp: 'Type the wallets name  "[+:verification]" to confirm deletion',
                     })
-                    .then(function (dialog) {
+                    .then((dialog) => {
                         walletApi.delete(wallet).then(() => {
                             store.dispatch(WALLET_LIST_REQUEST)
-                            that.$notify({
+                            this.$notify({
                                 title: 'Wallet deleted',
                             });
                         }).catch((e) => {
-                            that.$notify({
+                            this.$notify({
                                 type: 'error',
                                 title: 'Error during deleting wallet',
                             });

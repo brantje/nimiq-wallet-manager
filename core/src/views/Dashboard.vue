@@ -8,7 +8,7 @@
 
         <div class="action-card nq-card">
             <div>
-                Send
+                <router-link to="new-transaction">Send</router-link>
             </div>
             <div>
                 Receive

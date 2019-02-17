@@ -106,7 +106,7 @@ header {
 
 .content-container {
   //background-color: lightblue;
-  max-height: calc(100vh - 70px);
+  height: calc(100vh - 70px);
   max-width: 1200px;
   overflow-y: auto;
   -webkit-flex: 5;
@@ -173,3 +173,29 @@ header {
   float: left;
 }
 
+.contact-list .contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-list .contact .actions {
+  margin-top: 12px;
+}
+
+.contact-list .contact div:first-child {
+  width: 10%;
+  min-width: 55px;
+}
+
+.contact-list .contact div:nth-child(2) {
+  width: 20%
+}
+
+.contact-list .contact div:nth-child(3) {
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 300px;
+  text-overflow: ellipsis;
+}

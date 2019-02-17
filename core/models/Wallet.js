@@ -7,7 +7,8 @@ const WalletsSchema = new Schema({
     address: String,
     encryptedPrivateKey: String,
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
-    order: Number
+    order: Number,
+    deleted: {type: Number, default: 0 }
 });
 
 WalletsSchema.index({user: 1});

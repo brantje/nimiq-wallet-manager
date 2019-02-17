@@ -81,7 +81,7 @@ const actions = {
         }
         inflight[PEER_LIST_REQUEST] = true;
         commit(NETWORK_STATS_REQUEST)
-        nimiqApi.getStats()
+        nimiqApi.getPeerList()
             .then(resp => {
                 inflight[PEER_LIST_REQUEST] = false;
                 commit(PEER_LIST_SUCCESS, resp)

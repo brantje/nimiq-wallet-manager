@@ -1,6 +1,6 @@
 <template>
     <div class="nq-card walletDetail">
-        <h3 class="nq-label">Contact list</h3>
+        <h1 class="nq-h1">Contact list</h1>
         <button class="nq-button-s" @click="addContact">Add contact</button>
         <div class="contact-list" v-for="contact in getContacts">
             <div class="contact">
@@ -88,28 +88,7 @@
     };
 </script>
 <style scoped>
-    .contact-list .contact {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
-    .contact-list .contact .actions {
-        margin-top: 12px;
-    }
-
-    .contact-list .contact div:first-child {
-        width: 10%;
-        min-width: 55px;
-    }
-
-    .contact-list .contact div:nth-child(2) {
-        width: 20%
-    }
-
-    .contact-list .contact div:nth-child(3) {
-        width: 40%
-    }
 
     .nq-card {
         position: relative;
