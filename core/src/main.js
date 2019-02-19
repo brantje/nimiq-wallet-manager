@@ -31,7 +31,7 @@ import ContactPopupDialog from 'views/transaction/ContactPopup.vue'
 
 import router from "./router"
 import axios from "axios"
-// import Nimiq from '@nimiq/core-web'
+import Nimiq from '@nimiq/core-web';
 import { AUTH_SUCCESS } from 'store/actions/auth'
 
 const token = localStorage.getItem('user-token');
@@ -46,7 +46,7 @@ export const SocketInstance = socketio(socketHost, {
     upgrade: true,
     transports: ['websocket']
 });
-
+const workerURL = location.origin + '/build/';
 
 Vue.use(new VueSocketIO({
     debug: true,
@@ -70,9 +70,8 @@ new Vue({
     render: h => h(App)
 }).$mount("#app");
 
-
 (async () => {
-    await Nimiq.load()
+    await Nimiq.load(workerURL)
     Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
     Vue.dialog.registerComponent('AddContactDialog', AddContactDialog);
     Vue.dialog.registerComponent('EditWalletDialog', EditWalletDialog);

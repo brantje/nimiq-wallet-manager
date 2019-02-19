@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@nimiq/core": "^1.4.2",
-    "@nimiq/core-web": "^1.4.2",
+    "@nimiq/core-web": "^1.4.3",
     "@nimiq/style": "^0.4.2",
     "@nimiq/utils": "^0.1.0",
     "axios": "^0.16.2",
@@ -53,6 +53,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
+    "copy-webpack-plugin": "^4.6.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.4",

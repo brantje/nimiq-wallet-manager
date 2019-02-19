@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
@@ -66,6 +67,14 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new CopyPlugin([
+            { from: 'node_modules/@nimiq/core-web/worker.js', to: 'core/public/build/worker.js' },
+            { from: 'node_modules/@nimiq/core-web/worker-js.js', to: 'core/public/build/worker-js.js' },
+            { from: 'node_modules/@nimiq/core-web/worker-wasm.js', to: 'core/public/build/worker-wasm.js' },
+            { from: 'node_modules/@nimiq/core-web/worker-wasm.wasm', to: 'core/public/build/worker-wasm.wasm' },
+        ]),
+    ],
     devServer: {
         port: 3000
     }
