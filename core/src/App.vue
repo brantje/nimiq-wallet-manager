@@ -17,6 +17,7 @@
     import LeftSidebar from "layout/LeftSidebar.vue"
     import RightSidebar from "layout/RightSidebar.vue"
     import { USER_REQUEST } from 'store/actions/user'
+    import { CONTACT_LIST_REQUEST } from 'store/actions/contact'
     import store from 'store'
     import { mapState, mapGetters } from 'vuex'
     import router from 'router'
@@ -38,6 +39,7 @@
         created(){
             if(this.isAuthenticated){
                 store.dispatch(USER_REQUEST)
+                store.dispatch(CONTACT_LIST_REQUEST)
             }
         },
         watch: {

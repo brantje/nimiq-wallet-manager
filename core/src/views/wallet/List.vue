@@ -50,7 +50,7 @@
                         walletApi.update(wallet).catch(() => { console.log('Error updating wallet order') })
                         i++;
                     }
-                    store.dispatch(UPDATE_WALLET_LIST, value)
+                    store.dispatch(UPDATE_WALLET_LIST, wallets)
                     this.$notify({
                         title: 'Wallet order saved',
                     });
