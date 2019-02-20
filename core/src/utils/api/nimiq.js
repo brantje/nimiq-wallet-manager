@@ -9,6 +9,9 @@ const nimiqApi = {
     },
     getPeerList: () => {
         return axios({url: '/api/v1/nimiq/network/peer-list', method: 'GET'});
+    },
+    sendTransaction: (transaction) => {
+        return axios({url: '/api/v1/nimiq/transactions/send', method: 'POST', data: transaction});
     }
 }
 

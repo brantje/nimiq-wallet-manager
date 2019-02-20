@@ -74,6 +74,8 @@ new Vue({
 
 (async () => {
     await Nimiq.load(workerURL)
+    console.log(`Init config for ${NIMIQ_NETWORK}net`)
+    Nimiq.GenesisConfig[NIMIQ_NETWORK]()
     Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
     Vue.dialog.registerComponent('AddContactDialog', AddContactDialog);
     Vue.dialog.registerComponent('EditWalletDialog', EditWalletDialog);

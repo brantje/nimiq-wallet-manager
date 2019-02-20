@@ -1,4 +1,9 @@
 {% extends 'layout.twig' %}
+{% block head %}
+    <script nonce="469261a9b2a9dd894a48">
+        const NIMIQ_NETWORK = "{{ NIMIQ_NETWORK }}"
+    </script>
+{% endblock %}
 {% block body %}
     <div class="loading-container-overlay">
         <div class="loading-container">

@@ -77,7 +77,7 @@
                             <div class="input">
                                 <label class="nq-h3">Message</label>
                                 <div>
-                                    <input type="text" class="form-control" placeholder="Disabled during alpha" disabled />
+                                    <input type="text" v-model="newTx.extraData" class="form-control" placeholder="Disabled during alpha" disabled />
                                 </div>
                             </div>
                             <div class="input">
@@ -109,8 +109,8 @@
     import {mapGetters} from 'vuex'
     import store from 'store'
     import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
-    import {lunaToCoins} from "../../filters/lunaToCoins";
-
+    import {lunaToCoins} from "filters/lunaToCoins";
+    import {nimiqApi} from 'utils/api/nimiq'
 
     export default {
         name: "SendTransaction",
@@ -152,6 +152,7 @@
                     },
                     sendTo: {},
                     value: '',
+                    extraData: '',
                     fee: 138
                 }
             };
@@ -172,9 +173,14 @@
             sendTransaction: function () {
                 this.$dialog.alert('', {
                     view: 'ConfirmTransactionPopup',
-                    wallet: this.newTx.sendFrom.address
-                }).then(({privateKey}) => {
+                    transaction: this.newTx,
+                    loader: true
+                }).then((data) => {
+                    console.log(data.data.serialize())
 
+                    nimiqApi.sendTransaction({tx: data.data.serialize() }).then((r) => {
+                        console.log(r)
+                    })
                 }).catch(() => {
                 })
             }
