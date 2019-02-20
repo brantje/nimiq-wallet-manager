@@ -175,8 +175,6 @@
                     view: 'ConfirmTransactionPopup',
                     transaction: this.newTx,
                 }).then((data) => {
-                    console.log(data.data.serialize())
-
                     nimiqApi.sendTransaction({tx: data.data.serialize()}).then((r) => {
                         this.$notify({
                             title: 'Transaction send',
