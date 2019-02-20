@@ -23,6 +23,7 @@
     import {decrypt} from "utils/encryption"
     import {mapGetters} from 'vuex'
     import store from 'store'
+    import {NETWORK_STATS_REQUEST} from 'store/actions/nimiq'
 
 
     export default {
@@ -32,18 +33,20 @@
                 passPhrase: ''
             }
         },
+        created() {
+            store.dispatch(NETWORK_STATS_REQUEST)
+        },
         computed: mapGetters(['getNetworkStats']),
         methods: {
             verifyPassPhrase: function () {
                 walletApi.getPrivateKey(this.options.transaction.sendFrom.address).then(async (response) => {
                     let privateKey;
-                    let {transaction} = this.options;
+                    let rawTx = this.options.transaction;
                     try {
                         privateKey = await decrypt(response.data.seed, this.passPhrase);
                     } catch (e) {
                         this.$notify({
                             type: 'error',
-                            duration: -1,
                             title: 'Invalid pass phrase',
                         });
                         return;
@@ -54,14 +57,34 @@
                     let key = new Nimiq.PrivateKey(buf);
                     let keyPair = Nimiq.KeyPair.derive(key);
                     let wallet = new Nimiq.Wallet(keyPair);
-                    const tx = wallet.createTransaction(
-                        Nimiq.Address.fromUserFriendlyAddress(transaction.sendTo.address),
-                        Nimiq.Policy.coinsToLunas(transaction.value),
-                        transaction.fee,
-                        height
+
+
+                    const extraData = Nimiq.BufferUtils.fromAscii(rawTx.extraData);
+
+                    const transaction = new Nimiq.ExtendedTransaction(
+                        wallet.address,       // sender address
+                        Nimiq.Account.Type.BASIC,   // and account type
+                        Nimiq.Address.fromUserFriendlyAddress(rawTx.sendTo.address),
+                        Nimiq.Account.Type.BASIC,   // <- recipient -^
+                        Nimiq.Policy.coinsToLunas(rawTx.value),
+                        0,                          // fee
+                        height,
+                        Nimiq.Transaction.Flag.NONE,
+                        extraData                   // the message
                     );
-                    key, keyPair, wallet = undefined;
-                    this.proceed(tx);
+
+                    // sign transaction with the key pair of our wallet
+                    const signature = Nimiq.Signature.create(
+                        keyPair.privateKey,
+                        keyPair.publicKey,
+                        transaction.serializeContent()
+                    );
+                    const proof = Nimiq.SignatureProof.singleSig(keyPair.publicKey, signature);
+                    transaction.proof = proof.serialize();
+
+
+
+                    this.proceed(transaction);
 
                 });
             },

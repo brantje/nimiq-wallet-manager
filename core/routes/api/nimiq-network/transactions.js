@@ -26,11 +26,9 @@ module.exports = function (NimiqHelper) {
                 }
             }
         }
-        console.log(b)
         let Buf = new Nimiq.SerialBuffer(b);
-        let txObj = Nimiq.Transaction.unserialize(Buf);
+        let txObj = Nimiq.ExtendedTransaction.unserialize(Buf);
         let result = await NimiqHelper.sendTx(txObj);
-        console.log(result);
         if (result === 1) {
             return res.json({success: true});
         } else {

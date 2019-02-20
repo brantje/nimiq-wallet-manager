@@ -77,7 +77,7 @@
                             <div class="input">
                                 <label class="nq-h3">Message</label>
                                 <div>
-                                    <input type="text" v-model="newTx.extraData" class="form-control" placeholder="Disabled during alpha" disabled />
+                                    <input type="text" v-model="newTx.extraData"/>
                                 </div>
                             </div>
                             <div class="input">
@@ -151,7 +151,7 @@
                         balance: 0
                     },
                     sendTo: {},
-                    value: '',
+                    value: 0,
                     extraData: '',
                     fee: 138
                 }
@@ -174,12 +174,14 @@
                 this.$dialog.alert('', {
                     view: 'ConfirmTransactionPopup',
                     transaction: this.newTx,
-                    loader: true
                 }).then((data) => {
                     console.log(data.data.serialize())
 
-                    nimiqApi.sendTransaction({tx: data.data.serialize() }).then((r) => {
-                        console.log(r)
+                    nimiqApi.sendTransaction({tx: data.data.serialize()}).then((r) => {
+                        this.$notify({
+                            title: 'Transaction send',
+                        });
+                        this.$router.push('/')
                     })
                 }).catch(() => {
                 })
@@ -245,16 +247,19 @@
     .dropdown-container .wallet:hover {
         background-color: rgba(128, 128, 128, 0.1);
     }
-    .x-fee-labels{
+
+    .x-fee-labels {
         display: flex;
         justify-content: space-between;
     }
-    .x-fee-labels span{
+
+    .x-fee-labels span {
         width: 100%;
         display: block;
         text-align: center;
     }
-    .form-control{
+
+    .form-control {
         width: 100%;
     }
 </style>
