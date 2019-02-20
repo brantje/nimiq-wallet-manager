@@ -175,13 +175,17 @@
                     view: 'ConfirmTransactionPopup',
                     transaction: this.newTx,
                 }).then((data) => {
-                    nimiqApi.sendTransaction({tx: data.data.serialize()}).then((r) => {
+                    nimiqApi.sendTransaction({tx: data.data.serialize()}).then(() => {
                         this.$notify({
                             title: 'Transaction send',
                         });
                         this.$router.push('/')
                     })
-                }).catch(() => {
+                }).catch((e) => {
+                    this.$notify({
+                        type: 'error',
+                        title: 'Error:'+ e,
+                    });
                 })
             }
         },

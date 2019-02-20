@@ -21,6 +21,7 @@
         </div>
         <div>
             <div class="nq-card" v-if="!loading">
+                <TransactionList :transactions="getWalletTransactions(getMempool)"></TransactionList>
                 <TransactionList :transactions="getActiveWallet.transactions"></TransactionList>
             </div>
         </div>
@@ -41,14 +42,25 @@
         metaInfo: {
             title: 'Wallet detail'
         },
-        computed: mapGetters(['getActiveWallet']),
+        computed: mapGetters(['getActiveWallet', 'getMempool']),
         created() {
             store.dispatch(GET_WALLET_REQUEST, this.$route.params.address)
+            this.wallet = this.$route.params.address
         },
         data() {
             return {
-                loading: true
+                loading: true,
+                wallet: ''
             };
+        },
+        methods: {
+            getWalletTransactions:  (transactions) => {
+                if (store.state.wallet.wallets && store.state.wallet.wallets.length > 0) {
+                    return transactions.slice().filter(function (item) {
+                        return ( store.state.wallet.activeWallet.address === item.fromAddress || store.state.wallet.activeWallet.address === item.toAddress) ? item : false
+                    })
+                }
+            },
         },
         watch: {
             getActiveWallet: function () {

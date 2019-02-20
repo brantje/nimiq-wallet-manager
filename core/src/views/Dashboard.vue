@@ -57,7 +57,7 @@
                     });
                     if(ourWallets.length > 0 && transactions.length > 0) {
                         return transactions.slice().filter(function (item) {
-                            return ( ourWallets.indexOf(item.fromAddress) > -1 || ourWallets.indexOf(item.toAddress)) ? item : false
+                            return ( ourWallets.indexOf(item.fromAddress) > -1 || ourWallets.indexOf(item.toAddress) > -1) ? item : false
                         })
                     }
                 }
