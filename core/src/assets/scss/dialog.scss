@@ -21,7 +21,17 @@ body .dg-form{
 
   }
 }
-
+.dg-content-cont--floating {
+  top: 28%;
+}
+.big-dialog{
+  .dg-content-cont--floating {
+    top: 45%;
+  }
+  .dg-main-content{
+    max-width: 650px;
+  }
+}
 
 .dg-backdrop{
   background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;

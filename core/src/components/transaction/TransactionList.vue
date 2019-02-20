@@ -1,6 +1,6 @@
 <template>
     <div class="x-transactions-list">
-        <div class="x-transaction" v-for="transaction in sortTransactions(transactions)" v-if="transactions.length > 0">
+        <div class="x-transaction" v-for="transaction in sortTransactions(transactions)" v-if="transactions.length > 0" @click="showTxInfo(transaction)">
             <div class="timestamp">
                 <span v-if="transaction.timestamp">
                     {{ transaction.timestamp | formatDate}}
@@ -11,7 +11,7 @@
                 <Identicon :address="transaction.fromAddress" size="64"></Identicon>
             </div>
             <div class="x-label" sender="">
-                {{ getLabel(transaction.fromAddress) }}
+                {{ transaction.fromAddress | getAddressLabel }}
             </div>
             <div class="x-arrow">
                 <i class="nq-icon arrow-right"></i>
@@ -20,7 +20,7 @@
                 <Identicon :address="transaction.toAddress" size="64"></Identicon>
             </div>
             <div class="x-label" recipient="">
-                {{ getLabel(transaction.toAddress) }}
+                {{ transaction.toAddress | getAddressLabel }}
             </div>
             <div class="x-amount"
                  :class="{'incoming': (isOurs(transaction.toAddress)  && !isOurs(transaction.fromAddress)),
@@ -43,6 +43,7 @@
     import {lunaToCoins} from 'filters/lunaToCoins'
     import {formatDate} from 'filters/formatDate'
     import Identicon from "components/Identicon.vue"
+    import {getAddressLabel} from 'filters/getAddressLabel';
 
     export default {
         name: 'TransactionList',
@@ -71,14 +72,12 @@
                     })
                 }
             },
-            getLabel:function (wallet) {
-                let book = [...store.state.contact.contacts,...store.state.wallet.wallets]
-                for(let i of book){
-                    if(i.address === wallet){
-                        return i.label
-                    }
-                }
-                return wallet
+            showTxInfo: function (transaction) {
+                this.$dialog.alert('', {
+                    view: 'TransactionInfoPopup',
+                    transaction: transaction,
+                    customClass: 'big-dialog'
+                })
             }
         },
         computed: mapGetters(['getWallets']),
@@ -87,7 +86,8 @@
         },
         filters: {
             lunaToCoins,
-            formatDate
+            formatDate,
+            getAddressLabel
         },
         components: {
             Identicon

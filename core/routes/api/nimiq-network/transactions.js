@@ -18,7 +18,6 @@ module.exports = function (NimiqHelper) {
     router.post('/send', auth.required, async (req, res, next) => {
         const {payload: {id}, body: {tx} } = req;
         let b = [];
-        console.log(tx)
         for (let key in tx) {
             if (tx.hasOwnProperty(key)) {
                 if (!isNaN(key)) {
