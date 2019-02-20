@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const AddressBooks = mongoose.model('Contacts');
+const Contact = mongoose.model('Contacts');
 const router = require('express').Router();
 const auth = require('../../../auth');
 const Nimiq = require('@nimiq/core');
@@ -42,8 +42,8 @@ module.exports = function (NimiqHelper) {
             });
         }
 
-        let address = await AddressBooks.findOne({user: id, address: entry.address});
-        if(address){
+        let contact = await Contact.findOne({user: id, address: entry.address});
+        if(contact){
             return res.status(422).json({
                 errors: {
                     address: 'already exists',
@@ -51,7 +51,7 @@ module.exports = function (NimiqHelper) {
             });
         }
 
-        const newEntry = new AddressBooks(entry);
+        const newEntry = new Contact(entry);
         newEntry.user = userId;
 
         return newEntry.save()
@@ -62,9 +62,10 @@ module.exports = function (NimiqHelper) {
     router.delete('/:id', auth.required, async (req, res, next) => {
         const {body: {entry}, payload: {id}} = req;
 
-        let address = await AddressBooks.findOne({user: id, _id: req.params.id});
-        if(address){
-            return address.remove().then(() => res.json({success: true}));
+        let contact = await Contact.findOne({user: id, _id: req.params.id});
+        if(contact){
+            contact.deleted = 0;
+            return contact.save().then(() => res.json({success: true}));
         }
         return res.status(404);
     });
@@ -73,7 +74,6 @@ module.exports = function (NimiqHelper) {
 
     router.patch('/:id', auth.required, async (req, res, next) => {
         const {body, payload: {id}} = req;
-        const userId = id;
         const entry = body;
         if (!entry.label) {
             return res.status(422).json({
@@ -105,11 +105,11 @@ module.exports = function (NimiqHelper) {
             });
         }
 
-        let address = await AddressBooks.findOne({user: id, _id: req.params.id});
-        if(address){
-            address.label = entry.label;
-            address.address = entry.address;
-            return address.save().then(() => res.json(address.toJSON()));
+        let contact = await Contact.findOne({user: id, _id: req.params.id});
+        if(contact){
+            contact.label = entry.label;
+            contact.address = entry.address;
+            return contact.save().then(() => res.json(contact.toJSON()));
         }
         return res.status(404).json({error: 'Not found'});
     });
@@ -117,9 +117,9 @@ module.exports = function (NimiqHelper) {
 
     router.get('/', auth.required, async (req, res, next) => {
         const {body: {}, payload: {id}} = req;
-        let addresses = await AddressBooks.find({user: id});
+        let contacts = await Contact.find({user: id, deleted: 0});
         let results = [];
-        for (let address of addresses) {
+        for (let address of contacts) {
             results.push(address.toJSON());
         }
         return res.json(results);

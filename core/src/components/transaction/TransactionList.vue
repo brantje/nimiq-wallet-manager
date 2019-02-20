@@ -72,7 +72,7 @@
                 }
             },
             getLabel:function (wallet) {
-                let book = [].concat.apply(store.state.contact.contacts,store.state.wallet.wallets)
+                let book = [...store.state.contact.contacts,...store.state.wallet.wallets]
                 for(let i of book){
                     if(i.address === wallet){
                         return i.label

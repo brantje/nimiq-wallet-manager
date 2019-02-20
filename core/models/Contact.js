@@ -8,6 +8,7 @@ const WalletsSchema = new Schema({
     label: String,
     address: String,
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
+    deleted: {type: Number, default: 0 }
 });
 
 WalletsSchema.methods.toJSON = function () {

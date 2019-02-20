@@ -11,14 +11,6 @@ module.exports = function (NimiqHelper) {
         const {body, payload: {id}} = req;
         const wallet = body;
         const userId = id;
-        // if (!wallet.encryptedPrivateKey) {
-        //     return res.status(422).json({
-        //         errors: {
-        //             encryptedPrivateKey: 'is required',
-        //         },
-        //     });
-        // }
-        console.log(body);
         if (!wallet.label) {
             return res.status(422).json({
                 errors: {
@@ -49,7 +41,7 @@ module.exports = function (NimiqHelper) {
             });
         }
 
-        let exists = await Wallets.findOne({user: id, address: wallet.address});
+        let exists = await Wallets.findOne({user: id, address: wallet.address, deleted: 0});
         if (exists) {
             return res.status(422).json({
                 errors: {
@@ -81,7 +73,7 @@ module.exports = function (NimiqHelper) {
                 },
             });
         }
-        let wallet = await Wallets.findOne({user: id, address: addr.toUserFriendlyAddress()});
+        let wallet = await Wallets.findOne({user: id, address: addr.toUserFriendlyAddress(), deleted: 0});
         if (wallet) {
             let result = wallet.toJSON();
             let info = await NimiqHelper.getAccount(addr.toUserFriendlyAddress());
@@ -142,7 +134,8 @@ module.exports = function (NimiqHelper) {
 
         let wallet = await Wallets.findOne({user: id, address: req.param('address')});
         if (wallet) {
-            return wallet.remove().then(() => res.json({success: true}));
+            wallet.deleted = 1;
+            return wallet.save().then(() => res.json({success: true}));
         }
         return res.status(404);
     });
