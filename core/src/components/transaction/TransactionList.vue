@@ -11,7 +11,7 @@
                 <Identicon :address="transaction.fromAddress" size="64"></Identicon>
             </div>
             <div class="x-label" sender="">
-                {{ transaction.fromAddress }}
+                {{ getLabel(transaction.fromAddress) }}
             </div>
             <div class="x-arrow">
                 <i class="nq-icon arrow-right"></i>
@@ -20,7 +20,7 @@
                 <Identicon :address="transaction.toAddress" size="64"></Identicon>
             </div>
             <div class="x-label" recipient="">
-                {{ transaction.toAddress }}
+                {{ getLabel(transaction.toAddress) }}
             </div>
             <div class="x-amount"
                  :class="{'incoming': (isOurs(transaction.toAddress)  && !isOurs(transaction.fromAddress)),
@@ -70,6 +70,15 @@
                         return orderB - orderA
                     })
                 }
+            },
+            getLabel:function (wallet) {
+                let book = [].concat.apply(store.state.contact.contacts,store.state.wallet.wallets)
+                for(let i of book){
+                    if(i.address === wallet){
+                        return i.label
+                    }
+                }
+                return wallet
             }
         },
         computed: mapGetters(['getWallets']),
