@@ -16,6 +16,9 @@ const walletApi = {
     get: (address) => {
         return axios({url: `/api/v1/core/wallets/${address}`, method: 'GET'});
     },
+    getPrivateKey: (address) => {
+        return axios({url: `/api/v1/core/wallets/${address}/seed`, method: 'GET'});
+    },
     recentTransactions: () => {
         return axios({url: '/api/v1/core/transactions/recent'});
     }

@@ -15,7 +15,20 @@ input[type="text"], input.password, input[type="number"] {
   display: block;
   margin-bottom: 15px;
 }
-
+input[type="password"] {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  font-size: 1.875rem;
+  font-family: inherit;
+  font-style: inherit;
+  font-variant: inherit;
+  padding: 1px;
+}
 button{
   margin-bottom: 15px;
 }

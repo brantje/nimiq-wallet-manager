@@ -12,7 +12,8 @@
                             <div>
                                 <div class="selected-account" @click="dropdownShown = !dropdownShown">
                                     <div class="identicon">
-                                        <Identicon :address="newTx.sendFrom.address" size="64" class="img-responsive"></Identicon>
+                                        <Identicon :address="newTx.sendFrom.address" size="64"
+                                                   class="img-responsive"></Identicon>
                                     </div>
                                     <div class="account-data">
                                         <i class="nq-icon arrow-down"></i>
@@ -49,11 +50,13 @@
                         <div class="account-row">
                             <div>
                                 <div class="identicon">
-                                    <Identicon :address="newTx.sendTo.address" size="64" class="img-responsive"></Identicon>
+                                    <Identicon :address="newTx.sendTo.address" size="64"
+                                               class="img-responsive"></Identicon>
                                 </div>
                                 <div class="account-data">
                                     <div class="nq-text-s">
-                                        <input type="text" placeholder="Enter recipient address" v-model="inputToAddress">
+                                        <input type="text" placeholder="Enter recipient address"
+                                               v-model="inputToAddress">
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -66,31 +69,33 @@
                                    type="number" step="0.00001">
                         </div>
                     </div>
-                    <!--<div class="form-group">-->
-                    <!--<h5 class="text-center pointer" ngi-init="advanced=false;" ng-click="advanced=!advanced;">-->
-                    <!--Advanced settings <i-->
-                    <!--class="mdi mdi-arrow-downward"></i></h5>-->
-                    <!--<div class="advanced" ng-show="advanced">-->
-                    <!--<div class="input">-->
-                    <!--<label>Message</label>-->
-                    <!--<div>-->
-                    <!--<textarea class="form-control" placeholder="Disabled during alpha" disabled></textarea>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="input">-->
-                    <!--<label>Fee</label>-->
-                    <!--<div class="x-fee-labels">-->
-                    <!--<label free="">free&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>-->
-                    <!--<label low="">standard</label>-->
-                    <!--<label high="">express</label>-->
-                    <!--</div>-->
-                    <!--<input class="form-control" min="0" ng-model="newTx.fee" placeholder="Enter nim amount"-->
-                    <!--type="range" step="0.00138" max="0.00276">-->
-                    <!--<span>{{ newTx.fee }} NIM</span>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <button type="button" class="nq-button-s green pull-right" v-if="newTx.sendTo.address">Send</button>
+                    <div class="form-group">
+                        <h5 class="text-center pointer" @click="advancedSettingsShown =! advancedSettingsShown">
+                            Advanced settings <i class="mdi mdi-arrow-downward"></i>
+                        </h5>
+                        <div class="advanced" v-if="advancedSettingsShown">
+                            <div class="input">
+                                <label class="nq-h3">Message</label>
+                                <div>
+                                    <input type="text" class="form-control" placeholder="Disabled during alpha" disabled />
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label class="nq-h3">Fee</label>
+                                <div class="x-fee-labels">
+                                    <div free="">free&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div low="">standard</div>
+                                    <div high="">express</div>
+                                </div>
+                                <input class="form-control" min="0" v-model="newTx.fee" placeholder="Enter nim amount"
+                                       type="range" step="69" max="276">
+                                <div class="text-center">{{ newTx.fee | lunaToCoins}} NIM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="nq-button-s green pull-right" v-if="newTx.sendTo.address"
+                            @click="sendTransaction">Send
+                    </button>
                     <button type="button" class="nq-button-s red">Cancel</button>
                 </form>
             </div>
@@ -118,7 +123,7 @@
         },
         watch: {
             getWallets: function (wallets) {
-                if(wallets.length > 0){
+                if (wallets.length > 0) {
                     let firstWallet = wallets.slice().shift();
                     this.newTx.sendFrom = firstWallet;
                 }
@@ -139,6 +144,7 @@
             return {
                 inputToAddress: '',
                 dropdownShown: false,
+                advancedSettingsShown: false,
                 error: '',
                 newTx: {
                     sendFrom: {
@@ -160,7 +166,17 @@
                     view: 'ContactPopupDialog',
                 }).then(({data}) => {
                     this.inputToAddress = data
-                }).catch(() => {})
+                }).catch(() => {
+                })
+            },
+            sendTransaction: function () {
+                this.$dialog.alert('', {
+                    view: 'ConfirmTransactionPopup',
+                    wallet: this.newTx.sendFrom.address
+                }).then(({privateKey}) => {
+
+                }).catch(() => {
+                })
             }
         },
         filters: {
@@ -188,6 +204,7 @@
 
     .account-dropdown {
         position: relative;
+        z-index: 9;
     }
 
     .dropdown-container {
@@ -197,9 +214,11 @@
         top: 70px;
         animation: fadeOut 0.5s;
     }
-    .selected-account{
+
+    .selected-account {
         cursor: pointer;
     }
+
     .dropdown-container.shown {
         display: block;
         animation: fadeIn 0.5s;
@@ -209,7 +228,8 @@
         padding: 2rem;
         cursor: pointer;
     }
-    .selected-account .nq-text-s, .wallet .account-data .nq-text-s{
+
+    .selected-account .nq-text-s, .wallet .account-data .nq-text-s {
         white-space: nowrap;
         overflow: hidden;
         max-width: 300px;
@@ -218,5 +238,17 @@
 
     .dropdown-container .wallet:hover {
         background-color: rgba(128, 128, 128, 0.1);
+    }
+    .x-fee-labels{
+        display: flex;
+        justify-content: space-between;
+    }
+    .x-fee-labels span{
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    .form-control{
+        width: 100%;
     }
 </style>
