@@ -89,7 +89,7 @@
                                 </div>
                                 <input class="form-control" min="0" v-model="newTx.fee" placeholder="Enter nim amount"
                                        type="range" step="69" max="276">
-                                <div class="text-center">{{ newTx.fee | lunaToCoins}} NIM</div>
+                                <div class="text-center">{{ newTx.fee | lunaToCoins(5) }} NIM</div>
                             </div>
                         </div>
                     </div>

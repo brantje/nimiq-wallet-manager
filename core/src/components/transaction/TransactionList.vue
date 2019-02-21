@@ -1,6 +1,7 @@
 <template>
     <div class="x-transactions-list">
-        <div class="x-transaction" v-for="transaction in sortTransactions(transactions)" v-if="transactions.length > 0" @click="showTxInfo(transaction)">
+        <div class="x-transaction" v-for="transaction in sortTransactions(transactions)" v-if="transactions.length > 0"
+             @click="showTxInfo(transaction)">
             <div class="timestamp">
                 <span v-if="transaction.timestamp">
                     {{ transaction.timestamp | formatDate}}
@@ -58,7 +59,7 @@
                 }
             },
             sortTransactions: function (wallets) {
-                if(wallets) {
+                if (wallets) {
                     return wallets.slice().sort((a, b) => {
                         if (!a.hasOwnProperty('timestamp')) {
                             return -1
@@ -97,7 +98,11 @@
 </script>
 
 <style scoped>
-    .nq-icon.arrow-right{
+    .x-transaction {
+        cursor: pointer;
+    }
+
+    .nq-icon.arrow-right {
         display: block !important;
         margin: 0 auto;
     }
