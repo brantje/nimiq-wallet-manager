@@ -30,7 +30,7 @@
                 <div class="x-currency-nim " style="display: inline;">
                     <span v-if="isOurs(transaction.toAddress) && !isOurs(transaction.fromAddress)">+</span>
                     <span v-if="!isOurs(transaction.toAddress) && isOurs(transaction.fromAddress)">-</span>
-                    {{ transaction.value | lunaToCoins}}
+                    {{ transaction.value | lunaToCoins}} NIM
                 </div>
             </div>
         </div>

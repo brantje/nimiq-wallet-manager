@@ -71,7 +71,11 @@
                     </div>
                     <div class="form-group">
                         <h5 class="text-center pointer" @click="advancedSettingsShown =! advancedSettingsShown">
-                            Advanced settings <i class="mdi mdi-arrow-downward"></i>
+                            Advanced settings
+                            <div class="adv_icon">
+                                <span class="material-icons" v-if="!advancedSettingsShown">keyboard_arrow_down</span>
+                                <span class="material-icons" v-if="advancedSettingsShown">keyboard_arrow_up</span>
+                            </div>
                         </h5>
                         <div class="advanced" v-if="advancedSettingsShown">
                             <div class="input">
@@ -165,6 +169,7 @@
             showContactDialog: function () {
                 this.$dialog.alert('', {
                     view: 'ContactPopupDialog',
+                    customClass: 'big-dialog'
                 }).then(({data}) => {
                     this.inputToAddress = data
                 }).catch(() => {
@@ -260,7 +265,14 @@
         display: block;
         text-align: center;
     }
-
+    .adv_icon{
+        display: inline-block;
+        position: relative;
+    }
+    .adv_icon span{
+        position: absolute;
+        top: -18px;
+    }
     .form-control {
         width: 100%;
     }

@@ -41,7 +41,7 @@
                     </label>
 
                     <span class="nq-text-s pull-right">
-                    {{ tx.value }}
+                    {{ tx.value | lunaToCoins}} NIM
                 </span>
                 </div>
                 <div>
@@ -50,7 +50,7 @@
                     </label>
 
                     <span class="nq-text-s pull-right">
-                    {{ tx.fee }}
+                    {{ tx.fee | lunaToCoins(5) }} NIM
                 </span>
                 </div>
                 <div>
@@ -90,6 +90,7 @@
     import {NETWORK_STATS_REQUEST} from 'store/actions/nimiq'
     import {getAddressLabel} from 'filters/getAddressLabel';
     import {formatDate} from 'filters/formatDate';
+    import {lunaToCoins} from "../../filters/lunaToCoins";
 
 
     export default {
@@ -110,7 +111,8 @@
         },
         filters:{
             getAddressLabel,
-            formatDate
+            formatDate,
+            lunaToCoins
         },
         components: {
             CancelBtn,

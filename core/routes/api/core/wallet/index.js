@@ -143,7 +143,7 @@ module.exports = function (NimiqHelper) {
 
     router.get('/', auth.required, async (req, res, next) => {
         const {payload: {id}} = req;
-        let wallets = await Wallets.find({user: id}).sort('order');
+        let wallets = await Wallets.find({user: id, deleted: 0}).sort('order');
         let results = [];
         for (let wallet of wallets) {
             let result = wallet.toJSON();

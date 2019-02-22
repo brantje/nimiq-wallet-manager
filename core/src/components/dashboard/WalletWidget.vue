@@ -44,6 +44,7 @@
         watch: {
             getWallets: function (wallets) {
                 if(wallets) {
+                    this.totalBalance = 0
                     wallets.forEach((e) => {
                         if(e.hasOwnProperty('balance')){
                             this.totalBalance += e.balance;

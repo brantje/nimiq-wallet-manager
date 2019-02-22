@@ -39,7 +39,7 @@
         },
         computed: {
             contacts: function () {
-                return store.state.contact.contacts
+                return [...store.state.wallet.wallets, ...store.state.contact.contacts]
             }
         },
         created() {
