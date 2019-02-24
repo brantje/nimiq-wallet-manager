@@ -51,6 +51,9 @@
                 if(newValue === 401){
                     router.push({path: 'authorize'});
                 }
+                if(newValue === 403){
+                    router.push({path: 'login'});
+                }
             }
         },
         components: {

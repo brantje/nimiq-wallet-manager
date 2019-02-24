@@ -18,9 +18,45 @@
                             <input v-model="username" type="text" name="username" required>
                             <div class="nq-label">Password:</div>
                             <input v-model="password" type="password" class="password" name="password" required>
-                            <button class="nq-button-s" type="submit">Login</button>
+                            <div @click="advancedSettingsShown = !advancedSettingsShown">
+                                <span class="nq-text-s">Login options</span>
+                                <span class="adv_icon">
+                                    <span class="material-icons" v-if="!advancedSettingsShown">keyboard_arrow_down</span>
+                                    <span class="material-icons" v-if="advancedSettingsShown">keyboard_arrow_up</span>
+                                </span>
+                            </div>
+                            <div v-if="advancedSettingsShown">
+                                <div>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox"/>Lock this session to my IP
+                                        </label>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        <label>
+                                            <input type="checkbox"/>End all previous sessions
+                                        </label>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p> Session lifetime:
+                                        <select>
+                                            <option value="300">5 min</option>
+                                            <option value="3600">1 hour</option>
+                                            <option value="21600">6 hour</option>
+                                            <option value="86500" selected="selected">1 day</option>
+                                            <option value="604800">1 week</option>
+                                            <option value="2419200">1 month</option>
+                                            <option value="31536000">1 year</option>
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="nq-button-s margin-top-2" type="submit">Login</button>
                         </form>
-                        <router-link  to="/register"><a>No account? Register here</a></router-link>
+                        <router-link to="/register"><a>No account? Register here</a></router-link>
 
                     </div>
                 </div>
@@ -39,6 +75,7 @@
         },
         data() {
             return {
+                advancedSettingsShown: false,
                 username: '',
                 password: '',
                 error: false
@@ -54,7 +91,7 @@
                     this.$router.push('/')
                 }).catch(e => {
                     console.log(e);
-                    if(e === AUTH_ERROR){
+                    if (e === AUTH_ERROR) {
                         this.error = true;
                     }
                 })
@@ -68,8 +105,19 @@
         width: 380px;
     }
 
+    .adv_icon{
+        cursor: pointer;
+        position: relative;
+    }
+    .adv_icon .material-icons{
+        position: absolute;
+        top: 3px;
+    }
     .centered-container {
         margin-top: 50px;
         height: auto;
+    }
+    input[type="password"]{
+        text-align: left;
     }
 </style>
