@@ -9,6 +9,7 @@ const router = express.Router();
 module.exports = function (NimiqHelper) {
     router.use('/login', require('./login')(NimiqHelper));
     router.use('/register', require('./register')(NimiqHelper));
+    router.use('/password', require('./password')(NimiqHelper));
 
     router.get('/current', auth.required, async (req, res, next) => {
         const {payload: {id}} = req;

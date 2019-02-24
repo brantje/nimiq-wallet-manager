@@ -24,7 +24,7 @@
                         <router-link to="/contacts">Manage contacts</router-link>
                     </li>
                     <li>
-                        <a>Settings</a>
+                        <router-link to="/settings/user/account">Settings</router-link>
                     </li>
                     <li class="spacer"></li>
                     <li>

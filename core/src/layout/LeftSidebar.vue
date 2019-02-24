@@ -28,6 +28,7 @@
     import Identicon from "components/Identicon.vue"
 
     export default {
+        name: 'LeftSidebar',
         computed: mapGetters(['getWallets']),
         created() {
             store.dispatch(WALLET_LIST_REQUEST)

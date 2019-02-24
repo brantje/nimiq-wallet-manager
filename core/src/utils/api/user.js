@@ -9,6 +9,9 @@ const userApi = {
     },
     current: () => {
         return axios({url: '/api/v1/core/user/current', method: 'GET'});
+    },
+    changePassword: (data) => {
+        return axios({url: '/api/v1/core/user/password', method: 'PUT', data: data});
     }
 }
 

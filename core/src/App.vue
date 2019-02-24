@@ -2,7 +2,7 @@
     <div>
         <Header v-if="isProfileLoaded"/>
         <div class="flex-container">
-            <LeftSidebar v-if="isProfileLoaded"/>
+            <router-view name="leftSidebar" v-if="isProfileLoaded"></router-view>
             <div class="content-container nq-style scrollbar-themed"> <!-- Scrollbar not working on firefox -->
                 <notifications  position="top center" classes="notification" width="350" />
                 <router-view :key="$route.fullPath"></router-view>
@@ -14,7 +14,6 @@
 
 <script>
     import Header from "layout/Header.vue"
-    import LeftSidebar from "layout/LeftSidebar.vue"
     import RightSidebar from "layout/RightSidebar.vue"
     import { USER_REQUEST } from 'store/actions/user'
     import { CONTACT_LIST_REQUEST } from 'store/actions/contact'
@@ -51,7 +50,7 @@
         },
         components: {
             Header,
-            LeftSidebar,
+            // LeftSidebar,
             RightSidebar
         }
     };
