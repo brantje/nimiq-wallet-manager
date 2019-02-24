@@ -61,7 +61,14 @@
                         password: '',
                         confirmPassword: ''
                     }
-                }).catch((e) => console.error(e))
+                }).catch((e) => {
+                    if (e.response.data.hasOwnProperty('error')) {
+                        this.$notify({
+                            type: 'error',
+                            title: e.response.data.error,
+                        });
+                    }
+                })
             }
         },
     };
