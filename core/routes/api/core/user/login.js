@@ -5,6 +5,7 @@ const auth = require('../../../auth');
 const Users = mongoose.model('Users');
 const Session = mongoose.model('Sessions');
 var useragent = require('express-useragent');
+const iplocation = require("iplocation").default;
 const {check, validationResult, body} = require('express-validator/check');
 
 
@@ -45,6 +46,7 @@ module.exports = function (NimiqHelper) {
                     session.ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
                     session.user = user._id;
                     session.expires = expirationDate;
+                    session.location = await iplocation(session.ip);
                     session.browser = {
                         browser: req.useragent.browser,
                         version: req.useragent.version,

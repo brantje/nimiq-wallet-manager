@@ -11,7 +11,7 @@ const SessionSchema = new Schema({
     expires: {type: Date, default: Date.now},
     sessionIpLocked: {type: Boolean, default: false},
     ip: {type: String},
-    location: {type: String},
+    location: {type: Object},
     browser: {type: Object},
     deleted: {type: Number, default: 0}
 });
