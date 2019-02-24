@@ -4,13 +4,14 @@ const router = require('express').Router();
 const auth = require('../../../auth');
 const Users = mongoose.model('Users');
 const Session = mongoose.model('Sessions');
-const crypto = require('crypto');
-const JsonWebToken = require('jsonwebtoken');
+var useragent = require('express-useragent');
 const {check, validationResult, body} = require('express-validator/check');
 
 
 module.exports = function (NimiqHelper) {
-    router.post('/', auth.optional,
+    router.post('/',
+        useragent.express(),
+        auth.optional,
         [
             body('username').not().isEmpty().withMessage('Invalid username'),
             body('password').not().isEmpty().withMessage('Invalid username'),
@@ -44,6 +45,13 @@ module.exports = function (NimiqHelper) {
                     session.ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
                     session.user = user._id;
                     session.expires = expirationDate;
+                    session.browser = {
+                        browser: req.useragent.browser,
+                        version: req.useragent.version,
+                        os: req.useragent.os,
+                        platform: req.useragent.platform,
+                        userAgent: req.useragent.source
+                    };
                     session.sessionIpLocked = sessionIpLocked || false;
                     await session.save();
 

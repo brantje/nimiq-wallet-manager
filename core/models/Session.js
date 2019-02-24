@@ -7,11 +7,12 @@ const {Schema} = mongoose;
 const SessionSchema = new Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
     created: {type: Date, default: Date.now},
-    lastActive: { type: Date, default: Date.now},
-    expires: { type: Date, default: Date.now},
+    lastActive: {type: Date, default: Date.now},
+    expires: {type: Date, default: Date.now},
     sessionIpLocked: {type: Boolean, default: false},
-    ip: { type: String},
-    location: { type: String},
+    ip: {type: String},
+    location: {type: String},
+    browser: {type: Object},
     deleted: {type: Number, default: 0}
 });
 
