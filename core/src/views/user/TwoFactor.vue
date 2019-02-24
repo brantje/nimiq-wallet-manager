@@ -10,12 +10,9 @@
 
                     <div class="form">
                         <h2 class="nq-h2">Enter OTP</h2>
-                        <div class="nq-red-bg errors" v-if="error">
-                            Invalid username or password!
-                        </div>
-                        <form @submit.prevent="login">
-                            <div class="nq-label">Username:</div>
-                            <input v-model="username" type="text" name="username" required>
+                        <form @submit.prevent="verifyOtp">
+                            <input v-model="otp" type="text" name="username" required>
+                            <button class="nq-button-s" @click="verifyOtp">Verify</button>
                         </form>
                     </div>
                 </div>
@@ -25,35 +22,36 @@
 </template>
 
 <script>
-    import {AUTH_REQUEST, AUTH_ERROR} from 'store/actions/auth'
+    import {userApi} from 'utils/api/user'
+    import axios from 'axios'
+    import store from 'store'
+    import {USER_REQUEST} from "store/actions/user";
 
     export default {
-        name: "Login",
+        name: "TwoFactor",
         metaInfo: {
-            title: 'Login'
+            title: 'Authorize'
         },
         data() {
             return {
-                username: '',
-                password: '',
-                error: false
+                otp: '',
             };
         },
         components: {},
         methods: {
-            login: function () {
-                this.error = false;
-                const {username, password} = this;
-                this.$store.dispatch(AUTH_REQUEST, {username, password}).then(() => {
-                    console.log('Logged in!');
-                    this.$router.push('/')
-                }).catch(e => {
-                    console.log(e);
-                    if(e === AUTH_ERROR){
-                        this.error = true;
-                    }
+            verifyOtp: function () {
+                let p = this
+                userApi.twofactor.verifyOtp(this.otp).then(function (r) {
+                    let token = r.data.token
+                    localStorage.setItem('user-token', token)
+
+                    axios.defaults.headers.common['Authorization'] = 'Token ' + token
+                    store.dispatch(USER_REQUEST)
+                    p.$router.push('/')
+                }).catch(function (e) {
+                    console.log(e)
                 })
-            }
+            },
         }
 
     };

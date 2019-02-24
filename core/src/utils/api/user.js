@@ -19,6 +19,10 @@ const userApi = {
         },
         verifySecret: (otp) => {
             return axios({url: '/api/v1/core/user/two-factor/setup-verify', method: 'POST', data: {otp: otp}});
+        },
+        verifyOtp: (otp) => {
+            return axios({url: '/api/v1/core/user/two-factor/verify-totp', method: 'POST', data: {otp: otp}});
+
         }
     }
 }

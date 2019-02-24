@@ -5,6 +5,7 @@ import SettingsSidebar from "layout/SettingsSidebar.vue"
 import Dashboard from "views/Dashboard.vue";
 import Login from "views/user/Login.vue";
 import Register from "views/user/Register.vue";
+import TwoFactor from "views/user/TwoFactor.vue";
 import WalletDetail from "views/wallet/Detail.vue";
 import AddWallet from "views/wallet/Add.vue";
 import WalletList from "views/wallet/List.vue";
@@ -137,6 +138,11 @@ export default new Router({
             name: "Login",
             component: Login,
             beforeEnter: ifNotAuthenticated,
+        },
+        {
+            path: "/authorize",
+            name: "TwoFactor",
+            component: TwoFactor,
         },
         {
             path: "/register",

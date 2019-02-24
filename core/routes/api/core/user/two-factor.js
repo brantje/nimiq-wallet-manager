@@ -7,7 +7,18 @@ const TwoFactor = require('node-2fa');
 const JsonWebToken = require('jsonwebtoken');
 
 module.exports = function (NimiqHelper) {
-
+    const getBearerToken = function (header, callback) {
+        if (header) {
+            token = header.split(" ");
+            if (token.length === 2) {
+                return callback(null, token[1]);
+            } else {
+                return callback("Malformed bearer token", null);
+            }
+        } else {
+            return callback("Missing authorization header", null);
+        }
+    };
     /**
      * @api {get} /users/generate-secret Generate 2FA secret
      * @apiDescription Generate a secret for 2A authentication
@@ -29,7 +40,7 @@ module.exports = function (NimiqHelper) {
         const user = await Users.findOne({_id: id});
 
         if (user) {
-            user.settings =  {...user.settings, tmp_two_factor_secret: data.secret};
+            user.settings = {...user.settings, tmp_two_factor_secret: data.secret};
             user.save().then(() => {
                 res.send({
                     "secret": data
@@ -53,7 +64,7 @@ module.exports = function (NimiqHelper) {
      */
     router.post("/verify-totp", auth['2fa-login'], async function (req, res) {
         const {payload: {id}} = req;
-        const user = await Users.findById(id);
+        const user = await Users.findOne({_id: id});
         getBearerToken(req.headers["authorization"], function (error, token) {
             if (error) {
                 return res.status(401).send({"success": false, "message": error});
@@ -62,7 +73,7 @@ module.exports = function (NimiqHelper) {
                 return res.status(401).send({"success": false, "message": "An `otp` is required"});
             }
             JsonWebToken.verify(token, process.env.JWT_SECRET, function (error, decodedToken) {
-                if (TwoFactor.verifyToken(user['2fa_secret'], req.body.otp)) {
+                if (TwoFactor.verifyToken(user.settings.two_factor_secret, req.body.otp)) {
                     decodedToken.authorized = true;
                     var token = JsonWebToken.sign(decodedToken, process.env.JWT_SECRET, {});
                     return res.send({"token": token});
@@ -90,7 +101,7 @@ module.exports = function (NimiqHelper) {
         const {payload: {username, id}, body} = req;
 
         const user = await Users.findOne({_id: id});
-        if(user) {
+        if (user) {
             let secret = user.settings.tmp_two_factor_secret || user.settings.two_factor_secret
             if (TwoFactor.verifyToken(secret, body.otp)) {
                 let settings = {...user.settings};

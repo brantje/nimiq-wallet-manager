@@ -34,7 +34,7 @@ const actions = {
                 inflight[CONTACT_LIST_REQUEST] = false;
                 commit(CONTACT_LIST_ERROR)
                 // if resp is unauthorized, logout, to
-                console.log(resp)
+                // console.log(resp)
                 // dispatch(AUTH_LOGOUT)
             })
     },

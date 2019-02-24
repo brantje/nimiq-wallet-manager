@@ -34,7 +34,7 @@
                 user: false
             };
         },
-        computed: mapGetters(['isProfileLoaded', 'isAuthenticated']),
+        computed: mapGetters(['isProfileLoaded', 'isAuthenticated', 'getUserStatus']),
         created(){
             if(this.isAuthenticated){
                 store.dispatch(USER_REQUEST)
@@ -45,6 +45,11 @@
             isAuthenticated: (newValue, oldValue) => {
                 if(newValue === false && oldValue === true){
                     router.push({name: 'Login'});
+                }
+            },
+            getUserStatus: (newValue, oldValue) => {
+                if(newValue === 401){
+                    router.push({path: 'authorize'});
                 }
             }
         },

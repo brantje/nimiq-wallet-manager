@@ -11,6 +11,7 @@ const state = { status: '', profile: {} }
 const getters = {
     getProfile: state => state.profile,
     isProfileLoaded: state => !!state.profile.username,
+    getUserStatus: state => state.status
 }
 
 const actions = {
@@ -20,10 +21,15 @@ const actions = {
             .then(resp => {
                 commit(USER_SUCCESS, resp)
             })
-            .catch(resp => {
-                commit(USER_ERROR)
+            .catch(e => {
                 // if resp is unauthorized, logout, to
-                dispatch(AUTH_LOGOUT)
+                if(e.response.status === 403) {
+                    commit(USER_ERROR, 403)
+                    dispatch(AUTH_LOGOUT)
+                }
+                if(e.response.status === 401){
+                    commit(USER_ERROR, 401)
+                }
             })
     },
 }
@@ -36,8 +42,8 @@ const mutations = {
         state.status = 'success'
         Vue.set(state, 'profile', resp.data)
     },
-    [USER_ERROR]: (state) => {
-        state.status = 'error'
+    [USER_ERROR]: (state, err) => {
+        state.status = err || 'error'
     },
     [AUTH_LOGOUT]: (state) => {
         state.profile = {}
