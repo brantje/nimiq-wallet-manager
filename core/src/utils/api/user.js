@@ -22,7 +22,9 @@ const userApi = {
         },
         verifyOtp: (otp) => {
             return axios({url: '/api/v1/core/user/two-factor/verify-totp', method: 'POST', data: {otp: otp}});
-
+        },
+        disableTFA: (otp) => {
+            return axios({url: '/api/v1/core/user/two-factor', method: 'DELETE' });
         }
     }
 }

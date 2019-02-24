@@ -130,11 +130,13 @@ module.exports = function (NimiqHelper) {
  *        "success": true
  *     }
      */
-    router.post("/destoy-otp", auth.required, async function (req, res) {
+    router.delete("/", auth.required, async function (req, res) {
         const {payload: {username, id}, body: {data}} = req;
         let user = await Users.findById(id);
-        user['two_factor_enabled'] = false;
-        user['2fa_secret'] = '';
+        let settings = {...user.settings};
+        delete settings.two_factor_enabled;
+        delete settings.two_factor_secret;
+        user.settings = settings;
         await user.save();
 
         return res.json({success: true});

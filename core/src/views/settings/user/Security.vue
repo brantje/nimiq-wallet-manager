@@ -7,9 +7,10 @@
 
                     <div class="pull-right">
                         <div class="btn-states btn-two-factor-state">
+
                             <span v-if="getProfile.settings && getProfile.settings.two_factor_enabled">
-                                <button class="nq-button-s">Enabled</button>
-                                <button class="nq-button-s red">Disable</button>
+                                <button class="nq-button-s green">Enabled</button>
+                                <button class="nq-button-s red" @click="disableTwoFactor">Disable</button>
                             </span>
                             <span v-if="getProfile.settings && !getProfile.settings.two_factor_enabled">
                                 <button class="nq-button-s">Disabled</button>
@@ -34,6 +35,7 @@
     import {mapState, mapGetters} from 'vuex'
     import store from 'store'
     import {USER_REQUEST} from 'store/actions/user'
+    import {userApi} from "../../../utils/api/user";
 
     export default {
         created() {
@@ -51,7 +53,20 @@
                     view: 'TwoFactorSetupPopup',
                     customClass: 'big-dialog'
                 }).then(() => {
+                    store.dispatch(USER_REQUEST)
+                }).catch(() => {
+                })
+            },
+            disableTwoFactor: function () {
+                this.$dialog.confirm('Are you sure you want to disable two factor authentication?').then(() => {
 
+                    userApi.twofactor.disableTFA().then(() => {
+                        this.$notify({
+                            type: 'warn',
+                            title: 'Two factor authentication disabled',
+                        });
+                        store.dispatch(USER_REQUEST)
+                    })
                 }).catch(() => {
                 })
             }
