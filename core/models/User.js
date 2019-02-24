@@ -26,25 +26,21 @@ UserSchema.methods.validatePassword = function (password) {
     return this.hash === hash;
 };
 
-UserSchema.methods.generateJWT = function () {
-    const today = new Date();
-    const expirationDate = new Date(today);
-    expirationDate.setDate(today.getDate() + 1);
-
+UserSchema.methods.generateJWT = function (params) {
     return jwt.sign({
         "username": this.username,
         "id": this._id,
+        "session_id": params.session,
         "two_factor_enabled": this.settings.two_factor_enabled || false,
-        "2fa_secret": this.settings.two_factor_secret || false,
-        "exp": parseInt(expirationDate.getTime() / 1000, 10),
+        "two_factor_secret": this.settings.two_factor_secret || false,
     }, process.env.JWT_SECRET);
 };
 
-UserSchema.methods.toAuthJSON = function () {
+UserSchema.methods.toAuthJSON = function (params) {
     return {
         _id: this._id,
         username: this.username,
-        token: this.generateJWT(),
+        token: this.generateJWT(params),
     };
 };
 

@@ -59,7 +59,6 @@
             },
             disableTwoFactor: function () {
                 this.$dialog.confirm('Are you sure you want to disable two factor authentication?').then(() => {
-
                     userApi.twofactor.disableTFA().then(() => {
                         this.$notify({
                             type: 'warn',
