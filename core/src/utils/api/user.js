@@ -1,8 +1,17 @@
 import axios from 'axios'
 
 const userApi = {
-    login: ({username, password}) => {
-        return axios({url: '/api/v1/core/user/login', data: {username: username, password: password}, method: 'POST'});
+    login: ({username, password, sessionDuration, endAllPreviousSessions, sessionIpLocked}) => {
+        return axios({
+            url: '/api/v1/core/user/login', data: {
+                username: username,
+                password: password,
+                sessionDuration: sessionDuration,
+                endAllPreviousSessions: endAllPreviousSessions,
+                sessionIpLocked: sessionIpLocked
+            },
+            method: 'POST'
+        });
     },
     register: (newUser) => {
         return axios({url: '/api/v1/core/user/register', data: newUser, method: 'POST'});
@@ -24,7 +33,7 @@ const userApi = {
             return axios({url: '/api/v1/core/user/two-factor/verify-totp', method: 'POST', data: {otp: otp}});
         },
         disableTFA: (otp) => {
-            return axios({url: '/api/v1/core/user/two-factor', method: 'DELETE' });
+            return axios({url: '/api/v1/core/user/two-factor', method: 'DELETE'});
         }
     }
 }

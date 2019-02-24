@@ -17,31 +17,42 @@ module.exports = function (NimiqHelper) {
         ],
         async (req, res, next) => {
             return passport.authenticate('local', {session: false}, async (err, passportUser, info) => {
+                let {sessionDuration, endAllPreviousSessions, sessionIpLocked} = req.body;
+
                 if (err) {
                     return next(err);
                 }
 
                 if (passportUser) {
                     const today = new Date();
-                    const expirationDate = new Date(today);
-                    expirationDate.setDate(today.getDate() + 1);
-
                     const user = passportUser;
+                    sessionDuration = sessionDuration || 86500;
+                    const expirationDate = new Date(today.getTime() + sessionDuration * 1000);
+                    if (endAllPreviousSessions) {
+                        await Session.updateMany({
+                            user: user._id,
+                            deleted: 0
+                        }, {
+                            $set: {
+                                deleted: 1
+                            }
+                        }, {
+                            multi: true
+                        })
+                    }
                     let session = new Session();
                     session.ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
                     session.user = user._id;
                     session.expires = expirationDate;
-                    await session.save()
+                    session.sessionIpLocked = sessionIpLocked || false;
+                    await session.save();
 
-                    // user.token = passportUser.generateJWT();
-
-                    // res.cookie('accessToken', user.token, { expires: new Date(Date.now() + (24 * 3600000) ) });
                     return res.status(200).json(user.toAuthJSON({
                         session: session._id
                     }));
                 }
 
-                res.status(401).json( {errors: 'Invalid username or password'});
+                res.status(401).json({errors: 'Invalid username or password'});
             })(req, res, next);
         });
     return router;

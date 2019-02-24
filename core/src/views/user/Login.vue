@@ -29,24 +29,24 @@
                                 <div>
                                     <p>
                                         <label>
-                                            <input type="checkbox"/>Lock this session to my IP
+                                            <input type="checkbox" v-model="sessionIpLocked"/>Lock this session to my IP
                                         </label>
                                     </p>
                                 </div>
                                 <div>
                                     <p>
                                         <label>
-                                            <input type="checkbox"/>End all previous sessions
+                                            <input type="checkbox" v-model="endAllPreviousSessions" />End all previous sessions
                                         </label>
                                     </p>
                                 </div>
                                 <div>
                                     <p> Session lifetime:
-                                        <select>
+                                        <select v-model="sessionDuration">
                                             <option value="300">5 min</option>
                                             <option value="3600">1 hour</option>
                                             <option value="21600">6 hour</option>
-                                            <option value="86500" selected="selected">1 day</option>
+                                            <option value="86500">1 day</option>
                                             <option value="604800">1 week</option>
                                             <option value="2419200">1 month</option>
                                             <option value="31536000">1 year</option>
@@ -76,6 +76,9 @@
         data() {
             return {
                 advancedSettingsShown: false,
+                sessionIpLocked: false,
+                endAllPreviousSessions: false,
+                sessionDuration: 86500,
                 username: '',
                 password: '',
                 error: false
@@ -85,8 +88,8 @@
         methods: {
             login: function () {
                 this.error = false;
-                const {username, password} = this;
-                this.$store.dispatch(AUTH_REQUEST, {username, password}).then(() => {
+                const {username, password, sessionDuration, endAllPreviousSessions, sessionIpLocked} = this;
+                this.$store.dispatch(AUTH_REQUEST, {username, password, sessionDuration, endAllPreviousSessions, sessionIpLocked }).then(() => {
                     console.log('Logged in!');
                     this.$router.push('/')
                 }).catch(e => {
