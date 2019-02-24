@@ -10,7 +10,7 @@ const UserSchema = new Schema({
     "salt": String,
     "email": {type: String, unique: true, required: true},
     "active": {type: Boolean, default: true},
-    "settings": [{key: String, value: String}]
+    "settings": {type: Object }
 });
 
 UserSchema.index({username: 1, email: 1});
@@ -34,8 +34,8 @@ UserSchema.methods.generateJWT = function () {
     return jwt.sign({
         "username": this.username,
         "id": this._id,
-        "2fa_enabled": this.settings['2fa_enabled'] || false,
-        "2fa_secret": this.settings['2fa_secret'] || false,
+        "two_factor_enabled": this.settings.two_factor_enabled || false,
+        "2fa_secret": this.settings.two_factor_secret || false,
         "exp": parseInt(expirationDate.getTime() / 1000, 10),
     }, process.env.JWT_SECRET);
 };

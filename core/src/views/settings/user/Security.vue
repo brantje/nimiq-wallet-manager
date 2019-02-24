@@ -7,13 +7,13 @@
 
                     <div class="pull-right">
                         <div class="btn-states btn-two-factor-state">
-                            <span v-if="getProfile.settings.two_facor_enabled">
+                            <span v-if="getProfile.settings && getProfile.settings.two_factor_enabled">
                                 <button class="nq-button-s">Enabled</button>
                                 <button class="nq-button-s red">Disable</button>
                             </span>
-                            <span v-if="!getProfile.settings.two_facor_enabled">
+                            <span v-if="getProfile.settings && !getProfile.settings.two_factor_enabled">
                                 <button class="nq-button-s">Disabled</button>
-                                <button class="nq-button-s green">Enable</button>
+                                <button class="nq-button-s green" @click="setupTwoFacfor">Enable</button>
                             </span>
                         </div>
                     </div>
@@ -45,20 +45,32 @@
             return {};
         },
         filters: {},
-        methods: {},
+        methods: {
+            setupTwoFacfor: function () {
+                this.$dialog.alert('', {
+                    view: 'TwoFactorSetupPopup',
+                    customClass: 'big-dialog'
+                }).then(() => {
+
+                }).catch(() => {
+                })
+            }
+        },
         components: {}
     };
 </script>
 
 <style scoped>
-.btn-states:hover .nq-button-s:last-child{
-    display: inline-block;
-}
-.btn-states:hover .nq-button-s:first-child{
-    display: none;
-}
-.btn-states .nq-button-s:last-child{
-    display: none;
-}
+    .btn-states:hover .nq-button-s:last-child {
+        display: inline-block;
+    }
+
+    .btn-states:hover .nq-button-s:first-child {
+        display: none;
+    }
+
+    .btn-states .nq-button-s:last-child {
+        display: none;
+    }
 
 </style>

@@ -37,7 +37,7 @@ const validateToken = function(request, response, next) {
                 request.payload = decodedToken;
                 next();
             } else {
-                if(decodedToken.hasOwnProperty('2fa_enabled') && decodedToken['2fa_enabled']) {
+                if(decodedToken.hasOwnProperty('two_factor_enabled') && decodedToken['two_factor_enabled']) {
                     return response.status(401).send({"success": false, "error": "2FA is required"});
                 } else {
                     request.payload = decodedToken;

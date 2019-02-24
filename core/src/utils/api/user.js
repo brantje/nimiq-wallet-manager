@@ -12,6 +12,14 @@ const userApi = {
     },
     changePassword: (data) => {
         return axios({url: '/api/v1/core/user/password', method: 'PUT', data: data});
+    },
+    twofactor: {
+        getSecret: () => {
+            return axios({url: '/api/v1/core/user/two-factor/generate-secret', method: 'GET'});
+        },
+        verifySecret: (otp) => {
+            return axios({url: '/api/v1/core/user/two-factor/setup-verify', method: 'POST', data: {otp: otp}});
+        }
     }
 }
 

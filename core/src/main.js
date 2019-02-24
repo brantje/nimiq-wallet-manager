@@ -32,6 +32,7 @@ import EditWalletDialog from 'views/wallet/Edit.vue'
 import ContactPopupDialog from 'views/transaction/ContactPopup.vue'
 import ConfirmTransactionPopup from 'views/transaction/ConfirmTransactionPopup.vue'
 import TransactionInfoPopup from 'views/transaction/TransactionInfoPopup.vue'
+import TwoFactorSetupPopup from 'views/settings/user/TwoFactorSetupPopup.vue'
 
 import router from "./router"
 import axios from "axios"
@@ -84,6 +85,7 @@ new Vue({
     Vue.dialog.registerComponent('ContactPopupDialog', ContactPopupDialog);
     Vue.dialog.registerComponent('ConfirmTransactionPopup', ConfirmTransactionPopup);
     Vue.dialog.registerComponent('TransactionInfoPopup', TransactionInfoPopup);
+    Vue.dialog.registerComponent('TwoFactorSetupPopup', TwoFactorSetupPopup);
 
     setTimeout(() => {
         document.querySelectorAll(".loading-container-overlay").forEach( el => el.remove() )
