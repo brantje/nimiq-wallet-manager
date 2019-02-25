@@ -20,11 +20,12 @@ SessionSchema.methods.toJSON = function () {
     return {
         _id: this._id,
         created: this.created,
-        lastActive: this.lastActive,
-        expires: this.expires,
+        lastActive: new Date(this.lastActive).getTime() / 1000,
+        expires:  new Date(this.expires).getTime() / 1000,
         sessionIpLocked: this.sessionIpLocked,
         ip: this.ip,
-        location: this.ip,
+        location: this.location,
+        browser: this.browser,
     };
 };
 SessionSchema.index({user: 1});

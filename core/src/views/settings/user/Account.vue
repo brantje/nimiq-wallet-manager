@@ -39,7 +39,9 @@
         created() {
 
         },
-
+        metaInfo: {
+            title: 'Account'
+        },
         data() {
             return {
                 changePassword: {
@@ -78,5 +80,9 @@
     input[type="password"] {
         text-align: left;
         margin-bottom: 10px;
+    }
+    .nq-card {
+        margin: 2rem auto;
+        /*max-width: none;*/
     }
 </style>

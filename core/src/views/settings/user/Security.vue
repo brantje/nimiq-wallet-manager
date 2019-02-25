@@ -41,6 +41,9 @@
         created() {
             store.dispatch(USER_REQUEST)
         },
+        metaInfo: {
+            title: 'Security'
+        },
         computed: mapGetters(['getProfile']),
 
         data() {
@@ -86,5 +89,8 @@
     .btn-states .nq-button-s:last-child {
         display: none;
     }
-
+    .nq-card {
+        margin: 2rem auto;
+        /*max-width: none;*/
+    }
 </style>

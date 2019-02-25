@@ -22,6 +22,12 @@ const userApi = {
     changePassword: (data) => {
         return axios({url: '/api/v1/core/user/password', method: 'PUT', data: data});
     },
+    getSessions: () => {
+        return axios({url: '/api/v1/core/user/sessions', method: 'GET'});
+    },
+    destroySession: (session) => {
+        return axios({url: '/api/v1/core/user/sessions/'+ session._id, method: 'DELETE'});
+    },
     twofactor: {
         getSecret: () => {
             return axios({url: '/api/v1/core/user/two-factor/generate-secret', method: 'GET'});

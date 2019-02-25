@@ -11,6 +11,7 @@ module.exports = function (NimiqHelper) {
     router.use('/register', require('./register')(NimiqHelper));
     router.use('/password', require('./password')(NimiqHelper));
     router.use('/two-factor', require('./two-factor')(NimiqHelper));
+    router.use('/sessions', require('./session')(NimiqHelper));
 
     router.get('/current', auth.required, async (req, res, next) => {
         const {payload: {id}} = req;

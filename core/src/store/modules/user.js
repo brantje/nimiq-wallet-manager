@@ -1,15 +1,16 @@
 
-import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from '../actions/user'
+import { USER_REQUEST, USER_ERROR, USER_SUCCESS, SESSION_LIST_REQUEST, SESSION_LIST_REQUEST_ERROR, SESSION_LIST_REQUEST_SUCCESS } from '../actions/user'
 import {userApi} from 'utils/api/user'
 import axios from 'axios'
 
 import Vue from 'vue'
 import { AUTH_LOGOUT } from 'store/actions/auth'
 
-const state = { status: '', profile: {} }
+const state = { status: '', profile: {}, sessions: [] }
 
 const getters = {
     getProfile: state => state.profile,
+    getSessions: state => state.sessions,
     isProfileLoaded: state => !!state.profile.username,
     getUserStatus: state => state.status
 }
@@ -32,6 +33,17 @@ const actions = {
                 }
             })
     },
+    [SESSION_LIST_REQUEST]: ({commit, dispatch}) => {
+        commit(SESSION_LIST_REQUEST)
+        userApi.getSessions()
+            .then(resp => {
+                commit(SESSION_LIST_REQUEST_SUCCESS, resp)
+            })
+            .catch(e => {
+                // if resp is unauthorized, logout, to
+                commit(SESSION_LIST_REQUEST_ERROR, e.response.status)
+            })
+    },
 }
 
 const mutations = {
@@ -44,6 +56,15 @@ const mutations = {
     },
     [USER_ERROR]: (state, err) => {
         state.status = err || 'error'
+    },
+    [SESSION_LIST_REQUEST]: (state) => {
+
+    },
+    [SESSION_LIST_REQUEST_SUCCESS]: (state, resp) => {
+        state.sessions = resp.data
+    },
+    [SESSION_LIST_REQUEST_ERROR]: (state, err) => {
+        
     },
     [AUTH_LOGOUT]: (state) => {
         state.profile = {}
