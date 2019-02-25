@@ -61,11 +61,9 @@ typings/
 .idea
 .env
 .sass-cache
-main-full-consensus/
-main-light-consensus/
+*-full-consensus/
+*-light-consensus/
 peer-key/
-test-full-consensus/
-test-light-consensus/
 
 # Log files
 npm-debug.log*
