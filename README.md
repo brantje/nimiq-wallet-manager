@@ -14,7 +14,7 @@ https://documenter.getpostman.com/view/3064651/RztkQALx#a776cefa-736c-4b12-8b9a-
 ## Installation
 Setup a fresh MongoDB database.
 
-`$ sudo apt-get install -y build-essential mongodb`
+`$ sudo apt-get install -y build-essential mongodb redis-server`
 
 `$ npm install`
 
