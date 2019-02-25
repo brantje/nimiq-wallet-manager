@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('./auth');
 const Nimiq = require('@nimiq/core');
-const Identicon = require('../../lib/Identicon');
+const Iqons = require('@nimiq/iqons').default;
 const { convertFile }=  require('convert-svg-to-png');
 const fs = require('fs');
 
@@ -33,7 +33,7 @@ router.get('/:address', auth.optional, async (req, res, next) => {
     if (fs.existsSync('./cache/' + filenameSvg)) {
         svg = fs.readFileSync(savePath, 'utf8');
     } else {
-        svg = await Identicon.svg(address, true, true);
+        svg = await Iqons.svg(address);
         fs.writeFile(savePath, svg, function (err) {
             if (err) {
                 return console.log(err);
