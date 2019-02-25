@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Block = mongoose.model('Blocks');
 const Transaction = mongoose.model('Transactions');
-
+const TagCache = require('redis-tag-cache');
+const Cache = new TagCache.default();
+const Nimiq = require('@nimiq/core');
 class NimiqService {
     constructor(NimiqHelper) {
         this.$ = NimiqHelper.getConsensus();
@@ -17,6 +19,11 @@ class NimiqService {
             let newTx = Object.assign(new Transaction(), await this.helper.getTransactionByHash(tx));
             await newTx.save();
             transactions.push(newTx._id);
+            try {
+                Cache.invalidate(tx.recipient.toHex(), tx.sender.toHex());
+            } catch (e) {
+                Nimiq.Log.w(NimiqService, 'Unable to clear cache. Is redis running?');
+            }
         }
 
         let newBlock = Object.assign(new Block(), block);
