@@ -3,18 +3,26 @@ const auth = require('../../../auth');
 const Nimiq = require('@nimiq/core');
 const mongoose = require('mongoose');
 const Wallets = mongoose.model('Wallets');
+const TagCache = require('redis-tag-cache');
+const Cache = new TagCache.default();
 /**
  * @apiDefine TransactionGroup Transaction
  *
  * Get and send transactions
  */
-module.exports = function (NimiqHelper, Cache) {
+module.exports = function (NimiqHelper) {
 
     const $ = NimiqHelper.getConsensus();
 
     router.get('/recent', auth.required, async (req, res, next) => {
         const {payload: {id}} = req;
         let results = [];
+
+        let cacheKey = 'recent_tx_'+ id;
+        let cache = await Cache.get(cacheKey);
+        if(cache){
+            return res.json(JSON.parse(cache));
+        }
 
         let wallets = await Wallets.find({user: id});
         let tags = [];
@@ -31,6 +39,7 @@ module.exports = function (NimiqHelper, Cache) {
                 t.hash === tx.hash
             ))
         );
+        Cache.set(cacheKey, JSON.stringify(results), tags, { timeout: (60 * 60 * 24 * 31 * 12) });
         return res.json(results);
     });
 

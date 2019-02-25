@@ -4,6 +4,8 @@ const router = require('express').Router();
 const auth = require('../../../auth');
 const Wallets = mongoose.model('Wallets');
 const Nimiq = require('@nimiq/core');
+const TagCache = require('redis-tag-cache');
+const Cache = new TagCache.default();
 
 module.exports = function (NimiqHelper) {
 
@@ -73,6 +75,14 @@ module.exports = function (NimiqHelper) {
                 },
             });
         }
+
+        let cacheKey = 'wallet_info_'+ addr.toHex();
+
+        let cache = await Cache.get(cacheKey);
+        if(cache){
+            return res.json(JSON.parse(cache));
+        }
+
         let wallet = await Wallets.findOne({user: id, address: addr.toUserFriendlyAddress(), deleted: 0});
         if (wallet) {
             let result = wallet.toJSON();
@@ -83,6 +93,7 @@ module.exports = function (NimiqHelper) {
                 result.balance = info.balance;
             }
             result.transactions = txs;
+            Cache.set(cacheKey, JSON.stringify(result), [addr.toHex()], { timeout: (60 * 60 * 24 * 31 * 12) });
             return res.json(result);
         }
         return res.status(404).json({error: "Not found"});
