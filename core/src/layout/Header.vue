@@ -28,7 +28,7 @@
                     </li>
                     <li class="spacer"></li>
                     <li>
-                        <a>Logout</a>
+                        <a @click="logout">Logout</a>
                     </li>
                 </ul>
             </li>
@@ -40,6 +40,8 @@
 
 <script>
     import {mapState, mapGetters} from 'vuex'
+    import {AUTH_LOGOUT} from 'store/actions/auth'
+    import store from 'store'
 
     export default {
         data() {
@@ -47,7 +49,15 @@
                 user: false, // var for if
             };
         },
-        computed: mapGetters(['isProfileLoaded'])
+        computed: mapGetters(['isProfileLoaded']),
+        methods: {
+            logout: function () {
+             //
+                store.dispatch(AUTH_LOGOUT).then(() =>{
+                    this.$router.push('/login')
+                })
+            }
+        }
     };
 </script>
 
