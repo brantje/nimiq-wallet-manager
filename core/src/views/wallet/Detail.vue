@@ -9,7 +9,7 @@
             </div>
             <div v-if="!loading">
                 <h3 class="nq-label">{{ getActiveWallet.label }}</h3>
-                <h4>{{ getActiveWallet.address}}</h4>
+                <h4><Address :address="getActiveWallet.address" display-address="true"></Address></h4>
                 <div class="nq-label">
                     Balance:
                 </div>
@@ -32,6 +32,7 @@
     import {mapState, mapGetters} from 'vuex'
     import TransactionList from "components/transaction/TransactionList.vue";
     import Identicon from "components/Identicon.vue"
+    import Address from "components/Address.vue"
     import {lunaToCoins} from 'filters/lunaToCoins'
 
     import store from 'store'
@@ -75,7 +76,8 @@
         },
         components: {
             TransactionList,
-            Identicon
+            Identicon,
+            Address
         }
     };
 </script>
