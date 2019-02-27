@@ -69,16 +69,19 @@ Vue.use(VuejsDialog, {
     view: 'DefaultDialog',
     backdropClose: true
 });
-new Vue({
-    router,
-    store,
-    render: h => h(App)
-}).$mount("#app");
+
 
 (async () => {
     await Nimiq.load(workerURL)
     console.log(`Init config for ${NIMIQ_NETWORK}net`)
     Nimiq.GenesisConfig[NIMIQ_NETWORK]()
+
+    new Vue({
+        router,
+        store,
+        render: h => h(App)
+    }).$mount("#app");
+
     Vue.dialog.registerComponent('DefaultDialog', DefaultDialog);
     Vue.dialog.registerComponent('AddContactDialog', AddContactDialog);
     Vue.dialog.registerComponent('EditWalletDialog', EditWalletDialog);

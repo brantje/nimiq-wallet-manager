@@ -86,7 +86,7 @@
                             <input type="text" v-model="wallet.label"/>
                         </div>
                     </tab-content>
-                    <tab-content title="Last step" v-if="addType !== 'address'">
+                    <tab-content title="Pass phrase" v-if="addType !== 'address'">
                         <div>
                             <h1>Set a Pass Phrase</h1>
                             <p>Please enter a Pass Phrase to secure your wallet.<br/><br/>
@@ -96,7 +96,16 @@
                             </p>
                         </div>
                         <div>
-                            <input type="text" v-model="passPhrase"/>
+                            <input type="password" v-model="passPhrase"/>
+                        </div>
+                    </tab-content>
+                    <tab-content title="Confirm pass phrase" v-if="addType !== 'address'" :before-change="validatePassPhrase">
+                        <div>
+                            <h1>Confirm Pass Phrase</h1>
+                            <p>Please confirm your Pass Phrase.</p>
+                        </div>
+                        <div>
+                            <input type="password" v-model="passPhraseConfirm"/>
                         </div>
                     </tab-content>
                     <tab-content title="Confirmation">
@@ -147,6 +156,7 @@
                 firstStepPassed: false,
                 recoveryWords: '',
                 passPhrase: '',
+                passPhraseConfirm: '',
                 walletAddressInput: '',
                 wallet: {
                     label: '',
@@ -171,8 +181,6 @@
         methods: {
             async onComplete() {
                 let wallet = await this.wallet
-                console.log(wallet)
-                //@TODO encrypt the private key
                 if (wallet.privateKey) {
                     let encrypted = await encrypt(wallet.privateKey, this.passPhrase);
                     wallet.encryptedPrivateKey = encrypted;
@@ -247,6 +255,15 @@
                     resolve(true)
                 })
             },
+            validatePassPhrase: function () {
+                return new Promise((resolve, reject) => {
+                    if(this.passPhrase === this.passPhraseConfirm){
+                        resolve(true)
+                    }
+                    return reject('The pass phrase doesn\'t match');
+
+                })
+            },
             validateAddress: function () {
                 let address = Nimiq.Address.fromUserFriendlyAddress(this.walletAddressInput)
                 return {address: address.toUserFriendlyAddress(), privateKey: ''}
@@ -319,5 +336,8 @@
     .vue-form-wizard .wizard-tab-content {
         padding: 0;
         display: flex;
+    }
+    input[type="password"]{
+        text-align: left;
     }
 </style>
