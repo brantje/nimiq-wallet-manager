@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="form" v-if="success">
-                        Registration success, you can <a href="/login">login</a> now.
+                        Registration success, you can <router-link to="/login">login</router-link> now.
                     </div>
 
                 </div>
@@ -85,7 +85,9 @@
     .nq-card {
         width: 380px;
     }
-
+    input[type="password"]{
+        text-align: left;
+    }
     .centered-container {
         margin-top: 50px;
         height: auto;

@@ -31,8 +31,8 @@ UserSchema.methods.generateJWT = function (params) {
         "username": this.username,
         "id": this._id,
         "session_id": params.session,
-        "two_factor_enabled": this.settings.two_factor_enabled || false,
-        "two_factor_secret": this.settings.two_factor_secret || false,
+        "two_factor_enabled": (this.settings) ? this.settings.two_factor_enabled : false,
+        "two_factor_secret": (this.settings) ? this.settings.two_factor_secret : false,
     }, process.env.JWT_SECRET);
 };
 
