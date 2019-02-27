@@ -47,10 +47,10 @@ if (!isProduction) {
   app.use(function(req, res, next) {
     let ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     if (res.headersSent) {
-      Log.d("Express", ip, req.method, req.url, res.statusCode);
+      Log.d("Express", ip, req.method, req.originalUrl, res.statusCode);
     } else {
-      res.on("finish", function() {
-        Log.d("Express", ip, req.method, req.url, res.statusCode);
+        res.on("finish", function() {
+        Log.d("Express", ip, req.method, req.originalUrl, res.statusCode);
       });
     }
     next();

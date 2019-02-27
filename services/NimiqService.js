@@ -20,6 +20,7 @@ class NimiqService {
             await newTx.save();
             transactions.push(newTx._id);
             try {
+                Nimiq.Log.i(NimiqService, 'Clearing caches for:', newTx.to, newTx.from);
                 Cache.invalidate(newTx.to, newTx.from);
             } catch (e) {
                 Nimiq.Log.w(NimiqService, 'Unable to clear cache. Is redis running? Error:', e);

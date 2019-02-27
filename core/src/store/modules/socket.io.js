@@ -1,4 +1,4 @@
-import {PEER_LIST_REQUEST, NETWORK_STATS_REQUEST, MEMPOOL_ADD_TRANSACTION, MEMPOOL_CLEAR} from 'store/actions/nimiq'
+import {PEER_LIST_REQUEST, NETWORK_STATS_REQUEST, MEMPOOL_ADD_TRANSACTION, MEMPOOL_CLEAR, NETWORK_MEMPOOL_REQUEST} from 'store/actions/nimiq'
 import {WALLET_LIST_TRANSACTIONS_REQUEST, WALLET_LIST_REQUEST} from 'store/actions/wallet'
 
 
@@ -13,6 +13,7 @@ const actions = {
         dispatch(NETWORK_STATS_REQUEST)
         dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
         dispatch(WALLET_LIST_REQUEST)
+        dispatch(NETWORK_MEMPOOL_REQUEST)
     },
     SOCKET_MEMPOOL_TRANSACTION_ADDED({dispatch}, tx) {
         dispatch(MEMPOOL_ADD_TRANSACTION, tx)
