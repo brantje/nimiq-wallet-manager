@@ -17,7 +17,11 @@ class NimiqService {
         let transactions = [];
         for (let tx of block.transactions) {
             let newTx = Object.assign(new Transaction(), await this.helper.getTransactionByHash(tx));
-            await newTx.save();
+            try{
+                await newTx.save();
+            } catch (e){
+                Nimiq.Log.w(NimiqService, 'Error while inserting tx');
+            }
             transactions.push(newTx._id);
             try {
                 Nimiq.Log.i(NimiqService, 'Clearing caches for:', newTx.to, newTx.from);
@@ -29,13 +33,22 @@ class NimiqService {
 
         let newBlock = Object.assign(new Block(), block);
         newBlock.transactions = transactions;
-        newBlock.save();
+        try {
+            newBlock.save();
+        } catch (e) {
+            Nimiq.Log.w(NimiqService, 'Error while inserting block');
+        }
     }
 
     async blockReverted(head) {
         let block = await Block.findOne({hash: head.hash().toHex()});
         block.mainChain = false;
-        await block.save();
+        try {
+            await block.save();
+        } catch (e) {
+            Nimiq.Log.w(NimiqService, 'Error while saving block');
+        }
+
     }
 }
 

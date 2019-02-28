@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <button class="nq-button-s red" :data-session="session._id" v-confirm="{ok: destroySession, message: 'Are you ure you want to end this session?'}">Revoke</button>
+                        <button class="nq-button-s red" :data-session="session._id" v-confirm="{ok: destroySession, message: 'Are you sure you want to end this session?'}">Revoke</button>
                     </div>
                     <div class="clearfix"></div>
                 </div>
