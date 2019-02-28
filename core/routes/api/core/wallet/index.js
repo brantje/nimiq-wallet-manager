@@ -56,7 +56,11 @@ module.exports = function (NimiqHelper) {
         newWallet.user = userId;
 
         return newWallet.save()
-            .then(() => res.json(newWallet.toJSON()));
+            .then(async () => {
+                const pipeline = await Cache.redis.pipeline();
+                pipeline.del(`recent_tx_${id}`);
+                res.json(newWallet.toJSON())
+            });
     });
 
 
@@ -76,10 +80,10 @@ module.exports = function (NimiqHelper) {
             });
         }
 
-        let cacheKey = 'wallet_info_'+ addr.toHex();
+        let cacheKey = 'wallet_info_' + addr.toHex();
 
         let cache = await Cache.get(cacheKey);
-        if(cache){
+        if (cache) {
             return res.json(JSON.parse(cache));
         }
 
@@ -93,7 +97,7 @@ module.exports = function (NimiqHelper) {
                 result.balance = info.balance;
             }
             result.transactions = txs;
-            Cache.set(cacheKey, JSON.stringify(result), [addr.toHex()], { timeout: (60 * 60 * 24 * 31 * 12) });
+            Cache.set(cacheKey, JSON.stringify(result), [addr.toHex()], {timeout: (60 * 60 * 24 * 31 * 12)});
             return res.json(result);
         }
         return res.status(404).json({error: "Not found"});

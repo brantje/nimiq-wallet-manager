@@ -24,7 +24,7 @@ module.exports = function (NimiqHelper) {
             return res.json(JSON.parse(cache));
         }
 
-        let wallets = await Wallets.find({user: id});
+        let wallets = await Wallets.find({user: id, deleted: 0});
         let tags = [];
         if (wallets) {
             for (let wallet of wallets) {

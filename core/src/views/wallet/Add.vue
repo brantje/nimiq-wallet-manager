@@ -166,15 +166,14 @@
                 },
             };
         },
-        created() {
+        async created() {
             for (let i = 0; i < 7; i++) {
-                let entropy = Nimiq.Entropy.generate();
-                let master = entropy.toExtendedPrivateKey('');
-                let wallet = master.derivePath("m/44'/242'/0'/0'");
+                let wallet = await Nimiq.Wallet.generate();
+                let privateKey = wallet.keyPair.privateKey.toHex();
+                let publicAddress = wallet.address.toUserFriendlyAddress();
                 this.newWallets.push({
-                    address: wallet.toAddress().toUserFriendlyAddress(),
-                    privateKey: master.privateKey.toHex(),
-                    legacy: Nimiq.MnemonicUtils.MnemonicType.BIP39
+                    address: publicAddress,
+                    privateKey: privateKey
                 })
             }
         },

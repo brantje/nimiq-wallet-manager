@@ -58,7 +58,6 @@
                     let keyPair = Nimiq.KeyPair.derive(key);
                     let wallet = new Nimiq.Wallet(keyPair);
 
-
                     const extraData = Nimiq.BufferUtils.fromAscii(rawTx.extraData);
 
                     const transaction = new Nimiq.ExtendedTransaction(
@@ -81,9 +80,12 @@
                     );
                     const proof = Nimiq.SignatureProof.singleSig(keyPair.publicKey, signature);
                     transaction.proof = proof.serialize();
-
-
-
+                    if(transaction.sender.toUserFriendlyAddress() !== this.options.transaction.sendFrom.address){
+                        this.$notify({
+                            type: 'error',
+                            title: 'A fatal error occured ',
+                        });
+                    }
                     this.proceed(transaction);
 
                 });
