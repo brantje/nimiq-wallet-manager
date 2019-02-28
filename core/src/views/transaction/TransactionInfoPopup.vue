@@ -13,17 +13,17 @@
                     <label class="nq-label">
                         Sender
                     </label>
-                    <span class="nq-text-s pull-right">
-                    {{ tx.fromAddress | getAddressLabel}}
-                </span>
+                    <span class="nq-text-s">
+                        <Address :address="tx.fromAddress"></Address>
+                    </span>
                 </div>
                 <div>
                     <label class="nq-label">
                         Recipient
                     </label>
 
-                    <span class="nq-text-s pull-right">
-                    {{ tx.toAddress | getAddressLabel}}
+                    <span class="nq-text-s">
+                    <Address :address="tx.toAddress"></Address>
                 </span>
                 </div>
                 <div>
@@ -31,7 +31,7 @@
                         Date
                     </label>
 
-                    <span class="nq-text-s pull-right">
+                    <span class="nq-text-s">
                     {{ tx.timestamp | formatDate('long') }}
                 </span>
                 </div>
@@ -40,7 +40,7 @@
                         Value
                     </label>
 
-                    <span class="nq-text-s pull-right">
+                    <span class="nq-text-s">
                     {{ tx.value | lunaToCoins}} NIM
                 </span>
                 </div>
@@ -49,7 +49,7 @@
                         Fee
                     </label>
 
-                    <span class="nq-text-s pull-right">
+                    <span class="nq-text-s">
                     {{ tx.fee | lunaToCoins(5) }} NIM
                 </span>
                 </div>
@@ -58,7 +58,7 @@
                         Confirmations
                     </label>
 
-                    <span class="nq-text-s pull-right">
+                    <span class="nq-text-s">
                     {{ tx.confirmations }} (#{{ tx.blockNumber }})
                 </span>
                 </div>
@@ -67,7 +67,7 @@
                         Message
                     </label>
 
-                    <span class="nq-text-s pull-right">
+                    <span class="nq-text-s">
                     {{ tx.data }}
                 </span>
                 </div>
@@ -83,6 +83,7 @@
     import DialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js'; // Include mixin
     import OkBtn from 'components/dialog/Ok-btn.vue';
     import CancelBtn from 'components/dialog/Cancel-btn.vue';
+    import Address from "components/Address.vue"
     import {walletApi} from "utils/api/wallet";
     import {decrypt} from "utils/encryption"
     import {mapGetters} from 'vuex'
@@ -116,7 +117,8 @@
         },
         components: {
             CancelBtn,
-            OkBtn
+            OkBtn,
+            Address
         }
     };
 </script>
@@ -128,5 +130,11 @@
     .tx-info-detail {
         display: flex;
         flex-direction: column;
+    }
+    .tx-info-detail > div {
+        display: flex;
+    }
+    .tx-info-detail > div label{
+        width: 150px;
     }
 </style>
