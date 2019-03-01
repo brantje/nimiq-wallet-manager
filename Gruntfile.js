@@ -1,6 +1,6 @@
 var jsFiles = [
     // 'js/lib/jquery-3.1.0.min.js',
-    "public/javascripts/"
+    'public/javascripts/'
 ]
 
 module.exports = function(grunt) {
@@ -8,26 +8,26 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    style: "compressed"
+                    style: 'compressed'
                 },
                 files: {
-                    "public/css/style.css": "src/scss/main.scss"
+                    'public/css/style.css': 'src/scss/main.scss'
                 }
             }
         },
         concat: {
             options: {
-                separator: ";"
+                separator: ';'
             },
             dist: {
                 src: jsFiles,
-                dest: "js/combined.js"
+                dest: 'js/combined.js'
             }
         },
         uglify: {
             dist: {
                 files: {
-                    "js/combined.js": ["js/combined.js"]
+                    'js/combined.js': ['js/combined.js']
                 }
             }
         },
@@ -43,10 +43,10 @@ module.exports = function(grunt) {
         }
     })
 
-    grunt.loadNpmTasks("grunt-contrib-uglify")
-    grunt.loadNpmTasks("grunt-contrib-watch")
-    grunt.loadNpmTasks("grunt-contrib-concat")
-    grunt.loadNpmTasks("grunt-contrib-sass")
+    grunt.loadNpmTasks('grunt-contrib-uglify')
+    grunt.loadNpmTasks('grunt-contrib-watch')
+    grunt.loadNpmTasks('grunt-contrib-concat')
+    grunt.loadNpmTasks('grunt-contrib-sass')
 
-    grunt.registerTask("default", ["sass", "concat", "uglify"])
+    grunt.registerTask('default', ['sass', 'concat', 'uglify'])
 }

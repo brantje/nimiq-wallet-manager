@@ -17,7 +17,7 @@ WalletsSchema.methods.toJSON = function () {
         label: this.label,
         address: this.address,
         order: this.order || 0,
-        hasPrivateKey: (this.encryptedPrivateKey !== "")
+        hasPrivateKey: (this.encryptedPrivateKey !== '')
     }
 }
 

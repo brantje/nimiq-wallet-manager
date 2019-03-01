@@ -5,7 +5,7 @@ const contactApi = {
         return axios({url: '/api/v1/core/contacts'})
     },
     create: (contact) => {
-        return axios({url: `/api/v1/core/contacts/`, data: contact, method: 'POST'})
+        return axios({url: '/api/v1/core/contacts/', data: contact, method: 'POST'})
     },
     update: (contact) => {
         return axios({url: `/api/v1/core/contacts/${contact._id}`, data: contact, method: 'PATCH'})

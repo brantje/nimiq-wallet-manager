@@ -9,14 +9,14 @@ const JsonWebToken = require('jsonwebtoken')
 module.exports = function (NimiqHelper) {
     const getBearerToken = function (header, callback) {
         if (header) {
-            token = header.split(" ")
+            token = header.split(' ')
             if (token.length === 2) {
                 return callback(null, token[1])
             } else {
-                return callback("Malformed bearer token", null)
+                return callback('Malformed bearer token', null)
             }
         } else {
-            return callback("Missing authorization header", null)
+            return callback('Missing authorization header', null)
         }
     }
     /**
@@ -31,7 +31,7 @@ module.exports = function (NimiqHelper) {
  *        "success": true
  *     }
      */
-    router.get("/generate-secret", auth.required, async function (req, res) {
+    router.get('/generate-secret', auth.required, async function (req, res) {
         const {payload: {id, username}} = req
         let data = TwoFactor.generateSecret({
             name: 'Nimiq Wallet Manager'
@@ -43,7 +43,7 @@ module.exports = function (NimiqHelper) {
             user.settings = {...user.settings, tmp_two_factor_secret: data.secret}
             user.save().then(() => {
                 res.send({
-                    "secret": data
+                    'secret': data
                 })
             })
         }
@@ -62,23 +62,23 @@ module.exports = function (NimiqHelper) {
  *        "success": true
  *     }
      */
-    router.post("/verify-totp", auth['2fa-login'], async function (req, res) {
+    router.post('/verify-totp', auth['2fa-login'], async function (req, res) {
         const {payload: {id}} = req
         const user = await Users.findOne({_id: id})
-        getBearerToken(req.headers["authorization"], function (error, token) {
+        getBearerToken(req.headers['authorization'], function (error, token) {
             if (error) {
-                return res.status(401).send({"success": false, "message": error})
+                return res.status(401).send({'success': false, 'message': error})
             }
             if (!req.body.otp) {
-                return res.status(401).send({"success": false, "message": "An `otp` is required"})
+                return res.status(401).send({'success': false, 'message': 'An `otp` is required'})
             }
             JsonWebToken.verify(token, process.env.JWT_SECRET, function (error, decodedToken) {
                 if (TwoFactor.verifyToken(user.settings.two_factor_secret, req.body.otp)) {
                     decodedToken.authorized = true
                     var token = JsonWebToken.sign(decodedToken, process.env.JWT_SECRET, {})
-                    return res.send({"token": token})
+                    return res.send({'token': token})
                 } else {
-                    return res.status(401).send({"success": false, "message": "Invalid one-time password"})
+                    return res.status(401).send({'success': false, 'message': 'Invalid one-time password'})
                 }
             })
         })
@@ -97,7 +97,7 @@ module.exports = function (NimiqHelper) {
  *        "success": true
  *     }
      */
-    router.post("/setup-verify", auth.required, async function (req, res) {
+    router.post('/setup-verify', auth.required, async function (req, res) {
         const {payload: {username, id}, body} = req
 
         const user = await Users.findOne({_id: id})
@@ -130,7 +130,7 @@ module.exports = function (NimiqHelper) {
  *        "success": true
  *     }
      */
-    router.delete("/", auth.required, async function (req, res) {
+    router.delete('/', auth.required, async function (req, res) {
         const {payload: {username, id}, body: {data}} = req
         let user = await Users.findById(id)
         let settings = {...user.settings}

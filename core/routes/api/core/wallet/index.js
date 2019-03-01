@@ -100,7 +100,7 @@ module.exports = function (NimiqHelper) {
             Cache.set(cacheKey, JSON.stringify(result), [addr.toHex()], {timeout: (60 * 60 * 24 * 31 * 12)})
             return res.json(result)
         }
-        return res.status(404).json({error: "Not found"})
+        return res.status(404).json({error: 'Not found'})
     })
 
     router.get('/:address/seed', auth.required, async (req, res, next) => {

@@ -12,6 +12,7 @@ module.exports = {
         "interface-name": false,
         "ordered-imports": false,
         "semi": ['error', 'never'],
+        "quotes": ['error', 'single'],
         "object-literal-sort-keys": false,
         "max-classes-per-file": ['warn', 3],
         "no-consecutive-blank-lines": [false],

@@ -5,12 +5,12 @@ const jwt = require('jsonwebtoken')
 const {Schema} = mongoose
 
 const UserSchema = new Schema({
-    "username": {type: String, unique: true, required: true},
-    "hash": String,
-    "salt": String,
-    "email": {type: String, unique: true, required: true},
-    "active": {type: Boolean, default: true},
-    "settings": {type: Object }
+    'username': {type: String, unique: true, required: true},
+    'hash': String,
+    'salt': String,
+    'email': {type: String, unique: true, required: true},
+    'active': {type: Boolean, default: true},
+    'settings': {type: Object }
 })
 
 UserSchema.index({username: 1, email: 1})
@@ -28,11 +28,11 @@ UserSchema.methods.validatePassword = function (password) {
 
 UserSchema.methods.generateJWT = function (params) {
     return jwt.sign({
-        "username": this.username,
-        "id": this._id,
-        "session_id": params.session,
-        "two_factor_enabled": (this.settings) ? this.settings.two_factor_enabled : false,
-        "two_factor_secret": (this.settings) ? this.settings.two_factor_secret : false,
+        'username': this.username,
+        'id': this._id,
+        'session_id': params.session,
+        'two_factor_enabled': (this.settings) ? this.settings.two_factor_enabled : false,
+        'two_factor_secret': (this.settings) ? this.settings.two_factor_secret : false,
     }, process.env.JWT_SECRET)
 }
 
@@ -46,8 +46,8 @@ UserSchema.methods.toAuthJSON = function (params) {
 
 UserSchema.methods.toJSON = function () {
     const user = {
-        "username": this.username,
-        "settings": this.settings,
+        'username': this.username,
+        'settings': this.settings,
     }
     return user
 }

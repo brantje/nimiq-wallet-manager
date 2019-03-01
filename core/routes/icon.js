@@ -44,11 +44,11 @@ router.get('/:address', auth.optional, async (req, res, next) => {
 
     if (format === 'svg') {
         res.writeHead(200, {
-            "Content-Type": "image/svg+xml",
-            "Last-Modified":  new Date().toUTCString(),
-            "Content-Length": svg.length,
-            "Cache-Control": 'public, max-age=18144000',
-            "Expires": new Date(Date.now() + 18144000)
+            'Content-Type': 'image/svg+xml',
+            'Last-Modified':  new Date().toUTCString(),
+            'Content-Length': svg.length,
+            'Cache-Control': 'public, max-age=18144000',
+            'Expires': new Date(Date.now() + 18144000)
         })
         res.write(svg)
         res.end()
@@ -59,11 +59,11 @@ router.get('/:address', auth.optional, async (req, res, next) => {
         if (fs.existsSync('./cache/' + filename)) {
             let stats = fs.statSync('./cache/'+ filename)
             res.writeHead(200, {
-                "Content-Type": "image/jpg",
-                "Last-Modified":  stats.mtime.toUTCString(),
-                "Content-Length": stats.size,
-                "Cache-Control": 'public, max-age=18144000',
-                "Expires": new Date(Date.now() + 18144000)
+                'Content-Type': 'image/jpg',
+                'Last-Modified':  stats.mtime.toUTCString(),
+                'Content-Length': stats.size,
+                'Cache-Control': 'public, max-age=18144000',
+                'Expires': new Date(Date.now() + 18144000)
             })
             res.write(fs.readFileSync('./cache/'+ filename))
             res.end()
@@ -76,10 +76,10 @@ router.get('/:address', auth.optional, async (req, res, next) => {
                 fs.rename(outputFilePath, './cache/' + filename, function () {
                     let stats = fs.statSync('./cache/' + filename)
                     res.writeHead(200, {
-                        "Content-Type": "image/jpg",
-                        "Last-Modified": stats.mtime.toUTCString(),
-                        "Content-Length": stats.size,
-                        "Cache-Control": 'private',
+                        'Content-Type': 'image/jpg',
+                        'Last-Modified': stats.mtime.toUTCString(),
+                        'Content-Length': stats.size,
+                        'Cache-Control': 'private',
                     })
                     res.write(fs.readFileSync('./cache/' + filename))
                     res.end()

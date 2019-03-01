@@ -5,7 +5,7 @@ const passport = require('passport')
 
 module.exports = function (NimiqHelper) {
     router.get('/', function (req, res, next) {
-        res.clearCookie("accessToken")
+        res.clearCookie('accessToken')
         return res.redirect('/login')
     })
 
