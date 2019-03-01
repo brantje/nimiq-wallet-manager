@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "lint": "eslint core",
     "build": "webpack",
     "watch": "webpack --watch & nodemon app.js"
   },
@@ -56,13 +57,17 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@vue/eslint-config-prettier": "^4.0.1",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
     "copy-webpack-plugin": "^4.6.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.11",
+    "eslint": "^5.14.1",
+    "eslint-plugin-vue": "^5.2.2",
     "file-loader": "^1.1.4",
     "node-sass": "^4.11.0",
     "prettier": "^1.16.4",
