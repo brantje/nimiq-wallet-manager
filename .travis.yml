@@ -15,4 +15,6 @@ install:
   - npm install
   - npm run build
 script:
-  - node app.js 
+  - node app.js &
+  - sleep 30
+  - echo "Run tests..."
