@@ -1,6 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-
+const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
 
     entry: './core/src/main.js',
@@ -28,11 +28,6 @@ module.exports = {
             }, {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                options: {
-                    loaders: {
-                    }
-                    // other vue-loader options go here
-                }
             },
             {
                 test: /\.js$/,
@@ -74,6 +69,7 @@ module.exports = {
             { from: 'node_modules/@nimiq/core-web/worker-wasm.js', to: 'core/public/build/worker-wasm.js' },
             { from: 'node_modules/@nimiq/core-web/worker-wasm.wasm', to: 'core/public/build/worker-wasm.wasm' },
         ]),
+        new VueLoaderPlugin()
     ],
     devServer: {
         port: 3000

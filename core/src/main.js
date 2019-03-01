@@ -10,7 +10,7 @@ import VueSocketIO from 'vue-socket.io';
 
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 import "@nimiq/style/nimiq-style.min.css"
-import "@nimiq/style/nimiq-style-icons.min.css"
+// import "@nimiq/style/nimiq-style."
 import 'material-icons/iconfont/material-icons.scss';
 import "assets/scss/main.scss"
 import "assets/scss/layout.scss"
