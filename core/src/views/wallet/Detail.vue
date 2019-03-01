@@ -47,7 +47,9 @@
         created() {
             store.dispatch(GET_WALLET_REQUEST, this.$route.params.address)
             this.sockets.subscribe('BLOCKCHAIN_HEAD_CHANGED', (data) => {
-                store.dispatch(GET_WALLET_REQUEST, this.$route.params.address)
+                if( this.$route.params.address) {
+                    store.dispatch(GET_WALLET_REQUEST, this.$route.params.address)
+                }
             });
             this.wallet = this.$route.params.address
         },
