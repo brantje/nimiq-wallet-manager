@@ -5,10 +5,10 @@ node_js:
 services:
   - mongodb
   - redis-server
- before_install:
-- mv .env.sample .env
-- sed -i 's/full/light/g' .env
-- cat .env
+before_install:
+  - mv .env.sample .env
+  - sed -i 's/full/light/g' .env
+  - cat .env
 before_script:
   - npm install
   
