@@ -1,0 +1,3054 @@
+{
+	"info": {
+		"_postman_id": "342daa16-b523-4702-b321-426fc4a22e42",
+		"name": "Nimiq Wallet Manager Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65e84c85-32cd-4487-ae3f-f2035f169b29",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"User is created\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"username\",\n  \"email\": \"example@example.com\",\n  \"password\": \"password123\",\n  \"password_repeat\": \"password123\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/user/register",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Created",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"email\": \"example@example.com\",\n\t\"password\": \"password123\",\n\t\"password_repeat\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-bqQGZG7ugQurfMy+Mr331Q==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c-3UIRO84pjq55mxTZ2R+ibAs2I5Q\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:30:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"errors\": []\n}"
+				},
+				{
+					"name": "Example errors",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"email\": \"example@example.com\",\n\t\"password\": \"password123\",\n\t\"password_repeat\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-KEjaspmEazvM3zeZ8PsSHQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "214"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"d6-UaUm7IZ2pnRvOoJAa2A5WWXL9u4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:31:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"errors\": [\n        {\n            \"location\": \"body\",\n            \"param\": \"username\",\n            \"value\": \"username\",\n            \"msg\": \"Username already in use\"\n        },\n        {\n            \"location\": \"body\",\n            \"param\": \"email\",\n            \"value\": \"example@example.com\",\n            \"msg\": \"E-mail already in use\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "00913aba-1006-46be-bdbf-1a6ef8a4704c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Has token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('token');",
+							"    pm.environment.set(\"TOKEN\", jsonData.token);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password123\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/user/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-FkPZeStjluuXMqE9V6BpyQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI1YzU4OTJmMjk2NTY2MjI3MTJhNDIxODIiLCIyZmFfZW5hYmxlZCI6ZmFsc2UsIjJmYV9zZWNyZXQiOmZhbHNlLCJleHAiOjE1NDkzOTYwNjEsImlhdCI6MTU0OTMwOTY2MX0.1BpQo6qNieoTBjvQniaN0l_Dp6fY0gLHuAFNjAobQxM; Path=/; Expires=Tue, 05 Feb 2019 19:47:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "319"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13f-iO2mKJSIMm4aiuk8rrAhLjmG4EY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:47:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c5892f29656622712a42182\",\n    \"username\": \"username\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI1YzU4OTJmMjk2NTY2MjI3MTJhNDIxODIiLCIyZmFfZW5hYmxlZCI6ZmFsc2UsIjJmYV9zZWNyZXQiOmZhbHNlLCJleHAiOjE1NDkzOTYwNjEsImlhdCI6MTU0OTMwOTY2MX0.1BpQo6qNieoTBjvQniaN0l_Dp6fY0gLHuAFNjAobQxM\"\n}"
+				},
+				{
+					"name": "Invalid login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password12\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-YqZ1wSGsUIfMMnGmEeXGNQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29-k4VfuF6g+m3HzuEK6mnZl533Mk0\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:49:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": \"Invalid username or password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Change password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3351cfe7-c139-4fd7-a01e-73da30841110",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Password is updated\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"old\": \"password123\",\n  \"password\": \"password1234\",\n  \"confirmPassword\": \"password1234\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/user/password",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"user",
+						"password"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-FkPZeStjluuXMqE9V6BpyQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI1YzU4OTJmMjk2NTY2MjI3MTJhNDIxODIiLCIyZmFfZW5hYmxlZCI6ZmFsc2UsIjJmYV9zZWNyZXQiOmZhbHNlLCJleHAiOjE1NDkzOTYwNjEsImlhdCI6MTU0OTMwOTY2MX0.1BpQo6qNieoTBjvQniaN0l_Dp6fY0gLHuAFNjAobQxM; Path=/; Expires=Tue, 05 Feb 2019 19:47:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "319"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13f-iO2mKJSIMm4aiuk8rrAhLjmG4EY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:47:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c5892f29656622712a42182\",\n    \"username\": \"username\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI1YzU4OTJmMjk2NTY2MjI3MTJhNDIxODIiLCIyZmFfZW5hYmxlZCI6ZmFsc2UsIjJmYV9zZWNyZXQiOmZhbHNlLCJleHAiOjE1NDkzOTYwNjEsImlhdCI6MTU0OTMwOTY2MX0.1BpQo6qNieoTBjvQniaN0l_Dp6fY0gLHuAFNjAobQxM\"\n}"
+				},
+				{
+					"name": "Invalid login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password12\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-YqZ1wSGsUIfMMnGmEeXGNQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29-k4VfuF6g+m3HzuEK6mnZl533Mk0\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:49:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": \"Invalid username or password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Login with new password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "00913aba-1006-46be-bdbf-1a6ef8a4704c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('token');",
+							"    pm.environment.set(\"TOKEN\", jsonData.token);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password1234\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/user/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-FkPZeStjluuXMqE9V6BpyQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI1YzU4OTJmMjk2NTY2MjI3MTJhNDIxODIiLCIyZmFfZW5hYmxlZCI6ZmFsc2UsIjJmYV9zZWNyZXQiOmZhbHNlLCJleHAiOjE1NDkzOTYwNjEsImlhdCI6MTU0OTMwOTY2MX0.1BpQo6qNieoTBjvQniaN0l_Dp6fY0gLHuAFNjAobQxM; Path=/; Expires=Tue, 05 Feb 2019 19:47:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "319"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13f-iO2mKJSIMm4aiuk8rrAhLjmG4EY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:47:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c5892f29656622712a42182\",\n    \"username\": \"username\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI1YzU4OTJmMjk2NTY2MjI3MTJhNDIxODIiLCIyZmFfZW5hYmxlZCI6ZmFsc2UsIjJmYV9zZWNyZXQiOmZhbHNlLCJleHAiOjE1NDkzOTYwNjEsImlhdCI6MTU0OTMwOTY2MX0.1BpQo6qNieoTBjvQniaN0l_Dp6fY0gLHuAFNjAobQxM\"\n}"
+				},
+				{
+					"name": "Invalid login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password12\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-YqZ1wSGsUIfMMnGmEeXGNQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29-k4VfuF6g+m3HzuEK6mnZl533Mk0\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Feb 2019 19:49:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": \"Invalid username or password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add wallet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c1e29c71-848c-40e0-84f9-c79455a87d38",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1485bf8f-a515-4c2b-8958-e9450fe067e0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has property label\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('label');",
+							"});",
+							"",
+							"pm.test(\"Has property address\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('address');",
+							"    pm.environment.set(\"address\", jsonData.address);",
+							"});",
+							"",
+							"pm.test(\"Has property order\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('order');",
+							"});",
+							"",
+							"pm.test(\"Private key is true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.hasPrivateKey).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"label\": \"My wallet\",\n\t\"address\": \"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L\",\n\t\"order\": 1,\n\t\"encryptedPrivateKey\": \"test\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/wallets",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"wallets"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"My wallet\",\n\t\"address\": \"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L\",\n\t\"order\": 1,\n\t\"encryptedPrivateKey\": \"optinal\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/wallets",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"wallets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-rFpfcaYxfE/CFh+qeoVzvw==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "109"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6d-h7IVEKYiOMdnU2POcQAYNs5Wio8\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Feb 2019 11:31:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"label\": \"My wallet\",\n    \"address\": \"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L\",\n    \"order\": 1,\n    \"hasPrivateKey\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "List wallets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e9daa89-831f-45c4-a003-185b21c21316",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Is response an array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.constructor === Array).to.eql(true);",
+							"});",
+							"",
+							"",
+							"pm.test('Contains created address', () => {",
+							"    var currentAddress = pm.environment.get(\"address\");",
+							"    var found = 0;",
+							"    _.each(pm.response.json(), (arrItem) => {",
+							"        if (arrItem.address === currentAddress) {",
+							"            found = 1",
+							"        }",
+							"    })",
+							"    if(found === 0){",
+							"        throw new Error(`Wallet not found`)",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/wallets",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"wallets"
+					]
+				},
+				"description": "List all wallets belonging to current logged in user"
+			},
+			"response": [
+				{
+					"name": "200 Ok Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/wallets",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"wallets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-SNpdNAmnSsi/vAfUcC2m2A==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "124"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7c-EHAsSUkpd8CbfVtE5SWA6xDDYFo\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Feb 2019 11:40:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"label\": \"My wallet\",\n        \"address\": \"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L\",\n        \"order\": 1,\n        \"hasPrivateKey\": true,\n        \"balance\": 0\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get wallet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61d87062-f4e4-4b4e-a813-2e87c5875d1c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has property label\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('label');",
+							"});",
+							"",
+							"pm.test(\"Has property address\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('address');",
+							"    pm.environment.set(\"address\", jsonData.address);",
+							"});",
+							"",
+							"pm.test(\"Has property order\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('order');",
+							"});",
+							"",
+							"pm.test(\"Private key is true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.hasPrivateKey).to.eql(true);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Is transactions an array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.transactions.constructor === Array).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/wallets/:address",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"wallets",
+						":address"
+					],
+					"variable": [
+						{
+							"key": "address",
+							"value": "{{address}}"
+						}
+					]
+				},
+				"description": "List all wallets belonging to current logged in user"
+			},
+			"response": [
+				{
+					"name": "200 Ok Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/wallets",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"wallets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-SNpdNAmnSsi/vAfUcC2m2A==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "124"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7c-EHAsSUkpd8CbfVtE5SWA6xDDYFo\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Feb 2019 11:40:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"label\": \"My wallet\",\n        \"address\": \"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L\",\n        \"order\": 1,\n        \"hasPrivateKey\": true,\n        \"balance\": 0\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Update wallet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dea75314-3297-4a49-bd42-dc24e7eb2d1e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has property label\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('label');",
+							"});",
+							"",
+							"pm.test(\"Label has been updated\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.label).to.eql('My wallet2');",
+							"});",
+							"",
+							"pm.test(\"Has property address\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('address');",
+							"    pm.environment.set(\"address\", jsonData.address);",
+							"});",
+							"",
+							"pm.test(\"Has property order\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('order');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Order has been updated\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.order).to.eql(3);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Private key is true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.hasPrivateKey).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"label\": \"My wallet2\",\n\t\"order\": 3\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/wallets/NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"wallets",
+						"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Ok Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"My wallet2\",\n\t\"order\": 1\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/wallets/NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"wallets",
+								"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-/q+b/YUQaV3XL4l8l45GXQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "110"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e-GqMFlPdfdoEO47hVreAJOHTbC18\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Feb 2019 11:40:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"label\": \"My wallet2\",\n    \"address\": \"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L\",\n    \"order\": 1,\n    \"hasPrivateKey\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete wallet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b60d7d0-133a-40f3-8203-4e441c52d2b7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Wallet is deleted\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/wallets/:address",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"wallets",
+						":address"
+					],
+					"variable": [
+						{
+							"key": "address",
+							"value": "{{address}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/wallets/NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"wallets",
+								"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-yQo+fNRIjkSJUjceUZKc9Q==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10-oV4hJxRVSENxc/wX8+mA4/Pe4tA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Feb 2019 11:41:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true\n}"
+				},
+				{
+					"name": "200 Ok Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"My wallet2\",\n\t\"order\": 1\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/wallets/NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"wallets",
+								"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-/q+b/YUQaV3XL4l8l45GXQ==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "110"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e-GqMFlPdfdoEO47hVreAJOHTbC18\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Feb 2019 11:40:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"label\": \"My wallet2\",\n    \"address\": \"NQ17 57LC LDG5 EQSF MAQM 39UV FNXB 834B 0M1L\",\n    \"order\": 1,\n    \"hasPrivateKey\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Add contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c8b95a1-2852-4c9b-ab68-3e98fcb99260",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has property label\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('label');",
+							"});",
+							"",
+							"pm.test(\"Label mathes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.label).to.eql('John Doe');",
+							"});",
+							"",
+							"pm.test(\"Has property address\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('address');",
+							"    pm.environment.set(\"address\", jsonData.address);",
+							"});",
+							"",
+							"pm.test(\"Address matches\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.address).to.eql('NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP')",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/contacts",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"contacts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-0Up8bqGlDY6mWl+TkV4F7g==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "110"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e-IFQlydtWREzeeHtLd8GtuZiJi+s\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:30:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c615cd1ab6b2920182aadd7\",\n    \"label\": \"John Doe\",\n    \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+				},
+				{
+					"name": "422 - Contact already exists",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-dTnbx+z1TCJLzby9lvTPuA==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"27-2bzLVo9MqpohE/Uti5wCqhJSKhs\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 12:04:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": {\n        \"address\": \"already exists\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get contacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b4d63fc3-ab7d-4249-8936-ac081b2a1875",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Is response an array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.constructor === Array).to.eql(true);",
+							"});",
+							"",
+							"",
+							"pm.test('Contains created contact', () => {",
+							"    var currentAddress = pm.environment.get(\"address\");",
+							"    var found = 0;",
+							"    _.each(pm.response.json(), (arrItem) => {",
+							"        if (arrItem.address === currentAddress) {",
+							"            found = 1",
+							"            pm.environment.set(\"contactId\", arrItem._id);",
+							"        }",
+							"    })",
+							"    if(found === 0){",
+							"        throw new Error(`Contact not found`)",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/contacts",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"contacts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-6hbcYlD+S/C2lgGH0DDoHw==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"70-FMfMZ1hqYH9ajB9CHD9B9tUvTLI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:31:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"5c615cd1ab6b2920182aadd7\",\n        \"label\": \"John Doe\",\n        \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Update contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "521dc2cb-86f9-4af5-81be-2f4209fc84a7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has property label\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('label');",
+							"});",
+							"",
+							"pm.test(\"Label has been updated\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.label).to.eql('John Doe2');",
+							"});",
+							"",
+							"pm.test(\"Has property address\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('address');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"label\": \"John Doe2\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/contacts/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"contacts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{contactId}}",
+							"description": "The _id of the contact"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe2\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5c615cd1ab6b2920182aadd7",
+									"description": "The _id of the contact"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-pzTBvMwDU9uVsnErYFGigg==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "111"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6f-Kj3L05Ty0p9Stimff+cGPhwI3/c\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:33:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c615cd1ab6b2920182aadd7\",\n    \"label\": \"John Doe2\",\n    \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+				},
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-0Up8bqGlDY6mWl+TkV4F7g==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "110"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e-IFQlydtWREzeeHtLd8GtuZiJi+s\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:30:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c615cd1ab6b2920182aadd7\",\n    \"label\": \"John Doe\",\n    \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ede7a61-a44b-4cf7-9cf0-aef337b60545",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Contact is deleted\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/contacts/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"contacts",
+						":id"
+					],
+					"variable": [
+						{
+							"description": "The _id of the contact",
+							"key": "id",
+							"value": "{{contactId}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-0Up8bqGlDY6mWl+TkV4F7g==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "110"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e-IFQlydtWREzeeHtLd8GtuZiJi+s\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:30:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c615cd1ab6b2920182aadd7\",\n    \"label\": \"John Doe\",\n    \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+				},
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe2\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5c615cd1ab6b2920182aadd7",
+									"description": "The _id of the contact"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-pzTBvMwDU9uVsnErYFGigg==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "111"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6f-Kj3L05Ty0p9Stimff+cGPhwI3/c\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:33:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"5c615cd1ab6b2920182aadd7\",\n    \"label\": \"John Doe2\",\n    \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+				},
+				{
+					"name": "200 OK Reponse",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe2\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts",
+								":id"
+							],
+							"variable": [
+								{
+									"description": "The _id of the contact",
+									"key": "id",
+									"value": "5c615cd1ab6b2920182aadd7"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-Cfo0Du30PCtZBT8HnEZN+Q==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10-oV4hJxRVSENxc/wX8+mA4/Pe4tA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:34:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Recent transactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1b8906b-c2b4-4df7-9516-e467fed2b1dd",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Is response an array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.constructor === Array).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/transactions/recent",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"transactions",
+						"recent"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-6hbcYlD+S/C2lgGH0DDoHw==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"70-FMfMZ1hqYH9ajB9CHD9B9tUvTLI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:31:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"5c615cd1ab6b2920182aadd7\",\n        \"label\": \"John Doe\",\n        \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get sessions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e9940b8a-9d9e-4747-afec-bacd7a7330f4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Is response an array\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.constructor === Array).to.eql(true);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Minimal length is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length > 0).to.eql(true);",
+							"    pm.environment.set(\"sessionId\", jsonData[0]._id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/user/sessions",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"user",
+						"sessions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-6hbcYlD+S/C2lgGH0DDoHw==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"70-FMfMZ1hqYH9ajB9CHD9B9tUvTLI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:31:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"5c615cd1ab6b2920182aadd7\",\n        \"label\": \"John Doe\",\n        \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Delete session",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/core/user/sessions/:sessionId",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"core",
+						"user",
+						"sessions",
+						":sessionId"
+					],
+					"variable": [
+						{
+							"key": "sessionId",
+							"value": "{{sessionId}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"label\": \"John Doe\",\n\t\"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n}"
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/core/contacts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"core",
+								"contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "localhost"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self' localhost; connect-src 'self' wss://localhost; script-src 'self' 'nonce-6hbcYlD+S/C2lgGH0DDoHw==' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self'; worker-src 'self' blob:; block-all-mixed-content;"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"70-FMfMZ1hqYH9ajB9CHD9B9tUvTLI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Feb 2019 11:31:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"5c615cd1ab6b2920182aadd7\",\n        \"label\": \"John Doe\",\n        \"address\": \"NQ16 3BXR J8T1 CBXG 2H8B 5BU9 DY0V E9AT NXRP\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ffc07980-f140-4013-94d9-a0cc51f7e71a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fa798734-f785-4a5d-8d27-17c2d98fcbe4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
