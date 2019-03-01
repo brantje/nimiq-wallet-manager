@@ -7,11 +7,11 @@
     "watch": "webpack --watch & nodemon app.js"
   },
   "dependencies": {
-    "@nimiq/core": "^1.4.2",
+    "@nimiq/core": "^1.4.3",
     "@nimiq/core-web": "^1.4.3",
     "@nimiq/iqons": "^1.2.1",
-    "@nimiq/style": "^0.4.2",
-    "@nimiq/utils": "^0.1.0",
+    "@nimiq/style": "^0.5.1",
+    "@nimiq/utils": "^0.2.0",
     "axios": "^0.16.2",
     "convert-svg-to-png": "^0.5.0",
     "cookie-parser": "^1.4.4",
@@ -24,10 +24,10 @@
     "express-session": "^1.15.6",
     "express-useragent": "^1.0.12",
     "express-validator": "^5.3.1",
-    "http-errors": "~1.6.2",
+    "http-errors": "~1.7.2",
     "iplocation": "^6.1.0",
     "jsdom": "^13.2.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^8.5.0",
     "material-icons": "^0.3.0",
     "moment": "^2.24.0",
     "mongoose": "^5.4.11",
@@ -40,7 +40,7 @@
     "redis-tag-cache": "^1.2.1",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
-    "twig": "~0.10.3",
+    "twig": "~1.13.2",
     "vue": "^2.6.7",
     "vue-axios": "^2.0.2",
     "vue-form-wizard": "^0.8.4",
@@ -53,8 +53,8 @@
     "vuex": "^3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
@@ -67,7 +67,7 @@
     "prettier": "^1.16.4",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "vue-loader": "^13.0.5",
+    "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.6.7",
     "webpack": "^3.12.0"
   }
