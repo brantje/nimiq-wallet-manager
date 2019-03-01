@@ -15,7 +15,7 @@
                 {{ transaction.fromAddress | getAddressLabel }}
             </div>
             <div class="x-arrow">
-                <i class="nq-icon arrow-right"></i>
+                <NqIcon>nq-caret-right-small</NqIcon>
             </div>
             <div class="x-identicon">
                 <Identicon :address="transaction.toAddress" size="64"></Identicon>
@@ -44,6 +44,7 @@
     import {lunaToCoins} from 'filters/lunaToCoins'
     import {formatDate} from 'filters/formatDate'
     import Identicon from "components/Identicon.vue"
+    import NqIcon from "components/NqIcon.vue"
     import {getAddressLabel} from 'filters/getAddressLabel';
 
     export default {
@@ -91,7 +92,8 @@
             getAddressLabel
         },
         components: {
-            Identicon
+            Identicon,
+            NqIcon
         }
 
     }

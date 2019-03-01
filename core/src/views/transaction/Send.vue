@@ -16,7 +16,7 @@
                                                    class="img-responsive"></Identicon>
                                     </div>
                                     <div class="account-data">
-                                        <i class="nq-icon arrow-down"></i>
+                                        <span class="material-icons pull-right">keyboard_arrow_down</span>
                                         <span class="nq-label">{{ newTx.sendFrom.label }} </span>
                                         <div class="nq-text-s">
                                             {{ newTx.sendFrom.address }}
@@ -110,6 +110,7 @@
 <script>
     import {AUTH_REQUEST, AUTH_ERROR} from 'store/actions/auth'
     import Identicon from "components/Identicon.vue"
+    import NqIcon from "components/NqIcon.vue"
     import {mapGetters} from 'vuex'
     import store from 'store'
     import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
@@ -198,7 +199,8 @@
             lunaToCoins
         },
         components: {
-            Identicon
+            Identicon,
+            NqIcon
         },
 
     };
