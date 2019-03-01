@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - 9
   - 10
+cache:
+  yarn: true
 services:
   - mongodb
   - redis-server
@@ -9,6 +11,8 @@ before_install:
   - mv .env.sample .env
   - sed -i 's/full/light/g' .env
   - cat .env
-before_script:
+install:
   - npm install
-  
+  - npm run build
+script:
+  - node app.js &
