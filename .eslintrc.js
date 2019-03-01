@@ -19,12 +19,11 @@ module.exports = {
         "member-ordering": false
     },
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 9,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true,
-            "modules": true,
-            "experimentalObjectRestSpread": true
+            "modules": true
         },
         "parser": "babel-eslint",
 
