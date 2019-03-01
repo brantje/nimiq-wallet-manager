@@ -1,22 +1,22 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from "vue"
+import Router from "vue-router"
 import LeftSidebar from "layout/LeftSidebar.vue"
 import SettingsSidebar from "layout/SettingsSidebar.vue"
-import Dashboard from "views/Dashboard.vue";
-import Login from "views/user/Login.vue";
-import Register from "views/user/Register.vue";
-import TwoFactor from "views/user/TwoFactor.vue";
-import WalletDetail from "views/wallet/Detail.vue";
-import AddWallet from "views/wallet/Add.vue";
-import WalletList from "views/wallet/List.vue";
-import ContactList from "views/contacts/List.vue";
-import SendTransaction from 'views/transaction/Send.vue';
+import Dashboard from "views/Dashboard.vue"
+import Login from "views/user/Login.vue"
+import Register from "views/user/Register.vue"
+import TwoFactor from "views/user/TwoFactor.vue"
+import WalletDetail from "views/wallet/Detail.vue"
+import AddWallet from "views/wallet/Add.vue"
+import WalletList from "views/wallet/List.vue"
+import ContactList from "views/contacts/List.vue"
+import SendTransaction from 'views/transaction/Send.vue'
 import SettingsDisplay from 'views/settings/SettingsDisplay.vue'
 import AccountSettings from 'views/settings/user/Account.vue'
 import AccountSecuritySettings from 'views/settings/user/Security.vue'
 import AccountSessionSettings from 'views/settings/user/Sessions.vue'
-import store from "store";
-import Meta from 'vue-meta';
+import store from "store"
+import Meta from 'vue-meta'
 
 const ifNotAuthenticated = (to, from, next) => {
     if (!store.getters.isAuthenticated) {
@@ -34,8 +34,8 @@ const ifAuthenticated = (to, from, next) => {
     next('/login')
 }
 
-Vue.use(Router);
-Vue.use(Meta);
+Vue.use(Router)
+Vue.use(Meta)
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
@@ -151,4 +151,4 @@ export default new Router({
             beforeEnter: ifNotAuthenticated,
         }
     ]
-});
+})

@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose')
+const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
 
-const {Schema} = mongoose;
+const {Schema} = mongoose
 
 const SessionSchema = new Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
@@ -14,7 +14,7 @@ const SessionSchema = new Schema({
     location: {type: Object},
     browser: {type: Object},
     deleted: {type: Number, default: 0}
-});
+})
 
 SessionSchema.methods.toJSON = function () {
     return {
@@ -26,7 +26,7 @@ SessionSchema.methods.toJSON = function () {
         ip: this.ip,
         location: this.location,
         browser: this.browser,
-    };
-};
-SessionSchema.index({user: 1});
-mongoose.model('Sessions', SessionSchema);
+    }
+}
+SessionSchema.index({user: 1})
+mongoose.model('Sessions', SessionSchema)

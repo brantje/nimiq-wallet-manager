@@ -33,17 +33,17 @@ const inflight = {
 const actions = {
     [NETWORK_MEMPOOL_REQUEST]: ({commit, dispatch}) => {
         if (inflight[NETWORK_MEMPOOL_REQUEST]) {
-            return;
+            return
         }
-        inflight[NETWORK_MEMPOOL_REQUEST] = true;
+        inflight[NETWORK_MEMPOOL_REQUEST] = true
         commit(NETWORK_MEMPOOL_REQUEST)
         nimiqApi.getMempool()
             .then(resp => {
-                inflight[NETWORK_MEMPOOL_REQUEST] = false;
+                inflight[NETWORK_MEMPOOL_REQUEST] = false
                 commit(NETWORK_MEMPOOL_SUCCESS, resp)
             })
             .catch(resp => {
-                inflight[NETWORK_MEMPOOL_REQUEST] = false;
+                inflight[NETWORK_MEMPOOL_REQUEST] = false
                 commit(NETWORK_MEMPOOL_ERROR)
                 // if resp is unauthorized, logout, to
                 console.log(resp)
@@ -58,17 +58,17 @@ const actions = {
     },
     [NETWORK_STATS_REQUEST]: ({commit, dispatch}) => {
         if (inflight[NETWORK_STATS_REQUEST]) {
-            return;
+            return
         }
         commit(NETWORK_STATS_REQUEST)
-        inflight[NETWORK_STATS_REQUEST] = true;
+        inflight[NETWORK_STATS_REQUEST] = true
         nimiqApi.getNetworkStats()
             .then(resp => {
-                inflight[NETWORK_STATS_REQUEST] = false;
+                inflight[NETWORK_STATS_REQUEST] = false
                 commit(NETWORK_STATS_SUCCESS, resp)
             })
             .catch(resp => {
-                inflight[NETWORK_STATS_REQUEST] = false;
+                inflight[NETWORK_STATS_REQUEST] = false
                 commit(NETWORK_STATS_ERROR)
                 // if resp is unauthorized, logout, to
                 console.log(resp)
@@ -77,17 +77,17 @@ const actions = {
     },
     [PEER_LIST_REQUEST]: ({commit, dispatch}) => {
         if (inflight[PEER_LIST_REQUEST]) {
-            return;
+            return
         }
-        inflight[PEER_LIST_REQUEST] = true;
+        inflight[PEER_LIST_REQUEST] = true
         commit(NETWORK_STATS_REQUEST)
         nimiqApi.getPeerList()
             .then(resp => {
-                inflight[PEER_LIST_REQUEST] = false;
+                inflight[PEER_LIST_REQUEST] = false
                 commit(PEER_LIST_SUCCESS, resp)
             })
             .catch(resp => {
-                inflight[PEER_LIST_REQUEST] = false;
+                inflight[PEER_LIST_REQUEST] = false
                 commit(PEER_LIST_ERROR)
                 // if resp is unauthorized, logout, to
                 console.log(resp)

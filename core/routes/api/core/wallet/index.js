@@ -1,24 +1,24 @@
-const mongoose = require('mongoose');
-const passport = require('passport');
-const router = require('express').Router();
-const auth = require('../../../auth');
-const Wallets = mongoose.model('Wallets');
-const Nimiq = require('@nimiq/core');
-const TagCache = require('redis-tag-cache');
-const Cache = new TagCache.default();
+const mongoose = require('mongoose')
+const passport = require('passport')
+const router = require('express').Router()
+const auth = require('../../../auth')
+const Wallets = mongoose.model('Wallets')
+const Nimiq = require('@nimiq/core')
+const TagCache = require('redis-tag-cache')
+const Cache = new TagCache.default()
 
 module.exports = function (NimiqHelper) {
 
     router.post('/', auth.required, async (req, res, next) => {
-        const {body, payload: {id}} = req;
-        const wallet = body;
-        const userId = id;
+        const {body, payload: {id}} = req
+        const wallet = body
+        const userId = id
         if (!wallet.label) {
             return res.status(422).json({
                 errors: {
                     label: 'is required',
                 },
-            });
+            })
         }
 
         if (!wallet.address) {
@@ -26,12 +26,12 @@ module.exports = function (NimiqHelper) {
                 errors: {
                     address: 'is required',
                 },
-            });
+            })
         }
 
-        let validAddress;
+        let validAddress
         try {
-            validAddress = Nimiq.Address.fromUserFriendlyAddress(wallet.address);
+            validAddress = Nimiq.Address.fromUserFriendlyAddress(wallet.address)
         } catch (e) {
 
         }
@@ -40,35 +40,35 @@ module.exports = function (NimiqHelper) {
                 errors: {
                     address: 'is not valid',
                 },
-            });
+            })
         }
 
-        let exists = await Wallets.findOne({user: id, address: wallet.address, deleted: 0});
+        let exists = await Wallets.findOne({user: id, address: wallet.address, deleted: 0})
         if (exists) {
             return res.status(422).json({
                 errors: {
                     address: 'already exists for this user',
                 },
-            });
+            })
         }
 
-        const newWallet = new Wallets(wallet);
-        newWallet.user = userId;
+        const newWallet = new Wallets(wallet)
+        newWallet.user = userId
 
         return newWallet.save()
             .then(async () => {
-                const pipeline = await Cache.redis.pipeline();
-                pipeline.del(`recent_tx_${id}`);
+                const pipeline = await Cache.redis.pipeline()
+                pipeline.del(`recent_tx_${id}`)
                 res.json(newWallet.toJSON())
-            });
-    });
+            })
+    })
 
 
     router.get('/:address', auth.required, async (req, res, next) => {
-        const {payload: {id}} = req;
-        let addr;
+        const {payload: {id}} = req
+        let addr
         try {
-            addr = Nimiq.Address.fromUserFriendlyAddress(req.params.address);
+            addr = Nimiq.Address.fromUserFriendlyAddress(req.params.address)
         } catch (e) {
 
         }
@@ -77,37 +77,37 @@ module.exports = function (NimiqHelper) {
                 errors: {
                     address: 'is not valid',
                 },
-            });
+            })
         }
 
-        let cacheKey = 'wallet_info_' + addr.toHex();
+        let cacheKey = 'wallet_info_' + addr.toHex()
 
-        let cache = await Cache.get(cacheKey);
+        let cache = await Cache.get(cacheKey)
         if (cache) {
-            return res.json(JSON.parse(cache));
+            return res.json(JSON.parse(cache))
         }
 
-        let wallet = await Wallets.findOne({user: id, address: addr.toUserFriendlyAddress(), deleted: 0});
+        let wallet = await Wallets.findOne({user: id, address: addr.toUserFriendlyAddress(), deleted: 0})
         if (wallet) {
-            let result = wallet.toJSON();
-            let info = await NimiqHelper.getAccount(addr.toUserFriendlyAddress());
-            let txs = await NimiqHelper.getAccountTransactions(addr, 200);
-            result.balance = 0;
+            let result = wallet.toJSON()
+            let info = await NimiqHelper.getAccount(addr.toUserFriendlyAddress())
+            let txs = await NimiqHelper.getAccountTransactions(addr, 200)
+            result.balance = 0
             if (info && info.balance) {
-                result.balance = info.balance;
+                result.balance = info.balance
             }
-            result.transactions = txs;
-            Cache.set(cacheKey, JSON.stringify(result), [addr.toHex()], {timeout: (60 * 60 * 24 * 31 * 12)});
-            return res.json(result);
+            result.transactions = txs
+            Cache.set(cacheKey, JSON.stringify(result), [addr.toHex()], {timeout: (60 * 60 * 24 * 31 * 12)})
+            return res.json(result)
         }
-        return res.status(404).json({error: "Not found"});
-    });
+        return res.status(404).json({error: "Not found"})
+    })
 
     router.get('/:address/seed', auth.required, async (req, res, next) => {
-        const {payload: {id}} = req;
-        let addr;
+        const {payload: {id}} = req
+        let addr
         try {
-            addr = Nimiq.Address.fromUserFriendlyAddress(req.params.address);
+            addr = Nimiq.Address.fromUserFriendlyAddress(req.params.address)
         } catch (e) {
 
         }
@@ -117,59 +117,59 @@ module.exports = function (NimiqHelper) {
                 errors: {
                     address: 'is not valid',
                 },
-            });
+            })
         }
 
 
-        let wallet = await Wallets.findOne({user: id, address: req.param('address')});
+        let wallet = await Wallets.findOne({user: id, address: req.param('address')})
         if (wallet) {
-            return res.json({seed: wallet.encryptedPrivateKey});
+            return res.json({seed: wallet.encryptedPrivateKey})
         }
-        return res.status(404);
-    });
+        return res.status(404)
+    })
 
     router.patch('/:address', auth.required, async (req, res, next) => {
-        const {payload: {id}, body,} = req;
-        const wallet = body;
-        let walleta = await Wallets.findOne({user: id, address: req.param('address')});
+        const {payload: {id}, body,} = req
+        const wallet = body
+        let walleta = await Wallets.findOne({user: id, address: req.param('address')})
         if (walleta) {
             if (wallet.label) {
-                walleta.label = wallet.label;
+                walleta.label = wallet.label
             }
             if (wallet.order) {
-                walleta.order = wallet.order;
+                walleta.order = wallet.order
             }
-            return walleta.save().then(() => res.json(walleta.toJSON()));
+            return walleta.save().then(() => res.json(walleta.toJSON()))
         }
-        return res.status(404);
-    });
+        return res.status(404)
+    })
 
     router.delete('/:address', auth.required, async (req, res, next) => {
-        const {payload: {id}} = req;
+        const {payload: {id}} = req
 
-        let wallet = await Wallets.findOne({user: id, address: req.param('address')});
+        let wallet = await Wallets.findOne({user: id, address: req.param('address')})
         if (wallet) {
-            wallet.deleted = 1;
-            return wallet.save().then(() => res.json({success: true}));
+            wallet.deleted = 1
+            return wallet.save().then(() => res.json({success: true}))
         }
-        return res.status(404);
-    });
+        return res.status(404)
+    })
 
 
     router.get('/', auth.required, async (req, res, next) => {
-        const {payload: {id}} = req;
-        let wallets = await Wallets.find({user: id, deleted: 0}).sort('order');
-        let results = [];
+        const {payload: {id}} = req
+        let wallets = await Wallets.find({user: id, deleted: 0}).sort('order')
+        let results = []
         for (let wallet of wallets) {
-            let result = wallet.toJSON();
-            let info = await NimiqHelper.getAccount(wallet.address);
-            result.balance = 0;
+            let result = wallet.toJSON()
+            let info = await NimiqHelper.getAccount(wallet.address)
+            result.balance = 0
             if (info && info.balance) {
-                result.balance = info.balance;
+                result.balance = info.balance
             }
             results.push(result)
         }
-        return res.json(results);
-    });
-    return router;
-};
+        return res.json(results)
+    })
+    return router
+}

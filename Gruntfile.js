@@ -1,7 +1,7 @@
 var jsFiles = [
     // 'js/lib/jquery-3.1.0.min.js',
     "public/javascripts/"
-];
+]
 
 module.exports = function(grunt) {
     grunt.initConfig({
@@ -41,12 +41,12 @@ module.exports = function(grunt) {
 				tasks: ['concat','uglify']
 			}*/
         }
-    });
+    })
 
-    grunt.loadNpmTasks("grunt-contrib-uglify");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("grunt-contrib-concat");
-    grunt.loadNpmTasks("grunt-contrib-sass");
+    grunt.loadNpmTasks("grunt-contrib-uglify")
+    grunt.loadNpmTasks("grunt-contrib-watch")
+    grunt.loadNpmTasks("grunt-contrib-concat")
+    grunt.loadNpmTasks("grunt-contrib-sass")
 
-    grunt.registerTask("default", ["sass", "concat", "uglify"]);
-};
+    grunt.registerTask("default", ["sass", "concat", "uglify"])
+}

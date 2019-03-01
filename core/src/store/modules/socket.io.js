@@ -4,7 +4,7 @@ import {WALLET_LIST_TRANSACTIONS_REQUEST, WALLET_LIST_REQUEST} from 'store/actio
 
 const actions = {
     SOCKET_connect(state) {
-        state.connect = true;
+        state.connect = true
     },
     SOCKET_CONSENSUS_ESTABLISHED({dispatch}) {
         dispatch(NETWORK_STATS_REQUEST)
@@ -24,17 +24,17 @@ const actions = {
     SOCKET_NETWORK_PEERS_CHANGED({dispatch}) {
         dispatch(PEER_LIST_REQUEST)
     }
-};
+}
 
 const mutations = {}
 
 const state = {
     connect: false,
     messages: [],
-};
+}
 
 export default {
     state,
     mutations,
     actions
-};
+}

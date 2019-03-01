@@ -11,6 +11,7 @@ module.exports = {
         "indent": ['warn', 4],
         "interface-name": false,
         "ordered-imports": false,
+        "semi": ['error', 'never'],
         "object-literal-sort-keys": false,
         "max-classes-per-file": ['warn', 3],
         "no-consecutive-blank-lines": [false],

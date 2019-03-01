@@ -6,7 +6,7 @@ const state = { token: localStorage.getItem('user-token') || '', status: '', has
 
 const getters = {
     isAuthenticated: (state) => {
-        return state.token !== 'undefined' && state.token !== '';
+        return state.token !== 'undefined' && state.token !== ''
 
     },
     authStatus: state => state.status,
@@ -26,9 +26,9 @@ const actions = {
                     resolve(resp)
                 })
                 .catch(err => {
-                    commit(AUTH_ERROR, err);
-                    localStorage.removeItem('user-token');
-                    reject(AUTH_ERROR);
+                    commit(AUTH_ERROR, err)
+                    localStorage.removeItem('user-token')
+                    reject(AUTH_ERROR)
                 })
         })
     },
@@ -45,15 +45,15 @@ const actions = {
                     resolve(resp)
                 })
                 .catch(err => {
-                    commit(AUTH_REGISTER_ERROR, err);
-                    reject(err);
+                    commit(AUTH_REGISTER_ERROR, err)
+                    reject(err)
                 })
         })
     },
     [AUTH_LOGOUT]: ({commit, dispatch}) => {
         return new Promise((resolve, reject) => {
             commit(AUTH_LOGOUT)
-            axios.defaults.headers.common['Authorization'] = '';
+            axios.defaults.headers.common['Authorization'] = ''
             localStorage.removeItem('user-token')
             resolve()
         })
