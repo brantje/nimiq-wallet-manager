@@ -3,11 +3,12 @@ module.exports = {
     "env": {
         "node": true
     },
-    "extends": [],
+    "extends": [
+        'plugin:vue/recommended'
+    ],
     "rules": {
         "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
         "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-        "quotemark": [true, "single"],
         "indent": ['warn', 4],
         "interface-name": false,
         "ordered-imports": false,
