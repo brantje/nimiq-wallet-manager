@@ -19,11 +19,11 @@ module.exports = function (NimiqHelper) {
 
     $.consensus.network.on('peers-changed', () => {
         Log.d(SocketIO,'Emitting NETWORK_PEERS_CHANGED');
-       SocketSingleton.io.emit('NETWORK_PEERS_CHANGED', $.network.peerCount);
+        SocketSingleton.io.emit('NETWORK_PEERS_CHANGED', $.network.peerCount);
     });
 
     $.consensus.on('established', function () {
-       Log.d(SocketIO,'consensus established');
+        Log.d(SocketIO,'consensus established');
         SocketSingleton.io.emit('CONSENSUS_ESTABLISHED');
     });
 
@@ -33,11 +33,11 @@ module.exports = function (NimiqHelper) {
 
     $.consensus.network.on('peer-joined', () => {
         Log.d(SocketIO,'Emitting NETWORK_PEER_JOINED');
-       SocketSingleton.io.emit('NETWORK_PEER_JOINED');
+        SocketSingleton.io.emit('NETWORK_PEER_JOINED');
     });
     $.consensus.network.on('peer-left', () => {
         Log.d(SocketIO,'Emitting NETWORK_PEER_LEFT');
-       SocketSingleton.io.emit('NETWORK_PEER_LEFT');
+        SocketSingleton.io.emit('NETWORK_PEER_LEFT');
     });
 
     $.blockchain.on('head-changed', async (head) => {

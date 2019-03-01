@@ -12,9 +12,9 @@ const state = {
     mempool: [],
     peerList: [],
     stats: {
-       network:{
+        network:{
 
-       }
+        }
     }
 }
 
