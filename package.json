@@ -43,7 +43,7 @@
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "twig": "~1.13.2",
-    "vue": "^2.6.7",
+    "vue": "^2.6.8",
     "vue-axios": "^2.0.2",
     "vue-form-wizard": "^0.8.4",
     "vue-meta": "^1.5.8",
@@ -74,7 +74,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "vue-loader": "^15.4.2",
-    "vue-template-compiler": "^2.6.7",
+    "vue-template-compiler": "^2.6.8",
     "webpack": "^3.12.0"
   }
 }
