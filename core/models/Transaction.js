@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const {Schema} = mongoose;
+const mongoose = require('mongoose')
+const {Schema} = mongoose
 
 const TransactionSchema = new Schema({
     hash: {type: String, unique: true, required: true},
@@ -15,9 +15,9 @@ const TransactionSchema = new Schema({
     fee: Number,
     data: String,
     flags: Number
-});
+})
 
-TransactionSchema.index({hash: 1, from: 1, to: 1});
+TransactionSchema.index({hash: 1, from: 1, to: 1})
 
 TransactionSchema.methods.toJSON = function () {
     return {
@@ -34,8 +34,8 @@ TransactionSchema.methods.toJSON = function () {
         fee: this.fee,
         data: this.data,
         flags: this.flags
-    };
-};
+    }
+}
 
 
-mongoose.model('Transactions', TransactionSchema);
+mongoose.model('Transactions', TransactionSchema)

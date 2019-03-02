@@ -21,17 +21,17 @@ const inflight = {
 const actions = {
     [CONTACT_LIST_REQUEST]: ({commit, dispatch}) => {
         if (inflight[CONTACT_LIST_REQUEST]) {
-            return;
+            return
         }
-        inflight[CONTACT_LIST_REQUEST] = true;
+        inflight[CONTACT_LIST_REQUEST] = true
         commit(CONTACT_LIST_REQUEST)
         contactApi.list()
             .then(resp => {
-                inflight[CONTACT_LIST_REQUEST] = false;
+                inflight[CONTACT_LIST_REQUEST] = false
                 commit(CONTACT_LIST_SUCCESS, resp)
             })
             .catch(resp => {
-                inflight[CONTACT_LIST_REQUEST] = false;
+                inflight[CONTACT_LIST_REQUEST] = false
                 commit(CONTACT_LIST_ERROR)
                 // if resp is unauthorized, logout, to
                 // console.log(resp)

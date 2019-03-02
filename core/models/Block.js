@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const {Schema} = mongoose;
+const mongoose = require('mongoose')
+const {Schema} = mongoose
 
 const BlockSchema = new Schema({
     number: String,
@@ -16,9 +16,9 @@ const BlockSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Transactions'
     }],
-});
+})
 
-BlockSchema.index({number: 1, hash: 1, miner: 1});
+BlockSchema.index({number: 1, hash: 1, miner: 1})
 
 BlockSchema.methods.toJSON = function () {
     return {
@@ -32,8 +32,8 @@ BlockSchema.methods.toJSON = function () {
         size: this.size,
         timestamp: this.timestamp,
         transactions: this.transactions,
-    };
-};
+    }
+}
 
 
-mongoose.model('Blocks', BlockSchema);
+mongoose.model('Blocks', BlockSchema)

@@ -16,6 +16,7 @@ install:
   - npm install
   - npm run build
 script:
+  - npm run lint
   - node app.js &
   - sleep 30
   - node_modules/.bin/newman run "tests/Nimiq Wallet Manager Testing.postman_collection.json" -e "tests/Nimiq wallet manager.postman_environment.json"
