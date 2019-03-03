@@ -9,11 +9,11 @@ input[type="text"], input.password, input[type="number"] {
   font-family: inherit;
   font-style: inherit;
   font-variant: inherit;
-  padding: 1px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   color: #3b3b3b;
   display: block;
   margin-bottom: 15px;
+  padding: 5px 0;
 }
 input[type="password"] {
   width: 100%;

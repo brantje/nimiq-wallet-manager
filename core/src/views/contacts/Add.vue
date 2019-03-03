@@ -14,7 +14,7 @@
                     <input v-model="contact.label" type="text" placeholder="Enter a name ">
                 </span>
                 <div class="nq-text-s">
-                    <AddressInput :address="inputAddress" @changed="setAddress"></AddressInput>
+                    <AddressInput :address="inputAddress" :placeholder="'Enter address'" @changed="setAddress"></AddressInput>
                 </div>
                 <div class="clearfix"></div>
             </div>
