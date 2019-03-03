@@ -150,6 +150,8 @@ module.exports = function (NimiqHelper) {
         let wallet = await Wallets.findOne({user: id, address: req.param('address')})
         if (wallet) {
             wallet.deleted = 1
+            const pipeline = await Cache.redis.pipeline()
+            pipeline.del(`recent_tx_${id}`)
             return wallet.save().then(() => res.json({success: true}))
         }
         return res.status(404)
