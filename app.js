@@ -6,21 +6,46 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const csp = require('express-csp-header')
 const cors = require('cors')
-const http = require('http')
+var fs = require('fs')
+const Nimiq = require('@nimiq/core')
+Log = Nimiq.Log
 const mongoose = require('mongoose')
 const SocketSingleton = require('./lib/SocketSingletion')
 const app = express()
-const server = http.createServer(app)
+const isProduction = process.env.NODE_ENV === 'production'
+const isSecure = process.env.USE_SSL === 'true'
+let server
+if (isSecure) {
+    const https = require('https')
+    let options
+    try {
+        options = {
+            cert: fs.readFileSync(process.env.SSL_CERT),
+            key: fs.readFileSync(process.env.SSL_KEY)
+        }
+        if (process.env.SSL_CA) {
+            options.ca = [fs.readFileSync(process.env.SSL_CA)]
+        }
+        server = https.createServer(options, app)
+    } catch (e) {
+        Log.e('Unable to start https server.')
+        Log.e('Your ssl configuration is incorrect')
+        Log.e('Error:')
+        Log.e(e)
+        process.exit(1)
+    }
+} else {
+    const http = require('http')
+    server = http.createServer(app)
+}
 const NH = require('./lib/NimiqHelper')
-const Nimiq = require('@nimiq/core')
-Log = Nimiq.Log
+
 let NimiqHelper = new NH()
 SocketSingleton.configure(server)
-const isProduction = process.env.NODE_ENV === 'production'
 mongoose.promise = global.Promise
 
 //Configure Mongoose
-mongoose.connect(process.env.MONGODB_CONNECTION_URI, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_CONNECTION_URI, {useNewUrlParser: true})
 if (!isProduction) {
     mongoose.set('debug', true)
 }
@@ -44,12 +69,12 @@ if (!isProduction) {
     Log.instance.setLoggable('ConnectionPool', Log.Level.ASSERT)
     Log.instance.setLoggable('Network', Log.Level.ASSERT)
 
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
         if (res.headersSent) {
             Log.d('Express', ip, req.method, req.originalUrl, res.statusCode)
         } else {
-            res.on('finish', function() {
+            res.on('finish', function () {
                 Log.d('Express', ip, req.method, req.originalUrl, res.statusCode)
             })
         }
@@ -67,20 +92,20 @@ app.use(
         origin: process.env.DOMAIN_NAME
     })
 )
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(
     cookieParser(
         process.env.SESSION_KEY ||
-      'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997'
+        'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997'
     )
 )
 app.use(
     session({
         secret:
-      process.env.SESSION_KEY ||
-      'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997',
-        cookie: { maxAge: 60000 },
+        process.env.SESSION_KEY ||
+        'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997',
+        cookie: {maxAge: 60000},
         resave: false,
         saveUninitialized: false
     })
@@ -106,7 +131,7 @@ app.use(
 
 app.use(express.static(path.join(__dirname, 'core/public')))
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}
@@ -117,7 +142,7 @@ app.use(function(err, req, res, next) {
 });
 
 (async () => {
-    let { APP_PORT = 3000 } = process.env
+    let {APP_PORT = 3000} = process.env
     NimiqHelper = await NimiqHelper.connect();
 
     (async () => {
@@ -126,8 +151,9 @@ app.use(function(err, req, res, next) {
 
     NimiqHelper.$.consensus.on('established', function () {
         app.use(require('./core/routes')(NimiqHelper))
-        server.listen(APP_PORT, '0.0.0.0', () =>
-            Log.i(`Server running on http://localhost:${APP_PORT}/`)
-        )
+        server.listen(APP_PORT, '0.0.0.0', () => {
+            let prot = (isSecure) ? 'https' : 'http'
+            Log.i(`Server running on ${prot}://localhost:${APP_PORT}/`)
+        })
     })
 })()
