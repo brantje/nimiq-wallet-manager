@@ -1,5 +1,11 @@
 <template>
     <div class="sidenav scrollbar-themed">
+        <div class="nq-card" v-if="getWallets.length === 0">
+            <div class="nq-card-body">
+                No wallets yet! <br />
+                Why not <router-link to="/wallet/add">add</router-link> one?
+            </div>
+        </div>
         <div class="nq-card" v-for="wallet in sortWallets(getWallets)">
             <div class="nq-card-body" @click="loadWallet(wallet.address)">
                 <div class="identicon">

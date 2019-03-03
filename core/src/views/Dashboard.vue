@@ -27,6 +27,7 @@
             </div>
             <div class="nq-card-body">
                 <TransactionList :transactions="getOurTransactions(getMempool)"></TransactionList>
+                <span v-if="getWalletTransactions.length === 0">No transactions</span>
                 <TransactionList :transactions="getWalletTransactions"></TransactionList>
             </div>
         </div>
