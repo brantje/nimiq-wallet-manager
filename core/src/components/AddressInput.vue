@@ -1,6 +1,6 @@
 <template>
     <div class="address-input">
-        <input v-model="address" type="text" placeholder="Enter address" />
+        <input v-model="addressInput" type="text" :placeholder="placeholder" />
         <div v-if="error" class="error nq-red-bg">
             {{ error }}
         </div>
@@ -10,27 +10,30 @@
 <script>
 export default {
     name: 'Address',
-    props: ['address'],
+    props: ['address', 'placeholder'],
     data: function () {
         return {
-            error: ''
+            error: '',
+            addressInput: this.address
         }
     },
     watch: {
-        address: function () {
+        addressInput: function () {
             this.checkAddress()
-        }
+        },
+        address: function () {
+            this.addressInput = this.address
+        },
     },
     methods: {
         checkAddress: function () {
-            if (this.address === '') {
+            if (this.addressInput === '' || this.address) {
                 this.error = ''
             }
             let address
             try {
-                address = Nimiq.Address.fromUserFriendlyAddress(this.address)
+                address = Nimiq.Address.fromUserFriendlyAddress(this.addressInput)
             } catch (e) {
-                console.log(e)
                 this.error = 'Invalid address'
             }
             if (address) {
@@ -45,6 +48,7 @@ export default {
 <style scoped>
     .address-input {
         display: inline-block;
+        width: 100%;
     }
 
     .error {
