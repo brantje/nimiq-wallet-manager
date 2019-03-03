@@ -7,6 +7,11 @@ module.exports = {
         'plugin:vue/recommended'
     ],
     "rules": {
+        "vue/html-indent": "off",
+        "vue/max-attributes-per-line": "off",
+        "vue/require-prop-types": "off",
+        "vue/html-self-closing": "off",
+        "vue/no-side-effects-in-computed-properties": "off",
         "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
         "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
         "indent": ['warn', 4],
