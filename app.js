@@ -124,8 +124,10 @@ app.use(function(err, req, res, next) {
         new NimiqService(NimiqHelper)
     })()
 
-    app.use(require('./core/routes')(NimiqHelper))
-    server.listen(APP_PORT, '0.0.0.0', () =>
-        Log.i(`Server running on http://localhost:${APP_PORT}/`)
-    )
+    NimiqHelper.$.consensus.on('established', function () {
+        app.use(require('./core/routes')(NimiqHelper))
+        server.listen(APP_PORT, '0.0.0.0', () =>
+            Log.i(`Server running on http://localhost:${APP_PORT}/`)
+        )
+    })
 })()
