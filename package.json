@@ -31,7 +31,7 @@
     "jsonwebtoken": "^8.5.0",
     "material-icons": "^0.3.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.11",
+    "mongoose": "^5.4.17",
     "morgan": "~1.9.0",
     "newman": "^4.4.0",
     "node-2fa": "^1.1.2",
