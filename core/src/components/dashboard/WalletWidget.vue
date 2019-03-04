@@ -1,7 +1,9 @@
 <template>
     <div class="nq-card">
         <div class="nq-card-header">
-            <h1 class="nq-h1">Wallet information</h1>
+            <h1 class="nq-h1">
+                Wallet information
+            </h1>
         </div>
         <div class="nq-card-body">
             <div class="body-row">
@@ -16,47 +18,47 @@
                 <span class="nq-label">Avg balance</span>
                 <span class="nq-text-s pull-right">{{ avgBalance | lunaToCoins }} NIM</span>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
-    import {mapState, mapGetters} from 'vuex'
-    import store from 'store'
-    import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
-    import {lunaToCoins} from 'filters/lunaToCoins'
-    export default {
-        name: "WalletWidget",
-        computed: mapGetters(['getWallets']),
-        created() {
-            store.dispatch(WALLET_LIST_REQUEST)
-        },
-        data() {
-            return {
-                totalBalance: 0,
-                avgBalance: 0
-            };
-        },
-        filters: {
-            lunaToCoins
-        },
-        watch: {
-            getWallets: function (wallets) {
-                if(wallets) {
-                    this.totalBalance = 0
-                    wallets.forEach((e) => {
-                        if(e.hasOwnProperty('balance')){
-                            this.totalBalance += e.balance;
-                        }
-                    });
-                    this.avgBalance = (this.totalBalance / wallets.length);
-                }
-
+import {mapState, mapGetters} from 'vuex'
+import store from 'store'
+import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
+import {lunaToCoins} from 'filters/lunaToCoins'
+export default {
+    name: 'WalletWidget',
+    filters: {
+        lunaToCoins
+    },
+    data() {
+        return {
+            totalBalance: 0,
+            avgBalance: 0
+        }
+    },
+    computed: mapGetters(['getWallets']),
+    watch: {
+        getWallets: function (wallets) {
+            if(wallets) {
+                this.totalBalance = 0
+                wallets.forEach((e) => {
+                    if(e.hasOwnProperty('balance')){
+                        this.totalBalance += e.balance
+                    }
+                })
+                this.avgBalance = (this.totalBalance / wallets.length)
             }
-        },
-        methods: {}
-    };
+
+        }
+    },
+    created() {
+        store.dispatch(WALLET_LIST_REQUEST)
+    },
+
+    methods: {}
+}
 </script>
 
 <style scoped>

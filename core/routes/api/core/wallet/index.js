@@ -56,11 +56,11 @@ module.exports = function (NimiqHelper) {
         newWallet.user = userId
 
         return newWallet.save()
-            .then(async () => {
-                const pipeline = await Cache.redis.pipeline()
-                pipeline.del(`recent_tx_${id}`)
-                res.json(newWallet.toJSON())
-            })
+                .then(async () => {
+                    const pipeline = await Cache.redis.pipeline()
+                    pipeline.del(`recent_tx_${id}`)
+                    res.json(newWallet.toJSON())
+                })
     })
 
 

@@ -18,18 +18,18 @@ const actions = {
             commit(AUTH_REQUEST)
 
             userApi.login(user)
-                .then(resp => {
-                    localStorage.setItem('user-token', resp.data.token)
-                    axios.defaults.headers.common['Authorization'] = 'Token ' + resp.data.token
-                    commit(AUTH_SUCCESS, resp.data)
-                    dispatch(USER_REQUEST)
-                    resolve(resp)
-                })
-                .catch(err => {
-                    commit(AUTH_ERROR, err)
-                    localStorage.removeItem('user-token')
-                    reject(AUTH_ERROR)
-                })
+                    .then(resp => {
+                        localStorage.setItem('user-token', resp.data.token)
+                        axios.defaults.headers.common['Authorization'] = 'Token ' + resp.data.token
+                        commit(AUTH_SUCCESS, resp.data)
+                        dispatch(USER_REQUEST)
+                        resolve(resp)
+                    })
+                    .catch(err => {
+                        commit(AUTH_ERROR, err)
+                        localStorage.removeItem('user-token')
+                        reject(AUTH_ERROR)
+                    })
         })
     },
     [AUTH_REGISTER]: ({commit, dispatch}, user) => {
@@ -37,17 +37,17 @@ const actions = {
             commit(AUTH_REGISTER)
 
             userApi.register(user)
-                .then(resp => {
+                    .then(resp => {
                     // Here set the header of your ajax library to the token value.
                     // example with axios
-                    commit(AUTH_REGISTER_SUCCESS, resp)
-                    // dispatch(USER_REQUEST)
-                    resolve(resp)
-                })
-                .catch(err => {
-                    commit(AUTH_REGISTER_ERROR, err)
-                    reject(err)
-                })
+                        commit(AUTH_REGISTER_SUCCESS, resp)
+                        // dispatch(USER_REQUEST)
+                        resolve(resp)
+                    })
+                    .catch(err => {
+                        commit(AUTH_REGISTER_ERROR, err)
+                        reject(err)
+                    })
         })
     },
     [AUTH_LOGOUT]: ({commit, dispatch}) => {

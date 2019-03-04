@@ -38,17 +38,17 @@ const actions = {
         inflight[NETWORK_MEMPOOL_REQUEST] = true
         commit(NETWORK_MEMPOOL_REQUEST)
         nimiqApi.getMempool()
-            .then(resp => {
-                inflight[NETWORK_MEMPOOL_REQUEST] = false
-                commit(NETWORK_MEMPOOL_SUCCESS, resp)
-            })
-            .catch(resp => {
-                inflight[NETWORK_MEMPOOL_REQUEST] = false
-                commit(NETWORK_MEMPOOL_ERROR)
-                // if resp is unauthorized, logout, to
-                console.log(resp)
+                .then(resp => {
+                    inflight[NETWORK_MEMPOOL_REQUEST] = false
+                    commit(NETWORK_MEMPOOL_SUCCESS, resp)
+                })
+                .catch(resp => {
+                    inflight[NETWORK_MEMPOOL_REQUEST] = false
+                    commit(NETWORK_MEMPOOL_ERROR)
+                    // if resp is unauthorized, logout, to
+                    console.log(resp)
                 // dispatch(AUTH_LOGOUT)
-            })
+                })
     },
     [MEMPOOL_ADD_TRANSACTION]: ({commit}, tx) => {
         commit(MEMPOOL_ADD_TRANSACTION, tx)
@@ -63,17 +63,17 @@ const actions = {
         commit(NETWORK_STATS_REQUEST)
         inflight[NETWORK_STATS_REQUEST] = true
         nimiqApi.getNetworkStats()
-            .then(resp => {
-                inflight[NETWORK_STATS_REQUEST] = false
-                commit(NETWORK_STATS_SUCCESS, resp)
-            })
-            .catch(resp => {
-                inflight[NETWORK_STATS_REQUEST] = false
-                commit(NETWORK_STATS_ERROR)
-                // if resp is unauthorized, logout, to
-                console.log(resp)
+                .then(resp => {
+                    inflight[NETWORK_STATS_REQUEST] = false
+                    commit(NETWORK_STATS_SUCCESS, resp)
+                })
+                .catch(resp => {
+                    inflight[NETWORK_STATS_REQUEST] = false
+                    commit(NETWORK_STATS_ERROR)
+                    // if resp is unauthorized, logout, to
+                    console.log(resp)
                 // dispatch(AUTH_LOGOUT)
-            })
+                })
     },
     [PEER_LIST_REQUEST]: ({commit, dispatch}) => {
         if (inflight[PEER_LIST_REQUEST]) {
@@ -82,17 +82,17 @@ const actions = {
         inflight[PEER_LIST_REQUEST] = true
         commit(NETWORK_STATS_REQUEST)
         nimiqApi.getPeerList()
-            .then(resp => {
-                inflight[PEER_LIST_REQUEST] = false
-                commit(PEER_LIST_SUCCESS, resp)
-            })
-            .catch(resp => {
-                inflight[PEER_LIST_REQUEST] = false
-                commit(PEER_LIST_ERROR)
-                // if resp is unauthorized, logout, to
-                console.log(resp)
+                .then(resp => {
+                    inflight[PEER_LIST_REQUEST] = false
+                    commit(PEER_LIST_SUCCESS, resp)
+                })
+                .catch(resp => {
+                    inflight[PEER_LIST_REQUEST] = false
+                    commit(PEER_LIST_ERROR)
+                    // if resp is unauthorized, logout, to
+                    console.log(resp)
                 // dispatch(AUTH_LOGOUT)
-            })
+                })
     },
 }
 

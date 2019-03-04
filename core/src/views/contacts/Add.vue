@@ -2,8 +2,8 @@
     <div class="nq-card">
         <div class="nq-card-header">
             <h1 class="nq-h1">
-{{ messageTitle }}
-</h1>
+                {{ messageTitle }}
+            </h1>
         </div>
         <div class="nq-card-body">
             <div class="identicon">
@@ -21,11 +21,11 @@
         </div>
         <div class="nq-card-footer">
             <OkBtn v-if="contact.address" :options="options" btn-color="green" @click="saveContact">
-Save
-</OkBtn>
+                Save
+            </OkBtn>
             <CancelBtn :options="options" @click="handleDismiss()">
-Dismiss
-</CancelBtn>
+                Dismiss
+            </CancelBtn>
         </div>
     </div>
 </template>

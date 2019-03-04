@@ -19,30 +19,30 @@ const actions = {
     [USER_REQUEST]: ({commit, dispatch}) => {
         commit(USER_REQUEST)
         userApi.current()
-            .then(resp => {
-                commit(USER_SUCCESS, resp)
-            })
-            .catch(e => {
+                .then(resp => {
+                    commit(USER_SUCCESS, resp)
+                })
+                .catch(e => {
                 // if resp is unauthorized, logout, to
-                if(e.response.status === 403) {
-                    commit(USER_ERROR, 403)
-                    dispatch(AUTH_LOGOUT)
-                }
-                if(e.response.status === 401){
-                    commit(USER_ERROR, 401)
-                }
-            })
+                    if(e.response.status === 403) {
+                        commit(USER_ERROR, 403)
+                        dispatch(AUTH_LOGOUT)
+                    }
+                    if(e.response.status === 401){
+                        commit(USER_ERROR, 401)
+                    }
+                })
     },
     [SESSION_LIST_REQUEST]: ({commit, dispatch}) => {
         commit(SESSION_LIST_REQUEST)
         userApi.getSessions()
-            .then(resp => {
-                commit(SESSION_LIST_REQUEST_SUCCESS, resp)
-            })
-            .catch(e => {
+                .then(resp => {
+                    commit(SESSION_LIST_REQUEST_SUCCESS, resp)
+                })
+                .catch(e => {
                 // if resp is unauthorized, logout, to
-                commit(SESSION_LIST_REQUEST_ERROR, e.response.status)
-            })
+                    commit(SESSION_LIST_REQUEST_ERROR, e.response.status)
+                })
     },
 }
 

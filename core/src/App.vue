@@ -1,67 +1,68 @@
 <template>
     <div>
-        <Header v-if="isProfileLoaded"/>
+        <Header v-if="isProfileLoaded" />
         <div class="flex-container">
-            <router-view name="leftSidebar" v-if="isProfileLoaded"></router-view>
-            <div class="content-container nq-style scrollbar-themed"> <!-- Scrollbar not working on firefox -->
-                <notifications  position="top center" classes="notification" width="350" />
+            <router-view v-if="isProfileLoaded" name="leftSidebar"></router-view>
+            <div class="content-container nq-style scrollbar-themed">
+                <!-- Scrollbar not working on firefox -->
+                <notifications position="top center" classes="notification" width="350" />
                 <router-view :key="$route.fullPath"></router-view>
             </div>
-            <RightSidebar v-if="isProfileLoaded"/>
+            <RightSidebar v-if="isProfileLoaded" />
         </div>
     </div>
 </template>
 
 <script>
-    import Header from "layout/Header.vue"
-    import RightSidebar from "layout/RightSidebar.vue"
-    import { USER_REQUEST } from 'store/actions/user'
-    import { CONTACT_LIST_REQUEST } from 'store/actions/contact'
-    import store from 'store'
-    import { mapState, mapGetters } from 'vuex'
-    import router from 'router'
+import Header from 'layout/Header.vue'
+import RightSidebar from 'layout/RightSidebar.vue'
+import { USER_REQUEST } from 'store/actions/user'
+import { CONTACT_LIST_REQUEST } from 'store/actions/contact'
+import store from 'store'
+import { mapState, mapGetters } from 'vuex'
+import router from 'router'
 
-    export default {
-        name: "app",
-        metaInfo: {
-            // if no subcomponents specify a metaInfo.title, this title will be used
-            title: 'Index',
-            // all titles will be injected into this template
-            titleTemplate: '%s | Nimiq Wallet Manager'
-        },
-        data() {
-            return {
-                user: false
-            };
-        },
-        computed: mapGetters(['isProfileLoaded', 'isAuthenticated', 'getUserStatus']),
-        created(){
-            if(this.isAuthenticated){
-                store.dispatch(USER_REQUEST)
-                store.dispatch(CONTACT_LIST_REQUEST)
-            }
-        },
-        watch: {
-            isAuthenticated: (newValue, oldValue) => {
-                if(newValue === false && oldValue === true){
-                    router.push({name: 'Login'});
-                }
-            },
-            getUserStatus: (newValue, oldValue) => {
-                if(newValue === 401){
-                    router.push({path: 'authorize'});
-                }
-                if(newValue === 403){
-                    router.push({path: 'login'});
-                }
-            }
-        },
-        components: {
-            Header,
-            // LeftSidebar,
-            RightSidebar
+export default {
+    name: 'App',
+    metaInfo: {
+        // if no subcomponents specify a metaInfo.title, this title will be used
+        title: 'Index',
+        // all titles will be injected into this template
+        titleTemplate: '%s | Nimiq Wallet Manager'
+    },
+    components: {
+        Header,
+        // LeftSidebar,
+        RightSidebar
+    },
+    data() {
+        return {
+            user: false
         }
-    };
+    },
+    computed: mapGetters(['isProfileLoaded', 'isAuthenticated', 'getUserStatus']),
+    watch: {
+        isAuthenticated: (newValue, oldValue) => {
+            if(newValue === false && oldValue === true){
+                router.push({name: 'Login'})
+            }
+        },
+        getUserStatus: (newValue, oldValue) => {
+            if(newValue === 401){
+                router.push({path: 'authorize'})
+            }
+            if(newValue === 403){
+                router.push({path: 'login'})
+            }
+        }
+    },
+    created(){
+        if(this.isAuthenticated){
+            store.dispatch(USER_REQUEST)
+            store.dispatch(CONTACT_LIST_REQUEST)
+        }
+    }
+}
 </script>
 
 <style>

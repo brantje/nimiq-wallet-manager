@@ -1,10 +1,11 @@
 <template>
-
     <div class="nq-card">
         <div class="nq-card-body">
-            <h1 class="nq-h1">Sessions</h1>
+            <h1 class="nq-h1">
+                Sessions
+            </h1>
             <div class="session-devices">
-                <div class="session-details margin-top-2" v-for="session in getSessions">
+                <div v-for="session in getSessions" :key="session._id" class="session-details margin-top-2">
                     <div class="pull-left margin-right-2">
                         <span class="material-icons">computer</span>
                         <!--<span class="material-icons">phone_android</span>-->
@@ -33,54 +34,48 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <button class="nq-button-s red" :data-session="session._id" v-confirm="{ok: destroySession, message: 'Are you sure you want to end this session?'}">Revoke</button>
+                        <button v-confirm="{ok: destroySession, message: 'Are you sure you want to end this session?'}" class="nq-button-s red" :data-session="session._id">
+                            Revoke
+                        </button>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-
             </div>
-
         </div>
     </div>
-
-
 </template>
 
 <script>
-    import {mapState, mapGetters} from 'vuex'
-    import store from 'store'
-    import {formatDate} from "filters/formatDate";
-    import {SESSION_LIST_REQUEST} from 'store/actions/user'
-    import {userApi} from 'utils/api/user';
+import {mapState, mapGetters} from 'vuex'
+import store from 'store'
+import {formatDate} from 'filters/formatDate'
+import {SESSION_LIST_REQUEST} from 'store/actions/user'
+import {userApi} from 'utils/api/user'
 
-    export default {
-        created() {
-            store.dispatch(SESSION_LIST_REQUEST)
-        },
-        metaInfo: {
-            title: 'Sessions'
-        },
-        computed: mapGetters(['getSessions']),
-        data() {
-            return {};
-        },
-        filters: {
-            formatDate
-        },
-        methods: {
-            destroySession: function (dialog) {
-                let button = dialog.node
-                let session = button.dataset.session
-                userApi.destroySession({_id: session}).then(() =>{
-                    this.$notify({
-                        title: 'Session deleted',
-                    });
-                    store.dispatch(SESSION_LIST_REQUEST)
+export default {
+    filters: {
+        formatDate
+    },
+    computed: mapGetters(['getSessions']),
+    created() {
+        store.dispatch(SESSION_LIST_REQUEST)
+    },
+    metaInfo: {
+        title: 'Sessions'
+    },
+    methods: {
+        destroySession: function (dialog) {
+            let button = dialog.node
+            let session = button.dataset.session
+            userApi.destroySession({_id: session}).then(() =>{
+                this.$notify({
+                    title: 'Session deleted',
                 })
-            }
-        },
-        components: {}
-    };
+                store.dispatch(SESSION_LIST_REQUEST)
+            })
+        }
+    }
+}
 </script>
 
 <style scoped>

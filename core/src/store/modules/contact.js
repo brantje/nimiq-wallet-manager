@@ -26,17 +26,17 @@ const actions = {
         inflight[CONTACT_LIST_REQUEST] = true
         commit(CONTACT_LIST_REQUEST)
         contactApi.list()
-            .then(resp => {
-                inflight[CONTACT_LIST_REQUEST] = false
-                commit(CONTACT_LIST_SUCCESS, resp)
-            })
-            .catch(resp => {
-                inflight[CONTACT_LIST_REQUEST] = false
-                commit(CONTACT_LIST_ERROR)
+                .then(resp => {
+                    inflight[CONTACT_LIST_REQUEST] = false
+                    commit(CONTACT_LIST_SUCCESS, resp)
+                })
+                .catch(resp => {
+                    inflight[CONTACT_LIST_REQUEST] = false
+                    commit(CONTACT_LIST_ERROR)
                 // if resp is unauthorized, logout, to
                 // console.log(resp)
                 // dispatch(AUTH_LOGOUT)
-            })
+                })
     },
 }
 
