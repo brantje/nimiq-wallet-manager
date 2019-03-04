@@ -4,47 +4,58 @@
             <div class="nq-card-body">
                 Personal settings
                 <ul>
-                    <li><router-link to="/settings/user/account">Account</router-link></li>
-                    <li><router-link to="/settings/user/security">Security</router-link></li>
-                    <li><router-link to="/settings/user/sessions">Sessions</router-link></li>
+                    <li>
+                        <router-link to="/settings/user/account">
+                            Account
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/settings/user/security">
+                            Security
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/settings/user/sessions">
+                            Sessions
+                        </router-link>
+                    </li>
                 </ul>
 
                 <!--Admin settings-->
                 <!--<ul>-->
-                    <!--<li>Users</li>-->
-                    <!--<li>Nimiq</li>-->
+                <!--<li>Users</li>-->
+                <!--<li>Nimiq</li>-->
                 <!--</ul>-->
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
-    import {mapState, mapGetters} from 'vuex'
-    import store from 'store'
-    import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
-    import {lunaToCoins} from 'filters/lunaToCoins'
-    import Identicon from "components/Identicon.vue"
+import {mapState, mapGetters} from 'vuex'
+import store from 'store'
+import {WALLET_LIST_REQUEST} from 'store/actions/wallet'
+import {lunaToCoins} from 'filters/lunaToCoins'
+import Identicon from 'components/Identicon.vue'
 
-    export default {
+export default {
+    filters: {
 
-        created() {
+    },
+    components: {
 
-        },
-        data() {
-            return {};
-        },
-        filters: {
+    },
+    data() {
+        return {}
+    },
 
-        },
-        methods: {
+    created() {
 
-        },
-        components: {
+    },
+    methods: {
 
-        }
-    };
+    }
+}
 </script>
 
 <style scoped>

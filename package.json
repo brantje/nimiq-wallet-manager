@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "lint": "npx eslint . --debug",
+    "lint": "npx eslint --ext .js,.vue. .",
     "build": "webpack",
     "watch": "webpack --watch & nodemon app.js"
   },

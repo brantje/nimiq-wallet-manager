@@ -55,7 +55,7 @@ module.exports = function (NimiqHelper) {
         newEntry.user = userId
 
         return newEntry.save()
-            .then(() => res.json(newEntry))
+                .then(() => res.json(newEntry))
     })
 
 

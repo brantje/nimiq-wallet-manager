@@ -1,21 +1,35 @@
 <template>
     <div class="nq-card walletDetail">
-        <h1 class="nq-h1">Wallets</h1>
+        <h1 class="nq-h1">
+            Wallets
+        </h1>
         <router-link to="/wallet/add">
-            <button class="nq-button-s">Add wallet</button>
+            <button class="nq-button-s">
+                Add wallet
+            </button>
         </router-link>
         <draggable v-model="wallets" :options="{group:'people'}" @start="drag=true" @end="drag=false">
-            <div class="wallet-list" v-for="wallet in wallets" :key="wallet.address">
+            <div v-for="wallet in wallets" :key="wallet.address" class="wallet-list">
                 <div class="wallet">
                     <div>
                         <Identicon :address="wallet.address" size="50" class="img-responsive"></Identicon>
                     </div>
-                    <div class="nq-label">{{ wallet.label }}</div>
-                    <div class="nq-text-s">{{ wallet.address }}</div>
-                    <div class="nq-text-s">{{ wallet.balance | lunaToCoins}} NIM</div>
+                    <div class="nq-label">
+                        {{ wallet.label }}
+                    </div>
+                    <div class="nq-text-s">
+                        {{ wallet.address }}
+                    </div>
+                    <div class="nq-text-s">
+                        {{ wallet.balance | lunaToCoins }} NIM
+                    </div>
                     <div class="actions">
-                        <button class="nq-button-s red" @click="deleteWallet(wallet)">Delete</button>
-                        <button class="nq-button-s" @click="editWallet(wallet)">Edit</button>
+                        <button class="nq-button-s red" @click="deleteWallet(wallet)">
+                            Delete
+                        </button>
+                        <button class="nq-button-s" @click="editWallet(wallet)">
+                            Edit
+                        </button>
                     </div>
                 </div>
             </div>
@@ -24,48 +38,55 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
-    import store from 'store'
-    import {WALLET_LIST_REQUEST, UPDATE_WALLET_LIST} from 'store/actions/wallet'
-    import Identicon from "components/Identicon.vue"
-    import {walletApi} from 'utils/api/wallet'
-    import {lunaToCoins} from 'filters/lunaToCoins'
-    import draggable from 'vuedraggable'
+import {mapGetters} from 'vuex'
+import store from 'store'
+import {WALLET_LIST_REQUEST, UPDATE_WALLET_LIST} from 'store/actions/wallet'
+import Identicon from 'components/Identicon.vue'
+import {walletApi} from 'utils/api/wallet'
+import {lunaToCoins} from 'filters/lunaToCoins'
+import draggable from 'vuedraggable'
 
-    export default {
-        name: "Wallets",
-        metaInfo: {
-            title: 'My wallets'
-        },
-        computed: {
-            wallets: {
-                get: function () {
-                    return store.state.wallet.wallets.slice()
-                },
-                set: function (value) {
-                    let wallets = JSON.parse(JSON.stringify(value))
-                    let i = 1;
-                    for(let wallet of wallets){
-                        wallet.order = i;
-                        walletApi.update(wallet).catch(() => { console.log('Error updating wallet order') })
-                        i++;
-                    }
-                    store.dispatch(UPDATE_WALLET_LIST, wallets)
-                    this.$notify({
-                        title: 'Wallet order saved',
-                    });
+export default {
+    name: 'Wallets',
+    metaInfo: {
+        title: 'My wallets'
+    },
+    filters: {
+        lunaToCoins,
+    },
+    components: {
+        Identicon,
+        draggable
+    },
+    data() {
+        return {}
+    },
+    computed: {
+        wallets: {
+            get: function () {
+                return store.state.wallet.wallets.slice()
+            },
+            set: function (value) {
+                let wallets = JSON.parse(JSON.stringify(value))
+                let i = 1
+                for(let wallet of wallets){
+                    wallet.order = i
+                    walletApi.update(wallet).catch(() => { console.log('Error updating wallet order') })
+                    i++
                 }
+                store.dispatch(UPDATE_WALLET_LIST, wallets)
+                this.$notify({
+                    title: 'Wallet order saved',
+                })
             }
-        },
-        created() {
-            store.dispatch(WALLET_LIST_REQUEST)
-        },
-        data() {
-            return {};
-        },
-        methods: {
-            deleteWallet: function (wallet) {
-                this.$dialog
+        }
+    },
+    created() {
+        store.dispatch(WALLET_LIST_REQUEST)
+    },
+    methods: {
+        deleteWallet: function (wallet) {
+            this.$dialog
                     .confirm('Please confirm to continue', {
                         type: 'hard',
                         verification: wallet.label,
@@ -76,40 +97,33 @@
                             store.dispatch(WALLET_LIST_REQUEST)
                             this.$notify({
                                 title: 'Wallet deleted',
-                            });
+                            })
                         }).catch((e) => {
                             this.$notify({
                                 type: 'error',
                                 title: 'Error during deleting wallet',
-                            });
+                            })
                         })
                     })
                     .catch(function () {
 
-                    });
-            },
-            editWallet: function (wallet) {
-                this.$dialog.alert('', {
-                    view: 'EditWalletDialog',
-                    html: true,
-                    animation: 'fade',
-                    backdropClose: true,
-                    wallet: wallet,
-                    message: {
-                        title: 'Edit wallet'
-                    }
-                }).then(() => store.dispatch(WALLET_LIST_REQUEST)).catch(() => {
-                })
-            }
+                    })
         },
-        filters: {
-            lunaToCoins,
-        },
-        components: {
-            Identicon,
-            draggable
+        editWallet: function (wallet) {
+            this.$dialog.alert('', {
+                view: 'EditWalletDialog',
+                html: true,
+                animation: 'fade',
+                backdropClose: true,
+                wallet: wallet,
+                message: {
+                    title: 'Edit wallet'
+                }
+            }).then(() => store.dispatch(WALLET_LIST_REQUEST)).catch(() => {
+            })
         }
-    };
+    }
+}
 </script>
 <style scoped>
     .wallet-list .wallet {

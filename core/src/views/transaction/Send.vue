@@ -16,7 +16,7 @@
                                     <div class="identicon">
                                         <Identicon :address="newTx.sendFrom.address" size="64"
                                                    class="img-responsive"
-></Identicon>
+                                        ></Identicon>
                                     </div>
                                     <div class="account-data">
                                         <span class="material-icons pull-right">keyboard_arrow_down</span>
@@ -30,11 +30,11 @@
                                 <div class="dropdown-container nq-card" :class="{'shown': dropdownShown}">
                                     <div v-for="wallet in getWallets" :key="wallet.address" class="wallet"
                                          @click="selectAccount(wallet)"
->
+                                    >
                                         <div class="identicon">
                                             <Identicon :address="wallet.address" size="64"
                                                        class="img-responsive"
-></Identicon>
+                                            ></Identicon>
                                         </div>
                                         <div class="account-data">
                                             <span class="nq-label">{{ wallet.label }} </span>
@@ -61,13 +61,13 @@
                                 <div class="identicon">
                                     <Identicon :address="newTx.sendTo.address" size="64"
                                                class="img-responsive"
-></Identicon>
+                                    ></Identicon>
                                 </div>
                                 <div class="account-data">
                                     <div class="nq-text-s">
                                         <AddressInput :address="inputToAddress" placeholder="Enter recipient address"
                                                       @changed="setAddress"
-></AddressInput>
+                                        ></AddressInput>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -79,13 +79,13 @@
                             <div class="input-group">
                                 <input v-model="newTx.value" class="form-control" min="0" placeholder="0.00"
                                        type="number" step="0.00001"
->
+                                >
                                 <div class="suffix">
-NIM
-</div>
+                                    NIM
+                                </div>
                                 <div class="nq-button-s" @click="setMaxValue">
-MAX
-</div>
+                                    MAX
+                                </div>
                             </div>
                             <div v-if="newTx.sendFrom.balance < (newTx.value + newTx.fee)" class="error nq-red-bg">
                                 Not enough balance
@@ -126,7 +126,7 @@ MAX
                                 </div>
                                 <input v-model="newTx.fee" class="form-control" min="0" placeholder="Enter nim amount"
                                        type="range" step="69" max="276"
->
+                                >
                                 <div class="text-center">
                                     {{ newTx.fee | lunaToCoins(5) }} NIM
                                 </div>
@@ -135,7 +135,7 @@ MAX
                     </div>
                     <button v-if="validTx" type="button" class="nq-button-s green pull-right"
                             @click="sendTransaction"
->
+                    >
                         Send
                     </button>
                     <button type="button" class="nq-button-s red">

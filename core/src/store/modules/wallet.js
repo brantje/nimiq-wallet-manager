@@ -34,17 +34,17 @@ const actions = {
         inflight[WALLET_LIST_REQUEST] = true
         commit(WALLET_LIST_REQUEST)
         walletApi.list()
-            .then(resp => {
-                inflight[WALLET_LIST_REQUEST] = false
-                commit(WALLET_LIST_SUCCESS, resp)
-            })
-            .catch(resp => {
-                inflight[WALLET_LIST_REQUEST] = false
-                commit(WALLET_LIST_ERROR)
-                // if resp is unauthorized, logout, to
-                console.log(resp)
+                .then(resp => {
+                    inflight[WALLET_LIST_REQUEST] = false
+                    commit(WALLET_LIST_SUCCESS, resp)
+                })
+                .catch(resp => {
+                    inflight[WALLET_LIST_REQUEST] = false
+                    commit(WALLET_LIST_ERROR)
+                    // if resp is unauthorized, logout, to
+                    console.log(resp)
                 // dispatch(AUTH_LOGOUT)
-            })
+                })
     },
     [WALLET_LIST_TRANSACTIONS_REQUEST]: ({commit, dispatch}) => {
         if (inflight[WALLET_LIST_TRANSACTIONS_REQUEST]) {
@@ -53,17 +53,17 @@ const actions = {
         inflight[WALLET_LIST_TRANSACTIONS_REQUEST] = true
         commit(WALLET_LIST_TRANSACTIONS_REQUEST)
         walletApi.recentTransactions()
-            .then(resp => {
-                inflight[WALLET_LIST_TRANSACTIONS_REQUEST] = false
-                commit(WALLET_LIST_TRANSACTIONS_SUCCESS, resp)
-            })
-            .catch(resp => {
-                inflight[WALLET_LIST_TRANSACTIONS_REQUEST] = false
-                commit(WALLET_LIST_TRANSACTIONS_ERROR)
-                // if resp is unauthorized, logout, to
-                console.log(resp)
+                .then(resp => {
+                    inflight[WALLET_LIST_TRANSACTIONS_REQUEST] = false
+                    commit(WALLET_LIST_TRANSACTIONS_SUCCESS, resp)
+                })
+                .catch(resp => {
+                    inflight[WALLET_LIST_TRANSACTIONS_REQUEST] = false
+                    commit(WALLET_LIST_TRANSACTIONS_ERROR)
+                    // if resp is unauthorized, logout, to
+                    console.log(resp)
                 // dispatch(AUTH_LOGOUT)
-            })
+                })
     },
 
     [GET_WALLET_REQUEST]: ({commit, dispatch}, address) => {
@@ -73,30 +73,30 @@ const actions = {
         inflight[GET_WALLET_REQUEST] = true
         commit(GET_WALLET_REQUEST)
         walletApi.get(address)
-            .then(resp => {
-                inflight[GET_WALLET_REQUEST] = false
-                commit(GET_WALLET_SUCCESS, resp)
-            })
-            .catch(resp => {
-                inflight[GET_WALLET_REQUEST] = false
-                commit(GET_WALLET_ERROR)
-                // if resp is unauthorized, logout, to
-                console.log(resp)
+                .then(resp => {
+                    inflight[GET_WALLET_REQUEST] = false
+                    commit(GET_WALLET_SUCCESS, resp)
+                })
+                .catch(resp => {
+                    inflight[GET_WALLET_REQUEST] = false
+                    commit(GET_WALLET_ERROR)
+                    // if resp is unauthorized, logout, to
+                    console.log(resp)
                 // dispatch(AUTH_LOGOUT)
-            })
+                })
     },
     [ADD_WALLET_REQUEST]: ({commit, dispatch}, wallet) => {
         return new Promise((resolve, reject) => {
             commit(ADD_WALLET_REQUEST)
             walletApi.create(wallet)
-                .then(resp => {
-                    commit(ADD_WALLET_SUCCESS, resp.data)
-                    resolve(resp)
-                })
-                .catch(err => {
-                    commit(ADD_WALLET_ERROR, err)
-                    reject(ADD_WALLET_ERROR, err)
-                })
+                    .then(resp => {
+                        commit(ADD_WALLET_SUCCESS, resp.data)
+                        resolve(resp)
+                    })
+                    .catch(err => {
+                        commit(ADD_WALLET_ERROR, err)
+                        reject(ADD_WALLET_ERROR, err)
+                    })
         })
     },
     [UPDATE_WALLET_LIST]: ({commit}, walletList) => {

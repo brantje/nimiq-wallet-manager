@@ -17,14 +17,14 @@ module.exports = function (NimiqHelper) {
         const {payload: {id}} = req
 
         return Users.findById(id)
-            .then(async (user) => {
-                if (!user) {
-                    return res.sendStatus(400)
-                }
-                // let settings = await Config.getAll(id);
-                let userJson = user.toJSON()
-                return res.json(userJson)
-            })
+                .then(async (user) => {
+                    if (!user) {
+                        return res.sendStatus(400)
+                    }
+                    // let settings = await Config.getAll(id);
+                    let userJson = user.toJSON()
+                    return res.json(userJson)
+                })
     })
     return router
 }
