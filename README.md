@@ -14,14 +14,28 @@ https://documenter.getpostman.com/view/3064651/RztkQALx#a776cefa-736c-4b12-8b9a-
 If you want ssl during development (see above), you can use the following command to generate an ssl cert:  
 `openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout server.key -out server.crt`
 ## Installation
-Setup a fresh MongoDB database.
 
-`$ sudo apt-get install -y build-essential mongodb redis-server`
+```shell
+### System dependencies
+sudo apt-get install -y build-essential mongodb redis-server
+# (On macOS: brew install mongo redis)
 
-`$ npm install`
+### Optionally, set up custom Mongo Database
 
-`$ cp .env.sample .env`
+### Download source
+git clone https://github.com/brantje/nimiq-wallet-manager
+cd nimiq-wallet-manager
 
-`$ nano .env`
+### App dependencies
+npm install
 
-`$ npm run watch`
+### Setup configuration
+cp .env.sample .env
+$EDITOR .env
+
+### Install development dependencies
+npm install -g webpack-cli nodemon
+
+### Start Development Server
+npm run watch
+```
