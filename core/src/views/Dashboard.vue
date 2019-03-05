@@ -1,29 +1,29 @@
 <template>
     <div class="hello">
         <div class="dashboard">
-            <NetworkWidget></NetworkWidget>
-            <WalletWidget></WalletWidget>
-            <SeedWidget></SeedWidget>
+            <NetworkWidget />
+            <WalletWidget />
+            <SeedWidget />
         </div>
 
         <div class="action-card nq-card">
             <div>
-                <router-link to="new-transaction">
+                <RouterLink to="new-transaction">
                     Send
-                </router-link>
+                </RouterLink>
             </div>
             <div>
                 Receive
             </div>
             <div>
-                <router-link to="/contacts">
+                <RouterLink to="/contacts">
                     Contacts
-                </router-link>
+                </RouterLink>
             </div>
             <div>
-                <router-link to="/wallet/add">
+                <RouterLink to="/wallet/add">
                     Add wallet
-                </router-link>
+                </RouterLink>
             </div>
         </div>
 
@@ -34,9 +34,9 @@
                 </h1>
             </div>
             <div class="nq-card-body">
-                <TransactionList :transactions="getOurTransactions(getMempool)"></TransactionList>
+                <TransactionList :transactions="getOurTransactions(getMempool)" />
                 <span v-if="getWalletTransactions.length === 0">No transactions</span>
-                <TransactionList :transactions="getWalletTransactions"></TransactionList>
+                <TransactionList :transactions="getWalletTransactions" />
             </div>
         </div>
     </div>

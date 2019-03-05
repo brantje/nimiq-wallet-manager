@@ -1,6 +1,6 @@
 <template>
     <div class="address-input">
-        <input v-model="addressInput" type="text" :placeholder="placeholder" />
+        <input v-model="addressInput" type="text" :placeholder="placeholder">
         <div v-if="error" class="error nq-red-bg">
             {{ error }}
         </div>

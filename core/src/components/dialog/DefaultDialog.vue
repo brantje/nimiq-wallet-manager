@@ -18,7 +18,9 @@
                   autocomplete="off"
                   @submit.prevent="submitDialogForm"
             >
-                <label for="dg-input-elem" style="font-size: 13px">{{ hardConfirmHelpText }}</label>
+                <label for="dg-input-elem" style="font-size: 13px">
+                    {{ hardConfirmHelpText }}
+                </label>
                 <input id="dg-input-elem"
                        ref="inputElem"
                        v-model="input"
@@ -28,7 +30,7 @@
                        style="width: 100%;margin-top: 10px;
                             padding: 5px 15px; font-size: 16px;
                             border-radius: 4px; border: 2px solid #eee"
-                />
+                >
             </form>
         </div>
 
@@ -46,7 +48,7 @@
                 <span>{{ rightBtnText }}</span>
             </button>
 
-            <div class="dg-clear"></div>
+            <div class="dg-clear" />
         </div>
     </div>
 </template>

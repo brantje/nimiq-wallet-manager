@@ -2,16 +2,16 @@
     <div>
         <div class="nq-card walletDetail">
             <div v-if="loading" class="loading-container">
-                <div class="loading"></div>
+                <div class="loading" />
             </div>
             <div v-if="!loading" class="identicon">
-                <Identicon :address="getActiveWallet.address" size="128" class="img-responsive"></Identicon>
+                <Identicon :address="getActiveWallet.address" size="128" class="img-responsive" />
             </div>
             <div v-if="!loading">
                 <h3 class="nq-label">
                     {{ getActiveWallet.label }}
                 </h3>
-                <h4><Address :address="getActiveWallet.address" display-address="true"></Address></h4>
+                <h4><Address :address="getActiveWallet.address" display-address="true" /></h4>
                 <div class="nq-label">
                     Balance:
                 </div>
@@ -22,8 +22,8 @@
         </div>
         <div>
             <div v-if="!loading" class="nq-card">
-                <TransactionList :transactions="getWalletTransactions(getMempool)"></TransactionList>
-                <TransactionList :transactions="getActiveWallet.transactions"></TransactionList>
+                <TransactionList :transactions="getWalletTransactions(getMempool)" />
+                <TransactionList :transactions="getActiveWallet.transactions" />
             </div>
         </div>
     </div>

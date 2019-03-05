@@ -20,25 +20,30 @@
                         <div>
                             <small class="nq-text-s">
                                 Last accessed on
-                                <time>{{ session.lastActive | formatDate('long') }}</time>
-                                <br />
+                                <div>
+                                    <time>{{ session.lastActive | formatDate('long') }}</time>
+                                </div>
                                 Expires
-                                <time>{{ session.expires | formatDate('long') }}</time>
-
+                                <div>
+                                    <time>{{ session.expires | formatDate('long') }}</time>
+                                </div>
                             </small>
                         </div>
                         <div>
                             <small class="nq-text-s">
-                                {{ session.browser.browser }} {{ session.browser.version }} on {{ session.browser.platform }}
+                                {{ session.browser.browser }} {{ session.browser.version }} on {{
+                                    session.browser.platform }}
                             </small>
                         </div>
                     </div>
                     <div class="pull-right">
-                        <button v-confirm="{ok: destroySession, message: 'Are you sure you want to end this session?'}" class="nq-button-s red" :data-session="session._id">
+                        <button v-confirm="{ok: destroySession, message: 'Are you sure you want to end this session?'}"
+                                class="nq-button-s red" :data-session="session._id"
+                        >
                             Revoke
                         </button>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="clearfix" />
                 </div>
             </div>
         </div>
@@ -67,7 +72,7 @@ export default {
         destroySession: function (dialog) {
             let button = dialog.node
             let session = button.dataset.session
-            userApi.destroySession({_id: session}).then(() =>{
+            userApi.destroySession({_id: session}).then(() => {
                 this.$notify({
                     title: 'Session deleted',
                 })
@@ -82,6 +87,7 @@ export default {
     .session-details strong {
         display: block;
     }
+
     .nq-card {
         margin: 2rem auto;
         /*max-width: none;*/

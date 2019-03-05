@@ -2,10 +2,10 @@
     <div>
         <div class="nq-card">
             <div class="nq-card-body">
-                <form-wizard ref="wizard" title="Add wallet" subtitle="" color="#1f2348" step-size="xs"
-                             @on-complete="onComplete" @on-error="handleError"
+                <FormWizard ref="wizard" title="Add wallet" subtitle="" color="#1f2348" step-size="xs"
+                            @on-complete="onComplete" @on-error="handleError"
                 >
-                    <tab-content title="Choose wallet type">
+                    <TabContent title="Choose wallet type">
                         <div>
                             <p><b>Choose wallet type to add</b></p>
                         </div>
@@ -34,17 +34,20 @@
                             </label>
                         </div>
                         <p>
-                            <small>The wallet private key will be encrypted before it's send to the server.<br />More
+                            <small>
+                                The wallet private key will be encrypted before it's send to the server.<br>More
                                 info can be found <a
                                     href="https://github.com/brantje/nimiq-wallet-manager/wiki/How-is-the-private-key-of-the-wallet-stored%3F"
                                     rel="nofollow noreferrer noopener"
-                                >here</a>
+                                >
+                                    here
+                                </a>
                                 <!--nofollow noreferrer noopener: Prevents tab napping and information leakage. -->
                             </small>
                         </p>
-                    </tab-content>
+                    </TabContent>
 
-                    <tab-content title="Additional Info" :before-change="validateStep2">
+                    <TabContent title="Additional Info" :before-change="validateStep2">
                         <div v-if="addType === 'address'">
                             <div>
                                 <p>
@@ -54,7 +57,7 @@
                             <div>
                                 <input v-model="walletAddressInput" type="text"
                                        placeholder="NQ.. .... .... .... .... ...."
-                                />
+                                >
                             </div>
                         </div>
                         <div v-if="addType === 'generateNew'">
@@ -65,7 +68,7 @@
                             <div>
                                 <div class="identicon-container">
                                     <div v-for="item in newWallets" :key="item.address" class="x-identicon" :class="{'initial-position': !firstStepPassed}" @click="setWallet(item, true)">
-                                        <Identicon :address="item.address" size="128"></Identicon>
+                                        <Identicon :address="item.address" size="128" />
                                     </div>
                                 </div>
                             </div>
@@ -74,45 +77,45 @@
                             <div>
                                 <h1>Account Recovery</h1>
                                 <p>Please enter your 24 Account Recovery Words.</p>
-                                <input v-model="recoveryWords" type="text" placeholder="Enter your recovery words" />
+                                <input v-model="recoveryWords" type="text" placeholder="Enter your recovery words">
                             </div>
                         </div>
-                    </tab-content>
+                    </TabContent>
 
-                    <tab-content title="Name it" :before-change="validateStep3">
+                    <TabContent title="Name it" :before-change="validateStep3">
                         <div>
                             <p>
                                 <b>Make your wallet personal by giving it a name</b>
                             </p>
                         </div>
                         <div>
-                            <input v-model="wallet.label" type="text" />
+                            <input v-model="wallet.label" type="text">
                         </div>
-                    </tab-content>
-                    <tab-content v-if="addType !== 'address'" title="Pass phrase">
+                    </TabContent>
+                    <TabContent v-if="addType !== 'address'" title="Pass phrase">
                         <div>
                             <h1>Set a Pass Phrase</h1>
                             <p>
-                                Please enter a Pass Phrase to secure your wallet.<br /><br />
+                                Please enter a Pass Phrase to secure your wallet.<br><br>
 
                                 The Pass Phrase is not an alternative for your 24 Recovery Words and it cannot be
                                 changed or reset!
                             </p>
                         </div>
                         <div>
-                            <input v-model="passPhrase" type="password" />
+                            <input v-model="passPhrase" type="password">
                         </div>
-                    </tab-content>
-                    <tab-content v-if="addType !== 'address'" title="Confirm pass phrase" :before-change="validatePassPhrase">
+                    </TabContent>
+                    <TabContent v-if="addType !== 'address'" title="Confirm pass phrase" :before-change="validatePassPhrase">
                         <div>
                             <h1>Confirm Pass Phrase</h1>
                             <p>Please confirm your Pass Phrase.</p>
                         </div>
                         <div>
-                            <input v-model="passPhraseConfirm" type="password" />
+                            <input v-model="passPhraseConfirm" type="password">
                         </div>
-                    </tab-content>
-                    <tab-content title="Confirmation">
+                    </TabContent>
+                    <TabContent title="Confirmation">
                         <div>
                             <h1>Your wallet is almost ready</h1>
                             <p>
@@ -120,7 +123,7 @@
                             </p>
                             <div>
                                 <div class="identicon">
-                                    <Identicon :address="wallet.address" size="64" class="img-responsive"></Identicon>
+                                    <Identicon :address="wallet.address" size="64" class="img-responsive" />
                                 </div>
                                 <div class="account-data">
                                     <span class="nq-label">{{ wallet.label }} </span>
@@ -128,11 +131,11 @@
                                         {{ wallet.address }}
                                     </div>
                                 </div>
-                                <div class="clearfix"></div>
+                                <div class="clearfix" />
                             </div>
                         </div>
-                    </tab-content>
-                </form-wizard>
+                    </TabContent>
+                </FormWizard>
             </div>
         </div>
     </div>

@@ -10,13 +10,15 @@
                 <form role="form">
                     <div class="form-group">
                         <div class="account-dropdown">
-                            <label class="nq-h3">Send from</label>
+                            <label class="nq-h3">
+                                Send from
+                            </label>
                             <div>
                                 <div class="selected-account" @click="dropdownShown = !dropdownShown">
                                     <div class="identicon">
                                         <Identicon :address="newTx.sendFrom.address" size="64"
                                                    class="img-responsive"
-                                        ></Identicon>
+                                        />
                                     </div>
                                     <div class="account-data">
                                         <span class="material-icons pull-right">keyboard_arrow_down</span>
@@ -25,7 +27,7 @@
                                             {{ newTx.sendFrom.address }}
                                         </div>
                                     </div>
-                                    <div class="clearfix"></div>
+                                    <div class="clearfix" />
                                 </div>
                                 <div class="dropdown-container nq-card" :class="{'shown': dropdownShown}">
                                     <div v-for="wallet in getWallets" :key="wallet.address" class="wallet"
@@ -34,7 +36,7 @@
                                         <div class="identicon">
                                             <Identicon :address="wallet.address" size="64"
                                                        class="img-responsive"
-                                            ></Identicon>
+                                            />
                                         </div>
                                         <div class="account-data">
                                             <span class="nq-label">{{ wallet.label }} </span>
@@ -45,7 +47,7 @@
                                                 {{ wallet.balance | lunaToCoins }} NIM
                                             </div>
                                         </div>
-                                        <div class="clearfix"></div>
+                                        <div class="clearfix" />
                                     </div>
                                 </div>
                             </div>
@@ -55,27 +57,31 @@
                         <span class="pull-right nq-button-s" @click="showContactDialog">
                             Contacts
                         </span>
-                        <label class="nq-h3">Send to</label>
+                        <label class="nq-h3">
+                            Send to
+                        </label>
                         <div class="account-row">
                             <div>
                                 <div class="identicon">
                                     <Identicon :address="newTx.sendTo.address" size="64"
                                                class="img-responsive"
-                                    ></Identicon>
+                                    />
                                 </div>
                                 <div class="account-data">
                                     <div class="nq-text-s">
                                         <AddressInput :address="inputToAddress" placeholder="Enter recipient address"
                                                       @changed="setAddress"
-                                        ></AddressInput>
+                                        />
                                     </div>
                                 </div>
-                                <div class="clearfix"></div>
+                                <div class="clearfix" />
                             </div>
                         </div>
 
                         <div class="input">
-                            <label class="nq-h3">Amount</label>
+                            <label class="nq-h3">
+                                Amount
+                            </label>
                             <div class="input-group">
                                 <input v-model="newTx.value" class="form-control" min="0" placeholder="0.00"
                                        type="number" step="0.00001"
@@ -106,13 +112,17 @@
                         </h5>
                         <div v-if="advancedSettingsShown" class="advanced">
                             <div class="input">
-                                <label class="nq-h3">Message</label>
+                                <label class="nq-h3">
+                                    Message
+                                </label>
                                 <div>
-                                    <input v-model="newTx.extraData" type="text" />
+                                    <input v-model="newTx.extraData" type="text">
                                 </div>
                             </div>
                             <div class="input">
-                                <label class="nq-h3">Fee</label>
+                                <label class="nq-h3">
+                                    Fee
+                                </label>
                                 <div class="x-fee-labels">
                                     <div free="">
                                         free

@@ -20,7 +20,7 @@
                         Sender
                     </label>
                     <span class="nq-text-s">
-                        <Address :address="tx.fromAddress"></Address>
+                        <Address :address="tx.fromAddress" />
                     </span>
                 </div>
                 <div>
@@ -29,7 +29,7 @@
                     </label>
 
                     <span class="nq-text-s">
-                        <Address :address="tx.toAddress"></Address>
+                        <Address :address="tx.toAddress" />
                     </span>
                 </div>
                 <div>
@@ -80,9 +80,9 @@
             </div>
         </div>
         <div class="nq-card-footer">
-            <cancel-btn :options="options" @click="handleDismiss()">
+            <CancelBtn :options="options" @click="handleDismiss()">
                 Close
-            </cancel-btn>
+            </CancelBtn>
         </div>
     </div>
 </template>

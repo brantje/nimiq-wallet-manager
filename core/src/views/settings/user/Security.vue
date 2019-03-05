@@ -25,7 +25,9 @@
                     Two-factor authentication adds an additional layer of security to your account by requiring more
                     than just a password to log in. <a
                         href="https://help.github.com/articles/about-two-factor-authentication/"
-                    >Learn more</a>.
+                    >
+                        Learn more
+                    </a>.
                 </p>
             </div>
         </div>

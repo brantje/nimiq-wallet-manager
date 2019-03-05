@@ -10,7 +10,7 @@
                 <span v-else>Pending...</span>
             </div>
             <div class="x-identicon">
-                <Identicon :address="transaction.fromAddress" size="64"></Identicon>
+                <Identicon :address="transaction.fromAddress" size="64" />
             </div>
             <div class="x-label" sender="">
                 {{ transaction.fromAddress | getAddressLabel }}
@@ -19,7 +19,7 @@
                 <NqIcon>nq-caret-right-small</NqIcon>
             </div>
             <div class="x-identicon">
-                <Identicon :address="transaction.toAddress" size="64"></Identicon>
+                <Identicon :address="transaction.toAddress" size="64" />
             </div>
             <div class="x-label" recipient="">
                 {{ transaction.toAddress | getAddressLabel }}

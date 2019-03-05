@@ -9,7 +9,7 @@
             <div v-for="contact in contacts" :key="contact._id" class="contact-list">
                 <div class="contact" @click="selectContact(contact)">
                     <div>
-                        <Identicon :address="contact.address" size="50" class="img-responsive"></Identicon>
+                        <Identicon :address="contact.address" size="50" class="img-responsive" />
                     </div>
                     <div class="nq-label">
                         {{ contact.label }}
@@ -22,9 +22,9 @@
         </div>
         <div class="nq-card-footer">
             <!--<ok-btn @click="saveWallet" :options="options" btnColor="green" v-if="wallet.label">Save</ok-btn>-->
-            <cancel-btn :options="options" @click="handleDismiss()">
+            <CancelBtn :options="options" @click="handleDismiss()">
                 Cancel
-            </cancel-btn>
+            </CancelBtn>
         </div>
     </div>
 </template>
