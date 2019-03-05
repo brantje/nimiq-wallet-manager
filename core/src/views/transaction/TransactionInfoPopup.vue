@@ -80,9 +80,9 @@
             </div>
         </div>
         <div class="nq-card-footer">
-            <cancel-btn :options="options" @click="handleDismiss()">
+            <CancelBtn :options="options" @click="handleDismiss()">
                 Close
-            </cancel-btn>
+            </CancelBtn>
         </div>
     </div>
 </template>

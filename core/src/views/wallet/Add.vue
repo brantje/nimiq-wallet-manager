@@ -2,10 +2,10 @@
     <div>
         <div class="nq-card">
             <div class="nq-card-body">
-                <form-wizard ref="wizard" title="Add wallet" subtitle="" color="#1f2348" step-size="xs"
-                             @on-complete="onComplete" @on-error="handleError"
+                <FormWizard ref="wizard" title="Add wallet" subtitle="" color="#1f2348" step-size="xs"
+                            @on-complete="onComplete" @on-error="handleError"
                 >
-                    <tab-content title="Choose wallet type">
+                    <TabContent title="Choose wallet type">
                         <div>
                             <p><b>Choose wallet type to add</b></p>
                         </div>
@@ -42,9 +42,9 @@
                                 <!--nofollow noreferrer noopener: Prevents tab napping and information leakage. -->
                             </small>
                         </p>
-                    </tab-content>
+                    </TabContent>
 
-                    <tab-content title="Additional Info" :before-change="validateStep2">
+                    <TabContent title="Additional Info" :before-change="validateStep2">
                         <div v-if="addType === 'address'">
                             <div>
                                 <p>
@@ -77,9 +77,9 @@
                                 <input v-model="recoveryWords" type="text" placeholder="Enter your recovery words" />
                             </div>
                         </div>
-                    </tab-content>
+                    </TabContent>
 
-                    <tab-content title="Name it" :before-change="validateStep3">
+                    <TabContent title="Name it" :before-change="validateStep3">
                         <div>
                             <p>
                                 <b>Make your wallet personal by giving it a name</b>
@@ -88,8 +88,8 @@
                         <div>
                             <input v-model="wallet.label" type="text" />
                         </div>
-                    </tab-content>
-                    <tab-content v-if="addType !== 'address'" title="Pass phrase">
+                    </TabContent>
+                    <TabContent v-if="addType !== 'address'" title="Pass phrase">
                         <div>
                             <h1>Set a Pass Phrase</h1>
                             <p>
@@ -102,8 +102,8 @@
                         <div>
                             <input v-model="passPhrase" type="password" />
                         </div>
-                    </tab-content>
-                    <tab-content v-if="addType !== 'address'" title="Confirm pass phrase" :before-change="validatePassPhrase">
+                    </TabContent>
+                    <TabContent v-if="addType !== 'address'" title="Confirm pass phrase" :before-change="validatePassPhrase">
                         <div>
                             <h1>Confirm Pass Phrase</h1>
                             <p>Please confirm your Pass Phrase.</p>
@@ -111,8 +111,8 @@
                         <div>
                             <input v-model="passPhraseConfirm" type="password" />
                         </div>
-                    </tab-content>
-                    <tab-content title="Confirmation">
+                    </TabContent>
+                    <TabContent title="Confirmation">
                         <div>
                             <h1>Your wallet is almost ready</h1>
                             <p>
@@ -131,8 +131,8 @@
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                    </tab-content>
-                </form-wizard>
+                    </TabContent>
+                </FormWizard>
             </div>
         </div>
     </div>

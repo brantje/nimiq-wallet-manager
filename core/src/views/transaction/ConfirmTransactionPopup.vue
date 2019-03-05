@@ -9,12 +9,12 @@
             <input v-model="passPhrase" type="password" placeholder="••••••••" />
         </div>
         <div class="nq-card-footer">
-            <ok-btn v-if="passPhrase" :options="options" btn-color="green" @click="verifyPassPhrase">
+            <OkBtn v-if="passPhrase" :options="options" btn-color="green" @click="verifyPassPhrase">
                 Confirm transaction
-            </ok-btn>
-            <cancel-btn :options="options" @click="handleDismiss()">
+            </OkBtn>
+            <CancelBtn :options="options" @click="handleDismiss()">
                 Cancel
-            </cancel-btn>
+            </CancelBtn>
         </div>
     </div>
 </template>

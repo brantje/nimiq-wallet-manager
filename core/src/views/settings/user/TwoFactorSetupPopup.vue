@@ -2,7 +2,7 @@
     <div class="nq-card">
         <div class="nq-card-body nq-style">
             <div class="pull-left margin-right-2">
-                <qrcode-vue :value="twoFactorSecret.uri" :size="128" level="Q"></qrcode-vue>
+                <QrcodeVue :value="twoFactorSecret.uri" :size="128" level="Q"></QrcodeVue>
             </div>
             <div class="pull-left">
                 <label>Enter the verification code</label>
@@ -14,9 +14,9 @@
         </div>
         <div class="clearfix"></div>
         <div class="nq-card-footer">
-            <cancel-btn :options="options" @click="handleDismiss()">
+            <CancelBtn :options="options" @click="handleDismiss()">
                 Close
-            </cancel-btn>
+            </CancelBtn>
         </div>
     </div>
 </template>

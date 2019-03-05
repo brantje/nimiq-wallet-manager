@@ -18,12 +18,12 @@
             </div>
         </div>
         <div class="nq-card-footer">
-            <ok-btn v-if="wallet.label" :options="options" btn-color="green" @click="saveWallet">
+            <OkBtn v-if="wallet.label" :options="options" btn-color="green" @click="saveWallet">
                 Save
-            </ok-btn>
-            <cancel-btn :options="options" @click="handleDismiss()">
+            </OkBtn>
+            <CancelBtn :options="options" @click="handleDismiss()">
                 Dismiss
-            </cancel-btn>
+            </CancelBtn>
         </div>
     </div>
 </template>

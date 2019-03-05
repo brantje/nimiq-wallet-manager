@@ -22,9 +22,9 @@
         </div>
         <div class="nq-card-footer">
             <!--<ok-btn @click="saveWallet" :options="options" btnColor="green" v-if="wallet.label">Save</ok-btn>-->
-            <cancel-btn :options="options" @click="handleDismiss()">
+            <CancelBtn :options="options" @click="handleDismiss()">
                 Cancel
-            </cancel-btn>
+            </CancelBtn>
         </div>
     </div>
 </template>
