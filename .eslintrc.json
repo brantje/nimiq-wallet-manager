@@ -16,7 +16,16 @@
         ],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/max-attributes-per-line": "off",
-        "vue/singleline-html-element-content-newline": "off",
+        "vue/singleline-html-element-content-newline": ["error", {
+            "ignoreWhenNoAttributes": true,
+            "ignoreWhenEmpty": true,
+            "ignores": ["pre", "textarea", "span"]
+        }],
+        "vue/multiline-html-element-content-newline": ["error", {
+            "ignoreWhenEmpty": true,
+            "ignores": ["pre", "textarea", "span"],
+            "allowEmptyLines": false
+        }],
         "vue/require-prop-types": "off",
         "vue/html-self-closing": ["error", {
             "html": {

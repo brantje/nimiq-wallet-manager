@@ -10,7 +10,9 @@
                 <form role="form">
                     <div class="form-group">
                         <div class="account-dropdown">
-                            <label class="nq-h3">Send from</label>
+                            <label class="nq-h3">
+                                Send from
+                            </label>
                             <div>
                                 <div class="selected-account" @click="dropdownShown = !dropdownShown">
                                     <div class="identicon">
@@ -55,7 +57,9 @@
                         <span class="pull-right nq-button-s" @click="showContactDialog">
                             Contacts
                         </span>
-                        <label class="nq-h3">Send to</label>
+                        <label class="nq-h3">
+                            Send to
+                        </label>
                         <div class="account-row">
                             <div>
                                 <div class="identicon">
@@ -75,7 +79,9 @@
                         </div>
 
                         <div class="input">
-                            <label class="nq-h3">Amount</label>
+                            <label class="nq-h3">
+                                Amount
+                            </label>
                             <div class="input-group">
                                 <input v-model="newTx.value" class="form-control" min="0" placeholder="0.00"
                                        type="number" step="0.00001"
@@ -106,13 +112,17 @@
                         </h5>
                         <div v-if="advancedSettingsShown" class="advanced">
                             <div class="input">
-                                <label class="nq-h3">Message</label>
+                                <label class="nq-h3">
+                                    Message
+                                </label>
                                 <div>
                                     <input v-model="newTx.extraData" type="text">
                                 </div>
                             </div>
                             <div class="input">
-                                <label class="nq-h3">Fee</label>
+                                <label class="nq-h3">
+                                    Fee
+                                </label>
                                 <div class="x-fee-labels">
                                     <div free="">
                                         free

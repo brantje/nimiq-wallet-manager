@@ -18,7 +18,9 @@
                   autocomplete="off"
                   @submit.prevent="submitDialogForm"
             >
-                <label for="dg-input-elem" style="font-size: 13px">{{ hardConfirmHelpText }}</label>
+                <label for="dg-input-elem" style="font-size: 13px">
+                    {{ hardConfirmHelpText }}
+                </label>
                 <input id="dg-input-elem"
                        ref="inputElem"
                        v-model="input"

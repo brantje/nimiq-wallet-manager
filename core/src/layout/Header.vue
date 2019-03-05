@@ -35,7 +35,9 @@
                     </li>
                     <li class="spacer" />
                     <li>
-                        <a @click="logout">Logout</a>
+                        <a @click="logout">
+                            Logout
+                        </a>
                     </li>
                 </ul>
             </li>

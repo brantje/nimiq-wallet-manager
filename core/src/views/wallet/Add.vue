@@ -34,11 +34,14 @@
                             </label>
                         </div>
                         <p>
-                            <small>The wallet private key will be encrypted before it's send to the server.<br>More
+                            <small>
+                                The wallet private key will be encrypted before it's send to the server.<br>More
                                 info can be found <a
                                     href="https://github.com/brantje/nimiq-wallet-manager/wiki/How-is-the-private-key-of-the-wallet-stored%3F"
                                     rel="nofollow noreferrer noopener"
-                                >here</a>
+                                >
+                                    here
+                                </a>
                                 <!--nofollow noreferrer noopener: Prevents tab napping and information leakage. -->
                             </small>
                         </p>

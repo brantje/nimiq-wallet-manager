@@ -24,7 +24,6 @@
                                 <br>
                                 Expires
                                 <time>{{ session.expires | formatDate('long') }}</time>
-
                             </small>
                         </div>
                         <div>
