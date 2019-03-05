@@ -23,9 +23,9 @@
             </p>
             <p class="text-small">
                 Looking for two-factor authentication? You can find it in
-                <router-link to="/settings/user/security">
+                <RouterLink to="/settings/user/security">
                     Security
-                </router-link>
+                </RouterLink>
                 .
             </p>
 

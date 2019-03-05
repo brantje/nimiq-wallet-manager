@@ -5,19 +5,19 @@
                 Personal settings
                 <ul>
                     <li>
-                        <router-link to="/settings/user/account">
+                        <RouterLink to="/settings/user/account">
                             Account
-                        </router-link>
+                        </RouterLink>
                     </li>
                     <li>
-                        <router-link to="/settings/user/security">
+                        <RouterLink to="/settings/user/security">
                             Security
-                        </router-link>
+                        </RouterLink>
                     </li>
                     <li>
-                        <router-link to="/settings/user/sessions">
+                        <RouterLink to="/settings/user/sessions">
                             Sessions
-                        </router-link>
+                        </RouterLink>
                     </li>
                 </ul>
 

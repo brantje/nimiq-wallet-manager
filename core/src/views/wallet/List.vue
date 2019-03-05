@@ -3,12 +3,12 @@
         <h1 class="nq-h1">
             Wallets
         </h1>
-        <router-link to="/wallet/add">
+        <RouterLink to="/wallet/add">
             <button class="nq-button-s">
                 Add wallet
             </button>
-        </router-link>
-        <draggable v-model="wallets" :options="{group:'people'}" @start="drag=true" @end="drag=false">
+        </RouterLink>
+        <Draggable v-model="wallets" :options="{group:'people'}" @start="drag=true" @end="drag=false">
             <div v-for="wallet in wallets" :key="wallet.address" class="wallet-list">
                 <div class="wallet">
                     <div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-        </draggable>
+        </Draggable>
     </div>
 </template>
 

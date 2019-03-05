@@ -8,22 +8,22 @@
 
         <div class="action-card nq-card">
             <div>
-                <router-link to="new-transaction">
+                <RouterLink to="new-transaction">
                     Send
-                </router-link>
+                </RouterLink>
             </div>
             <div>
                 Receive
             </div>
             <div>
-                <router-link to="/contacts">
+                <RouterLink to="/contacts">
                     Contacts
-                </router-link>
+                </RouterLink>
             </div>
             <div>
-                <router-link to="/wallet/add">
+                <RouterLink to="/wallet/add">
                     Add wallet
-                </router-link>
+                </RouterLink>
             </div>
         </div>
 

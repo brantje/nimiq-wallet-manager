@@ -3,9 +3,9 @@
         <div v-if="getWallets.length === 0" class="nq-card">
             <div class="nq-card-body">
                 No wallets yet! <br>
-                Why not <router-link to="/wallet/add">
+                Why not <RouterLink to="/wallet/add">
                     add
-                </router-link> one?
+                </RouterLink> one?
             </div>
         </div>
         <div v-for="wallet in sortWallets(getWallets)" :key="wallet.address" class="nq-card">

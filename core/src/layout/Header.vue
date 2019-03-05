@@ -1,11 +1,11 @@
 <template>
     <header id="top" class="nq-blue-bg">
-        <router-link to="/login">
+        <RouterLink to="/login">
             <div class="nq-icon nimiq-logo pull-left" />
             <h1 class="nq-h1 pull-left">
                 Nimiq Wallet Manager
             </h1>
-        </router-link>
+        </RouterLink>
         <!-- {% if user %} -->
         <ul v-if="isProfileLoaded" class="nav pull-right">
             <li>
@@ -19,19 +19,19 @@
                 </a>
                 <ul class="submenu nq-card">
                     <li>
-                        <router-link to="/wallets">
+                        <RouterLink to="/wallets">
                             Manage wallets
-                        </router-link>
+                        </RouterLink>
                     </li>
                     <li>
-                        <router-link to="/contacts">
+                        <RouterLink to="/contacts">
                             Manage contacts
-                        </router-link>
+                        </RouterLink>
                     </li>
                     <li>
-                        <router-link to="/settings/user/account">
+                        <RouterLink to="/settings/user/account">
                             Settings
-                        </router-link>
+                        </RouterLink>
                     </li>
                     <li class="spacer" />
                     <li>

@@ -78,9 +78,9 @@
                                 Login
                             </button>
                         </form>
-                        <router-link to="/register">
+                        <RouterLink to="/register">
                             <a>No account? Register here</a>
-                        </router-link>
+                        </RouterLink>
                     </div>
                 </div>
             </div>

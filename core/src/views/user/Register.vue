@@ -37,15 +37,15 @@
                                 Register
                             </button>
                         </form>
-                        <router-link to="/login">
+                        <RouterLink to="/login">
                             <a>Already have an account? Login</a>
-                        </router-link>
+                        </RouterLink>
                     </div>
 
                     <div v-if="success" class="form">
-                        Registration success, you can <router-link to="/login">
+                        Registration success, you can <RouterLink to="/login">
                             login
-                        </router-link> now.
+                        </RouterLink> now.
                     </div>
                 </div>
             </div>
