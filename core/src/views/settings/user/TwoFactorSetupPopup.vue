@@ -2,17 +2,17 @@
     <div class="nq-card">
         <div class="nq-card-body nq-style">
             <div class="pull-left margin-right-2">
-                <QrcodeVue :value="twoFactorSecret.uri" :size="128" level="Q"></QrcodeVue>
+                <QrcodeVue :value="twoFactorSecret.uri" :size="128" level="Q" />
             </div>
             <div class="pull-left">
                 <label>Enter the verification code</label>
-                <input v-model="otp" type="text" />
+                <input v-model="otp" type="text">
                 <button class="nq-button-s" @click="verifyOtp">
                     Verify
                 </button>
             </div>
         </div>
-        <div class="clearfix"></div>
+        <div class="clearfix" />
         <div class="nq-card-footer">
             <CancelBtn :options="options" @click="handleDismiss()">
                 Close

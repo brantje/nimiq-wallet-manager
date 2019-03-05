@@ -1,6 +1,5 @@
 <template>
-    <div class="sidenav scrollbar-themed">
-    </div>
+    <div class="sidenav scrollbar-themed" />
 </template>
 
 <script>

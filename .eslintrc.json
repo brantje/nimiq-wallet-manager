@@ -16,8 +16,15 @@
         ],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/max-attributes-per-line": "off",
+        "vue/singleline-html-element-content-newline": "off",
         "vue/require-prop-types": "off",
-        "vue/html-self-closing": "off",
+        "vue/html-self-closing": ["error", {
+            "html": {
+                "void": "never",
+                "normal": "always",
+                "component": "always"
+            }
+        }],
         "vue/no-side-effects-in-computed-properties": "off",
         "no-console": "off",
         "no-debugger": "off",

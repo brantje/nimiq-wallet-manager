@@ -1,9 +1,9 @@
 <template>
     <span>
         <span class="slot">
-            <slot></slot>
+            <slot />
         </span>
-        <svg class="nq-icon"><use :xlink:href="icon"></use></svg>
+        <svg class="nq-icon"><use :xlink:href="icon" /></svg>
     </span>
 </template>
 

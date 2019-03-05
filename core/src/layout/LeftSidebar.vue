@@ -2,7 +2,7 @@
     <div class="sidenav scrollbar-themed">
         <div v-if="getWallets.length === 0" class="nq-card">
             <div class="nq-card-body">
-                No wallets yet! <br />
+                No wallets yet! <br>
                 Why not <router-link to="/wallet/add">
                     add
                 </router-link> one?
@@ -11,19 +11,19 @@
         <div v-for="wallet in sortWallets(getWallets)" :key="wallet.address" class="nq-card">
             <div class="nq-card-body" @click="loadWallet(wallet.address)">
                 <div class="identicon">
-                    <Identicon :address="wallet.address" size="64" class="img-responsive"></Identicon>
+                    <Identicon :address="wallet.address" size="64" class="img-responsive" />
                 </div>
                 <div class="account-data">
                     <span class="nq-label">{{ wallet.label }} </span>
                     <div class="nq-text-s">
                         {{ wallet.address }}
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="clearfix" />
                 </div>
                 <div class="nq-h3 pull-right">
                     {{ wallet.balance | lunaToCoins }} NIM
                 </div>
-                <div class="clearfix"></div>
+                <div class="clearfix" />
             </div>
         </div>
     </div>

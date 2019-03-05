@@ -3,10 +3,10 @@
             :class="['nq-button-s', {'dg-btn--loading': loading}, {'dg-pull-right': !options.reverse}, btnColor]" :disabled="is_disabled" @click.prevent="proceed()"
     >
         <span class="dg-btn-content">
-            <slot></slot>
+            <slot />
             <span v-if="soft_confirm">({{ clicks_remaining }})</span>
         </span>
-        <span is="btn-loader" v-if="loading"></span>
+        <span is="btn-loader" v-if="loading" />
     </button>
 </template>
 

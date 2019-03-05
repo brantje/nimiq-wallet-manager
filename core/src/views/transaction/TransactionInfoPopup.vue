@@ -20,7 +20,7 @@
                         Sender
                     </label>
                     <span class="nq-text-s">
-                        <Address :address="tx.fromAddress"></Address>
+                        <Address :address="tx.fromAddress" />
                     </span>
                 </div>
                 <div>
@@ -29,7 +29,7 @@
                     </label>
 
                     <span class="nq-text-s">
-                        <Address :address="tx.toAddress"></Address>
+                        <Address :address="tx.toAddress" />
                     </span>
                 </div>
                 <div>

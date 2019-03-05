@@ -1,7 +1,7 @@
 <template>
     <header id="top" class="nq-blue-bg">
         <router-link to="/login">
-            <div class="nq-icon nimiq-logo pull-left"></div>
+            <div class="nq-icon nimiq-logo pull-left" />
             <h1 class="nq-h1 pull-left">
                 Nimiq Wallet Manager
             </h1>
@@ -33,7 +33,7 @@
                             Settings
                         </router-link>
                     </li>
-                    <li class="spacer"></li>
+                    <li class="spacer" />
                     <li>
                         <a @click="logout">Logout</a>
                     </li>
@@ -41,7 +41,7 @@
             </li>
         </ul>
         <!-- {% endif %} -->
-        <div class="clearfix"></div>
+        <div class="clearfix" />
     </header>
 </template>
 

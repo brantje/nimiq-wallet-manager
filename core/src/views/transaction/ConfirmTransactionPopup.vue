@@ -6,7 +6,7 @@
             </h1>
         </div>
         <div class="nq-card-body">
-            <input v-model="passPhrase" type="password" placeholder="••••••••" />
+            <input v-model="passPhrase" type="password" placeholder="••••••••">
         </div>
         <div class="nq-card-footer">
             <OkBtn v-if="passPhrase" :options="options" btn-color="green" @click="verifyPassPhrase">

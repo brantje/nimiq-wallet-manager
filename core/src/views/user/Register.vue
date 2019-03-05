@@ -3,7 +3,7 @@
         <div class="content-container nq-style scrollbar-themed">
             <div class="centered-container">
                 <div class="text-center">
-                    <div class="logo"></div>
+                    <div class="logo" />
                     <h1>Nimiq Wallet Manager</h1>
                 </div>
                 <div class="nq-card">

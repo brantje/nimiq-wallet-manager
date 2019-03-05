@@ -12,7 +12,7 @@
             <div v-for="wallet in wallets" :key="wallet.address" class="wallet-list">
                 <div class="wallet">
                     <div>
-                        <Identicon :address="wallet.address" size="50" class="img-responsive"></Identicon>
+                        <Identicon :address="wallet.address" size="50" class="img-responsive" />
                     </div>
                     <div class="nq-label">
                         {{ wallet.label }}

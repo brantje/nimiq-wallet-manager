@@ -2,7 +2,7 @@
     <button v-if="enabled" ref="btn"
             :class="['nq-button-s', {'dg-pull-right': options.reverse}]" @click.prevent="$emit('click')"
     >
-        <slot></slot>
+        <slot />
     </button>
 </template>
 

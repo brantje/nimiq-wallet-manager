@@ -3,7 +3,7 @@
         <div class="content-container nq-style scrollbar-themed">
             <div class="centered-container">
                 <div class="text-center">
-                    <div class="logo"></div>
+                    <div class="logo" />
                     <h1>Nimiq Wallet Manager</h1>
                 </div>
                 <div class="nq-card">
@@ -34,14 +34,14 @@
                                 <div>
                                     <p>
                                         <label>
-                                            <input v-model="sessionIpLocked" type="checkbox" />Lock this session to my IP
+                                            <input v-model="sessionIpLocked" type="checkbox">Lock this session to my IP
                                         </label>
                                     </p>
                                 </div>
                                 <div>
                                     <p>
                                         <label>
-                                            <input v-model="endAllPreviousSessions" type="checkbox" />End all previous sessions
+                                            <input v-model="endAllPreviousSessions" type="checkbox">End all previous sessions
                                         </label>
                                     </p>
                                 </div>

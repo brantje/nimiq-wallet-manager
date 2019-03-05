@@ -16,7 +16,7 @@
                                     <div class="identicon">
                                         <Identicon :address="newTx.sendFrom.address" size="64"
                                                    class="img-responsive"
-                                        ></Identicon>
+                                        />
                                     </div>
                                     <div class="account-data">
                                         <span class="material-icons pull-right">keyboard_arrow_down</span>
@@ -25,7 +25,7 @@
                                             {{ newTx.sendFrom.address }}
                                         </div>
                                     </div>
-                                    <div class="clearfix"></div>
+                                    <div class="clearfix" />
                                 </div>
                                 <div class="dropdown-container nq-card" :class="{'shown': dropdownShown}">
                                     <div v-for="wallet in getWallets" :key="wallet.address" class="wallet"
@@ -34,7 +34,7 @@
                                         <div class="identicon">
                                             <Identicon :address="wallet.address" size="64"
                                                        class="img-responsive"
-                                            ></Identicon>
+                                            />
                                         </div>
                                         <div class="account-data">
                                             <span class="nq-label">{{ wallet.label }} </span>
@@ -45,7 +45,7 @@
                                                 {{ wallet.balance | lunaToCoins }} NIM
                                             </div>
                                         </div>
-                                        <div class="clearfix"></div>
+                                        <div class="clearfix" />
                                     </div>
                                 </div>
                             </div>
@@ -61,16 +61,16 @@
                                 <div class="identicon">
                                     <Identicon :address="newTx.sendTo.address" size="64"
                                                class="img-responsive"
-                                    ></Identicon>
+                                    />
                                 </div>
                                 <div class="account-data">
                                     <div class="nq-text-s">
                                         <AddressInput :address="inputToAddress" placeholder="Enter recipient address"
                                                       @changed="setAddress"
-                                        ></AddressInput>
+                                        />
                                     </div>
                                 </div>
-                                <div class="clearfix"></div>
+                                <div class="clearfix" />
                             </div>
                         </div>
 
@@ -108,7 +108,7 @@
                             <div class="input">
                                 <label class="nq-h3">Message</label>
                                 <div>
-                                    <input v-model="newTx.extraData" type="text" />
+                                    <input v-model="newTx.extraData" type="text">
                                 </div>
                             </div>
                             <div class="input">

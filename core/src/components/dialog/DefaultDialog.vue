@@ -28,7 +28,7 @@
                        style="width: 100%;margin-top: 10px;
                             padding: 5px 15px; font-size: 16px;
                             border-radius: 4px; border: 2px solid #eee"
-                />
+                >
             </form>
         </div>
 
@@ -46,7 +46,7 @@
                 <span>{{ rightBtnText }}</span>
             </button>
 
-            <div class="dg-clear"></div>
+            <div class="dg-clear" />
         </div>
     </div>
 </template>

@@ -7,14 +7,14 @@
         </div>
         <div class="nq-card-body">
             <div class="identicon">
-                <Identicon :address="wallet.address" size="64" class="img-responsive"></Identicon>
+                <Identicon :address="wallet.address" size="64" class="img-responsive" />
             </div>
             <div class="account-data">
                 <span class="nq-label"><input v-model="wallet.label" type="text" placeholder="Enter a name "> </span>
                 <div class="nq-text-s">
-                    <input v-model="wallet.address" type="text" disabled />
+                    <input v-model="wallet.address" type="text" disabled>
                 </div>
-                <div class="clearfix"></div>
+                <div class="clearfix" />
             </div>
         </div>
         <div class="nq-card-footer">

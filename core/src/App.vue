@@ -2,11 +2,11 @@
     <div>
         <Header v-if="isProfileLoaded" />
         <div class="flex-container">
-            <router-view v-if="isProfileLoaded" name="leftSidebar"></router-view>
+            <router-view v-if="isProfileLoaded" name="leftSidebar" />
             <div class="content-container nq-style scrollbar-themed">
                 <!-- Scrollbar not working on firefox -->
                 <notifications position="top center" classes="notification" width="350" />
-                <router-view :key="$route.fullPath"></router-view>
+                <router-view :key="$route.fullPath" />
             </div>
             <RightSidebar v-if="isProfileLoaded" />
         </div>

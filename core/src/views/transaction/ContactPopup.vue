@@ -9,7 +9,7 @@
             <div v-for="contact in contacts" :key="contact._id" class="contact-list">
                 <div class="contact" @click="selectContact(contact)">
                     <div>
-                        <Identicon :address="contact.address" size="50" class="img-responsive"></Identicon>
+                        <Identicon :address="contact.address" size="50" class="img-responsive" />
                     </div>
                     <div class="nq-label">
                         {{ contact.label }}

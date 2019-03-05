@@ -7,16 +7,16 @@
         </div>
         <div class="nq-card-body">
             <div class="identicon">
-                <Identicon :address="contact.address" size="64" class="img-responsive"></Identicon>
+                <Identicon :address="contact.address" size="64" class="img-responsive" />
             </div>
             <div class="account-data">
                 <span class="nq-label">
                     <input v-model="contact.label" type="text" placeholder="Enter a name ">
                 </span>
                 <div class="nq-text-s">
-                    <AddressInput :address="inputAddress" :placeholder="'Enter address'" @changed="setAddress"></AddressInput>
+                    <AddressInput :address="inputAddress" :placeholder="'Enter address'" @changed="setAddress" />
                 </div>
-                <div class="clearfix"></div>
+                <div class="clearfix" />
             </div>
         </div>
         <div class="nq-card-footer">

@@ -21,7 +21,7 @@
                             <small class="nq-text-s">
                                 Last accessed on
                                 <time>{{ session.lastActive | formatDate('long') }}</time>
-                                <br />
+                                <br>
                                 Expires
                                 <time>{{ session.expires | formatDate('long') }}</time>
 
@@ -38,7 +38,7 @@
                             Revoke
                         </button>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="clearfix" />
                 </div>
             </div>
         </div>
