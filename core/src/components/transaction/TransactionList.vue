@@ -1,5 +1,5 @@
 <template>
-    <div v-if="transactions && transactions.length > 0" class="x-transactions-list">
+    <div v-if="transactions && Ntransactions.length > 0" class="x-transactions-list">
         <div v-for="transaction in sortTransactions(transactions)" :key="transaction.hash" class="x-transaction"
              @click="showTxInfo(transaction)"
         >
