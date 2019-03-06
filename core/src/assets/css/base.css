@@ -1,0 +1,82 @@
+/* muli-regular - latin */
+@font-face {
+    font-family: 'Muli';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Muli Regular'), local('Muli-Regular'),
+    url('/fonts/muli-v12-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('/fonts/muli-v12-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* muli-600 - latin */
+@font-face {
+    font-family: 'Muli';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Muli SemiBold'), local('Muli-SemiBold'),
+    url('/fonts/muli-v12-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('/fonts/muli-v12-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* muli-700 - latin */
+@font-face {
+    font-family: 'Muli';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Muli Bold'), local('Muli-Bold'),
+    url('/fonts/muli-v12-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('/fonts/muli-v12-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* fira-mono-regular - latin */
+@font-face {
+    font-family: 'Fira Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/fira-mono-v7-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Fira Mono Regular'), local('FiraMono-Regular'),
+    url('/fonts/fira-mono-v7-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/fonts/fira-mono-v7-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/fonts/fira-mono-v7-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('/fonts/fira-mono-v7-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/fonts/fira-mono-v7-latin-regular.svg#FiraMono') format('svg'); /* Legacy iOS */
+}
+
+html {
+    font-size: 8px;
+}
+body{
+    font-size: 2.25rem;
+    background-color: #f4f4f4;
+    font-family: Muli,system-ui,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.loading-container {
+    margin: 0 auto;
+}
+
+.loading {
+    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3CclipPath%20id%3D%22hexClip%22%3E%3Cpath%20clip-rule%3D%22evenodd%22%20d%3D%22M16%204.29h32l16%2027.71l-16%2027.71h-32l-16%20-27.71zM20.62%2012.29h22.76l11.38%2019.71l-11.38%2019.71h-22.76l-11.38%20-19.71z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M16%204.29h32l16%2027.71l-16%2027.71h-32l-16%20-27.71zM20.62%2012.29h22.76l11.38%2019.71l-11.38%2019.71h-22.76l-11.38%20-19.71z%22%20fill%3D%22white%22%20opacity%3D%220.2%22%2F%3E%3Cg%20clip-path%3D%22url(%23hexClip)%22%3E%3Ccircle%20id%3D%22circle%22%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2216%22%20fill%3D%22none%22%20stroke-width%3D%2232%22%20stroke%3D%22%231f2348%22%20stroke-dasharray%3D%22101%20101%22%20transform%3D%22rotate(-120%2032%2032)%22%2F%3E%3Canimate%20href%3D%22%23circle%22%20id%3D%22circleanimate%22%20attributeName%3D%22stroke-dashoffset%22%20from%3D%220%22%20to%3D%22-202%22%20dur%3D%223s%22%20repeatCount%3D%22indefinite%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+    height: 50px;
+    width: 50px;
+}
+
+.loading-container-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 99;
+}
+
+.loading-container-overlay .loading-container {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.loading-container-overlay .loading-container .loading{
+    margin: 0 auto;
+}
