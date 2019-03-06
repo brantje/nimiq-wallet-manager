@@ -68,7 +68,7 @@ module.exports = {
             { from: 'node_modules/@nimiq/core-web/worker-js.js', to: 'core/public/build/worker-js.js' },
             { from: 'node_modules/@nimiq/core-web/worker-wasm.js', to: 'core/public/build/worker-wasm.js' },
             { from: 'node_modules/@nimiq/core-web/worker-wasm.wasm', to: 'core/public/build/worker-wasm.wasm' },
-            // { from: 'node_modules/@nimiq/style/nimiq-style.icons.svg', to: 'core/public/img/nimiq-style.icons.svg' },
+            { from: 'node_modules/@nimiq/style/nimiq-style.icons.svg', to: 'core/public/img/nimiq-style.icons.svg' },
             { from: 'core/src/assets/css', to: 'core/public/build' },
         ]),
         new VueLoaderPlugin()
