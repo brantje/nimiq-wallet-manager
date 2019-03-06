@@ -5,7 +5,7 @@
             <RouterView v-if="isProfileLoaded" name="leftSidebar" />
             <div class="content-container nq-style scrollbar-themed">
                 <!-- Scrollbar not working on firefox -->
-                <Notifications position="top center" classes="notification" width="350" />
+                <notifications position="top center" classes="notification" width="350" />
                 <RouterView :key="$route.fullPath" />
             </div>
             <RightSidebar v-if="isProfileLoaded" />

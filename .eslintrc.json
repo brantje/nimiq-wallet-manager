@@ -14,7 +14,9 @@
                 "MemberExpression": 2
             }
         ],
-        "vue/component-name-in-template-casing": ["error", "PascalCase"],
+        "vue/component-name-in-template-casing": ["error", "PascalCase", {
+            "ignores": ['notification']
+        }],
         "vue/max-attributes-per-line": "off",
         "vue/singleline-html-element-content-newline": ["error", {
             "ignoreWhenNoAttributes": true,
