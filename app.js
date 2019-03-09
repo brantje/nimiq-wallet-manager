@@ -26,6 +26,16 @@ if (isSecure) {
             options.ca = [fs.readFileSync(process.env.SSL_CA)]
         }
         server = https.createServer(options, app)
+
+        if(process.env.USE_HSTS){
+            app.use((req,res, next) => {
+                let maxAge = process.env.HSTS_MAX_AGE || 15552000
+                let header = 'max-age=' + maxAge
+                res.setHeader('Strict-Transport-Security', header)
+                next()
+            })
+        }
+
     } catch (e) {
         Log.e('Unable to start https server.')
         Log.e('Your ssl configuration is incorrect')
