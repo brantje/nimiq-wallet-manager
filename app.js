@@ -3,7 +3,6 @@ const path = require('path')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const session = require('express-session')
 const csp = require('express-csp-header')
 const cors = require('cors')
 var fs = require('fs')
@@ -99,16 +98,6 @@ app.use(
         process.env.SESSION_KEY ||
         'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997'
     )
-)
-app.use(
-    session({
-        secret:
-        process.env.SESSION_KEY ||
-        'a1a91792b1b0a8862cdfeb55820d9a577a16a460b10b2e99425f8851fbea2997',
-        cookie: {maxAge: 60000},
-        resave: false,
-        saveUninitialized: false
-    })
 )
 
 let stylePolicy = [csp.SELF, '\'unsafe-inline\'']
