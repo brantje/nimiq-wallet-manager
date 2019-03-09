@@ -17,10 +17,34 @@ if (isSecure) {
     const https = require('https')
     let options
     try {
+        let ciphers = [
+            //ChaCha is on the wishlist
+            'ECDHE-RSA-AES256-SHA384',
+            'DHE-RSA-AES256-SHA384',
+            'ECDHE-RSA-AES256-SHA256',
+            'DHE-RSA-AES256-SHA256',
+            'ECDHE-RSA-AES128-SHA256',
+            'DHE-RSA-AES128-SHA256',
+            'HIGH',
+            '!aNULL',
+            '!eNULL',
+            '!EXPORT',
+            '!DES',
+            '!RC4',
+            '!MD5',
+            '!PSK',
+            '!SRP',
+            '!CAMELLIA'
+        ]
         options = {
             cert: fs.readFileSync(process.env.SSL_CERT),
-            key: fs.readFileSync(process.env.SSL_KEY)
+            key: fs.readFileSync(process.env.SSL_KEY),
+            ciphers: ciphers.join(':'),
+            secureProtocol: 'TLSv1_2_method',
+            honorCipherOrder: true
         }
+
+
         if (process.env.SSL_CA) {
             options.ca = [fs.readFileSync(process.env.SSL_CA)]
         }
