@@ -8,7 +8,7 @@
                 Add wallet
             </button>
         </RouterLink>
-        <Draggable v-model="wallets" :options="{group:'people'}" @start="drag=true" @end="drag=false">
+        <draggable v-model="wallets" :options="{group:'people'}" @start="drag=true" @end="drag=false">
             <div v-for="wallet in wallets" :key="wallet.address" class="wallet-list">
                 <div class="wallet">
                     <div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-        </Draggable>
+        </draggable>
     </div>
 </template>
 

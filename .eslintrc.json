@@ -15,7 +15,7 @@
             }
         ],
         "vue/component-name-in-template-casing": ["error", "PascalCase", {
-            "ignores": ["notification"]
+            "ignores": ["notification", "draggable"]
         }],
         "vue/max-attributes-per-line": "off",
         "vue/singleline-html-element-content-newline": ["error", {
