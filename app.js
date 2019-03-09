@@ -3,8 +3,7 @@ const path = require('path')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const csp = require('express-csp-header')
-const cors = require('cors')
+const securityHeaders = require('./core/routes/middleware/securityHeaders')
 var fs = require('fs')
 const Nimiq = require('@nimiq/core')
 Log = Nimiq.Log
@@ -26,16 +25,6 @@ if (isSecure) {
             options.ca = [fs.readFileSync(process.env.SSL_CA)]
         }
         server = https.createServer(options, app)
-
-        if(process.env.USE_HSTS){
-            app.use((req,res, next) => {
-                let maxAge = process.env.HSTS_MAX_AGE || 15552000
-                let header = 'max-age=' + maxAge
-                res.setHeader('Strict-Transport-Security', header)
-                next()
-            })
-        }
-
     } catch (e) {
         Log.e('Unable to start https server.')
         Log.e('Your ssl configuration is incorrect')
@@ -94,13 +83,6 @@ if (!isProduction) {
 // view engine setup
 app.set('views', path.join(__dirname, 'core/views'))
 app.set('view engine', 'twig')
-
-//Configure our app
-app.use(
-    cors({
-        origin: process.env.DOMAIN_NAME
-    })
-)
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(
@@ -110,23 +92,8 @@ app.use(
     )
 )
 
-let stylePolicy = [csp.SELF, '\'unsafe-inline\'']
-//Configure SCP
-app.use(
-    csp({
-        policies: {
-            'default-src': [csp.SELF, process.env.DOMAIN_NAME],
-            'connect-src': [csp.SELF, 'wss://' + process.env.DOMAIN_NAME, 'https://cdn.nimiq.com'],
-            'script-src': [csp.SELF, csp.NONCE, csp.EVAL, 'https://cdn.nimiq.com', 'script src \'nonce-469261a9b2a9dd894a48\''],
-            'style-src': stylePolicy,
-            'font-src': [csp.SELF],
-            'img-src': ['data:', csp.SELF],
-            'worker-src': [csp.SELF, 'blob:'],
-            'block-all-mixed-content': true
-        }
-    })
-)
-
+//Configure headers
+app.use(securityHeaders())
 
 app.use(express.static(path.join(__dirname, 'core/public')))
 // error handler
