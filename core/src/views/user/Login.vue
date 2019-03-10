@@ -3,7 +3,6 @@
         <div class="content-container nq-style scrollbar-themed">
             <div class="centered-container">
                 <div class="text-center">
-                    <div class="logo" />
                     <h1>Nimiq Wallet Manager</h1>
                 </div>
                 <div class="nq-card">
@@ -128,9 +127,11 @@ export default {
 </script>
 <style scoped>
     .nq-card {
-        width: 380px;
+        max-width: 480px;
     }
-
+    .content-container{
+        height: auto;
+    }
     .adv_icon{
         cursor: pointer;
         position: relative;

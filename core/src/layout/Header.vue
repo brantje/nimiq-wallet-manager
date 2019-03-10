@@ -1,9 +1,18 @@
 <template>
     <header id="top" class="nq-blue-bg">
+        <div class="nq-icon nimiq-logo pull-left" />
+        <div class="menu-toggle pull-left" @click="toggleMenu">
+            <div class="line" />
+            <div class="line" />
+            <div class="line" />
+            <div class="line" />
+        </div>
         <RouterLink to="/login">
-            <div class="nq-icon nimiq-logo pull-left" />
-            <h1 class="nq-h1 pull-left">
+            <h1 class="nq-h1 pull-left hidden-xs">
                 Nimiq Wallet Manager
+            </h1>
+            <h1 class="nq-h1 pull-left show-xs">
+                NWM
             </h1>
         </RouterLink>
         <!-- {% if user %} -->
@@ -48,7 +57,7 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import {mapState, mapGetters, mapActions} from 'vuex'
 import {AUTH_LOGOUT} from 'store/actions/auth'
 import store from 'store'
 
@@ -65,14 +74,45 @@ export default {
             store.dispatch(AUTH_LOGOUT).then(() =>{
                 this.$router.push('/login')
             })
+        },
+        toggleMenu: function () {
+            store.commit('toggleMenu')
         }
     }
 }
 </script>
 
-<style>
+<style  lang="scss">
+    @media screen and (max-width: 1024px){
+        .nimiq-logo{
+            display: none;
+        }
+        header .menu-toggle{
+            display: block;
+        }
+    }
     header .nq-h1 {
         color: #fff;
+    }
+
+    .menu-toggle{
+        margin-top: 15px;
+        margin-left: 15px;
+        display: none;
+        cursor: pointer;
+        .line{
+            width: 36px;
+            margin-bottom: 6px;
+            background-color: #e9b213; // Old browsers
+            background: #e9b213; /* Old browsers */
+            background: -moz-linear-gradient(-45deg, #e9b213 0%, #ec991c 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg, #e9b213 0%,#ec991c 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg, #e9b213 0%,#ec991c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9b213', endColorstr='#ec991c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            height: 5px;
+            //E9B213 left top
+            //#EC991C right bottom
+        }
     }
 
     .settings {

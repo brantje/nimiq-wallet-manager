@@ -5,19 +5,23 @@
   text-align: left;
   .x-transaction {
     .x-label[recipient], .x-label[sender] {
-      @media screen and (max-width: 480px) {
-        display: none !important;
-      }
+
       overflow: hidden;
       width: 20%;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
     .timestamp {
+      @media screen and (max-width: 425px){
+        display: none;
+      }
       max-width: 150px;
       width: 10%;
     }
     .x-identicon {
+      @media screen and (max-width: 425px){
+        display: none;
+      }
       min-width: 64px;
       width: 10%;
       text-align: center;

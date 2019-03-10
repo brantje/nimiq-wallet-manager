@@ -128,16 +128,21 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
     .tx-info-head {
         margin-bottom: 15px;
     }
-
+    .nq-text-s {
+        word-break: break-word;
+    }
     .tx-info-detail {
         display: flex;
         flex-direction: column;
     }
     .tx-info-detail > div {
+        @media screen and (max-width: 768px){
+            flex-direction: column;
+        }
         display: flex;
     }
     .tx-info-detail > div label{

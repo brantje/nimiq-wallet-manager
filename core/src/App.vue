@@ -60,6 +60,9 @@ export default {
                 }
                 this.$socket.open()
             }
+        },
+        $route: function () {
+            store.commit('hideMenu')
         }
     },
     created() {

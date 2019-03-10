@@ -6,6 +6,7 @@ import nimiq from 'store/modules/nimiq'
 import wallet from 'store/modules/wallet'
 import contact from 'store/modules/contact'
 import socket from 'store/modules/socket.io'
+import menu from 'store/modules/menu'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -17,7 +18,8 @@ export default new Vuex.Store({
         nimiq,
         wallet,
         contact,
-        socket
+        socket,
+        menu
     },
     actions: {
         SOCKET_CONNECT: function () {

@@ -63,7 +63,7 @@ export default {
         position: relative;
         width: 100%;
         min-width: 15rem;
-        white-space: nowrap;
+        /*white-space: nowrap;*/
         cursor: pointer;
     }
     .address:hover .copy-hover{
