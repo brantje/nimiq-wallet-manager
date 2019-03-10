@@ -80,8 +80,8 @@ module.exports = function (NimiqHelper) {
                 affectedAddresses.push(tx.toAddress)
             }
         }
-        let refresh = false
         for (let client of clients) {
+            let refresh = false
             let wallets = await Wallet.find({user: client.userId, deleted: 0}, 'address')
             wallets = wallets.map((e) => e.address)
             for(let wallet of wallets){
@@ -90,8 +90,8 @@ module.exports = function (NimiqHelper) {
                     break
                 }
             }
+            client.socket.emit('BLOCKCHAIN_HEAD_CHANGED', {refresh})
         }
-        SocketSingleton.io.emit('BLOCKCHAIN_HEAD_CHANGED', {refresh})
     })
 
     $.mempool.on('transaction-added', (tx) => {
