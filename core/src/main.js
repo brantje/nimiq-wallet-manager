@@ -49,7 +49,8 @@ let socketPort = (window.location.port) ? ':'+ window.location.port : ''
 let socketHost = window.location.protocol + '//' + window.location.host + socketPort
 export const SocketInstance = socketio(socketHost, {
     upgrade: true,
-    transports: ['websocket']
+    transports: ['polling', 'websocket'],
+    autoConnect: false
 })
 const workerURL = location.origin + '/build/'
 
