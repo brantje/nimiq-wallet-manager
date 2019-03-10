@@ -14,7 +14,9 @@ module.exports = function (NimiqHelper) {
 
     SocketSingleton.io.on('connection', function (socket) {
         Log.d(SocketIO, 'A client has connected')
-
+        if(!socket.handshake.query.token){
+            socket.disconnect(true)
+        }
         let token = Buffer.from(socket.handshake.query.token, 'base64').toString()
         JsonWebToken.verify(token, process.env.JWT_SECRET, async function (error, decodedToken) {
             if (error) {
