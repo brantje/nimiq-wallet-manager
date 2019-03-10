@@ -44,12 +44,21 @@ UserSchema.methods.toAuthJSON = function (params) {
     }
 }
 
+
 UserSchema.methods.toJSON = function () {
+    let secretProperties = ['two_factor_secret', 'tmp_two_factor_secret']
+    let settings = this.settings
+    for(let prop of secretProperties){
+        if(settings.hasOwnProperty(prop)) {
+            delete settings[prop]
+        }
+    }
     const user = {
         'username': this.username,
-        'settings': this.settings,
+        'settings': settings,
     }
     return user
 }
+
 
 mongoose.model('Users', UserSchema)
