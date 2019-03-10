@@ -9,11 +9,13 @@ const actions = {
     SOCKET_CONSENSUS_ESTABLISHED({dispatch}) {
         dispatch(NETWORK_STATS_REQUEST)
     },
-    SOCKET_BLOCKCHAIN_HEAD_CHANGED({dispatch}) {
+    SOCKET_BLOCKCHAIN_HEAD_CHANGED({dispatch}, {refresh}) {
         dispatch(NETWORK_STATS_REQUEST)
-        dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
-        dispatch(WALLET_LIST_REQUEST)
         dispatch(NETWORK_MEMPOOL_REQUEST)
+        if(refresh) {
+            dispatch(WALLET_LIST_TRANSACTIONS_REQUEST)
+            dispatch(WALLET_LIST_REQUEST)
+        }
     },
     SOCKET_MEMPOOL_TRANSACTION_ADDED({dispatch}, tx) {
         dispatch(MEMPOOL_ADD_TRANSACTION, tx)
