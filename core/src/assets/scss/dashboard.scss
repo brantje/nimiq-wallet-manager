@@ -1,9 +1,15 @@
 
 .dashboard {
   display: flex;
+  flex-wrap: wrap;
+
   .nq-card {
+    @media screen and (max-width: 768px){
+      width: 100%;
+    }
+    max-width: none;
     flex-grow: 1;
-    width: 33%;
+    //width: 33%;
     .body-row{
       clear: both;
       &:after{

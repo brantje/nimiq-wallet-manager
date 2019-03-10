@@ -19,6 +19,7 @@ header {
   }
   > ul.nav {
     margin: 0;
+    padding: 0;
     > li {
       padding: 22px;
       cursor: pointer;
@@ -57,7 +58,7 @@ header {
         top: 53px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-
+        z-index: 50;
         & > li {
           &.spacer{
 
@@ -83,7 +84,24 @@ header {
 }
 
 .sidenav {
-  //background-color: lightgray;
+  @media screen and (max-width: 1024px){
+    flex: 0;
+    &.left{
+      &.shown{
+        left: 0;
+      }
+      position: absolute;
+      width: 96%;
+      max-width: 480px;
+      transition: 0.5s;
+      height: 100vh;
+      left: -100%;
+      z-index: 10;
+      box-shadow: 0 0.5rem 3.5rem rgba(0,0,0,.111158);
+    }
+    //
+  }
+  background: var(--nimiq-gray);
   -webkit-flex: 1;
   flex: 1.5;
   max-height: calc(100vh - 70px);
@@ -105,10 +123,12 @@ header {
 }
 
 .content-container {
+  @media screen and (max-width: 768px){
+    margin: 0 15px;
+  }
   //background-color: lightblue;
-  height: calc(100vh - 70px);
+  //height: calc(100vh - 70px);
   max-width: 1200px;
-  overflow-y: auto;
   -webkit-flex: 5;
   flex: 5;
   margin: 0 auto;
@@ -201,4 +221,16 @@ header {
 }
 .pointer{
   cursor: pointer;
+}
+
+@media screen and (max-width: 375px){
+  .hidden-xs{
+    display: none;
+  }
+  .show-xs{
+    display: block !important;
+  }
+}
+.show-xs{
+  display: none;
 }

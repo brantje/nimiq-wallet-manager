@@ -57,8 +57,7 @@ module.exports = function (NimiqHelper) {
 
         return newWallet.save()
                 .then(async () => {
-                    const pipeline = await Cache.redis.pipeline()
-                    pipeline.del(`recent_tx_${id}`)
+                    await Cache.redis.del(`recent_tx_${userId}`)
                     res.json(newWallet.toJSON())
                 })
     })

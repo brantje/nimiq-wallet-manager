@@ -87,6 +87,7 @@ export default {
 <style scoped>
     .action-card {
         display: flex;
+        flex-wrap: wrap;
         max-width: none;
     }
 

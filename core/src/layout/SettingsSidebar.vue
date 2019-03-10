@@ -1,5 +1,5 @@
 <template>
-    <div class="sidenav scrollbar-themed">
+    <div class="sidenav left scrollbar-themed" :class="{'shown': getMenuShown }">
         <div class="nq-card">
             <div class="nq-card-header">
                 <h1 class="nq-h1">
@@ -42,7 +42,7 @@ export default {
     data() {
         return {}
     },
-
+    computed: mapGetters(['getMenuShown']),
     created() {
 
     },

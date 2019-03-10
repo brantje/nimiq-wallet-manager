@@ -95,7 +95,11 @@ export default {
 </script>
 <style scoped>
     .nq-card {
-        width: 380px;
+        max-width: 480px;
+    }
+
+    .content-container{
+        height: auto;
     }
     input[type="password"]{
         text-align: left;

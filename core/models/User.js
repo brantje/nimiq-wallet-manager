@@ -10,7 +10,7 @@ const UserSchema = new Schema({
     'salt': String,
     'email': {type: String, unique: true, required: true},
     'active': {type: Boolean, default: true},
-    'settings': {type: Object }
+    'settings': {type: Object, default: {} }
 })
 
 UserSchema.index({username: 1, email: 1})

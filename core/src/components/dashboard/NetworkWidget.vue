@@ -48,6 +48,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .nq-card{
+        @media screen and (max-width: 768px){
+            order: 1;
+        }
+    }
 </style>

@@ -26,6 +26,17 @@ body .dg-form{
 }
 .big-dialog{
   .dg-content-cont--floating {
+    @media screen and (max-width: 768px){
+      top: 0;
+      transform: translateY(0%);
+      .dg-main-content{
+        .nq-card{
+          max-height: 90vh;
+          overflow: auto;
+        }
+        margin: 0;
+      }
+    }
     top: 45%;
   }
   .dg-main-content{

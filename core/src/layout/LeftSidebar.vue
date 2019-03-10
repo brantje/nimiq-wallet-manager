@@ -1,5 +1,5 @@
 <template>
-    <div class="sidenav scrollbar-themed">
+    <div class="sidenav left scrollbar-themed" :class="{'shown': getMenuShown }">
         <div v-if="getWallets.length === 0" class="nq-card">
             <div class="nq-card-body">
                 No wallets yet! <br>
@@ -47,7 +47,7 @@ export default {
     data() {
         return {}
     },
-    computed: mapGetters(['getWallets']),
+    computed: mapGetters(['getWallets', 'getMenuShown']),
     created() {
         store.dispatch(WALLET_LIST_REQUEST)
     },
