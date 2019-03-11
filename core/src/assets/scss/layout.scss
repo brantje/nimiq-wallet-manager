@@ -9,6 +9,11 @@ body {
 }
 
 header {
+  @media screen and (max-width: 768px){
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+  }
   h1.nq-h1 {
     margin: 0;
     padding: 20px;
@@ -50,7 +55,7 @@ header {
         min-width: 200px;
         text-align: center;
         display: none;
-        position: absolute;
+        position: fixed;
         background-color: #fff;
         right: 0;
         color: var(--nimiq-blue);
@@ -77,6 +82,9 @@ header {
 }
 
 .flex-container {
+  @media screen and (max-width: 768px){
+    padding-top: 69px;
+  }
   display: -webkit-flex;
   display: flex;
   //background-color: red;
@@ -90,7 +98,7 @@ header {
       &.shown{
         left: 0;
       }
-      position: absolute;
+      position: fixed;
       width: 96%;
       max-width: 480px;
       transition: 0.5s;
