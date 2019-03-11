@@ -88,8 +88,8 @@ if (!isProduction) {
         Nimiq.Log.instance.setLoggable(tag, config.log.tags[tag]);
 
     }*/
-    Log.instance.setLoggable('ConnectionPool', Log.Level.ASSERT)
-    Log.instance.setLoggable('Network', Log.Level.ASSERT)
+    //Log.instance.setLoggable('ConnectionPool', Log.Level.ASSERT)
+    //Log.instance.setLoggable('Network', Log.Level.ASSERT)
 
     app.use(function (req, res, next) {
         let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress

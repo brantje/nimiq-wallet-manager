@@ -8,7 +8,7 @@
         <div class="nq-card-body">
             <div class="body-row">
                 <span class="nq-label">Peers connected</span>
-                <span class="nq-text-s pull-right">{{ getNetworkStats.network.peerCount }}</span>
+                <span class="nq-text-s pull-right">{{ getPeerList.length }}</span>
             </div>
             <div class="body-row">
                 <span class="nq-label">Network in</span>
@@ -33,7 +33,7 @@ export default {
     filters: {
         formatBytes
     },
-    computed: mapGetters(['getNetworkStats']),
+    computed: mapGetters(['getNetworkStats', 'getPeerList']),
     created() {
         store.dispatch(NETWORK_STATS_REQUEST)
     }
