@@ -15,6 +15,7 @@ import SettingsDisplay from 'views/settings/SettingsDisplay.vue'
 import AccountSettings from 'views/settings/user/Account.vue'
 import AccountSecuritySettings from 'views/settings/user/Security.vue'
 import AccountSessionSettings from 'views/settings/user/Sessions.vue'
+import SeedInfo from 'views/SeedInfo.vue'
 import store from 'store'
 import Meta from 'vue-meta'
 
@@ -97,6 +98,16 @@ export default new Router({
             components: {
                 leftSidebar: LeftSidebar,
                 default: ContactList
+            },
+            beforeEnter: ifAuthenticated,
+        },
+        {
+            path: '/seed-info',
+            name: 'SeedInfo',
+            // component: ContactList,
+            components: {
+                leftSidebar: LeftSidebar,
+                default: SeedInfo
             },
             beforeEnter: ifAuthenticated,
         },
