@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 import user from 'store/modules/user'
 import auth from 'store/modules/auth'
 import nimiq from 'store/modules/nimiq'
@@ -21,6 +22,7 @@ export default new Vuex.Store({
         socket,
         menu
     },
+    plugins: [createPersistedState()],
     actions: {
         SOCKET_CONNECT: function () {
             console.log(34)

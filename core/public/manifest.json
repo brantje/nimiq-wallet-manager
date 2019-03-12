@@ -1,0 +1,31 @@
+{
+  "short_name": "NWM",
+  "name": "Nimiq Wallet Manger",
+  "icons": [
+    {
+      "src": "/img/favicon-32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/img/favicon-64x64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "/img/favicon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/img/favicon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#f4f4f4",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#1f2348"
+}
