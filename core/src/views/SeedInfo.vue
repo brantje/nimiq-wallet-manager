@@ -48,7 +48,7 @@
                                 {{ peer.address | getHostname }}
                             </td>
                             <td>
-                                {{ peer.addressState | getPeerState }}
+                                {{ peer.connectionState | getPeerState }}
                             </td>
                             <td>
                                 {{ (peer.tx || 0) | formatBytes }}
