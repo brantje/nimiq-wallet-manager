@@ -40,24 +40,25 @@ export default {
     },
     computed: mapGetters(['getWallets']),
     watch: {
-        getWallets: function (wallets) {
-            if(wallets) {
-                this.totalBalance = 0
-                wallets.forEach((e) => {
-                    if(e.hasOwnProperty('balance')){
-                        this.totalBalance += e.balance
-                    }
-                })
-                this.avgBalance = (this.totalBalance / wallets.length)
-            }
-
+        getWallets: function () {
+            this.calcBalance()
         }
     },
     created() {
         store.dispatch(WALLET_LIST_REQUEST)
+        this.calcBalance()
     },
-
-    methods: {}
+    methods: {
+        calcBalance: function () {
+            this.totalBalance = 0
+            this.getWallets.forEach((e) => {
+                if(e.hasOwnProperty('balance')){
+                    this.totalBalance += e.balance
+                }
+            })
+            this.avgBalance = (this.totalBalance / this.getWallets.length)
+        }
+    }
 }
 </script>
 
