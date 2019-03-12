@@ -36,7 +36,8 @@
                         <thead>
                             <tr>
                                 <th>Address</th>
-                                <th>State</th>
+                                <th>Address State</th>
+                                <th>Connection State</th>
                                 <th>TX</th>
                                 <th>RX</th>
                                 <th>Score</th>
@@ -48,7 +49,13 @@
                                 {{ peer.address | getHostname }}
                             </td>
                             <td>
-                                {{ peer.connectionState | getPeerState }}
+                                {{ peer.addressState | getPeerState('address') }}
+                            </td>
+                            <td>
+                                {{ peer.connectionState | getPeerState('connection') }}
+                                <span v-if="peer.addressState === 4">
+                                    Failed after {{ peer.failedAttempts }} attempts
+                                </span>
                             </td>
                             <td>
                                 {{ (peer.tx || 0) | formatBytes }}
