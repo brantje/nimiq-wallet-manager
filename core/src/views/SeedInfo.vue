@@ -39,6 +39,8 @@
                                 <th>State</th>
                                 <th>TX</th>
                                 <th>RX</th>
+                                <th>Score</th>
+                                <th>Ping</th>
                             </tr>
                         </thead>
                         <tr v-for="peer in getPeerList" :key="peer.id" class="row">
@@ -53,6 +55,12 @@
                             </td>
                             <td>
                                 {{ (peer.rx || 0) | formatBytes }}
+                            </td>
+                            <td>
+                                {{ peer.score || 0 }}
+                            </td>
+                            <td>
+                                {{ peer.latency || 0 }} ms
                             </td>
                         </tr>
                     </table>
