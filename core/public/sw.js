@@ -51,7 +51,7 @@ self.addEventListener('fetch', event => {
                                 })
                             })
                 }).catch(error => {
-
+                    console.log('[Service worker]', error)
                 })
     )
 })
