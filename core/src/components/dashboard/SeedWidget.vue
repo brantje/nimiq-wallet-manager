@@ -18,6 +18,11 @@
                 <span class="nq-label">Network out</span>
                 <span class="nq-text-s pull-right">{{ getNetworkStats.network.bytesSent | formatBytes }}</span>
             </div>
+            <div class="body-row">
+                <RouterLink to="seed-info">
+                    More info
+                </RouterLink>
+            </div>
         </div>
     </div>
 </template>
@@ -33,7 +38,7 @@ export default {
     filters: {
         formatBytes
     },
-    computed: mapGetters(['getNetworkStats', 'getPeerList']),
+    computed: mapGetters(['getNetworkStats']),
     created() {
         store.dispatch(NETWORK_STATS_REQUEST)
     }
