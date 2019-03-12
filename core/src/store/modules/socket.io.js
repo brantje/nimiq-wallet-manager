@@ -24,7 +24,7 @@ const actions = {
         dispatch(MEMPOOL_CLEAR)
     },
     SOCKET_NETWORK_PEERS_CHANGED({dispatch}) {
-        dispatch(PEER_LIST_REQUEST)
+        dispatch(NETWORK_STATS_REQUEST)
     }
 }
 
