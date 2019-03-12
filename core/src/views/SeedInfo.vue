@@ -36,9 +36,12 @@
                         <thead>
                             <tr>
                                 <th>Address</th>
-                                <th>State</th>
+                                <th>Address State</th>
+                                <th>Connection State</th>
                                 <th>TX</th>
                                 <th>RX</th>
+                                <th>Score</th>
+                                <th>Ping</th>
                             </tr>
                         </thead>
                         <tr v-for="peer in getPeerList" :key="peer.id" class="row">
@@ -46,13 +49,25 @@
                                 {{ peer.address | getHostname }}
                             </td>
                             <td>
-                                {{ peer.addressState | getPeerState }}
+                                {{ peer.addressState | getPeerState('address') }}
+                            </td>
+                            <td>
+                                {{ peer.connectionState | getPeerState('connection') }}
+                                <span v-if="peer.addressState === 4">
+                                    Failed after {{ peer.failedAttempts }} attempts
+                                </span>
                             </td>
                             <td>
                                 {{ (peer.tx || 0) | formatBytes }}
                             </td>
                             <td>
                                 {{ (peer.rx || 0) | formatBytes }}
+                            </td>
+                            <td>
+                                {{ peer.score || 0 }}
+                            </td>
+                            <td>
+                                {{ peer.latency || 0 }} ms
                             </td>
                         </tr>
                     </table>

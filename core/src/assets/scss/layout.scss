@@ -81,10 +81,12 @@ header {
   }
 }
 
-.flex-container {
+header + .flex-container{
   @media screen and (max-width: 768px){
     padding-top: 69px;
   }
+}
+.flex-container {
   display: -webkit-flex;
   display: flex;
   //background-color: red;
