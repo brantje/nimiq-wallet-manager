@@ -3,7 +3,6 @@ self.addEventListener('install', function (e) {
         caches.open('nwm').then(function (cache) {
             return cache.addAll([
                 '/',
-                '/index.html',
                 '/build/base.css',
                 '/build/bundle.js',
                 '/build/worker.js',
@@ -31,14 +30,33 @@ self.addEventListener('install', function (e) {
     )
 })
 
-self.addEventListener('fetch', function (event) {
-    if (event.request.url.indexOf('socket') > 0 || event.request.url.indexOf('api') > 0) {
+self.addEventListener('fetch', event => {
+    console.log('Fetch event for ', event.request.url)
+    if (event.request.url.indexOf('socket') > 0 || event.request.url.indexOf('api') > 0 || event.request.url.indexOf('chrome-extension') >= 0) {
         return
     }
-
     event.respondWith(
-        caches.match(event.request).then(function (cachedResponse) {
-            return cachedResponse || fetch(event.request)
-        })
+        caches.match(event.request)
+                .then(response => {
+                    if (response) {
+                        console.log('Found ', event.request.url, ' in cache')
+                        return response
+                    }
+                    console.log('Network request for ', event.request.url)
+                    return fetch(event.request)
+                            .then(response => {
+                                // TODO 5 - Respond with custom 404 page
+                                return caches.open('nwm').then(cache => {
+                                    cache.put(event.request.url, response.clone())
+                                    return response
+                                })
+                            })
+                    // TODO 4 - Add fetched files to the cache
+
+                }).catch(error => {
+
+                    // TODO 6 - Respond with custom offline page
+
+                })
     )
 })
