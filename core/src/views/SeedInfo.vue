@@ -53,9 +53,6 @@
                             </td>
                             <td>
                                 {{ peer.connectionState | getPeerState('connection') }}
-                                <span v-if="peer.addressState === 4">
-                                    Failed after {{ peer.failedAttempts }} attempts
-                                </span>
                             </td>
                             <td>
                                 {{ (peer.tx || 0) | formatBytes }}
