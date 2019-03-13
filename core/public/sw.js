@@ -30,28 +30,37 @@ self.addEventListener('install', function (e) {
     )
 })
 
-self.addEventListener('fetch', event => {
-    // console.log('Fetch event for ', event.request.url)
-    if (event.request.url.indexOf('socket') > 0 || event.request.url.indexOf('api') > 0 || event.request.url.indexOf('chrome-extension') >= 0) {
-        return
+
+self.addEventListener('fetch', (event) => {
+    if(event.request.url.indexOf('chrome-extension') >= 0 || event.request.url.indexOf('socket') > 0){
+        return // Ignore extensions & socket.io
     }
-    event.respondWith(
-        caches.match(event.request)
-                .then(response => {
-                    if (response) {
-                        // console.log('Found ', event.request.url, ' in cache')
-                        return response
-                    }
-                    // console.log('Network request for ', event.request.url)
-                    return fetch(event.request)
-                            .then(response => {
-                                return caches.open('nwm').then(cache => {
-                                    cache.put(event.request.url, response.clone())
-                                    return response
-                                })
-                            })
-                }).catch(error => {
-                    console.log('[Service worker]', error)
-                })
-    )
+    event.respondWith(async function() {
+        const cache = await caches.open('nwm')
+        const cachedResponse = await cache.match(event.request)
+
+        if(event.request.url.match(/api/)){
+            let networkResponse
+            try {
+                networkResponse = await fetch(event.request)
+            } catch (e){
+                networkResponse = false
+            }
+            if(networkResponse){
+                event.waitUntil(
+                    cache.put(event.request, networkResponse.clone())
+                )
+                return networkResponse
+            }
+            console.log('Cached api result:', cachedResponse)
+            return cachedResponse
+        } else {
+            if (cachedResponse) return cachedResponse
+            const networkResponse = await fetch(event.request)
+            event.waitUntil(
+                cache.put(event.request, networkResponse.clone())
+            )
+            return networkResponse
+        }
+    }())
 })
