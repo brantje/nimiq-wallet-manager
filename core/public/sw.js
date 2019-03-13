@@ -39,7 +39,7 @@ self.addEventListener('fetch', (event) => {
         const cache = await caches.open('nwm')
         const cachedResponse = await cache.match(event.request)
 
-        if(event.request.url.match(/api/)){
+        if(event.request.url.match(/api/) || event.request.url.match(/build/)){
             let networkResponse
             try {
                 networkResponse = await fetch(event.request)
@@ -52,7 +52,7 @@ self.addEventListener('fetch', (event) => {
                 )
                 return networkResponse
             }
-            console.log('Cached api result:', cachedResponse)
+            console.log('Cached result:', cachedResponse)
             return cachedResponse
         } else {
             if (cachedResponse) return cachedResponse
