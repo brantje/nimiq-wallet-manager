@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header v-if="isProfileLoaded" />
-        <div v-if="hasNoNetwork" class="warn">
+        <div v-if="!isOnline" class="warn">
             No network!
         </div>
         <div class="flex-container">
@@ -64,31 +64,13 @@ export default {
                 this.$socket.open()
             }
         },
-        isOnline: function (state) {
-            if(state){
-                store.dispatch('setAppOnline')
-            }  else {
-                store.dispatch('setAppOffline')
-            }
-        },
         $route: function () {
             store.commit('hideMenu')
         }
     },
     created: function() {
         let socket = this.$socket
-        store.dispatch('setAppOnline')
-        axios.interceptors.response.use((r) => {
-            if(r.status === 200 && this.hasNoNetwork === true){
-                store.dispatch('setAppOnline')
-                socket.$socket.open()
-            }
-            return Promise.resolve(r)
-        }, (error) => {
-            if(Object.keys(JSON.parse(JSON.stringify(error))).length === 2){
-                store.dispatch('setAppOffline')
-            }
-
+        axios.interceptors.response.use(false, (error) => {
             if(error.response.hasOwnProperty('status')) {
                 if (error.response.status === 401) {
                     router.push({path: 'authorize'})
@@ -119,11 +101,14 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
     .nq-card-body {
         padding: 2rem;
     }
     .warn{
+        @media screen and (max-width: 768px){
+            padding-top: 84px;
+        }
         padding: 15px;
         text-align: center;
         font-size: 2.0rem;
