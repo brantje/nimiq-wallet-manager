@@ -2,6 +2,7 @@
 
 import Vue from 'vue'
 import Notifications from 'vue-notification'
+import VueOnlinePlugin from 'vue-navigator-online'
 import VuejsDialog from 'vuejs-dialog'
 import socketio from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
@@ -65,12 +66,12 @@ Vue.use(new VueSocketIO({
 }))
 Vue.config.productionTip = false
 
+Vue.use(VueOnlinePlugin)
 Vue.use(Notifications)
 Vue.use(VuejsDialog, {
     view: 'DefaultDialog',
     backdropClose: true
 });
-
 
 (async () => {
     await Nimiq.load(workerURL)

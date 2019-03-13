@@ -8,6 +8,7 @@ import wallet from 'store/modules/wallet'
 import contact from 'store/modules/contact'
 import socket from 'store/modules/socket.io'
 import menu from 'store/modules/menu'
+import appState from 'store/modules/appNetwork'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -20,7 +21,8 @@ export default new Vuex.Store({
         wallet,
         contact,
         socket,
-        menu
+        menu,
+        appState
     },
     plugins: [createPersistedState()],
     actions: {

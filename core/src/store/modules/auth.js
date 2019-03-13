@@ -54,7 +54,8 @@ const actions = {
         return new Promise((resolve, reject) => {
             commit(AUTH_LOGOUT)
             axios.defaults.headers.common['Authorization'] = ''
-            localStorage.removeItem('user-token')
+            localStorage.removeItem('user-token') // Remove token
+            localStorage.removeItem('vuex') // clear vuex cache
             resolve()
         })
     }

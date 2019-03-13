@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../../auth')
 
 module.exports = function (NimiqHelper) {
-    router.get('/:blockHeightOrHash', async (req, res, next) => {
+    router.get('/:blockHeightOrHash', auth.required, async (req, res, next) => {
         let block
         try {
             if (isNaN(req.params.blockHeightOrHash)) {

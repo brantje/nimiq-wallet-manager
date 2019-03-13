@@ -5,7 +5,7 @@ const Nimiq = require('@nimiq/core')
 const router = express.Router()
 
 module.exports = function (NimiqHelper) {
-    router.get('/:hash', async (req, res, next) => {
+    router.get('/:hash', auth.required, async (req, res, next) => {
         try {
             const transaction = await NimiqHelper.getTransactionByHash(req.params.hash)
             return res.json(transaction)
@@ -15,7 +15,7 @@ module.exports = function (NimiqHelper) {
         }
     })
 
-    router.post('/send', auth.required, async (req, res, next) => {
+    router.post('/send', async (req, res, next) => {
         const {payload: {id}, body: {tx} } = req
         let b = []
         for (let key in tx) {

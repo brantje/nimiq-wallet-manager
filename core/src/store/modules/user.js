@@ -24,11 +24,11 @@ const actions = {
                 })
                 .catch(e => {
                 // if resp is unauthorized, logout, to
-                    if(e.response.status === 403) {
+                    if(e.response && e.response.status === 403) {
                         commit(USER_ERROR, 403)
                         dispatch(AUTH_LOGOUT)
                     }
-                    if(e.response.status === 401){
+                    if(e.response && e.response.status === 401){
                         commit(USER_ERROR, 401)
                     }
                 })
