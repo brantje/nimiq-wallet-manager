@@ -42,7 +42,8 @@ export default {
     },
     data() {
         return {
-            user: false
+            user: false,
+            navOnline: window.navigator.onLine
         }
     },
     computed: mapGetters(['isProfileLoaded', 'isAuthenticated', 'getUserStatus', 'getToken', 'hasNoNetwork']),
@@ -63,6 +64,13 @@ export default {
                 this.$socket.open()
             }
         },
+        isOnline: function (state) {
+            if(state){
+                store.dispatch('setAppOnline')
+            }  else {
+                store.dispatch('setAppOffline')
+            }
+        },
         $route: function () {
             store.commit('hideMenu')
         }
@@ -77,10 +85,8 @@ export default {
             }
             return Promise.resolve(r)
         }, (error) => {
-            if(error.hasOwnProperty('message')){
-                if(error.message === 'Network Error'){
-                    store.dispatch('setAppOffline')
-                }
+            if(Object.keys(JSON.parse(JSON.stringify(error))).length === 2){
+                store.dispatch('setAppOffline')
             }
 
             if(error.response.hasOwnProperty('status')) {
