@@ -82,6 +82,7 @@ export default {
                     store.dispatch('setAppOffline')
                 }
             }
+
             if(error.response.hasOwnProperty('status')) {
                 if (error.response.status === 401) {
                     router.push({path: 'authorize'})
@@ -90,6 +91,15 @@ export default {
                     store.commit(AUTH_LOGOUT)
                     socket.disconnect()
                     router.push({path: 'login'})
+                }
+
+                if(error.response.status.toString().charAt(0) === '5' && !this.hasNoNetwork){
+                    this.$notify({ clean: true })
+                    this.$notify({
+                        type: 'error',
+                        duration: 5000,
+                        title: 'Error while communicating with the server. Please try again later',
+                    })
                 }
             }
             return Promise.reject(error)
