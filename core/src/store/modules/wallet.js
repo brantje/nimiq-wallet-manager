@@ -41,9 +41,6 @@ const actions = {
                 .catch(resp => {
                     inflight[WALLET_LIST_REQUEST] = false
                     commit(WALLET_LIST_ERROR)
-                    // if resp is unauthorized, logout, to
-                    console.log(resp)
-                // dispatch(AUTH_LOGOUT)
                 })
     },
     [WALLET_LIST_TRANSACTIONS_REQUEST]: ({commit, dispatch}) => {
@@ -60,9 +57,6 @@ const actions = {
                 .catch(resp => {
                     inflight[WALLET_LIST_TRANSACTIONS_REQUEST] = false
                     commit(WALLET_LIST_TRANSACTIONS_ERROR)
-                    // if resp is unauthorized, logout, to
-                    console.log(resp)
-                // dispatch(AUTH_LOGOUT)
                 })
     },
 
@@ -80,9 +74,6 @@ const actions = {
                 .catch(resp => {
                     inflight[GET_WALLET_REQUEST] = false
                     commit(GET_WALLET_ERROR)
-                    // if resp is unauthorized, logout, to
-                    console.log(resp)
-                // dispatch(AUTH_LOGOUT)
                 })
     },
     [ADD_WALLET_REQUEST]: ({commit, dispatch}, wallet) => {

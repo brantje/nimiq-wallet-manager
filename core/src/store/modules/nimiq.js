@@ -42,12 +42,9 @@ const actions = {
                     inflight[NETWORK_MEMPOOL_REQUEST] = false
                     commit(NETWORK_MEMPOOL_SUCCESS, resp)
                 })
-                .catch(resp => {
+                .catch(() => {
                     inflight[NETWORK_MEMPOOL_REQUEST] = false
                     commit(NETWORK_MEMPOOL_ERROR)
-                    // if resp is unauthorized, logout, to
-                    console.log(resp)
-                // dispatch(AUTH_LOGOUT)
                 })
     },
     [MEMPOOL_ADD_TRANSACTION]: ({commit}, tx) => {
@@ -67,12 +64,9 @@ const actions = {
                     inflight[NETWORK_STATS_REQUEST] = false
                     commit(NETWORK_STATS_SUCCESS, resp)
                 })
-                .catch(resp => {
+                .catch(() => {
                     inflight[NETWORK_STATS_REQUEST] = false
                     commit(NETWORK_STATS_ERROR)
-                    // if resp is unauthorized, logout, to
-                    console.log(resp)
-                // dispatch(AUTH_LOGOUT)
                 })
     },
     [PEER_LIST_REQUEST]: ({commit, dispatch}) => {
@@ -86,12 +80,9 @@ const actions = {
                     inflight[PEER_LIST_REQUEST] = false
                     commit(PEER_LIST_SUCCESS, resp)
                 })
-                .catch(resp => {
+                .catch(() => {
                     inflight[PEER_LIST_REQUEST] = false
                     commit(PEER_LIST_ERROR)
-                    // if resp is unauthorized, logout, to
-                    console.log(resp)
-                // dispatch(AUTH_LOGOUT)
                 })
     },
 }
