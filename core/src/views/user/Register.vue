@@ -3,7 +3,9 @@
         <div class="content-container nq-style scrollbar-themed">
             <div class="centered-container">
                 <div class="text-center">
-                    <div class="logo" />
+                    <div class="logo-inline">
+                        <img src="/img/nimiq-logo.svg">
+                    </div>
                     <h1>Nimiq Wallet Manager</h1>
                 </div>
                 <div class="nq-card">
@@ -93,7 +95,7 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
     .nq-card {
         max-width: 480px;
     }
@@ -107,5 +109,17 @@ export default {
     .centered-container {
         margin-top: 50px;
         height: auto;
+    }
+    .logo-inline{
+        svg {
+            width: 64px;
+            height: 64px
+        }
+        width: 64px;
+        height: 64px;
+        display: inline-block;
+    }
+    .logo-inline + h1{
+        margin-top: 0;
     }
 </style>
