@@ -27,7 +27,7 @@
     "http-errors": "~1.7.2",
     "iplocation": "^6.1.0",
     "jsdom": "^14.0.0",
-    "jsonwebtoken": "^8.5.0",
+    "jsonwebtoken": "^8.5.1",
     "material-icons": "^0.3.0",
     "moment": "^2.24.0",
     "mongoose": "^5.4.19",
