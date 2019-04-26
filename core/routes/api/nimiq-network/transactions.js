@@ -16,7 +16,7 @@ module.exports = function (NimiqHelper) {
     })
 
     router.post('/send', async (req, res, next) => {
-        const {payload: {id}, body: {tx} } = req
+        const {body: {tx} } = req
         let b = []
         for (let key in tx) {
             if (tx.hasOwnProperty(key)) {
