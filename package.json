@@ -28,7 +28,7 @@
     "iplocation": "^6.1.0",
     "jsdom": "^14.0.0",
     "jsonwebtoken": "^8.5.1",
-    "material-icons": "^0.3.0",
+    "material-icons": "^0.3.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.22",
     "morgan": "~1.9.0",
