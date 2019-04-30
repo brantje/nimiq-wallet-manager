@@ -1,5 +1,7 @@
 # Nimiq-Wallet-Manager
 
+**Not ready for production, use only on testnet!**
+
 ## Requirements
 - NodeJS (Tested on v10)
 - MongoDB
