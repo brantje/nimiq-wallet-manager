@@ -2,7 +2,6 @@ const router = require('express').Router()
 const auth = require('./auth')
 const Nimiq = require('@nimiq/core')
 const Iqons = require('@nimiq/iqons').default
-const { convertFile }=  require('convert-svg-to-png')
 const fs = require('fs')
 
 router.get('/:address', auth.optional, async (req, res, next) => {
@@ -54,42 +53,5 @@ router.get('/:address', auth.optional, async (req, res, next) => {
         res.end()
         return
     }
-
-    if (format === 'png') {
-        if (fs.existsSync('./cache/' + filename)) {
-            let stats = fs.statSync('./cache/'+ filename)
-            res.writeHead(200, {
-                'Content-Type': 'image/jpg',
-                'Last-Modified':  stats.mtime.toUTCString(),
-                'Content-Length': stats.size,
-                'Cache-Control': 'public, max-age=18144000',
-                'Expires': new Date(Date.now() + 18144000)
-            })
-            res.write(fs.readFileSync('./cache/'+ filename))
-            res.end()
-        } else {
-            let outputFilePath = await convertFile(savePath,{
-                width: size,
-                height: size
-            })
-            if (!fs.existsSync('./cache/' + filename)) {
-                fs.rename(outputFilePath, './cache/' + filename, function () {
-                    let stats = fs.statSync('./cache/' + filename)
-                    res.writeHead(200, {
-                        'Content-Type': 'image/jpg',
-                        'Last-Modified': stats.mtime.toUTCString(),
-                        'Content-Length': stats.size,
-                        'Cache-Control': 'private',
-                    })
-                    res.write(fs.readFileSync('./cache/' + filename))
-                    res.end()
-                    // res.sendFile(filename, { root: './cache' });
-                })
-            } else {
-                return res.status(422)
-            }
-        }
-    }
-
 })
 module.exports = router

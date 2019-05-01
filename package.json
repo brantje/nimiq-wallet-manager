@@ -14,7 +14,6 @@
     "@nimiq/style": "^0.6.2",
     "@nimiq/utils": "^0.3.1",
     "axios": "^0.18.0",
-    "convert-svg-to-png": "^0.5.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "debug": "~4.1.1",
@@ -32,7 +31,6 @@
     "moment": "^2.24.0",
     "mongoose": "^5.5.5",
     "morgan": "~1.9.0",
-    "newman": "^4.4.1",
     "node-2fa": "^1.1.2",
     "node-fetch": "^2.4.1",
     "passport": "^0.4.0",
@@ -57,6 +55,7 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
+    "newman": "^4.4.1",
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@vue/eslint-config-prettier": "^4.0.1",
