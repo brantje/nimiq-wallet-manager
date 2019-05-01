@@ -1,5 +1,5 @@
 # Nimiq-Wallet-Manager
-![Codacy Badge](https://api.codacy.com/project/badge/Grade/25933aa72c7643219ced2e422e243908) ![Travis](https://travis-ci.com/brantje/nimiq-wallet-manager.svg?branch=master) ![Travis](https://travis-ci.com/brantje/nimiq-wallet-manager.svg?branch=master) ![Snyk](https://snyk.io/test/github/brantje/nimiq-wallet-manager)
+![Codacy Badge](https://api.codacy.com/project/badge/Grade/25933aa72c7643219ced2e422e243908) ![Travis](https://travis-ci.com/brantje/nimiq-wallet-manager.svg?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/brantje/nimiq-wallet-manager/badge.svg)](https://snyk.io/test/github/brantje/nimiq-wallet-manager)
 
 
 
