@@ -62,7 +62,7 @@ module.exports = function (NimiqHelper) {
                     }))
                 }
 
-                res.status(401).json({errors: 'Invalid username or password'})
+                res.status(400).json({errors: 'Invalid username or password'})
             })(req, res, next)
         })
     return router
