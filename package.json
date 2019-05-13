@@ -14,7 +14,7 @@
     "@nimiq/core-web": "^1.4.3",
     "@nimiq/iqons": "^1.4.4",
     "@nimiq/style": "^0.6.4",
-    "@nimiq/utils": "^0.3.1",
+    "@nimiq/utils": "^0.3.2",
     "axios": "^0.18.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
