@@ -58,7 +58,7 @@
     "snyk": "^1.164.0"
   },
   "devDependencies": {
-    "newman": "^4.4.1",
+    "newman": "^4.5.5",
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@vue/eslint-config-prettier": "^4.0.1",
