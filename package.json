@@ -12,7 +12,7 @@
   "dependencies": {
     "@nimiq/core": "^1.4.3",
     "@nimiq/core-web": "^1.4.3",
-    "@nimiq/iqons": "^1.4.4",
+    "@nimiq/iqons": "^1.5.2",
     "@nimiq/style": "^0.7.0",
     "@nimiq/utils": "^0.3.2",
     "axios": "^0.19.0",
