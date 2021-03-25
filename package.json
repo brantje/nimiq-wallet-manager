@@ -31,7 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.5.10",
+    "mongoose": "^5.12.2",
     "morgan": "~1.9.0",
     "node-2fa": "^1.1.2",
     "node-fetch": "^2.5.0",
@@ -55,7 +55,7 @@
     "vuejs-dialog": "^1.4.0",
     "vuex": "^3.1.1",
     "vuex-persistedstate": "^2.5.4",
-    "snyk": "^1.164.0"
+    "snyk": "^1.465.0"
   },
   "devDependencies": {
     "newman": "^4.4.1",
