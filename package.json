@@ -10,7 +10,7 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "@nimiq/core": "^1.4.3",
+    "@nimiq/core": "^1.5.1",
     "@nimiq/core-web": "^1.4.3",
     "@nimiq/iqons": "^1.4.4",
     "@nimiq/style": "^0.7.0",
@@ -27,7 +27,7 @@
     "express-validator": "^5.3.1",
     "http-errors": "~1.7.2",
     "iplocation": "^6.1.0",
-    "jsdom": "^15.1.0",
+    "jsdom": "^15.1.1",
     "jsonwebtoken": "^8.5.1",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
@@ -40,8 +40,8 @@
     "qrcode.vue": "^1.6.2",
     "rate-limit-redis": "^1.6.0",
     "redis-tag-cache": "^1.2.1",
-    "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0",
+    "socket.io": "^2.4.0",
+    "socket.io-client": "^2.4.0",
     "twig": "~1.13.2",
     "vue": "^2.6.10",
     "vue-axios": "^2.0.2",
