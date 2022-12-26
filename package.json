@@ -10,7 +10,7 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "@nimiq/core": "^1.4.3",
+    "@nimiq/core": "^1.5.1",
     "@nimiq/core-web": "^1.4.3",
     "@nimiq/iqons": "^1.4.4",
     "@nimiq/style": "^0.7.0",
