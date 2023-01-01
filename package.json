@@ -10,7 +10,7 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "@nimiq/core": "^1.4.3",
+    "@nimiq/core": "^1.6.0",
     "@nimiq/core-web": "^1.4.3",
     "@nimiq/iqons": "^1.4.4",
     "@nimiq/style": "^0.7.0",
@@ -64,23 +64,23 @@
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.3.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
-    "copy-webpack-plugin": "^4.6.0",
+    "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^5.0.5",
-    "css-loader": "^2.1.1",
+    "css-loader": "^6.7.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2",
-    "file-loader": "^2.0.0",
+    "file-loader": "^6.2.0",
     "node-sass": "^4.12.0",
     "prettier": "^1.17.1",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "vue-loader": "^15.7.0",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "vue-loader": "^17.0.1",
     "vue-template-compiler": "^2.6.10",
     "wait-on": "^3.2.0",
-    "webpack": "^3.12.0"
+    "webpack": "^5.75.0"
   },
   "snyk": true
 }
