@@ -10,7 +10,7 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "@nimiq/core": "^1.4.3",
+    "@nimiq/core": "^1.6.0",
     "@nimiq/core-web": "^1.4.3",
     "@nimiq/iqons": "^1.4.4",
     "@nimiq/style": "^0.7.0",
@@ -21,14 +21,14 @@
     "debug": "~4.1.1",
     "dotenv": "^8.0.0",
     "express": "~4.16.0",
-    "express-jwt": "^5.3.1",
+    "express-jwt": "^8.0.0",
     "express-rate-limit": "^3.5.1",
     "express-useragent": "^1.0.12",
     "express-validator": "^5.3.1",
     "http-errors": "~1.7.2",
     "iplocation": "^6.1.0",
     "jsdom": "^15.1.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
     "mongoose": "^5.5.10",
@@ -55,7 +55,7 @@
     "vuejs-dialog": "^1.4.0",
     "vuex": "^3.1.1",
     "vuex-persistedstate": "^2.5.4",
-    "snyk": "^1.164.0"
+    "snyk": "^1.685.0"
   },
   "devDependencies": {
     "newman": "^4.4.1",
