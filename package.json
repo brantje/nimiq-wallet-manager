@@ -26,8 +26,8 @@
     "express-useragent": "^1.0.12",
     "express-validator": "^5.3.1",
     "http-errors": "~1.7.2",
-    "iplocation": "^6.1.0",
-    "jsdom": "^15.1.0",
+    "iplocation": "^7.0.0",
+    "jsdom": "^16.6.0",
     "jsonwebtoken": "^8.5.1",
     "material-icons": "^0.3.1",
     "moment": "^2.24.0",
@@ -55,7 +55,7 @@
     "vuejs-dialog": "^1.4.0",
     "vuex": "^3.1.1",
     "vuex-persistedstate": "^2.5.4",
-    "snyk": "^1.164.0"
+    "snyk": "^1.996.0"
   },
   "devDependencies": {
     "newman": "^4.4.1",
